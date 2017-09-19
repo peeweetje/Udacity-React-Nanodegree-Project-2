@@ -1,3 +1,13 @@
-body{
-    background-color: #ddd;
+body {
+  background-color: #fdfbfb;
+}
+
+.header-section {
+  margin-top: 3em;
+}
+
+.categories {
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
 }

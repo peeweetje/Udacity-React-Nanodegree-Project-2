@@ -32,16 +32,6 @@ const defaultData = {
     category: "javascript",
     voteScore: 3,
     deleted: false
-  },
-  "2ls0g5loljamngzod567nd": {
-    id: "2ls0g5loljamngzod567nd",
-    timestamp: 1467166872650,
-    title: "learn to understand AI ",
-    body: "Accept that you will be assimulated.",
-    author: "lolmn",
-    category: "Machine Learning",
-    voteScore: 7,
-    deleted: false
   }
 };
 

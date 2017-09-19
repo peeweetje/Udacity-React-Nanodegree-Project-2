@@ -19,13 +19,9 @@ export const getAllCategories = () =>
     .then(res => res.json())
     .then(data => data.categories);
 
-//console.log(getAllCategories());
-
-//returns undefined
-export const getPostsCategory = category =>
-  fetch(`${api}/:category/posts`, { headers })
-    .then(res => res.json())
-    .then(data => data.category);
+//works
+export const fetchPostsCategory = category =>
+  fetch(`${api}/${category}/posts`, { headers }).then(data => data.json());
 
 //works
 export const getAllPosts = () =>
@@ -33,10 +29,8 @@ export const getAllPosts = () =>
     headers
   }).then(res => res.json());
 
-//console.log(getAllPosts());
-
-//works, but have to remove default postId later
-export const getSinglePost = (postId = "8xf0y6ziyjabvozdd253nd") =>
+//works
+export const getSinglePost = postId =>
   fetch(`${api}/posts/${postId}`, {
     headers
   }).then(res => res.json());

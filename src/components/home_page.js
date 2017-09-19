@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchPosts, fetchCategories } from "../actions";
 import { Link } from "react-router-dom";
+import { fetchPosts, fetchCategories } from "../actions";
+import { List, Header, Grid, Button } from "semantic-ui-react";
 
 class HomePage extends Component {
   componentDidMount() {
@@ -10,30 +11,45 @@ class HomePage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="header-section">
         <div>
-          <div>
-            <h1>Readable</h1>
+          <div className="header">
+            <Header textAlign="center" color="teal" as="h1">
+              Git Talks
+            </Header>
           </div>
-
-          <ul>
-            {this.props.categories &&
-              this.props.categories.length > 0 &&
-              this.props.categories.map(category => (
-                <li key={category.path}>
-                  <Link to={`/${category.name}`}>{category.name}</Link>
-                </li>
-              ))}
-          </ul>
+          <div className="categories">
+            <Grid columns={4}>
+              {this.props.categories &&
+                this.props.categories.length > 0 &&
+                this.props.categories.map(category => (
+                  <Grid.Column key={category.path}>
+                    <Link to={`/${category.name}`}>
+                      <Button size="tiny" compact basic color="teal">
+                        {category.name}
+                      </Button>
+                    </Link>
+                  </Grid.Column>
+                ))}
+            </Grid>
+          </div>
         </div>
 
-        {console.log(this.props.posts)}
-        {this.props.posts.length > 0 &&
+        {this.props.posts &&
+          this.props.posts.length > 0 &&
           this.props.posts.map(post => (
-            <div className="post" key={post.id}>
-              <h6 className="postTitle">{post.title}</h6>
-              {console.log(post.title)}
-            </div>
+            <List key={post.id} divided relaxed>
+              <List.Item>
+                <List.Icon name="github" size="large" verticalAlign="middle" />
+                <List.Content>
+                  <Link to={`/posts/${post.id}`}>
+                    <List.Header className="postTitle">
+                      {post.title}
+                    </List.Header>
+                  </Link>
+                </List.Content>
+              </List.Item>
+            </List>
           ))}
       </div>
     );

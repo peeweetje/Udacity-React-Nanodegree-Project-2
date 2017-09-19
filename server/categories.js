@@ -20,10 +20,6 @@ const defaultData = {
     {
       name: "javascript",
       path: "Javascript"
-    },
-    {
-      name: "All",
-      path: "All"
     }
   ]
 };
