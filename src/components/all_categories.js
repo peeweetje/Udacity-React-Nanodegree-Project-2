@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchPostsCategory } from "../actions";
+import { Header, Segment } from "semantic-ui-react";
 
 class AllCategories extends Component {
   componentDidMount() {
@@ -10,23 +11,32 @@ class AllCategories extends Component {
 
   render() {
     return (
-      <div>
+      <div className="header-section">
         <div>
           <div>
-            <h1>categories {this.props.match.params.category}</h1>
+            <Header textAlign="center" color="teal" as="h1">
+              Git Talks
+            </Header>
+            <h3 className="header-categories">
+              categories: {this.props.match.params.category}
+            </h3>
           </div>
         </div>
 
-        {this.props.posts && this.props.posts.length > 0 ? (
+        {this.props.posts.length > 0 ? (
           this.props.posts.map(post => (
             <div className="post" key={post.id}>
-              <Link to={`/posts/${post.id}`}>
-                <h3>{post.title}</h3>
-              </Link>
+              <Segment color="teal" raised>
+                <Link to={`/posts/${post.id}`}>
+                  <h3>{post.title}</h3>
+                </Link>
+              </Segment>
             </div>
           ))
         ) : (
-          <h3> no posts available at this time.</h3>
+          <h3>
+            There are no posts in this category. Do you want to make a new post?
+          </h3>
         )}
       </div>
     );

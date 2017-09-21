@@ -47,8 +47,8 @@ export const addPost = () =>
     .then(res => res.json())
     .then(data => data.posts);
 
-//Works, have to remove default postId value later.
-export const getComments = (postId = "8xf0y6ziyjabvozdd253nd") =>
+//Works
+export const getComments = postId =>
   fetch(`${api}/posts/${postId}/comments`, { headers }).then(response =>
     response.json()
   );

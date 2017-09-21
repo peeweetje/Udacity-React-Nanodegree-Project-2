@@ -1,13 +1,50 @@
 body {
-  background-color: #fdfbfb;
+  background-color: #fcf8f8;
 }
 
 .header-section {
   margin-top: 3em;
+}
+.ui.centered.header,
+.header-categories {
+  text-align: center;
+}
+
+h2.header-categories {
+  margin-bottom: 1em;
 }
 
 .categories {
   margin-top: 1em;
   display: flex;
   justify-content: center;
+}
+
+.ui.divided.relaxed.list {
+  display: flex;
+  justify-content: center;
+}
+
+div.post {
+  display: flex;
+  justify-content: center;
+}
+
+.ui.raised.segment {
+  padding: 0.5em 3em 1em 3em;
+  width: 75%;
+}
+
+.post-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.comment-wrapper {
+  display: block;
+  justify-content: center;
+}
+
+.comment-wrapper {
+  margin: 1em 4em 1em 4em;
 }

@@ -3,7 +3,8 @@ import {
   RECEIVE_POSTS,
   RECEIVE_CATEGORIES,
   GET_POSTS_CATEGORY,
-  GET_SINGLE_POST
+  GET_SINGLE_POST,
+  GET_COMMENTS
 } from "../actions";
 
 function receivePosts(state = {}, action) {
@@ -41,10 +42,19 @@ function receivePost(state = {}, action) {
       return state;
   }
 }
+function getComments(state = {}, action) {
+  switch (action.type) {
+    case GET_COMMENTS:
+      return action.posts;
+    default:
+      return state;
+  }
+}
 
 export default combineReducers({
   receivePosts,
   receiveCategories,
   getPostsCategory,
-  receivePost
+  receivePost,
+  getComments
 });
