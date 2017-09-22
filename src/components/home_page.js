@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp";
 import { fetchPosts, fetchCategories } from "../actions";
-import { List, Header, Grid, Button, Segment } from "semantic-ui-react";
+import { List, Header, Grid, Button, Segment, Popup } from "semantic-ui-react";
 
 class HomePage extends Component {
   componentDidMount() {
@@ -49,13 +49,27 @@ class HomePage extends Component {
                     <List.Content>
                       <Timestamp time={post.timestamp / 1000} />
                     </List.Content>
+                    <List.Content>votes: {post.voteScore}</List.Content>
                   </List.Content>
                 </List.Item>
-                <Button basic color="red" size="tiny" floated="right">
-                  delete post
-                </Button>
-                <Button basic color="teal" size="tiny" floated="right">
-                  edit post
+                <Popup
+                  trigger={
+                    <Button
+                      //onClick={this.deletePost}
+                      content="Delete post"
+                      compact
+                      basic
+                      color="red"
+                      size="tiny"
+                      floated="right"
+                    />
+                  }
+                  content="Are you sure you want to delete this post?!"
+                  on="hover"
+                />
+
+                <Button compact basic color="teal" size="tiny" floated="right">
+                  Edit post
                 </Button>
               </Segment>
             </List>

@@ -4,7 +4,10 @@ import {
   RECEIVE_CATEGORIES,
   GET_POSTS_CATEGORY,
   GET_SINGLE_POST,
-  GET_COMMENTS
+  GET_COMMENTS,
+  EDIT_POST,
+  DELETE_COMMENT,
+  EDIT_COMMENT
 } from "../actions";
 
 function receivePosts(state = {}, action) {
@@ -42,10 +45,35 @@ function receivePost(state = {}, action) {
       return state;
   }
 }
+
+function editPost(state = {}, action) {
+  switch (action.type) {
+    case EDIT_POST:
+      return action.posts;
+    default:
+      return state;
+  }
+}
 function getComments(state = {}, action) {
   switch (action.type) {
     case GET_COMMENTS:
-      return action.posts;
+      return action.comments;
+    default:
+      return state;
+  }
+}
+function deleteComment(state = {}, action) {
+  switch (action.type) {
+    case DELETE_COMMENT:
+      return action.comments;
+    default:
+      return state;
+  }
+}
+function editComment(state = {}, action) {
+  switch (action.type) {
+    case EDIT_COMMENT:
+      return action.comments;
     default:
       return state;
   }
@@ -56,5 +84,8 @@ export default combineReducers({
   receiveCategories,
   getPostsCategory,
   receivePost,
-  getComments
+  getComments,
+  editPost,
+  deleteComment,
+  editComment
 });

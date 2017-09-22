@@ -18,7 +18,7 @@ class AllCategories extends Component {
               Git Talks
             </Header>
             <h3 className="header-categories">
-              categories: {this.props.match.params.category}
+              Categories: {this.props.match.params.category}
             </h3>
           </div>
         </div>

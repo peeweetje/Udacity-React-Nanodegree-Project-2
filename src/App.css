@@ -41,7 +41,7 @@ div.post {
 }
 
 .comment-wrapper {
-  display: block;
+  display: flex;
   justify-content: center;
 }
 

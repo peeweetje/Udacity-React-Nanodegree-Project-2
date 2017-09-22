@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 //import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp";
 import { fetchSinglePost, fetchComments } from "../actions";
-import { Header, Segment } from "semantic-ui-react";
+import { Header, Segment, Button, Popup } from "semantic-ui-react";
 
 class PostDetail extends Component {
   componentDidMount() {
@@ -26,6 +26,24 @@ class PostDetail extends Component {
                 </p>
                 <p>{this.props.post.body}</p>
                 <p>Vote: {this.props.post.voteScore}</p>
+                <Popup
+                  trigger={
+                    <Button
+                      content="Delete post"
+                      compact
+                      basic
+                      color="red"
+                      size="tiny"
+                      floated="right"
+                    />
+                  }
+                  content="Are you sure you want to delete this post?!"
+                  on="hover"
+                />
+
+                <Button compact basic color="teal" size="tiny" floated="right">
+                  Edit post
+                </Button>
               </Segment>
             </div>
           )}
@@ -39,6 +57,30 @@ class PostDetail extends Component {
                   <p>
                     <Timestamp time={comment.timestamp / 1000} />
                   </p>
+                  <Popup
+                    trigger={
+                      <Button
+                        content="Delete comment"
+                        compact
+                        basic
+                        color="red"
+                        size="tiny"
+                        floated="right"
+                      />
+                    }
+                    content="Are you sure you want to delete this comment?!"
+                    on="hover"
+                  />
+
+                  <Button
+                    compact
+                    basic
+                    color="teal"
+                    size="tiny"
+                    floated="right"
+                  >
+                    Edit comment
+                  </Button>
                 </Segment>
               ))}
           </div>
