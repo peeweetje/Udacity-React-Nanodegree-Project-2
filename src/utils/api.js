@@ -53,7 +53,6 @@ export const getComments = postId =>
     response.json()
   );
 
-//How to test this with Postman?
 /*export const addPost = (post) => {
     const body = JSON.stringify(post);
   
