@@ -90,7 +90,7 @@ class PostDetail extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   post: state.receivePost,
   comments: state.getComments
 });

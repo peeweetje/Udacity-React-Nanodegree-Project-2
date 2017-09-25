@@ -55,9 +55,9 @@ class HomePage extends Component {
                 <Popup
                   trigger={
                     <Button
-                      //onClick={this.deletePost}
                       content="Delete post"
                       compact
+                      icon="trash"
                       basic
                       color="red"
                       size="tiny"
@@ -74,6 +74,11 @@ class HomePage extends Component {
               </Segment>
             </List>
           ))}
+        <div className="btn-add">
+          <Button compact basic color="teal" size="large">
+            Add Post
+          </Button>
+        </div>
       </div>
     );
   }
@@ -90,6 +95,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getData: () =>
       dispatch(fetchPosts()).then(() => dispatch(fetchCategories()))
+    //deletePost: id => dispatch(deletePost(id))
   };
 };
 

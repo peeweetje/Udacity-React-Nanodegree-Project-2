@@ -48,3 +48,9 @@ div.post {
 .comment-wrapper {
   margin: 1em 4em 1em 4em;
 }
+
+.btn-add {
+  margin-left: 9em;
+  display: flex;
+  justify-content: flex-start;
+}

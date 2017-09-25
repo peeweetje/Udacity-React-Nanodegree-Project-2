@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import HomePage from "../components/home_page";
 import AllCategories from "../components/all_categories";
 import PostDetail from "../components/post_detail";
+
 import "../App.css";
 
 class App extends Component {

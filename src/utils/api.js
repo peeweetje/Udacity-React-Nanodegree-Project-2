@@ -91,11 +91,9 @@ export const editComment = comment => {
 };
 
 export const deletePost = postId => {
-  return fetch(`${api}/posts/${postId}`, {
-    method: "DELETE",
-    headers
-  }).then(data => data.json());
+  return fetch(`${api}/posts/${postId}`, { method: "DELETE", headers });
 };
+// }).then(data => data.json());
 
 export const deleteComment = commentId => {
   return fetch(`${api}/comments/${commentId}`, {

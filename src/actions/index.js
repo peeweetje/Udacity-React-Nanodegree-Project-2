@@ -14,35 +14,34 @@ export const receivePosts = posts => ({
   type: RECEIVE_POSTS,
   posts
 });
-
 export const fetchPosts = () => dispatch =>
   api.getAllPosts().then(posts => dispatch(receivePosts(posts)));
+
 // fetching all categories
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
   categories
 });
-
 export const fetchCategories = () => dispatch =>
   api
     .getAllCategories()
     .then(categories => dispatch(receiveCategories(categories)));
+
 //fetching post categories
 export const getPostsCategory = posts => ({
   type: GET_POSTS_CATEGORY,
   posts
 });
-
 export const fetchPostsCategory = category => dispatch =>
   api
     .fetchPostsCategory(category)
     .then(posts => dispatch(getPostsCategory(posts)));
+
 //fetching single post
 export const receiveSinglePost = posts => ({
   type: GET_SINGLE_POST,
   posts
 });
-
 export const fetchSinglePost = postId => dispatch =>
   api.getSinglePost(postId).then(posts => dispatch(receiveSinglePost(posts)));
 
@@ -53,7 +52,6 @@ export const editPost = posts => ({
   type: EDIT_POST,
   posts
 });
-
 export const fetchEditPost = postId => dispatch =>
   api.editPost(postId).then(posts => dispatch(editPost(posts)));
 
@@ -62,7 +60,6 @@ export const getComments = comments => ({
   type: GET_COMMENTS,
   comments
 });
-
 export const fetchComments = commentId => dispatch =>
   api.getComments(commentId).then(comments => dispatch(getComments(comments)));
 
