@@ -47,34 +47,33 @@ export const addPost = () =>
     .then(res => res.json())
     .then(data => data.posts);
 
+//works
+export const editPost = post => {
+  const body = JSON.stringify(post);
+
+  return fetch(`${api}/posts/${post.id}`, {
+    method: "PUT",
+    headers,
+    body
+  }).then(response => response.json());
+};
+
+export const deletePost = postId => {
+  return fetch(`${api}/posts/${postId}`, { method: "DELETE", headers });
+};
+// }).then(data => data.json());
+
 //Works
 export const getComments = postId =>
   fetch(`${api}/posts/${postId}/comments`, { headers }).then(response =>
     response.json()
   );
 
-/*export const addPost = (post) => {
-    const body = JSON.stringify(post);
-  
-    return fetch(`${api}/posts/`, { method: 'POST', headers, body })
-      .then(response => response.json());
-  };*/
-
 export const addComment = comment => {
   const body = JSON.stringify(comment);
 
   return fetch(`${api}/comments/`, {
     method: "POST",
-    headers,
-    body
-  }).then(response => response.json());
-};
-
-export const editPost = post => {
-  const body = JSON.stringify(post);
-
-  return fetch(`${api}/posts/${post.id}`, {
-    method: "PUT",
     headers,
     body
   }).then(response => response.json());
@@ -89,11 +88,6 @@ export const editComment = comment => {
     body
   }).then(response => response.json());
 };
-
-export const deletePost = postId => {
-  return fetch(`${api}/posts/${postId}`, { method: "DELETE", headers });
-};
-// }).then(data => data.json());
 
 export const deleteComment = commentId => {
   return fetch(`${api}/comments/${commentId}`, {

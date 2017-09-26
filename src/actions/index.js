@@ -46,6 +46,12 @@ export const fetchSinglePost = postId => dispatch =>
   api.getSinglePost(postId).then(posts => dispatch(receiveSinglePost(posts)));
 
 //Deleting post
+export const deletePost = posts => ({
+  type: DELETE_POST,
+  posts
+});
+export const fetchDeletePost = postId => dispatch =>
+  api.deletePost(postId).then(posts => dispatch(deletePost(posts)));
 
 // edit post
 export const editPost = posts => ({
@@ -60,8 +66,8 @@ export const getComments = comments => ({
   type: GET_COMMENTS,
   comments
 });
-export const fetchComments = commentId => dispatch =>
-  api.getComments(commentId).then(comments => dispatch(getComments(comments)));
+export const fetchComments = postId => dispatch =>
+  api.getComments(postId).then(comments => dispatch(getComments(comments)));
 
 // delete comment
 export const deleteComment = comments => ({

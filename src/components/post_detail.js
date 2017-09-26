@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 //import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp";
 import { fetchSinglePost, fetchComments } from "../actions";
-import { Header, Segment, Button, Popup } from "semantic-ui-react";
+import { Header, Segment, Button, Icon, List } from "semantic-ui-react";
 
 class PostDetail extends Component {
   componentDidMount() {
@@ -20,28 +20,24 @@ class PostDetail extends Component {
             <div className="post-wrapper">
               <Segment color="teal" raised>
                 <h3 className="title">{this.props.post.title}</h3>
-                <p> author: {this.props.post.author}</p>
-                <p>
+                <List.Content>
+                  <Icon name="user" color="teal" size="large" /> author:
+                  {this.props.post.author}
+                </List.Content>
+                <List.Content>
+                  <Icon name="clock" />
                   <Timestamp time={this.props.post.timestamp / 1000} />
-                </p>
-                <p>{this.props.post.body}</p>
-                <p>Vote: {this.props.post.voteScore}</p>
-                <Popup
-                  trigger={
-                    <Button
-                      content="Delete post"
-                      compact
-                      basic
-                      color="red"
-                      size="tiny"
-                      floated="right"
-                    />
-                  }
-                  content="Are you sure you want to delete this post?!"
-                  on="hover"
-                />
+                </List.Content>
+                <List.Content>{this.props.post.body}</List.Content>
+                <List.Content>Vote: {this.props.post.voteScore}</List.Content>
+
+                <Button compact basic color="red" size="tiny" floated="right">
+                  <Icon name="trash" />
+                  deletePost
+                </Button>
 
                 <Button compact basic color="teal" size="tiny" floated="right">
+                  <Icon name="edit" />
                   Edit post
                 </Button>
               </Segment>
@@ -52,25 +48,20 @@ class PostDetail extends Component {
             {this.props.comments.length > 0 &&
               this.props.comments.map(comment => (
                 <Segment color="teal" raised key={comment.id}>
-                  <p>Author: {comment.author}</p>
-                  <p> {comment.body}</p>
-                  <p>
+                  <List.Content>
+                    <Icon name="user" color="teal" size="large" /> Author:
+                    {comment.author}
+                  </List.Content>
+                  <List.Content> {comment.body}</List.Content>
+                  <List.Content>
+                    <Icon name="clock" />
                     <Timestamp time={comment.timestamp / 1000} />
-                  </p>
-                  <Popup
-                    trigger={
-                      <Button
-                        content="Delete comment"
-                        compact
-                        basic
-                        color="red"
-                        size="tiny"
-                        floated="right"
-                      />
-                    }
-                    content="Are you sure you want to delete this comment?!"
-                    on="hover"
-                  />
+                  </List.Content>
+
+                  <Button compact basic color="red" size="tiny" floated="right">
+                    <Icon name="comments" />
+                    delete comment
+                  </Button>
 
                   <Button
                     compact
@@ -79,6 +70,7 @@ class PostDetail extends Component {
                     size="tiny"
                     floated="right"
                   >
+                    <Icon name="comments" />
                     Edit comment
                   </Button>
                 </Segment>

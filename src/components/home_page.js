@@ -2,13 +2,22 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp";
-import { fetchPosts, fetchCategories } from "../actions";
-import { List, Header, Grid, Button, Segment, Popup } from "semantic-ui-react";
+import { fetchPosts, fetchCategories, fetchComments } from "../actions";
+import { List, Header, Grid, Button, Segment, Icon } from "semantic-ui-react";
 
 class HomePage extends Component {
   componentDidMount() {
     this.props.getData();
+    this.props.fetchPost(this.props.match.params.postId);
   }
+
+  deletePost = (e, Id) => {
+    console.log("The user clicked  delete button");
+  };
+
+  editPost = e => {
+    console.log("The user clicked  edit button");
+  };
 
   render() {
     return (
@@ -44,31 +53,43 @@ class HomePage extends Component {
                     <Link to={`/posts/${post.id}`}>
                       <List.Header>{post.title}</List.Header>
                     </Link>
-                    <List.Content>Author: {post.author}</List.Content>
-                    <List.Content> {post.body}</List.Content>
                     <List.Content>
+                      <Icon name="user" color="teal" size="large" />
+                      {post.author}
+                    </List.Content>
+                    <List.Content>
+                      <Icon name="clock" />
                       <Timestamp time={post.timestamp / 1000} />
                     </List.Content>
                     <List.Content>votes: {post.voteScore}</List.Content>
+                    <List.Content key={post.Id}>
+                      comments: ({this.props.comments &&
+                        Object.values(this.props.comments).length})
+                    </List.Content>
                   </List.Content>
                 </List.Item>
-                <Popup
-                  trigger={
-                    <Button
-                      content="Delete post"
-                      compact
-                      icon="trash"
-                      basic
-                      color="red"
-                      size="tiny"
-                      floated="right"
-                    />
-                  }
-                  content="Are you sure you want to delete this post?!"
-                  on="hover"
-                />
 
-                <Button compact basic color="teal" size="tiny" floated="right">
+                <Button
+                  onClick={this.deletePost}
+                  compact
+                  basic
+                  color="red"
+                  size="tiny"
+                  floated="right"
+                >
+                  <Icon name="trash" />
+                  delete post
+                </Button>
+
+                <Button
+                  onClick={this.editPost}
+                  compact
+                  basic
+                  color="teal"
+                  size="tiny"
+                  floated="right"
+                >
+                  <Icon name="edit" />
                   Edit post
                 </Button>
               </Segment>
@@ -76,6 +97,7 @@ class HomePage extends Component {
           ))}
         <div className="btn-add">
           <Button compact basic color="teal" size="large">
+            <Icon name="plus square outline" />
             Add Post
           </Button>
         </div>
@@ -87,14 +109,17 @@ class HomePage extends Component {
 const mapStateToProps = state => {
   return {
     posts: state.receivePosts,
-    categories: state.receiveCategories
+    categories: state.receiveCategories,
+    comments: state.getComments
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     getData: () =>
-      dispatch(fetchPosts()).then(() => dispatch(fetchCategories()))
+      dispatch(fetchPosts()).then(() => dispatch(fetchCategories())),
+    fetchPost: postId => dispatch(fetchComments(postId))
+
     //deletePost: id => dispatch(deletePost(id))
   };
 };

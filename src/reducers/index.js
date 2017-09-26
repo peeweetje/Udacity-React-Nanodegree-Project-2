@@ -7,7 +7,8 @@ import {
   GET_COMMENTS,
   EDIT_POST,
   DELETE_COMMENT,
-  EDIT_COMMENT
+  EDIT_COMMENT,
+  DELETE_POST
 } from "../actions";
 
 function receivePosts(state = {}, action) {
@@ -54,6 +55,14 @@ function editPost(state = {}, action) {
       return state;
   }
 }
+function deletePost(state = {}, action) {
+  switch (action.type) {
+    case DELETE_POST:
+      return action.posts;
+    default:
+      return state;
+  }
+}
 function getComments(state = {}, action) {
   switch (action.type) {
     case GET_COMMENTS:
@@ -87,5 +96,6 @@ export default combineReducers({
   getComments,
   editPost,
   deleteComment,
-  editComment
+  editComment,
+  deletePost
 });
