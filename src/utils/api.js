@@ -59,8 +59,12 @@ export const editPost = post => {
 };
 
 export const deletePost = postId => {
-  return fetch(`${api}/posts/${postId}`, { method: "DELETE", headers });
+  return fetch(`${api}/posts/${postId}`, {
+    method: "DELETE",
+    headers
+  }).then(res => res);
 };
+
 // }).then(data => data.json());
 
 //Works

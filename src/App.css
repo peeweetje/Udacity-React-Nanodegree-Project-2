@@ -25,10 +25,10 @@ h2.header-categories {
   justify-content: center;
 }
 
-div.post {
+/*div.post {
   display: flex;
   justify-content: center;
-}
+}*/
 
 .ui.raised.segment {
   padding: 0.5em 3em 1em 3em;
@@ -46,7 +46,8 @@ div.post {
   margin: 1em 4em 1em 4em;
 }
 
-.btn-add {
+.btn-add,
+.add-btn-post {
   margin-left: 12em;
   display: flex;
   justify-content: flex-start;

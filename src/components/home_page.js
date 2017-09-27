@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp";
-import { fetchPosts, fetchCategories, fetchComments } from "../actions";
+import {
+  fetchPosts,
+  fetchCategories,
+  fetchComments,
+  fetchDeletePost
+} from "../actions";
 import { List, Header, Grid, Button, Segment, Icon } from "semantic-ui-react";
 
 class HomePage extends Component {
@@ -11,8 +16,10 @@ class HomePage extends Component {
     this.props.fetchPost(this.props.match.params.postId);
   }
 
-  deletePost = (e, Id) => {
+  deletePost = postId => {
     console.log("The user clicked  delete button");
+    console.log(postId);
+    this.props.deletePost(postId);
   };
 
   editPost = e => {
@@ -68,9 +75,8 @@ class HomePage extends Component {
                     </List.Content>
                   </List.Content>
                 </List.Item>
-
                 <Button
-                  onClick={this.deletePost}
+                  onClick={() => this.deletePost(post.id)}
                   compact
                   basic
                   color="red"
@@ -97,7 +103,7 @@ class HomePage extends Component {
           ))}
         <div className="btn-add">
           <Button compact basic color="teal" size="large">
-            <Icon name="plus square outline" />
+            <Icon name="plus circle" />
             Add Post
           </Button>
         </div>
@@ -118,9 +124,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getData: () =>
       dispatch(fetchPosts()).then(() => dispatch(fetchCategories())),
-    fetchPost: postId => dispatch(fetchComments(postId))
-
-    //deletePost: id => dispatch(deletePost(id))
+    fetchPost: postId => dispatch(fetchComments(postId)),
+    deletePost: postId => dispatch(fetchDeletePost(postId))
   };
 };
 

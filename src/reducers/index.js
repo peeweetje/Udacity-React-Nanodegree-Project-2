@@ -58,7 +58,7 @@ function editPost(state = {}, action) {
 function deletePost(state = {}, action) {
   switch (action.type) {
     case DELETE_POST:
-      return action.posts;
+      return action.postId;
     default:
       return state;
   }

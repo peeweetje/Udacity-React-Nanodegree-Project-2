@@ -46,12 +46,12 @@ export const fetchSinglePost = postId => dispatch =>
   api.getSinglePost(postId).then(posts => dispatch(receiveSinglePost(posts)));
 
 //Deleting post
-export const deletePost = posts => ({
+export const deletePost = postId => ({
   type: DELETE_POST,
-  posts
+  postId
 });
 export const fetchDeletePost = postId => dispatch =>
-  api.deletePost(postId).then(posts => dispatch(deletePost(posts)));
+  api.deletePost(postId).then(post => dispatch(deletePost(postId)));
 
 // edit post
 export const editPost = posts => ({

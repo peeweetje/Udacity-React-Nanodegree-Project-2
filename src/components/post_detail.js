@@ -9,6 +9,17 @@ class PostDetail extends Component {
   componentDidMount() {
     this.props.fetchPost(this.props.match.params.postId);
   }
+
+  deletePost = postId => {
+    console.log("The user clicked  delete button");
+    console.log(postId);
+    //this.props.deletePost(postId);
+  };
+
+  editPost = e => {
+    console.log("The user clicked  edit button");
+  };
+
   render() {
     return (
       <div className="header-section">
@@ -29,52 +40,84 @@ class PostDetail extends Component {
                   <Timestamp time={this.props.post.timestamp / 1000} />
                 </List.Content>
                 <List.Content>{this.props.post.body}</List.Content>
-                <List.Content>Vote: {this.props.post.voteScore}</List.Content>
+                <List.Content>Votes: {this.props.post.voteScore}</List.Content>
+                <List.Content>
+                  comments: ({this.props.comments &&
+                    Object.values(this.props.comments).length})
+                </List.Content>
 
-                <Button compact basic color="red" size="tiny" floated="right">
+                <Button
+                  // onClick={() => this.deletePost(post.id)}
+                  compact
+                  basic
+                  color="red"
+                  size="tiny"
+                  floated="right"
+                >
                   <Icon name="trash" />
-                  deletePost
+                  Delete Post
                 </Button>
 
-                <Button compact basic color="teal" size="tiny" floated="right">
+                <Button
+                  onClick={this.editPost}
+                  compact
+                  basic
+                  color="teal"
+                  size="tiny"
+                  floated="right"
+                >
                   <Icon name="edit" />
-                  Edit post
+                  Edit Post
                 </Button>
               </Segment>
             </div>
           )}
 
-          <div className="comment-wrapper">
+          <div className="comments-wrapper">
             {this.props.comments.length > 0 &&
               this.props.comments.map(comment => (
-                <Segment color="teal" raised key={comment.id}>
-                  <List.Content>
-                    <Icon name="user" color="teal" size="large" /> Author:
-                    {comment.author}
-                  </List.Content>
-                  <List.Content> {comment.body}</List.Content>
-                  <List.Content>
-                    <Icon name="clock" />
-                    <Timestamp time={comment.timestamp / 1000} />
-                  </List.Content>
+                <div key={comment.id} className="comment-wrapper">
+                  <Segment color="teal" raised>
+                    <List.Content>
+                      <Icon name="user" color="teal" size="large" /> Author:
+                      {comment.author}
+                    </List.Content>
+                    <List.Content> {comment.body}</List.Content>
+                    <List.Content>
+                      <Icon name="clock" />
+                      <Timestamp time={comment.timestamp / 1000} />
+                    </List.Content>
 
-                  <Button compact basic color="red" size="tiny" floated="right">
-                    <Icon name="comments" />
-                    delete comment
-                  </Button>
+                    <Button
+                      compact
+                      basic
+                      color="red"
+                      size="tiny"
+                      floated="right"
+                    >
+                      <Icon name="comments" />
+                      delete comment
+                    </Button>
 
-                  <Button
-                    compact
-                    basic
-                    color="teal"
-                    size="tiny"
-                    floated="right"
-                  >
-                    <Icon name="comments" />
-                    Edit comment
-                  </Button>
-                </Segment>
+                    <Button
+                      compact
+                      basic
+                      color="teal"
+                      size="tiny"
+                      floated="right"
+                    >
+                      <Icon name="comments" />
+                      Edit comment
+                    </Button>
+                  </Segment>
+                </div>
               ))}
+            <div className="btn-add">
+              <Button compact basic color="teal" size="large">
+                <Icon name="plus circle" />
+                Add Comment
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -89,8 +132,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchPost: postId =>
-    dispatch(fetchSinglePost(postId)).then(() =>
-      dispatch(fetchComments(postId))
+    dispatch(fetchSinglePost(postId)).then(
+      () => dispatch(fetchComments(postId)) //.then(() =>
+      // dispatch(fetchDeletePost(postId))
+      //)
     )
 });
 
