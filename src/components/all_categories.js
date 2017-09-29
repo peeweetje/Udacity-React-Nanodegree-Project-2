@@ -81,6 +81,12 @@ class Categories extends Component {
                   </Button>
                 </Segment>
               </div>
+              <div className="add-btn-post">
+                <Button compact basic color="teal" size="large" floated="right">
+                  <Icon name="plus circle" />
+                  Add Post
+                </Button>
+              </div>
             </div>
           ))
         ) : (
@@ -97,12 +103,6 @@ class Categories extends Component {
             </div>
           </div>
         )}
-        <div className="btn-add">
-          <Button compact basic color="teal" size="large">
-            <Icon name="plus circle" />
-            Add Comment
-          </Button>
-        </div>
       </div>
     );
   }

@@ -68,9 +68,9 @@ export const deletePost = postId => {
 // }).then(data => data.json());
 
 //Works
-export const getComments = postId =>
-  fetch(`${api}/posts/${postId}/comments`, { headers }).then(response =>
-    response.json()
+export const getComments = id =>
+  fetch(`${api}/posts/${id}/comments`, { headers }).then(response =>
+    response.json().then(data => data)
   );
 
 export const addComment = comment => {
@@ -100,30 +100,23 @@ export const deleteComment = commentId => {
   }).then(response => response.json());
 };
 
-/*export const example = () =>
-  fetch(`${api}/posts`, {
-    headers: {
-      ...headers,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ shelf })
-  }).then(res => res.json());
-*/
 // upvotePost
 // downvotePost
 
 /*
  * Pass the downVote or upVote to the post with given `postId`.
  */
-export const votePost = (postId, vote) =>
-  fetch(`${api}/posts/` + postId, {
+export const votePost = (postId, option) =>
+  fetch(`${api}/posts${postId}`, {
     method: `POST`,
     headers: {
       ...headers,
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(vote)
-  }).then(res => res.json());
+    body: JSON.stringify({ option })
+  })
+    .then(res => res.json())
+    .then(data => data);
 
 //upvoteComment
 //downvoteComment

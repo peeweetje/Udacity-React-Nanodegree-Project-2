@@ -4,11 +4,12 @@ import {
   RECEIVE_CATEGORIES,
   GET_POSTS_CATEGORY,
   GET_SINGLE_POST,
-  GET_COMMENTS,
   EDIT_POST,
+  DELETE_POST,
+  //ADD_POST,
   DELETE_COMMENT,
   EDIT_COMMENT,
-  DELETE_POST
+  GET_COMMENTS
 } from "../actions";
 
 function receivePosts(state = {}, action) {
@@ -55,10 +56,23 @@ function editPost(state = {}, action) {
       return state;
   }
 }
+
+/*function addPost(state = {}, action) {
+  switch (action.type) {
+    case ADD_POST:
+      return action.postid;
+    default:
+      return state;
+  }
+}*/
+
 function deletePost(state = {}, action) {
   switch (action.type) {
     case DELETE_POST:
-      return action.postId;
+      return {
+        ...state,
+        [action.postId]: { ...state[action.postId], deleted: true }
+      };
     default:
       return state;
   }
@@ -71,7 +85,7 @@ function getComments(state = {}, action) {
       return state;
   }
 }
-function deleteComment(state = {}, action) {
+function deleteComment(state = [], action) {
   switch (action.type) {
     case DELETE_COMMENT:
       return action.comments;
@@ -95,6 +109,7 @@ export default combineReducers({
   receivePost,
   getComments,
   editPost,
+  //addPost,
   deleteComment,
   editComment,
   deletePost

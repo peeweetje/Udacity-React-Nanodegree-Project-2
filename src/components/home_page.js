@@ -7,23 +7,29 @@ import {
   fetchCategories,
   fetchComments,
   fetchDeletePost
+  //fetchAddPost
 } from "../actions";
 import { List, Header, Grid, Button, Segment, Icon } from "semantic-ui-react";
 
 class HomePage extends Component {
   componentDidMount() {
     this.props.getData();
-    this.props.fetchPost(this.props.match.params.postId);
+    this.props.fetchPost();
   }
 
   deletePost = postId => {
-    console.log("The user clicked  delete button");
-    console.log(postId);
-    this.props.deletePost(postId);
+    this.props.deletePost(postId, () => {
+      this.props.history.push("/");
+    });
   };
 
   editPost = e => {
     console.log("The user clicked  edit button");
+  };
+
+  addPost = e => {
+    console.log("The user clicked  add button");
+    //this.props.addedPost();
   };
 
   render() {
@@ -70,11 +76,12 @@ class HomePage extends Component {
                     </List.Content>
                     <List.Content>votes: {post.voteScore}</List.Content>
                     <List.Content key={post.Id}>
-                      comments: ({this.props.comments &&
-                        Object.values(this.props.comments).length})
+                      comments:
+                      {this.props.comments && this.props.comments.length}
                     </List.Content>
                   </List.Content>
                 </List.Item>
+
                 <Button
                   onClick={() => this.deletePost(post.id)}
                   compact
@@ -102,7 +109,13 @@ class HomePage extends Component {
             </List>
           ))}
         <div className="btn-add">
-          <Button compact basic color="teal" size="large">
+          <Button
+            onClick={this.addPost}
+            compact
+            basic
+            color="teal"
+            size="large"
+          >
             <Icon name="plus circle" />
             Add Post
           </Button>
@@ -126,6 +139,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(fetchPosts()).then(() => dispatch(fetchCategories())),
     fetchPost: postId => dispatch(fetchComments(postId)),
     deletePost: postId => dispatch(fetchDeletePost(postId))
+    //addedPost: posts => dispatch(fetchAddPost(posts))
   };
 };
 

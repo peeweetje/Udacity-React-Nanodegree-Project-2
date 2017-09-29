@@ -42,8 +42,7 @@ class PostDetail extends Component {
                 <List.Content>{this.props.post.body}</List.Content>
                 <List.Content>Votes: {this.props.post.voteScore}</List.Content>
                 <List.Content>
-                  comments: ({this.props.comments &&
-                    Object.values(this.props.comments).length})
+                  comments: {this.props.comments && this.props.comments.length}
                 </List.Content>
 
                 <Button
