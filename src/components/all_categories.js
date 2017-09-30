@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp";
-import { fetchPostsCategory, fetchComments } from "../actions";
+import { fetchPostsCategory, fetchComments, fetchDeletePost } from "../actions";
 import { Header, Segment, List, Icon, Button } from "semantic-ui-react";
 
 class Categories extends Component {
@@ -13,6 +13,7 @@ class Categories extends Component {
   deletePost = postId => {
     console.log("The user clicked  delete button");
     console.log(postId);
+    this.props.deletePost(postId);
   };
 
   editPost = e => {
@@ -35,7 +36,7 @@ class Categories extends Component {
         </div>
 
         {this.props.posts.length > 0 ? (
-          this.props.posts.map(post => (
+          this.props.posts.filter(post => !post.deleted).map(post => (
             <div className="post" key={post.id}>
               <div className="post-wrapper">
                 <Segment color="teal" raised>
@@ -67,39 +68,44 @@ class Categories extends Component {
                     <Icon name="trash" />
                     delete post
                   </Button>
-
-                  <Button
-                    onClick={this.editPost}
-                    compact
-                    basic
-                    color="teal"
-                    size="tiny"
-                    floated="right"
-                  >
-                    <Icon name="edit" />
-                    Edit post
-                  </Button>
+                  <Link to="/editpost">
+                    <Button
+                      onClick={this.editPost}
+                      compact
+                      basic
+                      color="teal"
+                      size="tiny"
+                      floated="right"
+                    >
+                      <Icon name="edit" />
+                      Edit post
+                    </Button>
+                  </Link>
                 </Segment>
               </div>
               <div className="add-btn-post">
-                <Button compact basic color="teal" size="large" floated="right">
-                  <Icon name="plus circle" />
-                  Add Post
-                </Button>
+                <Link to="addpost">
+                  <Button compact color="teal" size="large" floated="right">
+                    <Icon name="plus circle" />
+                    Add Post
+                  </Button>
+                </Link>
               </div>
             </div>
           ))
         ) : (
           <div>
-            <h3>
+            <h3 className="empty-category">
               There are no posts in this category. Do you want to make a new
               post?
             </h3>
             <div className="add-btn-post">
-              <Button compact basic color="teal" size="large" floated="right">
-                <Icon name="plus circle" />
-                Add Post
-              </Button>
+              <Link to="/addpost">
+                <Button compact color="teal" size="large" floated="right">
+                  <Icon name="plus circle" />
+                  Add Post
+                </Button>
+              </Link>
             </div>
           </div>
         )}
@@ -115,7 +121,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchData: category => dispatch(fetchPostsCategory(category)),
-  fetchPost: postId => dispatch(fetchComments(postId))
+  fetchPost: postId => dispatch(fetchComments(postId)),
+  deletePost: postId => dispatch(fetchDeletePost(postId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);

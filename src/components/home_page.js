@@ -18,9 +18,7 @@ class HomePage extends Component {
   }
 
   deletePost = postId => {
-    this.props.deletePost(postId, () => {
-      this.props.history.push("/");
-    });
+    this.props.deletePost(postId);
   };
 
   editPost = e => {
@@ -58,7 +56,7 @@ class HomePage extends Component {
         </div>
 
         {this.props.posts.length > 0 &&
-          this.props.posts.map(post => (
+          this.props.posts.filter(post => !post.deleted).map(post => (
             <List key={post.id} divided relaxed>
               <Segment color="teal" raised>
                 <List.Item>
@@ -76,8 +74,8 @@ class HomePage extends Component {
                     </List.Content>
                     <List.Content>votes: {post.voteScore}</List.Content>
                     <List.Content key={post.Id}>
-                      comments:
-                      {this.props.comments && this.props.comments.length}
+                      comments: ({this.props.comments &&
+                        this.props.comments.length})
                     </List.Content>
                   </List.Content>
                 </List.Item>
@@ -94,31 +92,29 @@ class HomePage extends Component {
                   delete post
                 </Button>
 
-                <Button
-                  onClick={this.editPost}
-                  compact
-                  basic
-                  color="teal"
-                  size="tiny"
-                  floated="right"
-                >
-                  <Icon name="edit" />
-                  Edit post
-                </Button>
+                <Link to="/editpost">
+                  <Button
+                    onClick={this.editPost}
+                    compact
+                    basic
+                    color="teal"
+                    size="tiny"
+                    floated="right"
+                  >
+                    <Icon name="edit" />
+                    Edit post
+                  </Button>
+                </Link>
               </Segment>
             </List>
           ))}
         <div className="btn-add">
-          <Button
-            onClick={this.addPost}
-            compact
-            basic
-            color="teal"
-            size="large"
-          >
-            <Icon name="plus circle" />
-            Add Post
-          </Button>
+          <Link to="/addpost">
+            <Button onClick={this.addPost} compact color="teal" size="large">
+              <Icon name="plus circle" />
+              Add Post
+            </Button>
+          </Link>
         </div>
       </div>
     );

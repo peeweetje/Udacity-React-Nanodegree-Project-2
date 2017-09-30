@@ -75,8 +75,8 @@ export const getComments = comments => ({
   type: GET_COMMENTS,
   comments
 });
-export const fetchComments = id => dispatch =>
-  api.getComments(id).then(comments => dispatch(getComments(comments)));
+export const fetchComments = postId => dispatch =>
+  api.getComments(postId).then(comments => dispatch(getComments(comments)));
 
 // delete comment
 export const deleteComment = comments => ({

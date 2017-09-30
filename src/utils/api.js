@@ -35,7 +35,7 @@ export const getSinglePost = postId =>
     headers
   }).then(res => res.json());
 
-export const addPost = () =>
+export const addPost = post =>
   fetch(`${api}/posts`, {
     method: "POST",
     headers: {
@@ -68,8 +68,8 @@ export const deletePost = postId => {
 // }).then(data => data.json());
 
 //Works
-export const getComments = id =>
-  fetch(`${api}/posts/${id}/comments`, { headers }).then(response =>
+export const getComments = postId =>
+  fetch(`${api}/posts/${postId}/comments`, { headers }).then(response =>
     response.json().then(data => data)
   );
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 //import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp";
-import { fetchSinglePost, fetchComments } from "../actions";
+import { fetchSinglePost, fetchComments, fetchDeletePost } from "../actions";
 import { Header, Segment, Button, Icon, List } from "semantic-ui-react";
 
 class PostDetail extends Component {
@@ -13,7 +13,7 @@ class PostDetail extends Component {
   deletePost = postId => {
     console.log("The user clicked  delete button");
     console.log(postId);
-    //this.props.deletePost(postId);
+    this.props.deletePost(postId);
   };
 
   editPost = e => {
@@ -42,11 +42,12 @@ class PostDetail extends Component {
                 <List.Content>{this.props.post.body}</List.Content>
                 <List.Content>Votes: {this.props.post.voteScore}</List.Content>
                 <List.Content>
-                  comments: {this.props.comments && this.props.comments.length}
+                  comments: ({this.props.comments &&
+                    this.props.comments.length})
                 </List.Content>
 
                 <Button
-                  // onClick={() => this.deletePost(post.id)}
+                  onClick={() => this.deletePost(this.props.post.id)}
                   compact
                   basic
                   color="red"
@@ -131,11 +132,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchPost: postId =>
-    dispatch(fetchSinglePost(postId)).then(
-      () => dispatch(fetchComments(postId)) //.then(() =>
-      // dispatch(fetchDeletePost(postId))
-      //)
-    )
+    dispatch(fetchSinglePost(postId)).then(() =>
+      dispatch(fetchComments(postId))
+    ),
+  deletePost: postId => dispatch(fetchDeletePost(postId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);
