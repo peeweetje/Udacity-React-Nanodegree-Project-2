@@ -37,23 +37,25 @@ class Categories extends Component {
 
         {this.props.posts.length > 0 ? (
           this.props.posts.filter(post => !post.deleted).map(post => (
-            <div className="post" key={post.id}>
+            <List className="post" key={post.id}>
               <div className="post-wrapper">
                 <Segment color="teal" raised>
                   <Link to={`/posts/${post.id}`}>
-                    <h3>{post.title}</h3>
+                    <h3 className="header">{post.title}</h3>
                   </Link>
-                  <List.Content>
+                  <List.Content className="author">
                     <Icon name="user" color="teal" size="large" /> author:
                     {post.author}
                   </List.Content>
-                  <List.Content>
+                  <List.Content className="time">
                     <Icon name="clock" />
                     <Timestamp time={post.timestamp / 1000} />
                   </List.Content>
-                  <List.Content>{post.body}</List.Content>
-                  <List.Content>Votes: {post.voteScore}</List.Content>
-                  <List.Content key={post.Id}>
+                  <List.Content className="post-body">{post.body}</List.Content>
+                  <List.Content className="votes">
+                    Votes: {post.voteScore}
+                  </List.Content>
+                  <List.Content className="comments" key={post.Id}>
                     comments: ({this.props.comments &&
                       Object.values(this.props.comments).length})
                   </List.Content>
@@ -83,15 +85,7 @@ class Categories extends Component {
                   </Link>
                 </Segment>
               </div>
-              <div className="add-btn-post">
-                <Link to="addpost">
-                  <Button compact color="teal" size="large" floated="right">
-                    <Icon name="plus circle" />
-                    Add Post
-                  </Button>
-                </Link>
-              </div>
-            </div>
+            </List>
           ))
         ) : (
           <div>
@@ -99,16 +93,16 @@ class Categories extends Component {
               There are no posts in this category. Do you want to make a new
               post?
             </h3>
-            <div className="add-btn-post">
-              <Link to="/addpost">
-                <Button compact color="teal" size="large" floated="right">
-                  <Icon name="plus circle" />
-                  Add Post
-                </Button>
-              </Link>
-            </div>
           </div>
         )}
+        <div className="add-btn-post">
+          <Link to="/addpost">
+            <Button compact color="teal" size="large" floated="right">
+              <Icon name="plus circle" />
+              Add Post
+            </Button>
+          </Link>
+        </div>
       </div>
     );
   }

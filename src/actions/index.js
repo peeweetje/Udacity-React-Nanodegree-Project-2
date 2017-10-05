@@ -7,7 +7,7 @@ export const GET_SINGLE_POST = "GET_SINGLE_POST";
 export const GET_COMMENTS = "GET_COMMENTS";
 export const DELETE_POST = "DELETE_POST";
 export const EDIT_POST = "EDIT_POST";
-//export const ADD_POST = "ADD_POST";
+export const ADD_POST = "ADD_POST";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 //fetching posts
@@ -55,21 +55,22 @@ export const fetchDeletePost = postId => dispatch =>
   api.deletePost(postId).then(post => dispatch(deletePost(postId)));
 
 // edit post
-export const editPost = posts => ({
+export const editPost = (post, postId) => ({
   type: EDIT_POST,
-  posts
-});
-export const fetchEditPost = postId => dispatch =>
-  api.editPost(postId).then(posts => dispatch(editPost(posts)));
-
-//Add post
-/*export const addPost = postId => ({
-  type: ADD_POST,
+  post,
   postId
 });
-export const fetchAddPost = postId => dispatch =>
-  api.addPost(postId).then(posts => dispatch(addPost(posts)));
-*/
+export const fetchEditPost = (post, postId) => dispatch =>
+  api.editPost(post, postId).then(post => dispatch(editPost(post, postId)));
+
+//Add post
+export const addPost = post => ({
+  type: ADD_POST,
+  post
+});
+export const fetchAddPost = post => dispatch =>
+  api.addPost(post).then(post => dispatch(addPost(post)));
+
 //fetching comments
 export const getComments = comments => ({
   type: GET_COMMENTS,

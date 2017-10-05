@@ -64,16 +64,19 @@ class HomePage extends Component {
                     <Link to={`/posts/${post.id}`}>
                       <List.Header>{post.title}</List.Header>
                     </Link>
-                    <List.Content>
+                    <List.Content className="author">
                       <Icon name="user" color="teal" size="large" />
                       {post.author}
                     </List.Content>
-                    <List.Content>
-                      <Icon name="clock" />
-                      <Timestamp time={post.timestamp / 1000} />
+                    <List.Content className="time">
+                      <Icon name="clock" color="teal" size="large" />
+                      <Timestamp time={post.timestamp / 1000} format="full" />
                     </List.Content>
-                    <List.Content>votes: {post.voteScore}</List.Content>
-                    <List.Content key={post.Id}>
+                    <List.Content className="votes">
+                      votes: {post.voteScore}
+                    </List.Content>
+                    <List.Content className="comments" key={post.Id}>
+                      <Icon name="comment outline" color="teal" size="large" />
                       comments: ({this.props.comments &&
                         this.props.comments.length})
                     </List.Content>
@@ -125,7 +128,7 @@ const mapStateToProps = state => {
   return {
     posts: state.receivePosts,
     categories: state.receiveCategories,
-    comments: state.getComments
+    comments: state.comments
   };
 };
 

@@ -42,12 +42,9 @@ export const addPost = post =>
       ...headers,
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({})
-  })
-    .then(res => res.json())
-    .then(data => data.posts);
+    body: JSON.stringify(post)
+  }).then(data => data.json());
 
-//works
 export const editPost = post => {
   const body = JSON.stringify(post);
 
@@ -55,7 +52,7 @@ export const editPost = post => {
     method: "PUT",
     headers,
     body
-  }).then(response => response.json());
+  }).then(data => data.json());
 };
 
 export const deletePost = postId => {

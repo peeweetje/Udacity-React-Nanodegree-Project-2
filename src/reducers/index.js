@@ -6,7 +6,7 @@ import {
   GET_SINGLE_POST,
   EDIT_POST,
   DELETE_POST,
-  //ADD_POST,
+  ADD_POST,
   DELETE_COMMENT,
   EDIT_COMMENT,
   GET_COMMENTS
@@ -51,20 +51,20 @@ function receivePost(state = {}, action) {
 function editPost(state = {}, action) {
   switch (action.type) {
     case EDIT_POST:
-      return action.posts;
+      return action.post;
     default:
       return state;
   }
 }
 
-/*function addPost(state = {}, action) {
+function addPost(state = {}, action) {
   switch (action.type) {
     case ADD_POST:
-      return action.postid;
+      return action.post;
     default:
       return state;
   }
-}*/
+}
 
 function deletePost(state = {}, action) {
   switch (action.type) {
@@ -109,7 +109,7 @@ export default combineReducers({
   receivePost,
   getComments,
   editPost,
-  //addPost,
+  addPost,
   deleteComment,
   editComment,
   deletePost

@@ -31,17 +31,21 @@ class PostDetail extends Component {
             <div className="post-wrapper">
               <Segment color="teal" raised>
                 <h3 className="title">{this.props.post.title}</h3>
-                <List.Content>
-                  <Icon name="user" color="teal" size="large" /> author:
+                <List.Content className="author">
+                  <Icon name="user" color="teal" size="large" />
                   {this.props.post.author}
                 </List.Content>
-                <List.Content>
+                <List.Content className="time">
                   <Icon name="clock" />
                   <Timestamp time={this.props.post.timestamp / 1000} />
                 </List.Content>
-                <List.Content>{this.props.post.body}</List.Content>
-                <List.Content>Votes: {this.props.post.voteScore}</List.Content>
-                <List.Content>
+                <List.Content className="post-body">
+                  {this.props.post.body}
+                </List.Content>
+                <List.Content className="votes">
+                  Votes: {this.props.post.voteScore}
+                </List.Content>
+                <List.Content className="comments">
                   comments: ({this.props.comments &&
                     this.props.comments.length})
                 </List.Content>
@@ -113,7 +117,7 @@ class PostDetail extends Component {
                 </div>
               ))}
             <div className="btn-add">
-              <Button compact basic color="teal" size="large">
+              <Button compact color="teal" size="large">
                 <Icon name="plus circle" />
                 Add Comment
               </Button>
