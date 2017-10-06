@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Form, Header, Icon, Label } from "semantic-ui-react";
 import { fetchAddPost } from "../actions";
-const uuidv1 = require("uuid/v1");
+import uuidv1 from "uuid/v1";
 
 const options = [
   { key: 1, text: "React", value: "react" },

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchEditPost } from "../actions";
+import { fetchEditPost, fetchSinglePost } from "../actions";
 import { Form, Header, Icon } from "semantic-ui-react";
 
 const options = [
@@ -12,11 +12,30 @@ const options = [
 
 class EditPost extends Component {
   state = {
+    id: "",
     postCategory: "",
     postTitle: "",
     postAuthor: "",
     postContent: ""
   };
+
+  componentDidMount() {
+    //this.props.fetchPost(this.props.match.params.postId);
+    console.log(this.props.match.params.postId);
+
+    const { postId } = this.props.match.params;
+    this.props.fetchPost(postId).then(() => {
+      const { id, title, author, body, category } = this.props.post;
+      console.log(this.props.post.title);
+      this.setState({
+        id: id,
+        postTitle: title,
+        postAuthor: author,
+        postContent: body,
+        postCategory: category
+      });
+    });
+  }
 
   handleInputChange = e => {
     const target = e.target;
@@ -31,6 +50,20 @@ class EditPost extends Component {
   setPostCategory = (e, data) => {
     this.setState({ postCategory: data.value });
     console.log(this.state);
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const { id, postTitle, postCategory, postContent, postAuthor } = this.state;
+    const data = {
+      id: id,
+      title: postTitle,
+      body: postContent,
+      author: postAuthor,
+      category: postCategory
+    };
+    this.props.editPost(data, data.id);
+    this.props.history.push("/");
   };
 
   render() {
@@ -54,12 +87,16 @@ class EditPost extends Component {
             required
             name="postTitle"
             id="post-title"
+            value={this.state.postTitle}
+            onChange={this.handleInputChange}
             label="Post Title"
             placeholder="Post Title"
           />
           <Form.Input
             required
             name="postAuthor"
+            value={this.state.postAuthor}
+            onChange={this.handleInputChange}
             label="Author"
             placeholder="Author"
           />
@@ -67,6 +104,7 @@ class EditPost extends Component {
           <Form.TextArea
             required
             name="postContent"
+            value={this.state.postContent}
             onChange={this.handleInputChange}
             label="Post Content"
             placeholder="Post Content"
@@ -89,10 +127,15 @@ class EditPost extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  post: state.receivePost
+});
+
 const mapDispatchToProps = dispatch => {
   return {
-    editPost: post => dispatch(fetchEditPost(post))
+    editPost: (post, postId) => dispatch(fetchEditPost(post, postId)),
+    fetchPost: postId => dispatch(fetchSinglePost(postId))
   };
 };
 
-export default connect(null, mapDispatchToProps)(EditPost);
+export default connect(mapStateToProps, mapDispatchToProps)(EditPost);

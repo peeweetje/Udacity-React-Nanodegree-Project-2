@@ -9,7 +9,8 @@ import {
   ADD_POST,
   DELETE_COMMENT,
   EDIT_COMMENT,
-  GET_COMMENTS
+  GET_COMMENTS,
+  ADD_COMMENT
 } from "../actions";
 
 function receivePosts(state = {}, action) {
@@ -102,6 +103,15 @@ function editComment(state = {}, action) {
   }
 }
 
+function addComment(state = {}, action) {
+  switch (action.type) {
+    case ADD_COMMENT:
+      return action.comment;
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   receivePosts,
   receiveCategories,
@@ -112,5 +122,6 @@ export default combineReducers({
   addPost,
   deleteComment,
   editComment,
+  addComment,
   deletePost
 });

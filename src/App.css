@@ -42,7 +42,8 @@ h3.header:hover {
   display: inline-block;
 }
 
-.post-body {
+.post-body,
+.comment-body {
   margin-left: 1.2em;
 }
 
@@ -92,6 +93,10 @@ h3.header:hover {
 
 .add-post-form {
   margin: 0 11em 0 11em;
+}
+
+.add-comments-form {
+  margin: 2em 11em 0 11em;
 }
 
 .text {

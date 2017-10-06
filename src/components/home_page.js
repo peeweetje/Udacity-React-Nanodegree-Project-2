@@ -95,7 +95,7 @@ class HomePage extends Component {
                   delete post
                 </Button>
 
-                <Link to="/editpost">
+                <Link to={`/editpost/${post.id}`}>
                   <Button
                     onClick={this.editPost}
                     compact

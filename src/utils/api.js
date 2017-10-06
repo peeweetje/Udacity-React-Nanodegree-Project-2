@@ -45,13 +45,14 @@ export const addPost = post =>
     body: JSON.stringify(post)
   }).then(data => data.json());
 
-export const editPost = post => {
-  const body = JSON.stringify(post);
-
-  return fetch(`${api}/posts/${post.id}`, {
+export const editPost = (post, postId) => {
+  return fetch(`${api}/posts/${postId}`, {
     method: "PUT",
-    headers,
-    body
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(post)
   }).then(data => data.json());
 };
 

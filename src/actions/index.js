@@ -10,6 +10,7 @@ export const EDIT_POST = "EDIT_POST";
 export const ADD_POST = "ADD_POST";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
+export const ADD_COMMENT = "ADD_COMMENT";
 //fetching posts
 export const receivePosts = posts => ({
   type: RECEIVE_POSTS,
@@ -61,7 +62,7 @@ export const editPost = (post, postId) => ({
   postId
 });
 export const fetchEditPost = (post, postId) => dispatch =>
-  api.editPost(post, postId).then(post => dispatch(editPost(post, postId)));
+  api.editPost(post, postId).then(post => dispatch(editPost(post)));
 
 //Add post
 export const addPost = post => ({
@@ -97,3 +98,10 @@ export const editComment = comments => ({
 
 export const fetchEditComment = commentId => dispatch =>
   api.editComment(commentId).then(comments => dispatch(editComment(comments)));
+
+export const addComment = comment => ({
+  type: ADD_COMMENT,
+  comment
+});
+export const fetchAddComment = comment => dispatch =>
+  api.addComment(comment).then(comment => dispatch(addComment(comment)));

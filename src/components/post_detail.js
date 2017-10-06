@@ -2,10 +2,21 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 //import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp";
-import { fetchSinglePost, fetchComments, fetchDeletePost } from "../actions";
-import { Header, Segment, Button, Icon, List } from "semantic-ui-react";
+import {
+  fetchSinglePost,
+  fetchComments,
+  fetchDeletePost,
+  fetchAddComment
+} from "../actions";
+import { Header, Segment, Button, Icon, List, Form } from "semantic-ui-react";
+import uuidv1 from "uuid/v1";
 
 class PostDetail extends Component {
+  state = {
+    commentAuthor: "",
+    commentContent: ""
+  };
+
   componentDidMount() {
     this.props.fetchPost(this.props.match.params.postId);
   }
@@ -18,6 +29,35 @@ class PostDetail extends Component {
 
   editPost = e => {
     console.log("The user clicked  edit button");
+  };
+
+  handleInputChange = e => {
+    const target = e.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+    console.log(this.state);
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const data = {
+      id: uuidv1(),
+      timestamp: Date.now(),
+      body: this.state.commentContent,
+      author: this.state.commentAuthor,
+      parentId: this.props.match.params.postId,
+      deleted: false,
+      parentDeleted: false,
+      voteScore: 1
+    };
+    console.log(data);
+    this.props.addComment(data);
+    //this.props.history.push(`/posts/${data.parentId}`);
+    console.log(data.parentId);
   };
 
   render() {
@@ -36,7 +76,7 @@ class PostDetail extends Component {
                   {this.props.post.author}
                 </List.Content>
                 <List.Content className="time">
-                  <Icon name="clock" />
+                  <Icon color="teal" name="clock" size="large" />
                   <Timestamp time={this.props.post.timestamp / 1000} />
                 </List.Content>
                 <List.Content className="post-body">
@@ -82,14 +122,19 @@ class PostDetail extends Component {
               this.props.comments.map(comment => (
                 <div key={comment.id} className="comment-wrapper">
                   <Segment color="teal" raised>
-                    <List.Content>
-                      <Icon name="user" color="teal" size="large" /> Author:
+                    <List.Content className="author">
+                      <Icon name="user" color="teal" size="large" />
                       {comment.author}
                     </List.Content>
-                    <List.Content> {comment.body}</List.Content>
-                    <List.Content>
-                      <Icon name="clock" />
-                      <Timestamp time={comment.timestamp / 1000} />
+                    <List.Content className="time">
+                      <Icon color="teal" name="clock" size="large" />
+                      <Timestamp
+                        format="full"
+                        time={comment.timestamp / 1000}
+                      />
+                    </List.Content>
+                    <List.Content className="comment-body">
+                      {comment.body}
                     </List.Content>
 
                     <Button
@@ -116,12 +161,39 @@ class PostDetail extends Component {
                   </Segment>
                 </div>
               ))}
-            <div className="btn-add">
-              <Button compact color="teal" size="large">
+
+            <Form className="add-comments-form" onSubmit={this.handleSubmit}>
+              <h2>Add a Comment</h2>
+              <Form.Input
+                required
+                name="commentAuthor"
+                value={this.state.commentAuthor}
+                onChange={this.handleInputChange}
+                label="Author"
+                placeholder="Author"
+              />
+
+              <Form.TextArea
+                required
+                name="commentContent"
+                value={this.state.commentContent}
+                onChange={this.handleInputChange}
+                label="Comment Content"
+                placeholder="Add a comment"
+                rows={6}
+              />
+              <Form.Button
+                name="form-button-control-public"
+                color="teal"
+                compact
+                size="large"
+
+                //label="Label with htmlFor"
+              >
                 <Icon name="plus circle" />
                 Add Comment
-              </Button>
-            </div>
+              </Form.Button>
+            </Form>
           </div>
         </div>
       </div>
@@ -139,7 +211,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(fetchSinglePost(postId)).then(() =>
       dispatch(fetchComments(postId))
     ),
-  deletePost: postId => dispatch(fetchDeletePost(postId))
+  deletePost: postId => dispatch(fetchDeletePost(postId)),
+  addComment: comment => dispatch(fetchAddComment(comment))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);
