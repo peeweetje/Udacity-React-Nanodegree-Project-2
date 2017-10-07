@@ -6,7 +6,8 @@ import {
   fetchPosts,
   fetchCategories,
   fetchComments,
-  fetchDeletePost
+  fetchDeletePost,
+  fetchVotePost
   //fetchAddPost
 } from "../actions";
 import { List, Header, Grid, Button, Segment, Icon } from "semantic-ui-react";
@@ -28,6 +29,15 @@ class HomePage extends Component {
   addPost = e => {
     console.log("The user clicked  add button");
     //this.props.addedPost();
+  };
+
+  iconThumbsUp = postId => {
+    console.log("user clicked thumbsup");
+    this.props.votePost(postId);
+  };
+
+  iconThumbsDown = e => {
+    console.log("user clicked thumbsdown");
   };
 
   render() {
@@ -73,7 +83,19 @@ class HomePage extends Component {
                       <Timestamp time={post.timestamp / 1000} format="full" />
                     </List.Content>
                     <List.Content className="votes">
+                      <Icon
+                        name="thumbs up outline"
+                        color="teal"
+                        size="large"
+                        onClick={() => this.iconThumbsUp(post.id)}
+                      />
                       votes: {post.voteScore}
+                      <Icon
+                        name="thumbs down outline"
+                        color="red"
+                        size="large"
+                        onClick={this.iconThumbsDown}
+                      />
                     </List.Content>
                     <List.Content className="comments" key={post.Id}>
                       <Icon name="comment outline" color="teal" size="large" />
@@ -92,7 +114,7 @@ class HomePage extends Component {
                   floated="right"
                 >
                   <Icon name="trash" />
-                  delete post
+                  Delete post
                 </Button>
 
                 <Link to={`/editpost/${post.id}`}>
@@ -137,8 +159,9 @@ const mapDispatchToProps = dispatch => {
     getData: () =>
       dispatch(fetchPosts()).then(() => dispatch(fetchCategories())),
     fetchPost: postId => dispatch(fetchComments(postId)),
-    deletePost: postId => dispatch(fetchDeletePost(postId))
+    deletePost: postId => dispatch(fetchDeletePost(postId)),
     //addedPost: posts => dispatch(fetchAddPost(posts))
+    votePost: postId => dispatch(fetchVotePost(postId))
   };
 };
 
