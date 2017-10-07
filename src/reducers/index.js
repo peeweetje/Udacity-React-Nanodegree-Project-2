@@ -10,7 +10,8 @@ import {
   DELETE_COMMENT,
   EDIT_COMMENT,
   GET_COMMENTS,
-  ADD_COMMENT
+  ADD_COMMENT,
+  UP_VOTE
 } from "../actions";
 
 function receivePosts(state = {}, action) {
@@ -111,6 +112,14 @@ function addComment(state = {}, action) {
       return state;
   }
 }
+function votePost(state = {}, action) {
+  switch (action.type) {
+    case UP_VOTE:
+      return action.postId;
+    default:
+      return state;
+  }
+}
 
 export default combineReducers({
   receivePosts,
@@ -123,5 +132,6 @@ export default combineReducers({
   deleteComment,
   editComment,
   addComment,
-  deletePost
+  deletePost,
+  votePost
 });
