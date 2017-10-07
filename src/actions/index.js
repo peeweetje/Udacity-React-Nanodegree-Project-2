@@ -11,6 +11,7 @@ export const ADD_POST = "ADD_POST";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 export const ADD_COMMENT = "ADD_COMMENT";
+export const UP_VOTE = "UP_VOTE";
 //fetching posts
 export const receivePosts = posts => ({
   type: RECEIVE_POSTS,
@@ -105,3 +106,12 @@ export const addComment = comment => ({
 });
 export const fetchAddComment = comment => dispatch =>
   api.addComment(comment).then(comment => dispatch(addComment(comment)));
+
+// upvote
+export const votePost = postId => ({
+  type: UP_VOTE,
+  postId
+});
+
+export const fetchVotePost = postId => dispatch =>
+  api.votePost(postId).then(post => dispatch(votePost(post)));
