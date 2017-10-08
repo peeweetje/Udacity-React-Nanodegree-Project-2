@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp";
+import Menu from "./menu";
 import {
   fetchPosts,
   fetchCategories,
@@ -10,7 +11,7 @@ import {
   fetchVotePost
   //fetchAddPost
 } from "../actions";
-import { List, Header, Grid, Button, Segment, Icon } from "semantic-ui-react";
+import { List, Header, Button, Segment, Icon } from "semantic-ui-react";
 
 class HomePage extends Component {
   componentDidMount() {
@@ -31,13 +32,12 @@ class HomePage extends Component {
     //this.props.addedPost();
   };
 
-  iconThumbsUp = postId => {
-    console.log("user clicked thumbsup");
-    this.props.votePost(postId);
+  iconThumbsUp = (postId, option) => {
+    this.props.votePost(postId, "upVote");
   };
 
-  iconThumbsDown = e => {
-    console.log("user clicked thumbsdown");
+  iconThumbsDown = (postId, option) => {
+    this.props.votePost(postId, "downVote");
   };
 
   render() {
@@ -49,20 +49,7 @@ class HomePage extends Component {
               Git Talks
             </Header>
           </div>
-          <div className="categories">
-            <Grid columns={4}>
-              {this.props.categories.length > 0 &&
-                this.props.categories.map(category => (
-                  <Grid.Column key={category.path}>
-                    <Link to={`/${category.name}`}>
-                      <Button size="tiny" compact basic color="teal">
-                        {category.name}
-                      </Button>
-                    </Link>
-                  </Grid.Column>
-                ))}
-            </Grid>
-          </div>
+          <Menu />
         </div>
 
         {this.props.posts.length > 0 &&
@@ -87,14 +74,14 @@ class HomePage extends Component {
                         name="thumbs up outline"
                         color="teal"
                         size="large"
-                        onClick={() => this.iconThumbsUp(post.id)}
+                        onClick={() => this.iconThumbsUp(post.id, "upVote")}
                       />
                       votes: {post.voteScore}
                       <Icon
                         name="thumbs down outline"
                         color="red"
                         size="large"
-                        onClick={this.iconThumbsDown}
+                        onClick={() => this.iconThumbsDown(post.id, "downVote")}
                       />
                     </List.Content>
                     <List.Content className="comments" key={post.Id}>
@@ -161,7 +148,7 @@ const mapDispatchToProps = dispatch => {
     fetchPost: postId => dispatch(fetchComments(postId)),
     deletePost: postId => dispatch(fetchDeletePost(postId)),
     //addedPost: posts => dispatch(fetchAddPost(posts))
-    votePost: postId => dispatch(fetchVotePost(postId))
+    votePost: (postId, option) => dispatch(fetchVotePost(postId, option))
   };
 };
 

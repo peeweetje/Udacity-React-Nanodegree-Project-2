@@ -11,7 +11,8 @@ import {
   EDIT_COMMENT,
   GET_COMMENTS,
   ADD_COMMENT,
-  UP_VOTE
+  VOTE
+  // CHANGE_SORT
 } from "../actions";
 
 function receivePosts(state = {}, action) {
@@ -114,12 +115,25 @@ function addComment(state = {}, action) {
 }
 function votePost(state = {}, action) {
   switch (action.type) {
-    case UP_VOTE:
+    case VOTE:
       return action.postId;
     default:
       return state;
   }
 }
+
+/*function sort(state = { sort: "popular" }, action) {
+  switch (action.type) {
+    case "CHANGE_SORT":
+      const newValue = action.value;
+      return {
+        ...state,
+        sort: newValue
+      };
+    default:
+      return state;
+  }
+}*/
 
 export default combineReducers({
   receivePosts,
@@ -134,4 +148,5 @@ export default combineReducers({
   addComment,
   deletePost,
   votePost
+  //sort
 });

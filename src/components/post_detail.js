@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp";
 import {
   fetchSinglePost,
@@ -83,7 +83,19 @@ class PostDetail extends Component {
                   {this.props.post.body}
                 </List.Content>
                 <List.Content className="votes">
-                  Votes: {this.props.post.voteScore}
+                  <Icon
+                    name="thumbs up outline"
+                    color="teal"
+                    size="large"
+                    //onClick={() => this.iconThumbsUp(post.id, "upVote")}
+                  />
+                  votes: {this.props.post.voteScore}
+                  <Icon
+                    name="thumbs down outline"
+                    color="red"
+                    size="large"
+                    //onClick={() => this.iconThumbsDown(post.id, "downVote")}
+                  />
                 </List.Content>
                 <List.Content className="comments">
                   comments: ({this.props.comments &&
@@ -136,6 +148,21 @@ class PostDetail extends Component {
                     <List.Content className="comment-body">
                       {comment.body}
                     </List.Content>
+                    <List.Content className="votes">
+                      <Icon
+                        name="thumbs up outline"
+                        color="teal"
+                        size="large"
+                        //onClick={() => this.iconThumbsUp(post.id, "upVote")}
+                      />
+                      votes: {comment.voteScore}
+                      <Icon
+                        name="thumbs down outline"
+                        color="red"
+                        size="large"
+                        //onClick={() => this.iconThumbsDown(post.id, "downVote")}
+                      />
+                    </List.Content>
 
                     <Button
                       compact
@@ -145,19 +172,21 @@ class PostDetail extends Component {
                       floated="right"
                     >
                       <Icon name="comments" />
-                      delete comment
+                      Delete comment
                     </Button>
 
-                    <Button
-                      compact
-                      basic
-                      color="teal"
-                      size="tiny"
-                      floated="right"
-                    >
-                      <Icon name="comments" />
-                      Edit comment
-                    </Button>
+                    <Link to={`/editcomment/${comment.id}`}>
+                      <Button
+                        compact
+                        basic
+                        color="teal"
+                        size="tiny"
+                        floated="right"
+                      >
+                        <Icon name="comments" />
+                        Edit comment
+                      </Button>
+                    </Link>
                   </Segment>
                 </div>
               ))}
@@ -183,6 +212,7 @@ class PostDetail extends Component {
                 rows={6}
               />
               <Form.Button
+                className="add-comment-btn"
                 name="form-button-control-public"
                 color="teal"
                 compact

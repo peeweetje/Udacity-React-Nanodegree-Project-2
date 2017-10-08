@@ -112,8 +112,7 @@ export const votePost = (postId, option) =>
       "Content-Type": "application/json"
     },
     body: JSON.stringify({ option })
-  });
-// .then(res => res.json())
+  }).then(res => res.json());
 // .then(data => data);
 
 //upvoteComment
