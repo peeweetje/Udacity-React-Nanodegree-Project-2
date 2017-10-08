@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp";
+import Menu from "./menu";
 import { fetchPostsCategory, fetchComments, fetchDeletePost } from "../actions";
 import { Header, Segment, List, Icon, Button } from "semantic-ui-react";
 
@@ -28,6 +29,7 @@ class Categories extends Component {
             <Header textAlign="center" color="teal" as="h1">
               Git Talks
             </Header>
+            <Menu />
 
             <h3 className="header-categories">
               Category: {this.props.match.params.category}
