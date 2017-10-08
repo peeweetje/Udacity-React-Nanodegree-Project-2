@@ -11,7 +11,9 @@ export const ADD_POST = "ADD_POST";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 export const ADD_COMMENT = "ADD_COMMENT";
-export const UP_VOTE = "UP_VOTE";
+export const VOTE = "VOTE";
+export const CHANGE_SORT = "CHANGE_SORT";
+
 //fetching posts
 export const receivePosts = posts => ({
   type: RECEIVE_POSTS,
@@ -100,6 +102,7 @@ export const editComment = comments => ({
 export const fetchEditComment = commentId => dispatch =>
   api.editComment(commentId).then(comments => dispatch(editComment(comments)));
 
+//add commment
 export const addComment = comment => ({
   type: ADD_COMMENT,
   comment
@@ -107,11 +110,19 @@ export const addComment = comment => ({
 export const fetchAddComment = comment => dispatch =>
   api.addComment(comment).then(comment => dispatch(addComment(comment)));
 
-// upvote
-export const votePost = postId => ({
-  type: UP_VOTE,
+// upvote post
+export const votePost = (postId, option) => ({
+  type: VOTE,
   postId
 });
 
-export const fetchVotePost = postId => dispatch =>
-  api.votePost(postId).then(post => dispatch(votePost(post)));
+export const fetchVotePost = (postId, option) => dispatch =>
+  api.votePost(postId, option).then(post => dispatch(votePost(post)));
+
+//Change sort post
+export const changeSortAction = value => {
+  return {
+    type: CHANGE_SORT,
+    value: value
+  };
+};
