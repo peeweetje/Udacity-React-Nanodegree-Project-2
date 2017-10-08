@@ -4,6 +4,7 @@ import HomePage from "../components/home_page";
 import AllCategories from "../components/all_categories";
 import PostDetail from "../components/post_detail";
 import EditPost from "../components/edit_post";
+import EditComment from "../components/edit_comment";
 import AddPost from "../components/add_post";
 
 import "../App.css";
@@ -16,6 +17,7 @@ class App extends Component {
         <Route exact path="/addPost" component={AddPost} />>
         <Route exact path="/:category" component={AllCategories} />
         <Route exact path="/editPost/:postId" component={EditPost} />
+        <Route exact path="/editComment/:id" component={EditComment} />
         <Route exact path="/posts/:postId" component={PostDetail} />
       </Switch>
     );
