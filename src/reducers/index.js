@@ -21,6 +21,8 @@ function receivePosts(state = {}, action) {
   switch (action.type) {
     case RECEIVE_POSTS:
       return { ...state, posts: action.posts };
+    case GET_POSTS_CATEGORY:
+      return { ...state, posts: action.posts };
     case DELETE_POST:
       const availablePosts = state.posts.filter(
         item => item.id !== action.postId
@@ -30,9 +32,15 @@ function receivePosts(state = {}, action) {
         posts: availablePosts
       };
     case VOTE:
+      const updatedPosts = state.posts.map(item => {
+        if (item.id === action.payload.id) {
+          item.voteScore = action.payload.voteScore;
+        }
+        return item;
+      });
       return {
         ...state,
-        [action.postId.id]: action.postId
+        posts: updatedPosts
       };
 
     default:
@@ -49,14 +57,14 @@ function receiveCategories(state = {}, action) {
   }
 }
 
-function getPostsCategory(state = {}, action) {
+/*function getPostsCategory(state = {}, action) {
   switch (action.type) {
     case GET_POSTS_CATEGORY:
       return action.posts;
     default:
       return state;
   }
-}
+}*/
 
 function receivePost(state = {}, action) {
   switch (action.type) {
@@ -174,7 +182,7 @@ function sort(state = { sort: "popular" }, action) {
 export default combineReducers({
   receivePosts,
   receiveCategories,
-  getPostsCategory,
+  //getPostsCategory,
   receivePost,
   receiveComment,
   getComments,
