@@ -117,10 +117,11 @@ i.red.thumbs.down {
 }
 
 .sort {
-  margin-left: 5em;
+  margin-left: 7em;
   display: flex;
   justify-content: center;
   font-size: 10px;
+  max-height: 0.5em;
 }
 
 .ui.selection.dropdown {
@@ -141,4 +142,19 @@ span.text {
 
 span.text:hover {
   color: #009c95;
+}
+
+.post-not-found {
+  text-align: center;
+  padding-top: 2em;
+  margin-bottom: 6em;
+}
+
+.post-not-found-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.back-btn {
+  position: absolute;
 }
