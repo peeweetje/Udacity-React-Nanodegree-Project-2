@@ -23,15 +23,6 @@ class HomePage extends Component {
     this.props.deletePost(postId);
   };
 
-  editPost = e => {
-    console.log("The user clicked  edit button");
-  };
-
-  addPost = e => {
-    console.log("The user clicked  add button");
-    //this.props.addedPost();
-  };
-
   iconThumbsUp = (postId, option) => {
     this.props.votePost(postId, "upVote");
   };
@@ -51,14 +42,15 @@ class HomePage extends Component {
           </div>
           <Menu />
         </div>
-
-        {this.props.posts.length > 0 &&
-          this.props.posts.filter(post => !post.deleted).map(post => (
+        {console.log(this.props.posts.posts)}
+        {this.props.posts.posts &&
+          this.props.posts.posts.length > 0 &&
+          this.props.posts.posts.filter(post => !post.deleted).map(post => (
             <List key={post.id} divided relaxed>
               <Segment color="teal" raised>
                 <List.Item>
                   <List.Content>
-                    <Link to={`/posts/${post.id}`}>
+                    <Link to={`/${post.category}/${post.id}`}>
                       <List.Header>{post.title}</List.Header>
                     </Link>
                     <List.Content className="author">
@@ -86,8 +78,7 @@ class HomePage extends Component {
                     </List.Content>
                     <List.Content className="comments" key={post.Id}>
                       <Icon name="comment outline" color="teal" size="large" />
-                      comments: ({this.props.comments &&
-                        this.props.comments.length})
+                      comments: ({post.comments && post.comments.length})
                     </List.Content>
                   </List.Content>
                 </List.Item>
@@ -106,7 +97,6 @@ class HomePage extends Component {
 
                 <Link to={`/editpost/${post.id}`}>
                   <Button
-                    onClick={this.editPost}
                     compact
                     basic
                     color="teal"
@@ -122,7 +112,7 @@ class HomePage extends Component {
           ))}
         <div className="btn-add">
           <Link to="/addpost">
-            <Button onClick={this.addPost} compact color="teal" size="large">
+            <Button compact color="teal" size="large">
               <Icon name="plus circle" />
               Add Post
             </Button>

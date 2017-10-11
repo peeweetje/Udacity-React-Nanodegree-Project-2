@@ -1,31 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchEditComment, fetchSinglePost, fetchComments } from "../actions";
+import { fetchEditComment, fetchComment } from "../actions";
 import { Form, Header, Icon } from "semantic-ui-react";
 
 class EditComment extends Component {
   state = {
-    id: "",
     commentAuthor: "",
     commentContent: ""
   };
 
   componentDidMount() {
-    //this.props.fetchPost(this.props.match.params.postId);
-    //this part needs to be changed to work for comments
-    console.log(this.props.match.params.id);
-    const { parentId } = this.props.match.params;
-    console.log(this.props.comments.parentId);
-    console.log(this.props.match.params.parentId);
-    this.props.fetchPost(parentId).then(() => {
-      const { id, author, body } = this.props.post;
-      console.log(this.props.post.title);
+    this.props.getComment(this.props.match.params.commentId).then(() => {
+      const { author, body } = this.props.comment;
       this.setState({
-        id: id,
         commentAuthor: author,
         commentContent: body
       });
     });
+    console.log(this.props.match.params.commentId);
+    console.log(this.props.comment);
   }
 
   handleInputChange = e => {
@@ -40,14 +33,15 @@ class EditComment extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { id, commentContent, commentAuthor } = this.state;
+    const { commentContent, commentAuthor } = this.state;
     const data = {
-      id: id,
+      id: this.props.comment.id,
       body: commentContent,
       author: commentAuthor
     };
-    // needs to be changed to editComment when created: this.props.editPost(data, data.id);
-    this.props.history.push("/");
+    console.log(data);
+    this.props.editComment(data, data.id);
+    this.props.history.goBack();
   };
 
   render() {
@@ -56,11 +50,11 @@ class EditComment extends Component {
         <Header textAlign="center" color="teal" as="h1">
           Edit Comment
         </Header>
-        <Form>
+        <Form onSubmit={this.handleSubmit}>
           <Form.Input
             required
             name="commentAuthor"
-            value={this.state.commenttAuthor}
+            value={this.state.commentAuthor}
             onChange={this.handleInputChange}
             label="Author"
           />
@@ -92,18 +86,14 @@ class EditComment extends Component {
 
 //needs to be changed to work for comments instead of for posts!
 const mapStateToProps = state => ({
-  post: state.receivePost,
-  comments: state.getComments
+  comment: state.receiveComment
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    editComment: (comment, postId) =>
-      dispatch(fetchEditComment(comment, postId)),
-    fetchPost: postId =>
-      dispatch(fetchSinglePost(postId)).then(() =>
-        dispatch(fetchComments(postId))
-      )
+    getComment: commentId => dispatch(fetchComment(commentId)),
+    editComment: (comment, commentId) =>
+      dispatch(fetchEditComment(comment, commentId))
   };
 };
 

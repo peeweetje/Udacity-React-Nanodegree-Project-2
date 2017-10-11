@@ -6,7 +6,9 @@ import {
   fetchSinglePost,
   fetchComments,
   fetchDeletePost,
-  fetchAddComment
+  fetchAddComment,
+  fetchDeleteComment,
+  fetchVoteComment
 } from "../actions";
 import { Header, Segment, Button, Icon, List, Form } from "semantic-ui-react";
 import uuidv1 from "uuid/v1";
@@ -22,13 +24,25 @@ class PostDetail extends Component {
   }
 
   deletePost = postId => {
-    console.log("The user clicked  delete button");
-    console.log(postId);
     this.props.deletePost(postId);
   };
 
   editPost = e => {
     console.log("The user clicked  edit button");
+  };
+
+  onDeleteComment = commentId => {
+    this.props.deleteComment(commentId);
+  };
+
+  iconThumbsUp = (commentId, option) => {
+    console.log("up is clicked");
+    this.props.voteComment(commentId, "upVote");
+  };
+
+  iconThumbsDown = (commentId, option) => {
+    console.log("down is clicked");
+    this.props.voteComment(commentId, "downVote");
   };
 
   handleInputChange = e => {
@@ -67,7 +81,10 @@ class PostDetail extends Component {
           <Header textAlign="center" color="teal" as="h1">
             Git Talks
           </Header>
-          {this.props.post && (
+
+          {this.props.post &&
+          this.props.post !== this.props.post.deleted &&
+          Object.keys(this.props.post).length > 0 && (
             <div className="post-wrapper">
               <Segment color="teal" raised>
                 <h3 className="title">{this.props.post.title}</h3>
@@ -83,19 +100,9 @@ class PostDetail extends Component {
                   {this.props.post.body}
                 </List.Content>
                 <List.Content className="votes">
-                  <Icon
-                    name="thumbs up outline"
-                    color="teal"
-                    size="large"
-                    //onClick={() => this.iconThumbsUp(post.id, "upVote")}
-                  />
+                  <Icon name="thumbs up outline" color="teal" size="large" />
                   votes: {this.props.post.voteScore}
-                  <Icon
-                    name="thumbs down outline"
-                    color="red"
-                    size="large"
-                    //onClick={() => this.iconThumbsDown(post.id, "downVote")}
-                  />
+                  <Icon name="thumbs down outline" color="red" size="large" />
                 </List.Content>
                 <List.Content className="comments">
                   comments: ({this.props.comments &&
@@ -113,117 +120,142 @@ class PostDetail extends Component {
                   <Icon name="trash" />
                   Delete Post
                 </Button>
-
-                <Button
-                  onClick={this.editPost}
-                  compact
-                  basic
-                  color="teal"
-                  size="tiny"
-                  floated="right"
-                >
-                  <Icon name="edit" />
-                  Edit Post
-                </Button>
+                <Link to={`/editpost/${this.props.post.id}`}>
+                  <Button
+                    onClick={this.editPost}
+                    compact
+                    basic
+                    color="teal"
+                    size="tiny"
+                    floated="right"
+                  >
+                    <Icon name="edit" />
+                    Edit Post
+                  </Button>
+                </Link>
               </Segment>
             </div>
           )}
 
           <div className="comments-wrapper">
             {this.props.comments.length > 0 &&
-              this.props.comments.map(comment => (
-                <div key={comment.id} className="comment-wrapper">
-                  <Segment color="teal" raised>
-                    <List.Content className="author">
-                      <Icon name="user" color="teal" size="large" />
-                      {comment.author}
-                    </List.Content>
-                    <List.Content className="time">
-                      <Icon color="teal" name="clock" size="large" />
-                      <Timestamp
-                        format="full"
-                        time={comment.timestamp / 1000}
-                      />
-                    </List.Content>
-                    <List.Content className="comment-body">
-                      {comment.body}
-                    </List.Content>
-                    <List.Content className="votes">
-                      <Icon
-                        name="thumbs up outline"
-                        color="teal"
-                        size="large"
-                        //onClick={() => this.iconThumbsUp(post.id, "upVote")}
-                      />
-                      votes: {comment.voteScore}
-                      <Icon
-                        name="thumbs down outline"
-                        color="red"
-                        size="large"
-                        //onClick={() => this.iconThumbsDown(post.id, "downVote")}
-                      />
-                    </List.Content>
+              this.props.comments
+                .filter(comment => !comment.deleted)
+                .filter(comment => !comment.parentDeleted)
+                .map(comment => (
+                  <div key={comment.id} className="comment-wrapper">
+                    <Segment color="teal" raised>
+                      <List.Content className="author">
+                        <Icon name="user" color="teal" size="large" />
+                        {comment.author}
+                      </List.Content>
+                      <List.Content className="time">
+                        <Icon color="teal" name="clock" size="large" />
+                        <Timestamp
+                          format="full"
+                          time={comment.timestamp / 1000}
+                        />
+                      </List.Content>
+                      <List.Content className="comment-body">
+                        {comment.body}
+                      </List.Content>
+                      <List.Content className="votes">
+                        <Icon
+                          name="thumbs up outline"
+                          color="teal"
+                          size="large"
+                          onClick={() =>
+                            this.iconThumbsUp(comment.id, "upVote")}
+                        />
+                        votes: {comment.voteScore}
+                        <Icon
+                          name="thumbs down outline"
+                          color="red"
+                          size="large"
+                          onClick={() =>
+                            this.iconThumbsDown(comment.id, "downVote")}
+                        />
+                      </List.Content>
 
-                    <Button
-                      compact
-                      basic
-                      color="red"
-                      size="tiny"
-                      floated="right"
-                    >
-                      <Icon name="comments" />
-                      Delete comment
-                    </Button>
-
-                    <Link to={`/editcomment/${comment.id}`}>
                       <Button
                         compact
                         basic
-                        color="teal"
+                        color="red"
                         size="tiny"
                         floated="right"
+                        onClick={() => this.onDeleteComment(comment.id)}
                       >
                         <Icon name="comments" />
-                        Edit comment
+                        Delete comment
                       </Button>
-                    </Link>
-                  </Segment>
-                </div>
-              ))}
 
-            <Form className="add-comments-form" onSubmit={this.handleSubmit}>
-              <h2>Add a Comment</h2>
-              <Form.Input
-                required
-                name="commentAuthor"
-                value={this.state.commentAuthor}
-                onChange={this.handleInputChange}
-                label="Author"
-                placeholder="Author"
-              />
+                      <Link to={`/editcomment/${comment.id}`}>
+                        <Button
+                          compact
+                          basic
+                          color="teal"
+                          size="tiny"
+                          floated="right"
+                        >
+                          <Icon name="comments" />
+                          Edit comment
+                        </Button>
+                      </Link>
+                    </Segment>
+                  </div>
+                ))}
 
-              <Form.TextArea
-                required
-                name="commentContent"
-                value={this.state.commentContent}
-                onChange={this.handleInputChange}
-                label="Comment Content"
-                placeholder="Add a comment"
-                rows={6}
-              />
-              <Form.Button
-                className="add-comment-btn"
-                name="form-button-control-public"
-                color="teal"
-                compact
-                size="large"
+            {this.props.post &&
+            this.props.post !== this.props.post.deleted &&
+            Object.keys(this.props.post).length > 0 ? (
+              <Form className="add-comments-form" onSubmit={this.handleSubmit}>
+                <h2>Add a Comment</h2>
+                <Form.Input
+                  required
+                  name="commentAuthor"
+                  value={this.state.commentAuthor}
+                  onChange={this.handleInputChange}
+                  label="Author"
+                  placeholder="Author"
+                />
 
-                //label="Label with htmlFor"
-              >
-                <Icon name="plus circle" />
-                Add Comment
-              </Form.Button>
-            </Form>
+                <Form.TextArea
+                  required
+                  name="commentContent"
+                  value={this.state.commentContent}
+                  onChange={this.handleInputChange}
+                  label="Comment Content"
+                  placeholder="Add a comment"
+                  rows={6}
+                />
+                <Form.Button
+                  className="add-comment-btn"
+                  name="form-button-control-public"
+                  color="teal"
+                  compact
+                  size="large"
+
+                  //label="Label with htmlFor"
+                >
+                  <Icon name="plus circle" />
+                  Add Comment
+                </Form.Button>
+              </Form>
+            ) : (
+              <div className="post-not-found-wrapper">
+                <h3 className="post-not-found">This post had been deleted.</h3>
+                <Button
+                  className="back-btn"
+                  color="teal"
+                  compact
+                  size="large"
+                  onClick={() => this.props.history.goBack()}
+                >
+                  <Icon name="arrow left" />
+                  Back
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -242,7 +274,10 @@ const mapDispatchToProps = dispatch => ({
       dispatch(fetchComments(postId))
     ),
   deletePost: postId => dispatch(fetchDeletePost(postId)),
-  addComment: comment => dispatch(fetchAddComment(comment))
+  addComment: comment => dispatch(fetchAddComment(comment)),
+  deleteComment: commentId => dispatch(fetchDeleteComment(commentId)),
+  voteComment: (commentId, option) =>
+    dispatch(fetchVoteComment(commentId, option))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);

@@ -55,11 +55,12 @@ class Categories extends Component {
                   </List.Content>
                   <List.Content className="post-body">{post.body}</List.Content>
                   <List.Content className="votes">
+                    <Icon name="thumbs up outline" color="teal" size="large" />
                     Votes: {post.voteScore}
+                    <Icon name="thumbs down outline" color="red" size="large" />
                   </List.Content>
                   <List.Content className="comments" key={post.Id}>
-                    comments: ({this.props.comments &&
-                      Object.values(this.props.comments).length})
+                    comments: ({post.comments && post.comments.length})
                   </List.Content>
                   <Button
                     onClick={() => this.deletePost(post.id)}
@@ -72,7 +73,7 @@ class Categories extends Component {
                     <Icon name="trash" />
                     delete post
                   </Button>
-                  <Link to="/editpost">
+                  <Link to={`/editpost/${post.id}`}>
                     <Button
                       onClick={this.editPost}
                       compact
