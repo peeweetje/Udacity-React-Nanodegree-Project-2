@@ -65,6 +65,11 @@ export const deletePost = postId => {
 
 // }).then(data => data.json());
 
+export const getComment = commentId =>
+  fetch(`${api}/comments/${commentId}`, { headers }).then(res =>
+    res.json().then(data => data)
+  );
+
 //Works
 export const getComments = postId =>
   fetch(`${api}/posts/${postId}/comments`, { headers }).then(response =>
@@ -81,14 +86,15 @@ export const addComment = comment => {
   }).then(response => response.json());
 };
 
-export const editComment = comment => {
-  const body = JSON.stringify(comment);
-
-  return fetch(`${api}/comments/${comment.id}`, {
+export const editComment = (comment, commentId) => {
+  return fetch(`${api}/comments/${commentId}`, {
     method: "PUT",
-    headers,
-    body
-  }).then(response => response.json());
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(comment)
+  }).then(data => data.json());
 };
 
 export const deleteComment = commentId => {
@@ -117,3 +123,16 @@ export const votePost = (postId, option) =>
 
 //upvoteComment
 //downvoteComment
+
+export const voteComment = (commentId, option) => {
+  return fetch(`${api}/comments/${commentId}`, {
+    method: "POST",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      option: option
+    })
+  }).then(data => data.json());
+};
