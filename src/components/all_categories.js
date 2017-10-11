@@ -37,8 +37,8 @@ class Categories extends Component {
           </div>
         </div>
 
-        {this.props.posts.length > 0 ? (
-          this.props.posts.filter(post => !post.deleted).map(post => (
+        {this.props.posts.posts && this.props.posts.posts.length > 0 ? (
+          this.props.posts.posts.filter(post => !post.deleted).map(post => (
             <List className="post" key={post.id}>
               <div className="post-wrapper">
                 <Segment color="teal" raised>
@@ -112,7 +112,7 @@ class Categories extends Component {
 }
 
 const mapStateToProps = state => ({
-  posts: state.getPostsCategory,
+  posts: state.receivePosts,
   comments: state.getComments
 });
 
