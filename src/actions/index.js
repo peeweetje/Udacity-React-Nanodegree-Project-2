@@ -100,10 +100,18 @@ export const fetchAddPost = post => dispatch =>
   api.addPost(post).then(post => dispatch(addPost(post)));
 
 // upvote post
-export const votePost = (postId, option) => ({
+//export const votePost = (postId, option) => ({
+// type: VOTE,
+// postId
+//});
+
+export const votePost = post => ({
   type: VOTE,
-  postId
+  payload: post
 });
+
+//export const fetchVotePost = (postId, option) => dispatch =>
+// api.votePost(postId, option).then(post => dispatch(votePost(post)));
 
 export const fetchVotePost = (postId, option) => dispatch =>
   api.votePost(postId, option).then(post => dispatch(votePost(post)));
