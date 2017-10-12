@@ -15,7 +15,7 @@ export const ADD_COMMENT = "ADD_COMMENT";
 export const VOTE = "VOTE";
 export const VOTE_COMMENT = "VOTE_COMMENT";
 export const CHANGE_SORT = "CHANGE_SORT";
-
+export const DELETE_SINGLE_POST = "DELETE_SINGLE_POST";
 //fetching posts
 export const receivePosts = posts => ({
   type: RECEIVE_POSTS,
@@ -81,6 +81,12 @@ export const deletePost = postId => ({
 });
 export const fetchDeletePost = postId => dispatch =>
   api.deletePost(postId).then(post => dispatch(deletePost(postId)));
+
+//deleting singlepost
+export const deleteSinglePost = postId => ({
+  type: DELETE_SINGLE_POST,
+  postId
+});
 
 // edit post
 export const editPost = (post, postId) => ({

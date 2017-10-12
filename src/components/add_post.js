@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Form, Header, Icon, Label } from "semantic-ui-react";
+import { Form, Header, Icon } from "semantic-ui-react";
 import { fetchAddPost } from "../actions";
 import uuidv1 from "uuid/v1";
 
@@ -27,12 +27,10 @@ class AddPost extends Component {
     this.setState({
       [name]: value
     });
-    console.log(this.state);
   };
 
   setPostCategory = (e, data) => {
     this.setState({ postCategory: data.value });
-    console.log(this.state);
   };
 
   handleSubmit = e => {
@@ -58,10 +56,9 @@ class AddPost extends Component {
           Add Post
         </Header>
 
-        <Label content={`Current: ${this.state.postCategory}`} />
-
         <Form onSubmit={this.handleSubmit}>
           <Form.Select
+            required
             name="postCategory"
             placeholder="Category"
             label="Choose Category"
@@ -102,8 +99,6 @@ class AddPost extends Component {
             color="teal"
             compact
             size="large"
-
-            //label="Label with htmlFor"
           >
             <Icon name="plus circle" />
             Add Post
