@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp";
 import Menu from "./menu";
-import { fetchPostsCategory, fetchComments, fetchDeletePost } from "../actions";
+import { fetchPostsCategory, fetchDeletePost, fetchVotePost } from "../actions";
 import { Header, Segment, List, Icon, Button } from "semantic-ui-react";
 
 class Categories extends Component {
@@ -17,8 +17,12 @@ class Categories extends Component {
     this.props.deletePost(postId);
   };
 
-  editPost = e => {
-    console.log("The user clicked  edit button");
+  iconThumbsUp = (postId, option) => {
+    this.props.votePost(postId, "upVote");
+  };
+
+  iconThumbsDown = (postId, option) => {
+    this.props.votePost(postId, "downVote");
   };
 
   render() {
@@ -51,13 +55,23 @@ class Categories extends Component {
                   </List.Content>
                   <List.Content className="time">
                     <Icon name="clock" />
-                    <Timestamp time={post.timestamp / 1000} />
+                    <Timestamp time={post.timestamp / 1000} format="full" />
                   </List.Content>
                   <List.Content className="post-body">{post.body}</List.Content>
                   <List.Content className="votes">
-                    <Icon name="thumbs up outline" color="teal" size="large" />
+                    <Icon
+                      name="thumbs up outline"
+                      onClick={() => this.iconThumbsUp(post.id, "upVote")}
+                      color="teal"
+                      size="large"
+                    />
                     Votes: {post.voteScore}
-                    <Icon name="thumbs down outline" color="red" size="large" />
+                    <Icon
+                      name="thumbs down outline"
+                      color="red"
+                      size="large"
+                      onClick={() => this.iconThumbsDown(post.id, "downVote")}
+                    />
                   </List.Content>
                   <List.Content className="comments" key={post.Id}>
                     comments: ({post.comments && post.comments.length})
@@ -71,7 +85,7 @@ class Categories extends Component {
                     floated="right"
                   >
                     <Icon name="trash" />
-                    delete post
+                    Delete post
                   </Button>
                   <Link to={`/editpost/${post.id}`}>
                     <Button
@@ -93,8 +107,7 @@ class Categories extends Component {
         ) : (
           <div>
             <h3 className="empty-category">
-              There are no posts in this category. Do you want to make a new
-              post?
+              There are no posts in this category.
             </h3>
           </div>
         )}
@@ -112,14 +125,13 @@ class Categories extends Component {
 }
 
 const mapStateToProps = state => ({
-  posts: state.receivePosts,
-  comments: state.getComments
+  posts: state.receivePosts
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchData: category => dispatch(fetchPostsCategory(category)),
-  fetchPost: postId => dispatch(fetchComments(postId)),
-  deletePost: postId => dispatch(fetchDeletePost(postId))
+  deletePost: postId => dispatch(fetchDeletePost(postId)),
+  votePost: (postId, option) => dispatch(fetchVotePost(postId, option))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);
