@@ -3,20 +3,12 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp";
 import Menu from "./menu";
-import {
-  fetchPosts,
-  fetchCategories,
-  fetchComments,
-  fetchDeletePost,
-  fetchVotePost
-  //fetchAddPost
-} from "../actions";
+import { fetchPosts, fetchDeletePost, fetchVotePost } from "../actions";
 import { List, Header, Button, Segment, Icon } from "semantic-ui-react";
 
 class HomePage extends Component {
   componentDidMount() {
     this.props.getData();
-    this.props.fetchPost();
   }
 
   deletePost = postId => {
@@ -42,7 +34,7 @@ class HomePage extends Component {
           </div>
           <Menu />
         </div>
-        {console.log(this.props.posts.posts)}
+
         {this.props.posts.posts &&
           this.props.posts.posts.length > 0 &&
           this.props.posts.posts.filter(post => !post.deleted).map(post => (
@@ -125,19 +117,14 @@ class HomePage extends Component {
 
 const mapStateToProps = state => {
   return {
-    posts: state.receivePosts,
-    categories: state.receiveCategories,
-    comments: state.comments
+    posts: state.receivePosts
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getData: () =>
-      dispatch(fetchPosts()).then(() => dispatch(fetchCategories())),
-    fetchPost: postId => dispatch(fetchComments(postId)),
+    getData: () => dispatch(fetchPosts()),
     deletePost: postId => dispatch(fetchDeletePost(postId)),
-    //addedPost: posts => dispatch(fetchAddPost(posts))
     votePost: (postId, option) => dispatch(fetchVotePost(postId, option))
   };
 };
