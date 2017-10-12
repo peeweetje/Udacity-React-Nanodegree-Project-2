@@ -42,6 +42,10 @@ function receivePosts(state = {}, action) {
         ...state,
         posts: updatedPosts
       };
+    case ADD_POST:
+      return { ...state, ...action.post };
+    case EDIT_POST:
+      return { ...state, ...action.post };
 
     default:
       return state;
@@ -69,29 +73,30 @@ function receiveCategories(state = {}, action) {
 function receivePost(state = {}, action) {
   switch (action.type) {
     case GET_SINGLE_POST:
-      return action.posts;
+      return { ...state, post: [action.posts] };
+
     default:
       return state;
   }
 }
 
-function editPost(state = {}, action) {
+/*function editPost(state = {}, action) {
   switch (action.type) {
     case EDIT_POST:
       return action.post;
     default:
       return state;
   }
-}
+}*/
 
-function addPost(state = {}, action) {
+/*function addPost(state = {}, action) {
   switch (action.type) {
     case ADD_POST:
       return action.post;
     default:
       return state;
   }
-}
+}*/
 
 /*function deletePost(state = {}, action) {
   switch (action.type) {
@@ -126,45 +131,68 @@ function receiveComment(state = {}, action) {
 function getComments(state = {}, action) {
   switch (action.type) {
     case GET_COMMENTS:
-      return action.comments;
+      return { ...state, comments: action.comments };
+    case VOTE_COMMENT:
+      const updatedComments = state.comments.map(item => {
+        if (item.id === action.commentId.id) {
+          item.voteScore = action.commentId.voteScore;
+        }
+        return item;
+      });
+      return {
+        ...state,
+        comments: updatedComments
+      };
+    case DELETE_COMMENT:
+      const availableComments = state.comments.filter(
+        item => item.id !== action.commentId
+      );
+      return {
+        ...state,
+        comments: availableComments
+      };
+    case ADD_COMMENT:
+      return { ...state, comments: state.comments.concat(action.comment) };
+    case EDIT_COMMENT:
+      return { ...state, ...action.comment };
     default:
       return state;
   }
 }
-function deleteComment(state = [], action) {
+/*function deleteComment(state = [], action) {
   switch (action.type) {
     case DELETE_COMMENT:
       return action.commentId;
     default:
       return state;
   }
-}
-function editComment(state = {}, action) {
+}*/
+/*function editComment(state = {}, action) {
   switch (action.type) {
     case EDIT_COMMENT:
       return action.comment;
     default:
       return state;
   }
-}
+}*/
 
-function addComment(state = {}, action) {
+/*function addComment(state = {}, action) {
   switch (action.type) {
     case ADD_COMMENT:
       return action.comment;
     default:
       return state;
   }
-}
+}*/
 
-function voteComment(state = {}, action) {
+/*function voteComment(state = {}, action) {
   switch (action.type) {
     case VOTE_COMMENT:
       return action.commentId;
     default:
       return state;
   }
-}
+}*/
 
 function sort(state = { sort: "popular" }, action) {
   switch (action.type) {
@@ -186,13 +214,13 @@ export default combineReducers({
   receivePost,
   receiveComment,
   getComments,
-  editPost,
-  addPost,
-  deleteComment,
-  editComment,
-  addComment,
+  //editPost,
+  //addPost,
+  //deleteComment,
+  //editComment,
+  //addComment,
   //deletePost,
   //votePost,
-  voteComment,
+  //voteComment,
   sort
 });
