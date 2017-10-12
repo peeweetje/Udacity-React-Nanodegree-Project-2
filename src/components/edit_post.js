@@ -75,6 +75,7 @@ class EditPost extends Component {
 
         <Form onSubmit={this.handleSubmit}>
           <Form.Select
+            required
             name="postCategory"
             placeholder="Category"
             label="Choose Category"
