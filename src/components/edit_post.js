@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchEditPost, fetchSinglePost } from "../actions";
+import Menu from "./menu";
 import { Form, Header, Icon } from "semantic-ui-react";
 
 const options = [
@@ -20,13 +21,11 @@ class EditPost extends Component {
   };
 
   componentDidMount() {
-    //this.props.fetchPost(this.props.match.params.postId);
-    console.log(this.props.match.params.postId);
-
     const { postId } = this.props.match.params;
+    //Fetches post matching a postId, then uses the data from the post to set the state,
+    //and prepopulate the edit post form with this data.
     this.props.fetchPost(postId).then(() => {
-      const { id, title, author, body, category } = this.props.post;
-      console.log(this.props.post.title);
+      const { id, title, author, body, category } = this.props.posts.posts[0];
       this.setState({
         id: id,
         postTitle: title,
@@ -73,6 +72,10 @@ class EditPost extends Component {
           Edit Post
         </Header>
 
+        <div className="edit-post-menu">
+          <Menu />
+        </div>
+
         <Form onSubmit={this.handleSubmit}>
           <Form.Select
             required
@@ -116,8 +119,6 @@ class EditPost extends Component {
             color="teal"
             compact
             size="large"
-
-            //label="Label with htmlFor"
           >
             <Icon name="edit" />
             Edit Post
@@ -129,7 +130,7 @@ class EditPost extends Component {
 }
 
 const mapStateToProps = state => ({
-  post: state.receivePost
+  posts: state.receivePosts
 });
 
 const mapDispatchToProps = dispatch => {

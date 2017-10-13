@@ -11,6 +11,8 @@ import {
   fetchVoteComment,
   fetchVotePost
 } from "../actions";
+import Menu from "./menu";
+import SortBy from "./sortBy";
 import { Header, Segment, Button, Icon, List, Form } from "semantic-ui-react";
 import uuidv1 from "uuid/v1";
 
@@ -21,13 +23,15 @@ class PostDetail extends Component {
   };
 
   componentDidMount() {
-    this.props.fetchPost(this.props.match.params.postId);
+    //Fetches a single post by matches the post_id.
+    this.props.fetchPost(this.props.match.params.post_id);
   }
 
   deletePost = postId => {
     this.props.deletePost(postId);
   };
 
+  //Dispatches action to delete a comment by commentId, when clicking on delete comment.
   onDeleteComment = commentId => {
     this.props.deleteComment(commentId);
   };
@@ -67,7 +71,7 @@ class PostDetail extends Component {
       timestamp: Date.now(),
       body: this.state.commentContent,
       author: this.state.commentAuthor,
-      parentId: this.props.match.params.postId,
+      parentId: this.props.match.params.post_id,
       deleted: false,
       parentDeleted: false,
       voteScore: 1
@@ -83,80 +87,110 @@ class PostDetail extends Component {
     const { comments } = this.props.comments;
     return (
       <div className="header-section">
-        <div>
+        <div className="container">
           <Header textAlign="center" color="teal" as="h1">
             Git Talks
           </Header>
 
-          {this.props.post.post &&
-            this.props.post.post.length > 0 &&
-            this.props.post.post.filter(post => !post.deleted).map(post => (
-              <div key={post.id} className="post-wrapper">
-                <Segment color="teal" raised>
-                  <h3 className="title">{post.title}</h3>
-                  <List.Content className="author">
-                    <Icon name="user" color="teal" size="large" />
-                    {post.author}
-                  </List.Content>
-                  <List.Content className="time">
-                    <Icon color="teal" name="clock" size="large" />
-                    <Timestamp time={post.timestamp / 1000} format="full" />
-                  </List.Content>
-                  <List.Content className="post-body">{post.body}</List.Content>
-                  <List.Content className="votes">
-                    <Icon
-                      name="thumbs up outline"
-                      color="teal"
-                      size="large"
-                      onClick={() => this.iconThumbsUp(post.id, "upVote")}
-                    />
-                    votes: {post.voteScore}
-                    <Icon
-                      name="thumbs down outline"
-                      color="red"
-                      size="large"
-                      onClick={() => this.iconThumbsDown(post.id, "downVote")}
-                    />
-                    {console.log(post.id)}
-                    {console.log(post)}
-                  </List.Content>
-                  <List.Content className="comments">
-                    comments: ({comments && comments.length})
-                  </List.Content>
+          <Menu />
+          <SortBy />
 
-                  <Button
-                    onClick={() => this.deletePost(post.id)}
-                    compact
-                    basic
-                    color="red"
-                    size="tiny"
-                    floated="right"
-                  >
-                    <Icon name="trash" />
-                    Delete Post
-                  </Button>
-                  <Link to={`/editpost/${post.id}`}>
+          {//Check if there is a post, filter to check if the post isn't deleted, check
+          //if the post object isn't empty, map to display the post.
+          this.props.posts.posts &&
+            this.props.posts.posts.length > 0 &&
+            this.props.posts.posts
+              .filter(post => !post.deleted && Object.keys(post).length > 0)
+              .map(post => (
+                <div key={post.id} className="post-wrapper">
+                  <Segment color="teal" raised>
+                    <h3 className="title">{post.title}</h3>
+                    <List.Content className="author">
+                      <Icon name="user" color="teal" size="large" />
+                      {post.author}
+                    </List.Content>
+                    <List.Content className="time">
+                      <Icon color="teal" name="clock" size="large" />
+                      <Timestamp time={post.timestamp / 1000} format="full" />
+                    </List.Content>
+                    <List.Content className="post-body">
+                      {post.body}
+                    </List.Content>
+                    <List.Content className="votes">
+                      <Icon
+                        name="thumbs up outline"
+                        color="teal"
+                        size="large"
+                        onClick={() => this.iconThumbsUp(post.id, "upVote")}
+                      />
+                      <div className="vote-score">
+                        <p className="vote-score-num">{post.voteScore}</p>
+                      </div>
+                      <Icon
+                        name="thumbs down outline"
+                        color="red"
+                        size="large"
+                        onClick={() => this.iconThumbsDown(post.id, "downVote")}
+                      />
+                    </List.Content>
+                    <List.Content className="comments">
+                      <Icon name="comment outline" color="teal" size="large" />
+                      {comments && comments.length}
+                    </List.Content>
+
                     <Button
-                      onClick={this.editPost}
+                      onClick={() => this.deletePost(post.id)}
                       compact
                       basic
-                      color="teal"
+                      color="red"
                       size="tiny"
                       floated="right"
                     >
-                      <Icon name="edit" />
-                      Edit Post
+                      <Icon name="trash" />
+                      Delete Post
                     </Button>
-                  </Link>
-                </Segment>
-              </div>
-            ))}
+                    <Link to={`/editpost/${post.id}`}>
+                      <Button
+                        onClick={this.editPost}
+                        compact
+                        basic
+                        color="teal"
+                        size="tiny"
+                        floated="right"
+                      >
+                        <Icon name="edit" />
+                        Edit Post
+                      </Button>
+                    </Link>
+                  </Segment>
+                </div>
+              ))}
 
           <div className="comments-wrapper">
-            {comments &&
+            {//Check if there is a post, filter deleted post, check if post object isn't empty,
+            //then filter comments for deleted comments and deleted parent post, sort comments,
+            //and map over comments to display them on the PostDetail page.
+            this.props.posts.posts &&
+              this.props.posts.posts.length > 0 &&
+              this.props.posts.posts.filter(
+                post => !post.deleted && Object.keys(post).length > 0
+              ).length > 0 &&
+              comments &&
               comments
                 .filter(comment => !comment.deleted)
                 .filter(comment => !comment.parentDeleted)
+                .sort((a, b) => {
+                  switch (this.props.sort.sort.value) {
+                    case "unpopular":
+                      return a.voteScore - b.voteScore;
+                    case "oldest":
+                      return a.timestamp - b.timestamp;
+                    case "newest":
+                      return b.timestamp - a.timestamp;
+                    default:
+                      return b.voteScore - a.voteScore;
+                  }
+                })
                 .map(comment => (
                   <div key={comment.id} className="comment-wrapper">
                     <Segment color="teal" raised>
@@ -182,7 +216,10 @@ class PostDetail extends Component {
                           onClick={() =>
                             this.iconThumbsUpComment(comment.id, "upVote")}
                         />
-                        votes: {comment.voteScore}
+                        <div className="vote-score">
+                          <p className="vote-score-num">{comment.voteScore}</p>
+                        </div>
+
                         <Icon
                           name="thumbs down outline"
                           color="red"
@@ -220,7 +257,7 @@ class PostDetail extends Component {
                   </div>
                 ))}
 
-            {this.props.post.post && this.props.post.post.length > 0 ? (
+            {this.props.posts.posts && this.props.posts.posts.length > 0 ? (
               <Form className="add-comments-form" onSubmit={this.handleSubmit}>
                 <h2>Add a Comment</h2>
                 <Form.Input
@@ -247,8 +284,6 @@ class PostDetail extends Component {
                   color="teal"
                   compact
                   size="large"
-
-                  //label="Label with htmlFor"
                 >
                   <Icon name="plus circle" />
                   Add Comment
@@ -277,8 +312,9 @@ class PostDetail extends Component {
 }
 
 const mapStateToProps = state => ({
-  post: state.receivePost,
-  comments: state.getComments
+  posts: state.receivePosts,
+  comments: state.getComments,
+  sort: state.sort
 });
 
 const mapDispatchToProps = dispatch => ({

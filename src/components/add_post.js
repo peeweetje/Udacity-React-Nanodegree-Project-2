@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Form, Header, Icon } from "semantic-ui-react";
 import { fetchAddPost } from "../actions";
+import Menu from "./menu";
 import uuidv1 from "uuid/v1";
 
+//Variable to hold the values of the dropdown menu for the post category.
 const options = [
   { key: 1, text: "React", value: "react" },
   { key: 2, text: "Redux", value: "redux" },
@@ -12,6 +14,7 @@ const options = [
 ];
 
 class AddPost extends Component {
+  //State to keep track of the post details.
   state = {
     postCategory: "react",
     postTitle: "",
@@ -19,6 +22,7 @@ class AddPost extends Component {
     postContent: ""
   };
 
+  //Handles input in the form fields
   handleInputChange = e => {
     const target = e.target;
     const value = target.value;
@@ -29,10 +33,12 @@ class AddPost extends Component {
     });
   };
 
+  //Sets the value of the chosen category in the dropdown menu
   setPostCategory = (e, data) => {
     this.setState({ postCategory: data.value });
   };
 
+  //Submits the post detail data.
   handleSubmit = e => {
     e.preventDefault();
     const data = {
@@ -45,16 +51,26 @@ class AddPost extends Component {
       deleted: false,
       voteScore: 1
     };
+    //Dispatches addPost action with the added post detail data.
     this.props.addPost(data);
+    //Redirects to the HomePage after adding a new post.
     this.props.history.push("/");
   };
 
   render() {
     return (
       <div className="add-post-form ">
-        <Header textAlign="center" color="teal" as="h1">
+        <Header
+          className="add-post-header"
+          textAlign="center"
+          color="teal"
+          as="h1"
+        >
           Add Post
         </Header>
+        <div className="add-post-menu">
+          <Menu />
+        </div>
 
         <Form onSubmit={this.handleSubmit}>
           <Form.Select

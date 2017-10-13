@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchEditComment, fetchComment } from "../actions";
+import Menu from "./menu";
 import { Form, Header, Icon } from "semantic-ui-react";
 
 class EditComment extends Component {
@@ -10,6 +11,8 @@ class EditComment extends Component {
   };
 
   componentDidMount() {
+    //Get the comment by commentId, then set the state using the data
+    //from the comment, and prepopulate the form with this data.
     this.props.getComment(this.props.match.params.commentId).then(() => {
       const { author, body } = this.props.comment;
       this.setState({
@@ -17,8 +20,6 @@ class EditComment extends Component {
         commentContent: body
       });
     });
-    console.log(this.props.match.params.commentId);
-    console.log(this.props.comment);
   }
 
   handleInputChange = e => {
@@ -31,6 +32,7 @@ class EditComment extends Component {
     });
   };
 
+  //Submits input data from form fields
   handleSubmit = e => {
     e.preventDefault();
     const { commentContent, commentAuthor } = this.state;
@@ -39,8 +41,9 @@ class EditComment extends Component {
       body: commentContent,
       author: commentAuthor
     };
-    console.log(data);
+    //Dispatched editComment action with data from form
     this.props.editComment(data, data.id);
+    //Redirects back to previous page.
     this.props.history.goBack();
   };
 
@@ -50,6 +53,11 @@ class EditComment extends Component {
         <Header textAlign="center" color="teal" as="h1">
           Edit Comment
         </Header>
+
+        <div className="edit-comment-menu">
+          <Menu />
+        </div>
+
         <Form onSubmit={this.handleSubmit}>
           <Form.Input
             required
@@ -72,8 +80,6 @@ class EditComment extends Component {
             color="teal"
             compact
             size="large"
-
-            //label="Label with htmlFor"
           >
             <Icon name="edit" />
             Edit comment
@@ -84,7 +90,6 @@ class EditComment extends Component {
   }
 }
 
-//needs to be changed to work for comments instead of for posts!
 const mapStateToProps = state => ({
   comment: state.receiveComment
 });

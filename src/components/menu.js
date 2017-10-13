@@ -1,38 +1,33 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchCategories, changeSortAction } from "../actions";
-import { Grid, Button, Select, Label } from "semantic-ui-react";
-
-const options = [
-  { value: "popular", text: "Popular" },
-  { value: "unpopular", text: "Unpopular" },
-  { value: "date", text: "Date" }
-];
+import { fetchCategories, fetchPostsCategory } from "../actions";
+import { Grid, Button } from "semantic-ui-react";
 
 class Menu extends Component {
-  state = {
-    value: "popular"
-  };
-
+  //Get all the categories, to display in the Menu.
   componentDidMount() {
     this.props.getCategories();
   }
 
-  setValue = (e, data) => {
-    this.setState({ value: data.value });
-    this.props.changeSort({ value: data.value });
+  //Dispatches action to get the posts for a category, when clicking on a Menu Button.
+  getPostsByCategory = category => {
+    this.props.fetchData(category);
   };
 
   render() {
-    const { value } = this.state;
-    //console.log(this.state.value);
     return (
       <div className="categories">
-        <Grid columns={7}>
+        <Grid columns={5}>
           <Grid.Column>
             <Link to="/">
-              <Button size="tiny" compact basic color="teal">
+              <Button
+                className="menu-btn"
+                size="tiny"
+                compact
+                basic
+                color="teal"
+              >
                 All
               </Button>
             </Link>
@@ -41,40 +36,32 @@ class Menu extends Component {
             this.props.categories.map(category => (
               <Grid.Column key={category.path}>
                 <Link to={`/${category.name}`}>
-                  <Button size="tiny" compact basic color="teal">
+                  <Button
+                    className="menu-btn"
+                    onClick={() => this.getPostsByCategory(category.name)}
+                    size="tiny"
+                    compact
+                    basic
+                    color="teal"
+                  >
                     {category.name}
                   </Button>
                 </Link>
               </Grid.Column>
             ))}
-
-          <Grid.Column>
-            <div className="sort">
-              <Select
-                onChange={this.setValue}
-                color="teal"
-                name="sort"
-                placeholder="Sort By"
-                options={options}
-                value={value}
-              />
-            </div>
-          </Grid.Column>
         </Grid>
-        <Label content={`Current: ${value}`} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  categories: state.receiveCategories,
-  sort: state.sort
+  categories: state.receiveCategories
 });
 
 const mapDispatchToProps = dispatch => ({
   getCategories: () => dispatch(fetchCategories()),
-  changeSort: value => dispatch(changeSortAction(value))
+  fetchData: category => dispatch(fetchPostsCategory(category))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);
