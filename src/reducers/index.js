@@ -21,6 +21,8 @@ function receivePosts(state = {}, action) {
   switch (action.type) {
     case RECEIVE_POSTS:
       return { ...state, posts: action.posts };
+    case GET_SINGLE_POST:
+      return { ...state, posts: [action.posts] };
     case GET_POSTS_CATEGORY:
       return { ...state, posts: action.posts };
     case DELETE_POST:
@@ -60,64 +62,6 @@ function receiveCategories(state = {}, action) {
       return state;
   }
 }
-
-/*function getPostsCategory(state = {}, action) {
-  switch (action.type) {
-    case GET_POSTS_CATEGORY:
-      return action.posts;
-    default:
-      return state;
-  }
-}*/
-
-function receivePost(state = {}, action) {
-  switch (action.type) {
-    case GET_SINGLE_POST:
-      return { ...state, post: [action.posts] };
-
-    default:
-      return state;
-  }
-}
-
-/*function editPost(state = {}, action) {
-  switch (action.type) {
-    case EDIT_POST:
-      return action.post;
-    default:
-      return state;
-  }
-}*/
-
-/*function addPost(state = {}, action) {
-  switch (action.type) {
-    case ADD_POST:
-      return action.post;
-    default:
-      return state;
-  }
-}*/
-
-/*function deletePost(state = {}, action) {
-  switch (action.type) {
-    case DELETE_POST:
-      return {
-        ...state,
-        [action.postId]: { ...state[action.postId], deleted: true }
-      };
-    default:
-      return state;
-  }
-}*/
-
-/*function votePost(state = {}, action) {
-  switch (action.type) {
-    case VOTE:
-      return action.postId;
-    default:
-      return state;
-  }
-}*/
 
 function receiveComment(state = {}, action) {
   switch (action.type) {
@@ -159,40 +103,6 @@ function getComments(state = {}, action) {
       return state;
   }
 }
-/*function deleteComment(state = [], action) {
-  switch (action.type) {
-    case DELETE_COMMENT:
-      return action.commentId;
-    default:
-      return state;
-  }
-}*/
-/*function editComment(state = {}, action) {
-  switch (action.type) {
-    case EDIT_COMMENT:
-      return action.comment;
-    default:
-      return state;
-  }
-}*/
-
-/*function addComment(state = {}, action) {
-  switch (action.type) {
-    case ADD_COMMENT:
-      return action.comment;
-    default:
-      return state;
-  }
-}*/
-
-/*function voteComment(state = {}, action) {
-  switch (action.type) {
-    case VOTE_COMMENT:
-      return action.commentId;
-    default:
-      return state;
-  }
-}*/
 
 function sort(state = { sort: "popular" }, action) {
   switch (action.type) {
@@ -210,17 +120,7 @@ function sort(state = { sort: "popular" }, action) {
 export default combineReducers({
   receivePosts,
   receiveCategories,
-  //getPostsCategory,
-  receivePost,
   receiveComment,
   getComments,
-  //editPost,
-  //addPost,
-  //deleteComment,
-  //editComment,
-  //addComment,
-  //deletePost,
-  //votePost,
-  //voteComment,
   sort
 });
