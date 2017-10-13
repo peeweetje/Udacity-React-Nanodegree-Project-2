@@ -16,11 +16,17 @@ export const VOTE = "VOTE";
 export const VOTE_COMMENT = "VOTE_COMMENT";
 export const CHANGE_SORT = "CHANGE_SORT";
 export const DELETE_SINGLE_POST = "DELETE_SINGLE_POST";
-//fetching posts
+
+//Thunk is used to handle asynchronous actions in Redux
+
+//fetching all posts
 export const receivePosts = posts => ({
   type: RECEIVE_POSTS,
   posts
 });
+
+//Fetch all the posts using thunk action, then fetch all the comments for a post,
+// to display the number of comments for a post on the Home.
 export const fetchPosts = () => dispatch =>
   api
     .getAllPosts()
@@ -36,7 +42,7 @@ export const fetchPosts = () => dispatch =>
     )
     .then(posts => dispatch(receivePosts(posts)));
 
-// fetching all categories
+// fetching all categories, to display in a menu
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
   categories
@@ -46,11 +52,14 @@ export const fetchCategories = () => dispatch =>
     .getAllCategories()
     .then(categories => dispatch(receiveCategories(categories)));
 
-//fetching post categories
+//fetching posts for a category, to display posts on Category Page
 export const getPostsCategory = posts => ({
   type: GET_POSTS_CATEGORY,
   posts
 });
+
+//Fetching posts for a category using thunk, then, fetching all comments for a post,
+// to display the number of comments for a post on the Category Page.
 export const fetchPostsCategory = category => dispatch =>
   api
     .fetchPostsCategory(category)
@@ -66,7 +75,7 @@ export const fetchPostsCategory = category => dispatch =>
     )
     .then(posts => dispatch(getPostsCategory(posts)));
 
-//fetching single post
+//fetching a single post
 export const receiveSinglePost = posts => ({
   type: GET_SINGLE_POST,
   posts
@@ -81,12 +90,6 @@ export const deletePost = postId => ({
 });
 export const fetchDeletePost = postId => dispatch =>
   api.deletePost(postId).then(post => dispatch(deletePost(postId)));
-
-//deleting singlepost
-export const deleteSinglePost = postId => ({
-  type: DELETE_SINGLE_POST,
-  postId
-});
 
 // edit post
 export const editPost = (post, postId) => ({
@@ -105,7 +108,7 @@ export const addPost = post => ({
 export const fetchAddPost = post => dispatch =>
   api.addPost(post).then(post => dispatch(addPost(post)));
 
-// upvote post
+// Upvote post
 //export const votePost = (postId, option) => ({
 // type: VOTE,
 // postId
@@ -115,9 +118,6 @@ export const votePost = post => ({
   type: VOTE,
   payload: post
 });
-
-//export const fetchVotePost = (postId, option) => dispatch =>
-// api.votePost(postId, option).then(post => dispatch(votePost(post)));
 
 export const fetchVotePost = (postId, option) => dispatch =>
   api.votePost(postId, option).then(post => dispatch(votePost(post)));
@@ -133,7 +133,7 @@ export const fetchComment = commentId => dispatch =>
     .getComment(commentId)
     .then(comments => dispatch(receiveComment(comments)));
 
-//fetching comments
+//fetching all comments gor a post
 export const getComments = comments => ({
   type: GET_COMMENTS,
   comments
