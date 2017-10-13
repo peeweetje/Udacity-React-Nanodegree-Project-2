@@ -13,23 +13,19 @@ const headers = {
   "Content-Type": "application/json"
 };
 
-//works
 export const getAllCategories = () =>
   fetch(`${api}/categories`, { headers })
     .then(res => res.json())
     .then(data => data.categories);
 
-//works
 export const fetchPostsCategory = category =>
   fetch(`${api}/${category}/posts`, { headers }).then(data => data.json());
 
-//works
 export const getAllPosts = () =>
   fetch(`${api}/posts`, {
     headers
   }).then(res => res.json());
 
-//works
 export const getSinglePost = postId =>
   fetch(`${api}/posts/${postId}`, {
     headers
@@ -63,14 +59,13 @@ export const deletePost = postId => {
   }).then(res => res);
 };
 
-// }).then(data => data.json());
-
+//get a single comment for editing the comment
 export const getComment = commentId =>
   fetch(`${api}/comments/${commentId}`, { headers }).then(res =>
     res.json().then(data => data)
   );
 
-//Works
+//get comments for a post
 export const getComments = postId =>
   fetch(`${api}/posts/${postId}/comments`, { headers }).then(response =>
     response.json().then(data => data)
@@ -103,9 +98,6 @@ export const deleteComment = commentId => {
     headers
   }).then(response => response.json());
 };
-
-// upvotePost
-// downvotePost
 
 /*
  * Pass the downVote or upVote to the post with given `postId`.
