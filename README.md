@@ -8,13 +8,13 @@ Important! The assignment did not specify any use of authentication. From the AP
 
 ## Getting Started
 
->* git clone (git@github.com:peeweetje/Udacity-React-Nanodegree-Project-2.git)
+>* git clone [git@github.com:peeweetje/Udacity-React-Nanodegree-Project-2.git]
   
 >* `cd server`
 >* `npm install`
 >* To start the server:
 >* `node server.js`
 
->* cd readable
->* npm install
->* npm start
+>* `cd readable`
+>* `npm install`
+>* `npm start`
