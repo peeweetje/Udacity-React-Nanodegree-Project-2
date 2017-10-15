@@ -25,6 +25,7 @@ class PostDetail extends Component {
   componentDidMount() {
     //Fetches a single post by matches the post_id.
     this.props.fetchPost(this.props.match.params.post_id);
+    console.log(this.props.fetchPost(this.props.match.params.post_id));
   }
 
   deletePost = postId => {
@@ -96,11 +97,15 @@ class PostDetail extends Component {
           <SortBy />
 
           {//Check if there is a post, filter to check if the post isn't deleted, check
-          //if the post object isn't empty, map to display the post.
+          //if the post object isn't empty, check if there isn't an error when fetching the post,
+          // map to display the post.
           this.props.posts.posts &&
             this.props.posts.posts.length > 0 &&
             this.props.posts.posts
-              .filter(post => !post.deleted && Object.keys(post).length > 0)
+              .filter(
+                post =>
+                  !post.deleted && Object.keys(post).length > 0 && !post.error
+              )
               .map(post => (
                 <div key={post.id} className="post-wrapper">
                   <Segment color="teal" raised>
@@ -257,7 +262,12 @@ class PostDetail extends Component {
                   </div>
                 ))}
 
-            {this.props.posts.posts && this.props.posts.posts.length > 0 ? (
+            {this.props.posts.posts &&
+            this.props.posts.posts.length > 0 &&
+            this.props.posts.posts.filter(
+              post =>
+                !post.deleted && Object.keys(post).length > 0 && !post.error
+            ).length > 0 ? (
               <Form className="add-comments-form" onSubmit={this.handleSubmit}>
                 <h2>Add a Comment</h2>
                 <Form.Input
@@ -291,7 +301,7 @@ class PostDetail extends Component {
               </Form>
             ) : (
               <div className="post-not-found-wrapper">
-                <h3 className="post-not-found">This post has been deleted.</h3>
+                <h3 className="post-not-found">Post not found.</h3>
                 <Button
                   className="back-btn"
                   color="teal"
@@ -318,6 +328,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  //Fetch single post by postId, then, fetch the comments for that post.
   fetchPost: postId =>
     dispatch(fetchSinglePost(postId)).then(() =>
       dispatch(fetchComments(postId))
