@@ -4,28 +4,28 @@ import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp";
 import Menu from "./menu";
 import SortBy from "./sortBy";
-import { fetchPostsCategory, fetchDeletePost, fetchVotePost } from "../actions";
+import * as actions from "../actions";
 import { Header, Segment, List, Icon, Button } from "semantic-ui-react";
 
 class Categories extends Component {
   componentDidMount() {
     //Fetches the posts for a given category (this.props.match.params.category)
-    this.props.fetchData(this.props.match.params.category);
+    this.props.fetchPostsCategory(this.props.match.params.category);
   }
 
   //Dispatches deletePost action for a given postId, to delete a post.
   deletePost = postId => {
-    this.props.deletePost(postId);
+    this.props.fetchDeletePost(postId);
   };
 
   //Dispatches votePost action for a given postId. Option determines upvote/downvote.
   iconThumbsUp = (postId, option) => {
-    this.props.votePost(postId, "upVote");
+    this.props.fetchVotePost(postId, "upVote");
   };
 
   //Dispatches votePost action for a given postId. Option determines upvote/downvote.
   iconThumbsDown = (postId, option) => {
-    this.props.votePost(postId, "downVote");
+    this.props.fetchVotePost(postId, "downVote");
   };
 
   render() {
@@ -49,7 +49,7 @@ class Categories extends Component {
         //sorts posts, and maps posts to display them.
         this.props.posts.posts && this.props.posts.posts.length > 0 ? (
           this.props.posts.posts
-            .filter(post => !post.deleted)
+            .filter(post => !post.deleted && !post.error)
             .sort((a, b) => {
               switch (this.props.sort.sort.value) {
                 case "unpopular":
@@ -66,7 +66,7 @@ class Categories extends Component {
               <List className="post" key={post.id}>
                 <div className="post-wrapper">
                   <Segment color="teal" raised>
-                    <Link to={`/posts/${post.id}`}>
+                    <Link to={`/{post.category}/${post.id}`}>
                       <h3 className="header">{post.title}</h3>
                     </Link>
                     <List.Content className="author">
@@ -156,10 +156,7 @@ const mapStateToProps = state => ({
   sort: state.sort
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchData: category => dispatch(fetchPostsCategory(category)),
-  deletePost: postId => dispatch(fetchDeletePost(postId)),
-  votePost: (postId, option) => dispatch(fetchVotePost(postId, option))
-});
+//Imported all actions from action folder. Pass actions into connect,
+//so they can be accessed via this.props and a mapDispatchToProps function isn't needed.
 
-export default connect(mapStateToProps, mapDispatchToProps)(Categories);
+export default connect(mapStateToProps, actions)(Categories);

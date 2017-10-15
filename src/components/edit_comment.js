@@ -13,7 +13,7 @@ class EditComment extends Component {
   componentDidMount() {
     //Get the comment by commentId, then set the state using the data
     //from the comment, and prepopulate the form with this data.
-    this.props.getComment(this.props.match.params.commentId).then(() => {
+    this.props.fetchComment(this.props.match.params.commentId).then(() => {
       const { author, body } = this.props.comment;
       this.setState({
         commentAuthor: author,
@@ -42,7 +42,7 @@ class EditComment extends Component {
       author: commentAuthor
     };
     //Dispatched editComment action with data from form
-    this.props.editComment(data, data.id);
+    this.props.fetchEditComment(data, data.id);
     //Redirects back to previous page.
     this.props.history.goBack();
   };
@@ -94,12 +94,6 @@ const mapStateToProps = state => ({
   comment: state.receiveComment
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getComment: commentId => dispatch(fetchComment(commentId)),
-    editComment: (comment, commentId) =>
-      dispatch(fetchEditComment(comment, commentId))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditComment);
+export default connect(mapStateToProps, { fetchEditComment, fetchComment })(
+  EditComment
+);

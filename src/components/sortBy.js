@@ -22,7 +22,7 @@ class SortBy extends Component {
     this.setState({ value: data.value });
     //Dispatches changeSort action to keep track of the value of the dropdown sort menu
     //in Redux.
-    this.props.changeSort({ value: data.value });
+    this.props.changeSortAction({ value: data.value });
   };
 
   render() {
@@ -46,8 +46,4 @@ const mapStateToProps = state => ({
   sort: state.sort
 });
 
-const mapDispatchToProps = dispatch => ({
-  changeSort: value => dispatch(changeSortAction(value))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(SortBy);
+export default connect(mapStateToProps, { changeSortAction })(SortBy);

@@ -51,8 +51,8 @@ class AddPost extends Component {
       deleted: false,
       voteScore: 1
     };
-    //Dispatches addPost action with the added post detail data.
-    this.props.addPost(data);
+    //Dispatches fetchAddPost action with the added post detail data.
+    this.props.fetchAddPost(data);
     //Redirects to the HomePage after adding a new post.
     this.props.history.push("/");
   };
@@ -125,10 +125,7 @@ class AddPost extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addPost: post => dispatch(fetchAddPost(post))
-  };
-};
+//Add the fetchAddPost action directly to the connect method, so a
+//mapDispatchToProps method isn't needed.
 
-export default connect(null, mapDispatchToProps)(AddPost);
+export default connect(null, { fetchAddPost })(AddPost);

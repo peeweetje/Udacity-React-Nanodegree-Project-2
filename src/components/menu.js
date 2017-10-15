@@ -7,12 +7,12 @@ import { Grid, Button } from "semantic-ui-react";
 class Menu extends Component {
   //Get all the categories, to display in the Menu.
   componentDidMount() {
-    this.props.getCategories();
+    this.props.fetchCategories();
   }
 
   //Dispatches action to get the posts for a category, when clicking on a Menu Button.
   getPostsByCategory = category => {
-    this.props.fetchData(category);
+    this.props.fetchPostsCategory(category);
   };
 
   render() {
@@ -59,9 +59,10 @@ const mapStateToProps = state => ({
   categories: state.receiveCategories
 });
 
-const mapDispatchToProps = dispatch => ({
-  getCategories: () => dispatch(fetchCategories()),
-  fetchData: category => dispatch(fetchPostsCategory(category))
-});
+//Pass actions directly into connect method, so mapDispatchToProps function
+//isn't needed, and less code is needed.
 
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+export default connect(mapStateToProps, {
+  fetchCategories,
+  fetchPostsCategory
+})(Menu);

@@ -24,7 +24,7 @@ class EditPost extends Component {
     const { postId } = this.props.match.params;
     //Fetches post matching a postId, then uses the data from the post to set the state,
     //and prepopulate the edit post form with this data.
-    this.props.fetchPost(postId).then(() => {
+    this.props.fetchSinglePost(postId).then(() => {
       const { id, title, author, body, category } = this.props.posts.posts[0];
       this.setState({
         id: id,
@@ -61,7 +61,7 @@ class EditPost extends Component {
       author: postAuthor,
       category: postCategory
     };
-    this.props.editPost(data, data.id);
+    this.props.fetchEditPost(data, data.id);
     this.props.history.push("/");
   };
 
@@ -133,11 +133,6 @@ const mapStateToProps = state => ({
   posts: state.receivePosts
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    editPost: (post, postId) => dispatch(fetchEditPost(post, postId)),
-    fetchPost: postId => dispatch(fetchSinglePost(postId))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditPost);
+export default connect(mapStateToProps, { fetchEditPost, fetchSinglePost })(
+  EditPost
+);

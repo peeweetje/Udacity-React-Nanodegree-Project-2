@@ -4,28 +4,28 @@ import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp";
 import Menu from "./menu";
 import SortBy from "./sortBy";
-import { fetchPosts, fetchDeletePost, fetchVotePost } from "../actions";
+import * as actions from "../actions";
 import { List, Header, Button, Segment, Icon } from "semantic-ui-react";
 
 class HomePage extends Component {
   componentDidMount() {
     //fetch posts to display on Home Page
-    this.props.getData();
+    this.props.fetchPosts();
   }
 
   //dispatch delete action, when clicking on delete button
   deletePost = postId => {
-    this.props.deletePost(postId);
+    this.props.fetchDeletePost(postId);
   };
 
   //dispatch vote action, when clicking on upvote, option determines upvote or downvote for action.
   iconThumbsUp = (postId, option) => {
-    this.props.votePost(postId, "upVote");
+    this.props.fetchVotePost(postId, "upVote");
   };
 
   //dispatch vote action when clicking on downvote, option determines upvote/downvote.
   iconThumbsDown = (postId, option) => {
-    this.props.votePost(postId, "downVote");
+    this.props.fetchVotePost(postId, "downVote");
   };
 
   render() {
@@ -93,7 +93,7 @@ class HomePage extends Component {
                             this.iconThumbsDown(post.id, "downVote")}
                         />
                       </List.Content>
-                      <List.Content className="comments" key={post.Id}>
+                      <List.Content className="comments" key={post.id}>
                         <Icon
                           name="comment outline"
                           color="teal"
@@ -153,13 +153,6 @@ const mapStateToProps = state => {
   };
 };
 
-//Dispatch actions to fetch to posts to display them on the HomePage, and be able to delete the posts, and vote on posts
-const mapDispatchToProps = dispatch => {
-  return {
-    getData: () => dispatch(fetchPosts()),
-    deletePost: postId => dispatch(fetchDeletePost(postId)),
-    votePost: (postId, option) => dispatch(fetchVotePost(postId, option))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+//Imported all actions from action folder. Pass actions into connect,
+//so they can be accessed via this.props and a mapDispatchToProps function isn't needed.
+export default connect(mapStateToProps, actions)(HomePage);
