@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchCategories, fetchPostsCategory } from "../actions";
-import { Grid, Button } from "semantic-ui-react";
+import { Grid, Button, Responsive } from "semantic-ui-react";
 
 class Menu extends Component {
   //Get all the categories, to display in the Menu.
@@ -18,7 +18,7 @@ class Menu extends Component {
   render() {
     return (
       <div className="categories">
-        <Grid columns={5}>
+        <Responsive as={Grid} columns={5} minWidth={768}>
           <Grid.Column>
             <Link to="/">
               <Button
@@ -49,7 +49,7 @@ class Menu extends Component {
                 </Link>
               </Grid.Column>
             ))}
-        </Grid>
+        </Responsive>
       </div>
     );
   }
