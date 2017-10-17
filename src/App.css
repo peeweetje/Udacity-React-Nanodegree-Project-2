@@ -1,6 +1,5 @@
 body {
   background-color: #fcf8f8;
-  margin: 3em;
 }
 
 .container {
@@ -8,6 +7,22 @@ body {
   margin-left: 10em;
 }
 
+/*Mobile Hamburger Button */
+.ui.top.attached.menu > .item:first-child {
+  padding-right: 3.8em;
+  color: #00b5ad;
+}
+
+i.sidebar.icon {
+  padding-right: 2em;
+}
+
+/*SideBar for Mobile*/
+.ui.sidebar {
+  top: 3em;
+}
+
+/*Menu Button for desktop Menu*/
 .menu-btn {
   min-width: 6em;
 }
