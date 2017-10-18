@@ -22,6 +22,10 @@ i.sidebar.icon {
   top: 3em;
 }
 
+.ui.inverted.menu {
+  background-color: #009c95;
+}
+
 /*Menu Button for desktop Menu*/
 .menu-btn {
   min-width: 6em;
