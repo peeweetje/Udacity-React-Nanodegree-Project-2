@@ -1,15 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import {
-  Sidebar,
-  Segment,
-  Button,
-  Menu,
-  Image,
-  Icon,
-  Header,
-  Responsive
-} from "semantic-ui-react";
+import { Sidebar, Menu, Image, Icon, Responsive } from "semantic-ui-react";
 
 class SideBar extends Component {
   state = { visible: false };
@@ -32,7 +23,7 @@ class SideBar extends Component {
             <Icon name="sidebar" />Menu
           </Menu.Item>
         </Responsive>
-        <Responsive as={Sidebar.Pusher} maxWidth={767} as={Image}>
+        <Responsive maxWidth={767} as={Image}>
           <Sidebar
             as={Menu}
             width="thin"
@@ -43,7 +34,9 @@ class SideBar extends Component {
             inverted
           >
             <Link to="/">
-              <Menu.Item name="home">Home</Menu.Item>
+              <Menu.Item className="mobile-menu-btn" name="home">
+                Home
+              </Menu.Item>
             </Link>
             <Link to="/react">
               <Menu.Item name="react">React</Menu.Item>
