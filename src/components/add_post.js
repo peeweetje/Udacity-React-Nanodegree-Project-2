@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Form, Header, Icon } from "semantic-ui-react";
 import { fetchAddPost } from "../actions";
 import Menu from "./menu";
+import SideBar from "./sideBar";
 import uuidv1 from "uuid/v1";
 
 //Variable to hold the values of the dropdown menu for the post category.
@@ -59,67 +60,70 @@ class AddPost extends Component {
 
   render() {
     return (
-      <div className="add-post-form ">
-        <Header
-          className="add-post-header"
-          textAlign="center"
-          color="teal"
-          as="h1"
-        >
-          Add Post
-        </Header>
-        <div className="add-post-menu">
-          <Menu />
-        </div>
-
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Select
-            required
-            name="postCategory"
-            placeholder="Category"
-            label="Choose Category"
-            value={this.state.postCategory}
-            onChange={this.setPostCategory}
-            options={options}
-          />
-
-          <Form.Input
-            required
-            name="postTitle"
-            id="post-title"
-            value={this.state.postTitle}
-            onChange={this.handleInputChange}
-            label="Post Title"
-            placeholder="Post Title"
-          />
-          <Form.Input
-            required
-            name="postAuthor"
-            value={this.state.postAuthor}
-            onChange={this.handleInputChange}
-            label="Author"
-            placeholder="Author"
-          />
-
-          <Form.TextArea
-            required
-            name="postContent"
-            value={this.state.postContent}
-            onChange={this.handleInputChange}
-            label="Post Content"
-            placeholder="Post Content"
-            rows={6}
-          />
-          <Form.Button
-            name="form-button-control-public"
+      <div className="page-wrapper">
+        <SideBar />
+        <div className="add-post-form ">
+          <Header
+            className="add-post-header"
+            textAlign="center"
             color="teal"
-            compact
-            size="large"
+            as="h1"
           >
-            <Icon name="plus circle" />
             Add Post
-          </Form.Button>
-        </Form>
+          </Header>
+          <div className="add-post-menu">
+            <Menu />
+          </div>
+
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Select
+              required
+              name="postCategory"
+              placeholder="Category"
+              label="Choose Category"
+              value={this.state.postCategory}
+              onChange={this.setPostCategory}
+              options={options}
+            />
+
+            <Form.Input
+              required
+              name="postTitle"
+              id="post-title"
+              value={this.state.postTitle}
+              onChange={this.handleInputChange}
+              label="Post Title"
+              placeholder="Post Title"
+            />
+            <Form.Input
+              required
+              name="postAuthor"
+              value={this.state.postAuthor}
+              onChange={this.handleInputChange}
+              label="Author"
+              placeholder="Author"
+            />
+
+            <Form.TextArea
+              required
+              name="postContent"
+              value={this.state.postContent}
+              onChange={this.handleInputChange}
+              label="Post Content"
+              placeholder="Post Content"
+              rows={6}
+            />
+            <Form.Button
+              name="form-button-control-public"
+              color="teal"
+              compact
+              size="large"
+            >
+              <Icon name="plus circle" />
+              Add Post
+            </Form.Button>
+          </Form>
+        </div>
       </div>
     );
   }

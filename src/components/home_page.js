@@ -33,9 +33,9 @@ class HomePage extends Component {
     return (
       <div className="page-wrapper">
         <SideBar />
-        <div className="header-section">
+        <div className="content-wrapper">
           <div className="container">
-            <div>
+            <div className="header-section">
               <Header textAlign="center" color="teal" as="h1">
                 Git Talks
               </Header>
