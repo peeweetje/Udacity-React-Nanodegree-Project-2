@@ -42,8 +42,8 @@ class SortBy extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  sort: state.sort
+const mapStateToProps = ({ sort }) => ({
+  sort
 });
 
 export default connect(mapStateToProps, { changeSortAction })(SortBy);

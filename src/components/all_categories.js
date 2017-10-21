@@ -30,6 +30,9 @@ class Categories extends Component {
   };
 
   render() {
+    const { posts } = this.props.posts;
+    const { sort } = this.props.sort;
+    const { category } = this.props.match.params;
     return (
       <div className="page-wrapper">
         <SideBar />
@@ -42,19 +45,17 @@ class Categories extends Component {
               <Menu />
               <SortBy />
 
-              <h3 className="header-categories">
-                Category: {this.props.match.params.category}
-              </h3>
+              <h3 className="header-categories">Category: {category}</h3>
             </div>
           </div>
 
           {//Checks if there are posts to display for a category
           //sorts posts, and maps posts to display them.
-          this.props.posts.posts && this.props.posts.posts.length > 0 ? (
-            this.props.posts.posts
+          posts && posts.length > 0 ? (
+            posts
               .filter(post => !post.deleted && !post.error)
               .sort((a, b) => {
-                switch (this.props.sort.sort.value) {
+                switch (sort.value) {
                   case "unpopular":
                     return a.voteScore - b.voteScore;
                   case "oldest":
@@ -160,9 +161,9 @@ class Categories extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  posts: state.receivePosts,
-  sort: state.sort
+const mapStateToProps = ({ posts, sort }) => ({
+  posts,
+  sort
 });
 
 //Imported all actions from action folder. Pass actions into connect,

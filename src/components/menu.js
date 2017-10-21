@@ -16,6 +16,7 @@ class Menu extends Component {
   };
 
   render() {
+    const { receiveCategories } = this.props;
     return (
       <div className="categories">
         <Responsive as={Grid} columns={5} minWidth={768}>
@@ -32,8 +33,8 @@ class Menu extends Component {
               </Button>
             </Link>
           </Grid.Column>
-          {this.props.categories.length > 0 &&
-            this.props.categories.map(category => (
+          {receiveCategories.length > 0 &&
+            receiveCategories.map(category => (
               <Grid.Column key={category.path}>
                 <Link to={`/${category.name}`}>
                   <Button
@@ -55,8 +56,8 @@ class Menu extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  categories: state.receiveCategories
+const mapStateToProps = ({ receiveCategories }) => ({
+  receiveCategories
 });
 
 //Pass actions directly into connect method, so mapDispatchToProps function

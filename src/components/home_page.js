@@ -6,7 +6,14 @@ import Menu from "./menu";
 import SideBar from "./sideBar";
 import SortBy from "./sortBy";
 import * as actions from "../actions";
-import { List, Header, Button, Segment, Icon } from "semantic-ui-react";
+import {
+  List,
+  Header,
+  Button,
+  Segment,
+  Icon,
+  Responsive
+} from "semantic-ui-react";
 
 class HomePage extends Component {
   componentDidMount() {
@@ -30,6 +37,8 @@ class HomePage extends Component {
   };
 
   render() {
+    const { posts } = this.props.posts;
+    const { sort } = this.props.sort;
     return (
       <div className="page-wrapper">
         <SideBar />
@@ -44,14 +53,14 @@ class HomePage extends Component {
             <SortBy />
           </div>
 
-          {//Check if posts exist, then filter over the posts, sort the posts,
-          //and map over the posts, to display them on the HomePage
-          this.props.posts.posts &&
-            this.props.posts.posts.length > 0 &&
-            this.props.posts.posts
+          {/*Check if posts exist, then filter over the posts, sort the posts,
+          and map over the posts, to display them on the HomePage*/
+          posts &&
+            posts.length > 0 &&
+            posts
               .filter(post => !post.deleted)
               .sort((a, b) => {
-                switch (this.props.sort.sort.value) {
+                switch (sort.value) {
                   case "unpopular":
                     return a.voteScore - b.voteScore;
                   case "oldest":
@@ -109,31 +118,63 @@ class HomePage extends Component {
                         </List.Content>
                       </List.Content>
                     </List.Item>
-
-                    <Button
-                      onClick={() => this.deletePost(post.id)}
-                      compact
-                      basic
-                      color="red"
-                      size="tiny"
-                      floated="right"
-                    >
-                      <Icon name="trash" />
-                      Delete post
-                    </Button>
-
-                    <Link to={`/editpost/${post.id}`}>
-                      <Button
+                    <div className="post-btn-wrapper">
+                      {/*Added responsive element to the buttons, so less text wille be 
+                    displayed on mobile devices*/}
+                      <Responsive
+                        as={Button}
+                        onClick={() => this.deletePost(post.id)}
                         compact
                         basic
-                        color="teal"
+                        color="red"
                         size="tiny"
                         floated="right"
+                        maxWidth={400}
                       >
-                        <Icon name="edit" />
-                        Edit post
-                      </Button>
-                    </Link>
+                        <Icon name="trash" />
+                        Delete
+                      </Responsive>
+                      <Responsive
+                        as={Button}
+                        onClick={() => this.deletePost(post.id)}
+                        compact
+                        basic
+                        color="red"
+                        size="tiny"
+                        floated="right"
+                        minWidth={401}
+                      >
+                        <Icon name="trash" />
+                        Delete post
+                      </Responsive>
+
+                      <Link to={`/editpost/${post.id}`}>
+                        <Responsive
+                          as={Button}
+                          compact
+                          basic
+                          color="teal"
+                          size="tiny"
+                          floated="left"
+                          maxWidth={400}
+                        >
+                          <Icon name="edit" />
+                          Edit
+                        </Responsive>
+                        <Responsive
+                          as={Button}
+                          compact
+                          basic
+                          color="teal"
+                          size="tiny"
+                          floated="right"
+                          minWidth={401}
+                        >
+                          <Icon name="edit" />
+                          Edit post
+                        </Responsive>
+                      </Link>
+                    </div>
                   </Segment>
                 </List>
               ))}
@@ -151,14 +192,12 @@ class HomePage extends Component {
   }
 }
 
-//Give the HomePage access to the redux store state for receivePosts and sort
-
-const mapStateToProps = state => {
-  return {
-    posts: state.receivePosts,
-    sort: state.sort
-  };
-};
+//Give the HomePage access to the redux store state for receivePosts and sort.
+//Pass reducers directly into mapStateToProps (instead of the state), so we need less code.
+const mapStateToProps = ({ posts, sort }) => ({
+  posts,
+  sort
+});
 
 //Imported all actions from action folder. Pass actions into connect,
 //so they can be accessed via this.props and a mapDispatchToProps function isn't needed.

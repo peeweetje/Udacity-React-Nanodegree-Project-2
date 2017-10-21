@@ -24,6 +24,7 @@ class SideBar extends Component {
 
   render() {
     const { visible } = this.state;
+    const { receiveCategories } = this.props;
     return (
       <div>
         <Responsive
@@ -54,10 +55,10 @@ class SideBar extends Component {
               </Menu.Item>
             </Link>
             {//Check if their are categories, if so, map over the,
-            this.props.categories.length > 0 &&
-              this.props.categories.map(category => (
+            receiveCategories.length > 0 &&
+              receiveCategories.map(category => (
                 <Link
-                  //When the menu link/item is linked, dispatch action to
+                  //When the menu link/item is clicked, dispatch action to
                   //fetch the matching posts for a category, and go to the right
                   //page.
                   onClick={() => this.getPostsByCategory(category.name)}
@@ -87,8 +88,8 @@ class SideBar extends Component {
 }
 
 //Give SideBar access to categories from redux store.
-const mapStateToProps = state => ({
-  categories: state.receiveCategories
+const mapStateToProps = ({ receiveCategories }) => ({
+  receiveCategories
 });
 
 //Pass actions directly into connect method, so mapDispatchToProps function

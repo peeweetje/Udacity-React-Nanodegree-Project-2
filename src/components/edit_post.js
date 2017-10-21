@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchEditPost, fetchSinglePost } from "../actions";
 import Menu from "./menu";
+import SideBar from "./sideBar";
 import { Form, Header, Icon } from "semantic-ui-react";
 
 const options = [
@@ -67,70 +68,75 @@ class EditPost extends Component {
 
   render() {
     return (
-      <div className="add-post-form ">
-        <Header textAlign="center" color="teal" as="h1">
-          Edit Post
-        </Header>
+      <div className="page-wrapper">
+        <SideBar />
+        <div className="add-post-form">
+          <div className="editpost-header">
+            <Header textAlign="center" color="teal" as="h1">
+              Edit Post
+            </Header>
+          </div>
 
-        <div className="edit-post-menu">
-          <Menu />
+          <div className="edit-post-menu">
+            <Menu />
+          </div>
+
+          <Form onSubmit={this.handleSubmit}>
+            <Form.Select
+              required
+              name="postCategory"
+              placeholder="Category"
+              label="Choose Category"
+              value={this.state.postCategory}
+              onChange={this.setPostCategory}
+              options={options}
+            />
+
+            <Form.Input
+              required
+              name="postTitle"
+              id="post-title"
+              value={this.state.postTitle}
+              onChange={this.handleInputChange}
+              label="Post Title"
+              placeholder="Post Title"
+            />
+            <Form.Input
+              required
+              name="postAuthor"
+              value={this.state.postAuthor}
+              onChange={this.handleInputChange}
+              label="Author"
+              placeholder="Author"
+            />
+
+            <Form.TextArea
+              required
+              name="postContent"
+              value={this.state.postContent}
+              onChange={this.handleInputChange}
+              label="Post Content"
+              placeholder="Post Content"
+              rows={6}
+            />
+            <Form.Button
+              name="form-button-control-public"
+              color="teal"
+              compact
+              size="large"
+            >
+              <Icon name="edit" />
+              Edit Post
+            </Form.Button>
+          </Form>
         </div>
-
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Select
-            required
-            name="postCategory"
-            placeholder="Category"
-            label="Choose Category"
-            value={this.state.postCategory}
-            onChange={this.setPostCategory}
-            options={options}
-          />
-
-          <Form.Input
-            required
-            name="postTitle"
-            id="post-title"
-            value={this.state.postTitle}
-            onChange={this.handleInputChange}
-            label="Post Title"
-            placeholder="Post Title"
-          />
-          <Form.Input
-            required
-            name="postAuthor"
-            value={this.state.postAuthor}
-            onChange={this.handleInputChange}
-            label="Author"
-            placeholder="Author"
-          />
-
-          <Form.TextArea
-            required
-            name="postContent"
-            value={this.state.postContent}
-            onChange={this.handleInputChange}
-            label="Post Content"
-            placeholder="Post Content"
-            rows={6}
-          />
-          <Form.Button
-            name="form-button-control-public"
-            color="teal"
-            compact
-            size="large"
-          >
-            <Icon name="edit" />
-            Edit Post
-          </Form.Button>
-        </Form>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  posts: state.receivePosts
+const mapStateToProps = ({ posts }) => ({
+  posts
 });
 
 export default connect(mapStateToProps, { fetchEditPost, fetchSinglePost })(
