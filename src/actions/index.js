@@ -19,6 +19,7 @@ export const DELETE_SINGLE_POST = "DELETE_SINGLE_POST";
 
 //Thunk is used to handle asynchronous actions in Redux
 
+//POST ACTIONS
 //fetching all posts
 export const receivePosts = posts => ({
   type: RECEIVE_POSTS,
@@ -122,6 +123,7 @@ export const votePost = post => ({
 export const fetchVotePost = (postId, option) => dispatch =>
   api.votePost(postId, option).then(post => dispatch(votePost(post)));
 
+//COMMENT ACTIONS
 //fetch comment for editing
 export const receiveComment = comments => ({
   type: GET_COMMENT,
@@ -183,7 +185,7 @@ export const fetchVoteComment = (commentId, option) => dispatch =>
     .voteComment(commentId, option)
     .then(comment => dispatch(voteComment(comment)));
 
-//Change sort post
+//Change sort post and sort comment
 export const changeSortAction = value => {
   return {
     type: CHANGE_SORT,
