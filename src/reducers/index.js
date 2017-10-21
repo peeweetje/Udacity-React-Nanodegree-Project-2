@@ -17,7 +17,7 @@ import {
   CHANGE_SORT
 } from "../actions";
 
-function receivePosts(state = {}, action) {
+function posts(state = {}, action) {
   switch (action.type) {
     case RECEIVE_POSTS:
       return { ...state, posts: action.posts };
@@ -118,7 +118,7 @@ function sort(state = { sort: "popular" }, action) {
 }
 
 export default combineReducers({
-  receivePosts,
+  posts,
   receiveCategories,
   receiveComment,
   getComments,
