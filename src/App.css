@@ -2,24 +2,38 @@ body {
   background-color: #fcf8f8;
 }
 
-.content-wrapper {
-  margin-top: 3em;
-  margin-left: 8em;
-  margin-right: 8em;
+.content-wrapper{
+  margin: 3em 8em 0 8em
 }
 
 .container {
-  margin-right: 10em;
-  margin-left: 10em;
+  text-align: center;
+}
+
+.postdetail-page-container, .category-page-container {
+  margin: 2em 10em 0 10em;
+}
+
+
+/*Wraps around Message (which displays the Category) on CategoryPage*/
+.category-message-wrapper {
+  display: flex;
+  justify-content: center;
 }
 
 .header-section {
-  margin-bottom: 3em;
+  margin-bottom: 2em;
   margin-top: 2em;
+  display: flex;
+  justify-content: center;
 }
 
 .editpost-header {
-  margin-bottom: 2em;
+  margin: 2em 0 2em 0;
+}
+
+.ui.center.aligned.header.editcomment-header {
+  margin-bottom: 1em;
 }
 
 a:focus {
@@ -78,13 +92,12 @@ i.close.icon:hover {
   text-align: center;
 }
 
-h3.header-categories {
-  margin-bottom: 1em;
+.ui.small.message.header-categories {
+  width: 20%;
 }
 
-/*Wraps around the Desktop Menu buttons*/
+/*Wraps around the Desktop Menu buttons */
 .categories {
-  margin-left: -5.5em;
   margin-top: 1em;
   margin-bottom: 1.5em;
   display: flex;
@@ -141,9 +154,16 @@ div.content.votes {
   margin-left: 1.2em;
 }
 
-.empty-category {
+.no-posts {
   display: flex;
+  margin-right: 10em;
+  margin-left: 10em;
   justify-content: center;
+}
+
+h3.empty-category {
+  text-align: center;
+  margin-top: 1em;
 }
 
 .ui.divided.relaxed.list {
@@ -151,25 +171,41 @@ div.content.votes {
   justify-content: center;
 }
 
-/*div.post {
-  display: flex;
-  justify-content: center;
-}*/
-
 .ui.raised.segment {
   padding: 0.5em 3em 1em 3em;
   width: 75%;
 }
 
-.post-wrapper {
+.post-wrapper,
+.comments-wrapper .post-wrapper-categories {
   display: flex;
   justify-content: center;
+}
+
+.post-wrapper-categories {
+  margin-top: 1em;
 }
 
 .comment-wrapper {
   display: flex;
   justify-content: center;
   margin: 1em 4em 1em 4em;
+}
+
+.comments-form-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.post-btn-wrapper,
+.comment-btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ui.basic.red.button.postdetail-deletepost-btn,
+.ui.basic.red.button.postdetail-deletecomment-btn {
+  margin-right: 1em;
 }
 
 .btn-add,
@@ -184,14 +220,7 @@ button.ui.teal.large.compact.button {
 }
 
 i.red.thumbs.down {
-  margin-left: 0.5em;
-}
-
-.add-post-menu,
-.edit-post-menu,
-.edit-comment-menu {
-  margin-right: -5.5em;
-  margin-bottom: 2em;
+  margin-left: 0.25em;
 }
 
 .add-post-form {
@@ -203,7 +232,8 @@ h1.ui.add-post-header {
 }
 
 .add-comments-form {
-  margin: 2em 11em 0 11em;
+  width: 70%;
+  margin-top: 2em;
 }
 
 .text {
@@ -217,10 +247,9 @@ h1.ui.add-post-header {
 .sort {
   display: flex;
   justify-content: flex-end;
-  margin-top: -4.7em;
-  margin-bottom: 5em;
   font-size: 10px;
   max-height: 0.5em;
+  margin-right: -3.5em;
 }
 
 .ui.selection.dropdown {
@@ -258,46 +287,60 @@ span.text:hover {
   position: absolute;
 }
 
+.addpost-form {
+  margin-top: 2em;
+}
+
 @media (max-width: 1150px) {
   .content-wrapper {
-    margin-top: 3em;
-    margin-left: 6em;
-    margin-right: 6em;
+    margin: 3em 6em 0 6em;
   }
-  .container {
+
+  .no-posts {
     margin-right: 4em;
     margin-left: 4em;
   }
-  .categories {
-    margin-left: -7.5em;
-  }
 
-  .sort {
-    margin-right: 4em;
-  }
   .add-comments-form {
     margin: 2em 8em 0 8em;
   }
+  .menu-section.categories {
+    margin-left: 2em;
+  }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 980px) {
   .content-wrapper {
-    margin-top: 2.5em;
-    margin-left: 5em;
-    margin-right: 5em;
+    margin: 2.5em 5em 0 5em
   }
-  .container {
+
+  .postdetail-page-container, .category-page-container {
+    margin-left: 8em;
+    margin-right: 8em;
+  }
+
+  .no-posts {
     margin-right: 1em;
     margin-left: 1em;
+  }
+
+  .categories {
+    margin-left: 0;
   }
 }
 
 @media (max-width: 900px) {
   .content-wrapper {
-    margin-left: 3em;
-    margin-right: 3em;
+    margin: 2.5em 3em 0 3em
+
   }
-  .container {
+
+  .postdetail-page-container, .category-page-container {
+    margin-left: 4em;
+    margin-right: 4em;
+  }
+
+  .no-posts {
     margin-right: 0;
     margin-left: 0;
   }
@@ -307,42 +350,59 @@ span.text:hover {
   }
 
   .add-comments-form {
-    margin: 2em 6em 0 6em;
+    margin: 2em 4.5em 0 4.5em;
   }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 768px) {
   .ui.selection.dropdown .menu {
     max-height: 12rem;
   }
+  .sort {
+    margin-right: 0;
+  }
+  .categories {
+    margin: 1em 0 1em 0;
+  }
+  .post-wrapper {
+    padding-top: 1em;
+  }
+.post-container {
+  margin-top: 1em;
+}
 }
 
-@media (max-width: 775px) {
-  .sort {
-    margin-right: -5em;
-  }
+@media (max-width: 800px) {
   .add-post-form {
     margin: 2em 8em 0 8em;
+  }
+  .add-comments-form {
+    margin: 1.5em 4em 0 4em;
   }
   .editpost-header {
     margin-bottom: 0;
   }
+  .ui.small.message.header-categories {
+    width: 30%;
+    margin-top: 1em;
+  }
 }
 
 @media (max-width: 680px) {
-  .content-wrapper {
+  .content-wrapper,
+  .post-wrapper,
+  .post-wrapper-categories {
     margin: 0.5em 1em 0 1em;
   }
   .header-section {
     margin-bottom: 0;
   }
-  .categories {
-    margin-left: -1.5em;
+
+  .postdetail-page-container, .category-page-container {
+    margin-left: 2em;
+    margin-right: 2em;
   }
-  .sort {
-    margin-right: 1.5em;
-    margin-top: 0em;
-  }
+
   .menu-btn {
     max-width: 3.5em;
   }
@@ -350,19 +410,41 @@ span.text:hover {
     width: 85%;
   }
   .add-post-form {
-    margin: 1.5em 5em 0 5em;
+    margin: 2em 5em 0 5em;
+  }
+  .add-comments-form {
+    margin: 1.5em 2.5em 0 2.5em;
+  }
+  .ui.small.message.header-categories {
+    width: 35%;
+  }
+  .ui-header {
+    padding-bottom: 0.25em;
   }
 }
 
 @media (max-width: 500px) {
   .add-post-form {
-    margin: 0.8em 2.5em 0 2.5em;
+    margin: 2em 2.5em 0 2.5em;
   }
-  .sort {
-    margin-top: -2em;
-    margin-bottom: 3em;
+  .comment-wrapper {
+    margin: 0.75em 1.5em 0.75em 1.5em;
   }
-  div.header {
+  .add.comments-form {
+    width: 100%;
+  }
+  .postdetail-page-container, .category-page-container {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+  }
+
+  .title {
+    margin-bottom: 0;
+  }
+
+  div.header,
+  h3.header,
+  .title {
     padding: 0.5em 0 0.3em 0.4em;
     font-size: 1.4em;
   }
@@ -374,26 +456,38 @@ span.text:hover {
   .comments {
     margin: -2em 0 1em 10em;
   }
+  .comment-btn-wrapper {
+    margin-top: 1em;
+  }
   .ui.teal.raised.segment {
     width: 90%;
+  }
+  .ui.small.message.header-categories {
+    width: 50%;
   }
 }
 
 @media (max-width: 400px) {
-  .post-btn-wrapper {
-    margin-left: 1em;
-    margin-right: 1em;
+  .comment-btn-wrapper {
+    margin: 0;
+  }
+
+  .postdetail-page-container, .category-page-container {
+    margin-left: 0.25em;
+    margin-right: 0.25em;
   }
 }
 
 @media (max-width: 360px) {
-  post-btn-wrapper {
-    margin: 0em;
-  }
   .ui.teal.raised.segment {
     width: 95%;
   }
   .btn-add {
+    margin-left: 1em;
+  }
+
+  .add-btn-post {
+    justify-content: center;
     margin-left: 1em;
   }
 }
