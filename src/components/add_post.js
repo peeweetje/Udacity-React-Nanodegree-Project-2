@@ -75,7 +75,7 @@ class AddPost extends Component {
             <Menu />
           </div>
 
-          <Form onSubmit={this.handleSubmit}>
+          <Form className="addpost-form" onSubmit={this.handleSubmit}>
             <Form.Select
               required
               name="postCategory"
