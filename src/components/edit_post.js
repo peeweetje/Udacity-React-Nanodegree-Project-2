@@ -70,17 +70,17 @@ class EditPost extends Component {
     return (
       <div className="page-wrapper">
         <SideBar />
+
+        <div className="editpost-header">
+          <Header textAlign="center" color="teal" as="h1">
+            Edit Post
+          </Header>
+        </div>
+
+        <div className="edit-post-menu">
+          <Menu />
+        </div>
         <div className="add-post-form">
-          <div className="editpost-header">
-            <Header textAlign="center" color="teal" as="h1">
-              Edit Post
-            </Header>
-          </div>
-
-          <div className="edit-post-menu">
-            <Menu />
-          </div>
-
           <Form onSubmit={this.handleSubmit}>
             <Form.Select
               required
