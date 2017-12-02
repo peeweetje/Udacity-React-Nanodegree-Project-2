@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp";
 import Menu from "./menu";
 import SideBar from "./sideBar";
-import SortBy from "./sortBy";
 import * as actions from "../actions";
 import {
   List,
@@ -50,141 +49,143 @@ class HomePage extends Component {
               </Header>
             </div>
             <Menu />
-            <SortBy />
           </div>
 
-          {/*Check if posts exist, then filter over the posts, sort the posts,
+          <div className="post-container">
+            {/*Check if posts exist, then filter over the posts, sort the posts,
           and map over the posts, to display them on the HomePage*/
-          posts &&
-            posts.length > 0 &&
-            posts
-              .filter(post => !post.deleted)
-              .sort((a, b) => {
-                switch (sort.value) {
-                  case "unpopular":
-                    return a.voteScore - b.voteScore;
-                  case "oldest":
-                    return a.timestamp - b.timestamp;
-                  case "newest":
-                    return b.timestamp - a.timestamp;
-                  default:
-                    return b.voteScore - a.voteScore;
-                }
-              })
-              .map(post => (
-                <List key={post.id} divided relaxed>
-                  <Segment color="teal" raised>
-                    <List.Item>
-                      <List.Content>
-                        <Link to={`/${post.category}/${post.id}`}>
-                          <List.Header>{post.title}</List.Header>
-                        </Link>
-                        <List.Content className="author">
-                          <Icon name="user" color="teal" size="large" />
-                          {post.author}
+            posts &&
+              posts.length > 0 &&
+              posts
+                .filter(post => !post.deleted)
+                .sort((a, b) => {
+                  switch (sort.value) {
+                    case "unpopular":
+                      return a.voteScore - b.voteScore;
+                    case "oldest":
+                      return a.timestamp - b.timestamp;
+                    case "newest":
+                      return b.timestamp - a.timestamp;
+                    default:
+                      return b.voteScore - a.voteScore;
+                  }
+                })
+                .map(post => (
+                  <List key={post.id} divided relaxed>
+                    <Segment color="teal" raised>
+                      <List.Item>
+                        <List.Content>
+                          <Link to={`/${post.category}/${post.id}`}>
+                            <List.Header>{post.title}</List.Header>
+                          </Link>
+                          <List.Content className="author">
+                            <Icon name="user" color="teal" size="large" />
+                            {post.author}
+                          </List.Content>
+                          <List.Content className="time">
+                            <Icon name="clock" color="teal" size="large" />
+                            <Timestamp
+                              time={post.timestamp / 1000}
+                              format="full"
+                            />
+                          </List.Content>
+                          <List.Content className="votes">
+                            <Icon
+                              name="thumbs up outline"
+                              color="teal"
+                              size="large"
+                              onClick={() =>
+                                this.iconThumbsUp(post.id, "upVote")}
+                            />
+                            <div className="vote-score">
+                              <p className="vote-score-num">{post.voteScore}</p>
+                            </div>
+                            <Icon
+                              name="thumbs down outline"
+                              color="red"
+                              size="large"
+                              onClick={() =>
+                                this.iconThumbsDown(post.id, "downVote")}
+                            />
+                          </List.Content>
+                          <List.Content className="comments" key={post.id}>
+                            <Icon
+                              name="comment outline"
+                              color="teal"
+                              size="large"
+                            />
+                            {post.comments && post.comments.length}
+                          </List.Content>
                         </List.Content>
-                        <List.Content className="time">
-                          <Icon name="clock" color="teal" size="large" />
-                          <Timestamp
-                            time={post.timestamp / 1000}
-                            format="full"
-                          />
-                        </List.Content>
-                        <List.Content className="votes">
-                          <Icon
-                            name="thumbs up outline"
-                            color="teal"
-                            size="large"
-                            onClick={() => this.iconThumbsUp(post.id, "upVote")}
-                          />
-                          <div className="vote-score">
-                            <p className="vote-score-num">{post.voteScore}</p>
-                          </div>
-                          <Icon
-                            name="thumbs down outline"
-                            color="red"
-                            size="large"
-                            onClick={() =>
-                              this.iconThumbsDown(post.id, "downVote")}
-                          />
-                        </List.Content>
-                        <List.Content className="comments" key={post.id}>
-                          <Icon
-                            name="comment outline"
-                            color="teal"
-                            size="large"
-                          />
-                          {post.comments && post.comments.length}
-                        </List.Content>
-                      </List.Content>
-                    </List.Item>
-                    <div className="post-btn-wrapper">
-                      {/*Added responsive element to the buttons, so less text wille be 
+                      </List.Item>
+                      <div className="post-btn-wrapper">
+                        {/*Added responsive element to the buttons, so less text will be
                     displayed on mobile devices*/}
-                      <Responsive
-                        as={Button}
-                        onClick={() => this.deletePost(post.id)}
-                        compact
-                        basic
-                        color="red"
-                        size="tiny"
-                        floated="right"
-                        maxWidth={400}
-                      >
-                        <Icon name="trash" />
-                        Delete
-                      </Responsive>
-                      <Responsive
-                        as={Button}
-                        onClick={() => this.deletePost(post.id)}
-                        compact
-                        basic
-                        color="red"
-                        size="tiny"
-                        floated="right"
-                        minWidth={401}
-                      >
-                        <Icon name="trash" />
-                        Delete post
-                      </Responsive>
-
-                      <Link to={`/editpost/${post.id}`}>
                         <Responsive
                           as={Button}
+                          onClick={() => this.deletePost(post.id)}
                           compact
                           basic
-                          color="teal"
+                          color="red"
                           size="tiny"
-                          floated="left"
+                          floated="right"
                           maxWidth={400}
                         >
-                          <Icon name="edit" />
-                          Edit
+                          <Icon name="trash" />
+                          Delete
                         </Responsive>
                         <Responsive
                           as={Button}
+                          onClick={() => this.deletePost(post.id)}
                           compact
                           basic
-                          color="teal"
+                          color="red"
                           size="tiny"
                           floated="right"
                           minWidth={401}
                         >
-                          <Icon name="edit" />
-                          Edit post
+                          <Icon name="trash" />
+                          Delete post
                         </Responsive>
-                      </Link>
-                    </div>
-                  </Segment>
-                </List>
-              ))}
-          <div className="btn-add">
-            <Link to="/addpost">
-              <Button compact color="teal" size="large">
-                <Icon name="plus circle" />
-                Add Post
-              </Button>
-            </Link>
+
+                        <Link to={`/editpost/${post.id}`}>
+                          <Responsive
+                            as={Button}
+                            compact
+                            basic
+                            color="teal"
+                            size="tiny"
+                            floated="left"
+                            maxWidth={400}
+                          >
+                            <Icon name="edit" />
+                            Edit
+                          </Responsive>
+                          <Responsive
+                            as={Button}
+                            compact
+                            basic
+                            color="teal"
+                            size="tiny"
+                            floated="right"
+                            minWidth={401}
+                          >
+                            <Icon name="edit" />
+                            Edit post
+                          </Responsive>
+                        </Link>
+                      </div>
+                    </Segment>
+                  </List>
+                ))}
+            <div className="btn-add">
+              <Link to="/addpost">
+                <Button compact color="teal" size="large">
+                  <Icon name="plus circle" />
+                  Add Post
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
