@@ -53,13 +53,16 @@ class EditComment extends Component {
       <div className="page-wrapper">
         <SideBar />
         <div className="add-post-form ">
-          <Header textAlign="center" color="teal" as="h1">
+          <Header
+            className="editcomment-header"
+            textAlign="center"
+            color="teal"
+            as="h1"
+          >
             Edit Comment
           </Header>
 
-          <div className="edit-comment-menu">
-            <Menu />
-          </div>
+          <Menu />
 
           <Form onSubmit={this.handleSubmit}>
             <Form.Input
