@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchCategories, fetchPostsCategory } from "../actions";
+import SortBy from "./sortBy";
 import { Grid, Button, Responsive } from "semantic-ui-react";
 
 class Menu extends Component {
@@ -19,7 +20,7 @@ class Menu extends Component {
     const { receiveCategories } = this.props;
     return (
       <div className="categories">
-        <Responsive as={Grid} columns={5} minWidth={768}>
+        <Responsive as={Grid} columns={6} minWidth={768}>
           <Grid.Column>
             <Link to="/">
               <Button
@@ -50,6 +51,12 @@ class Menu extends Component {
                 </Link>
               </Grid.Column>
             ))}
+          <Grid.Column>
+            <SortBy />
+          </Grid.Column>
+        </Responsive>
+        <Responsive as={Grid} columns={1} maxWidth={767}>
+          <SortBy />
         </Responsive>
       </div>
     );
