@@ -10,7 +10,7 @@ if (!token)
 const headers = {
   Accept: "application/json",
   Authorization: token,
-  "Content-Type": "application/json"
+  "Content-Type": "application/json",
 };
 
 export const getAllCategories = () =>
@@ -23,12 +23,12 @@ export const fetchPostsCategory = category =>
 
 export const getAllPosts = () =>
   fetch(`${api}/posts`, {
-    headers
+    headers,
   }).then(res => res.json());
 
 export const getSinglePost = postId =>
   fetch(`${api}/posts/${postId}`, {
-    headers
+    headers,
   }).then(res => res.json());
 
 export const addPost = post =>
@@ -36,9 +36,9 @@ export const addPost = post =>
     method: "POST",
     headers: {
       ...headers,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(post)
+    body: JSON.stringify(post),
   }).then(data => data.json());
 
 export const editPost = (post, postId) => {
@@ -46,16 +46,16 @@ export const editPost = (post, postId) => {
     method: "PUT",
     headers: {
       ...headers,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(post)
+    body: JSON.stringify(post),
   }).then(data => data.json());
 };
 
 export const deletePost = postId => {
   return fetch(`${api}/posts/${postId}`, {
     method: "DELETE",
-    headers
+    headers,
   }).then(res => res);
 };
 
@@ -77,7 +77,7 @@ export const addComment = comment => {
   return fetch(`${api}/comments/`, {
     method: "POST",
     headers,
-    body
+    body,
   }).then(response => response.json());
 };
 
@@ -86,16 +86,16 @@ export const editComment = (comment, commentId) => {
     method: "PUT",
     headers: {
       ...headers,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(comment)
+    body: JSON.stringify(comment),
   }).then(data => data.json());
 };
 
 export const deleteComment = commentId => {
   return fetch(`${api}/comments/${commentId}`, {
     method: "DELETE",
-    headers
+    headers,
   }).then(response => response.json());
 };
 
@@ -107,9 +107,9 @@ export const votePost = (postId, option) =>
     method: `POST`,
     headers: {
       ...headers,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify({ option })
+    body: JSON.stringify({ option }),
   }).then(res => res.json());
 // .then(data => data);
 
@@ -121,10 +121,10 @@ export const voteComment = (commentId, option) => {
     method: "POST",
     headers: {
       ...headers,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      option: option
-    })
+      option: option,
+    }),
   }).then(data => data.json());
 };
