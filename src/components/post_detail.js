@@ -9,8 +9,8 @@ import {
   fetchAddComment,
   fetchDeleteComment,
   fetchVoteComment,
-  fetchVotePost
-} from "../actions";
+  fetchVotePost,
+} from "../redux/actions";
 import Menu from "./menu";
 import SideBar from "./sideBar";
 
@@ -21,14 +21,14 @@ import {
   Icon,
   List,
   Form,
-  Responsive
+  Responsive,
 } from "semantic-ui-react";
 import uuidv1 from "uuid/v1";
 
 class PostDetail extends Component {
   state = {
     commentAuthor: "",
-    commentContent: ""
+    commentContent: "",
   };
 
   componentDidMount() {
@@ -70,7 +70,7 @@ class PostDetail extends Component {
     const name = target.name;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -84,12 +84,12 @@ class PostDetail extends Component {
       parentId: this.props.match.params.post_id,
       deleted: false,
       parentDeleted: false,
-      voteScore: 1
+      voteScore: 1,
     };
     this.props.addComment(data);
     this.setState({
       commentAuthor: "",
-      commentContent: ""
+      commentContent: "",
     });
   };
 
@@ -263,7 +263,8 @@ class PostDetail extends Component {
                           color="teal"
                           size="large"
                           onClick={() =>
-                            this.iconThumbsUpComment(comment.id, "upVote")}
+                            this.iconThumbsUpComment(comment.id, "upVote")
+                          }
                         />
                         <div className="vote-score">
                           <p className="vote-score-num">{comment.voteScore}</p>
@@ -274,7 +275,8 @@ class PostDetail extends Component {
                           color="red"
                           size="large"
                           onClick={() =>
-                            this.iconThumbsDownComment(comment.id, "downVote")}
+                            this.iconThumbsDownComment(comment.id, "downVote")
+                          }
                         />
                       </List.Content>
                       <div className="comment-btn-wrapper">
@@ -404,7 +406,7 @@ class PostDetail extends Component {
 const mapStateToProps = ({ posts, getComments, sort }) => ({
   posts,
   getComments,
-  sort
+  sort,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -418,7 +420,7 @@ const mapDispatchToProps = dispatch => ({
   deleteComment: commentId => dispatch(fetchDeleteComment(commentId)),
   voteComment: (commentId, option) =>
     dispatch(fetchVoteComment(commentId, option)),
-  votePost: (postId, option) => dispatch(fetchVotePost(postId, option))
+  votePost: (postId, option) => dispatch(fetchVotePost(postId, option)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);

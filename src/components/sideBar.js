@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchCategories, fetchPostsCategory } from "../actions";
+import { fetchCategories, fetchPostsCategory } from "../redux/actions";
 import { Sidebar, Menu, Image, Icon, Responsive } from "semantic-ui-react";
 
 class SideBar extends Component {
@@ -36,7 +36,8 @@ class SideBar extends Component {
           attached="top"
         >
           <Menu.Item onClick={this.toggleVisibility}>
-            <Icon name="sidebar" />Menu
+            <Icon name="sidebar" />
+            Menu
           </Menu.Item>
         </Responsive>
         <Responsive maxWidth={767} as={Image}>
@@ -89,12 +90,12 @@ class SideBar extends Component {
 
 //Give SideBar access to categories from redux store.
 const mapStateToProps = ({ receiveCategories }) => ({
-  receiveCategories
+  receiveCategories,
 });
 
 //Pass actions directly into connect method, so mapDispatchToProps function
 //doesn't have to be defined, and less code is needed.
 export default connect(mapStateToProps, {
   fetchCategories,
-  fetchPostsCategory
+  fetchPostsCategory,
 })(SideBar);

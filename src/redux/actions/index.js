@@ -1,4 +1,4 @@
-import * as api from "../utils/api";
+import * as api from "../../utils/api";
 
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
 export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES";
@@ -23,7 +23,7 @@ export const DELETE_SINGLE_POST = "DELETE_SINGLE_POST";
 //fetching all posts
 export const receivePosts = posts => ({
   type: RECEIVE_POSTS,
-  posts
+  posts,
 });
 
 //Fetch all the posts using thunk action, then fetch all the comments for a post,
@@ -46,7 +46,7 @@ export const fetchPosts = () => dispatch =>
 // fetching all categories, to display in a menu
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
-  categories
+  categories,
 });
 export const fetchCategories = () => dispatch =>
   api
@@ -56,7 +56,7 @@ export const fetchCategories = () => dispatch =>
 //fetching posts for a category, to display posts on Category Page
 export const getPostsCategory = posts => ({
   type: GET_POSTS_CATEGORY,
-  posts
+  posts,
 });
 
 //Fetching posts for a category using thunk, then, fetching all comments for a post,
@@ -79,7 +79,7 @@ export const fetchPostsCategory = category => dispatch =>
 //fetching a single post
 export const receiveSinglePost = posts => ({
   type: GET_SINGLE_POST,
-  posts
+  posts,
 });
 export const fetchSinglePost = postId => dispatch =>
   api.getSinglePost(postId).then(posts => dispatch(receiveSinglePost(posts)));
@@ -87,7 +87,7 @@ export const fetchSinglePost = postId => dispatch =>
 //Deleting post
 export const deletePost = postId => ({
   type: DELETE_POST,
-  postId
+  postId,
 });
 export const fetchDeletePost = postId => dispatch =>
   api.deletePost(postId).then(post => dispatch(deletePost(postId)));
@@ -96,7 +96,7 @@ export const fetchDeletePost = postId => dispatch =>
 export const editPost = (post, postId) => ({
   type: EDIT_POST,
   post,
-  postId
+  postId,
 });
 export const fetchEditPost = (post, postId) => dispatch =>
   api.editPost(post, postId).then(post => dispatch(editPost(post)));
@@ -104,7 +104,7 @@ export const fetchEditPost = (post, postId) => dispatch =>
 //Add post
 export const addPost = post => ({
   type: ADD_POST,
-  post
+  post,
 });
 export const fetchAddPost = post => dispatch =>
   api.addPost(post).then(post => dispatch(addPost(post)));
@@ -117,7 +117,7 @@ export const fetchAddPost = post => dispatch =>
 
 export const votePost = post => ({
   type: VOTE,
-  payload: post
+  payload: post,
 });
 
 export const fetchVotePost = (postId, option) => dispatch =>
@@ -127,7 +127,7 @@ export const fetchVotePost = (postId, option) => dispatch =>
 //fetch comment for editing
 export const receiveComment = comments => ({
   type: GET_COMMENT,
-  comments
+  comments,
 });
 
 export const fetchComment = commentId => dispatch =>
@@ -138,7 +138,7 @@ export const fetchComment = commentId => dispatch =>
 //fetching all comments gor a post
 export const getComments = comments => ({
   type: GET_COMMENTS,
-  comments
+  comments,
 });
 export const fetchComments = postId => dispatch =>
   api.getComments(postId).then(comments => dispatch(getComments(comments)));
@@ -146,7 +146,7 @@ export const fetchComments = postId => dispatch =>
 // delete comment
 export const deleteComment = commentId => ({
   type: DELETE_COMMENT,
-  commentId
+  commentId,
 });
 export const fetchDeleteComment = commentId => dispatch =>
   api
@@ -157,7 +157,7 @@ export const fetchDeleteComment = commentId => dispatch =>
 export const editComment = (comment, commentId) => ({
   type: EDIT_COMMENT,
   comment,
-  commentId
+  commentId,
 });
 
 export const fetchEditComment = (comment, commentId) => dispatch =>
@@ -168,7 +168,7 @@ export const fetchEditComment = (comment, commentId) => dispatch =>
 //add commment
 export const addComment = comment => ({
   type: ADD_COMMENT,
-  comment
+  comment,
 });
 export const fetchAddComment = comment => dispatch =>
   api.addComment(comment).then(comment => dispatch(addComment(comment)));
@@ -177,7 +177,7 @@ export const fetchAddComment = comment => dispatch =>
 
 export const voteComment = (commentId, option) => ({
   type: VOTE_COMMENT,
-  commentId
+  commentId,
 });
 
 export const fetchVoteComment = (commentId, option) => dispatch =>
@@ -189,6 +189,6 @@ export const fetchVoteComment = (commentId, option) => dispatch =>
 export const changeSortAction = value => {
   return {
     type: CHANGE_SORT,
-    value: value
+    value: value,
   };
 };

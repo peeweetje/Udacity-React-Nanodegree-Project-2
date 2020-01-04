@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchCategories, fetchPostsCategory } from "../actions";
+import { fetchCategories, fetchPostsCategory } from "../redux/actions";
 import SortBy from "./sortBy";
 import { Grid, Button, Responsive } from "semantic-ui-react";
 
@@ -64,7 +64,7 @@ class Menu extends Component {
 }
 
 const mapStateToProps = ({ receiveCategories }) => ({
-  receiveCategories
+  receiveCategories,
 });
 
 //Pass actions directly into connect method, so mapDispatchToProps function
@@ -72,5 +72,5 @@ const mapStateToProps = ({ receiveCategories }) => ({
 
 export default connect(mapStateToProps, {
   fetchCategories,
-  fetchPostsCategory
+  fetchPostsCategory,
 })(Menu);
