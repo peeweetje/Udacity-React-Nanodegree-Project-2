@@ -14,8 +14,8 @@ import {
   ADD_COMMENT,
   VOTE,
   VOTE_COMMENT,
-  CHANGE_SORT
-} from "../actions";
+  CHANGE_SORT,
+} from "../../redux/actions";
 
 function posts(state = {}, action) {
   switch (action.type) {
@@ -31,7 +31,7 @@ function posts(state = {}, action) {
       );
       return {
         ...state,
-        posts: availablePosts
+        posts: availablePosts,
       };
     case VOTE:
       const updatedPosts = state.posts.map(item => {
@@ -42,7 +42,7 @@ function posts(state = {}, action) {
       });
       return {
         ...state,
-        posts: updatedPosts
+        posts: updatedPosts,
       };
     case ADD_POST:
       return { ...state, ...action.post };
@@ -85,7 +85,7 @@ function getComments(state = {}, action) {
       });
       return {
         ...state,
-        comments: updatedComments
+        comments: updatedComments,
       };
     case DELETE_COMMENT:
       const availableComments = state.comments.filter(
@@ -93,7 +93,7 @@ function getComments(state = {}, action) {
       );
       return {
         ...state,
-        comments: availableComments
+        comments: availableComments,
       };
     case ADD_COMMENT:
       return { ...state, comments: state.comments.concat(action.comment) };
@@ -110,7 +110,7 @@ function sort(state = { sort: "popular" }, action) {
       const newValue = action.value;
       return {
         ...state,
-        sort: newValue
+        sort: newValue,
       };
     default:
       return state;
@@ -122,5 +122,5 @@ export default combineReducers({
   receiveCategories,
   receiveComment,
   getComments,
-  sort
+  sort,
 });

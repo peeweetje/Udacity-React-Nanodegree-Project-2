@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Form, Header, Icon } from "semantic-ui-react";
-import { fetchAddPost } from "../actions";
-import Menu from "./menu";
-import SideBar from "./sideBar";
+import { fetchAddPost } from "../../redux/actions";
+import Menu from "../menu/menu";
+import SideBar from "../sidebar/sideBar";
 import uuidv1 from "uuid/v1";
 
 //Variable to hold the values of the dropdown menu for the post category.
@@ -11,7 +11,7 @@ const options = [
   { key: 1, text: "React", value: "react" },
   { key: 2, text: "Redux", value: "redux" },
   { key: 3, text: "Udacity", value: "udacity" },
-  { key: 4, text: "Javascript", value: "javascript" }
+  { key: 4, text: "Javascript", value: "javascript" },
 ];
 
 class AddPost extends Component {
@@ -20,7 +20,7 @@ class AddPost extends Component {
     postCategory: "react",
     postTitle: "",
     postAuthor: "",
-    postContent: ""
+    postContent: "",
   };
 
   //Handles input in the form fields
@@ -30,7 +30,7 @@ class AddPost extends Component {
     const name = target.name;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -50,7 +50,7 @@ class AddPost extends Component {
       author: this.state.postAuthor,
       category: this.state.postCategory,
       deleted: false,
-      voteScore: 1
+      voteScore: 1,
     };
     //Dispatches fetchAddPost action with the added post detail data.
     this.props.fetchAddPost(data);

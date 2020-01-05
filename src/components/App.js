@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import HomePage from "../components/home_page";
-import AllCategories from "../components/all_categories";
-import PostDetail from "../components/post_detail";
-import EditPost from "../components/edit_post";
-import EditComment from "../components/edit_comment";
-import AddPost from "../components/add_post";
+import HomePage from "./home-page/home_page";
+import AllCategories from "./all-categories/all_categories";
+import PostDetail from "./post-details/post_detail";
+import EditPost from "./edit-post/edit_post";
+import EditComment from "./edit-comment/edit_comment";
+import AddPost from "./add-post/add_post";
 
 import "../App.css";
 

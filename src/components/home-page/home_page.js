@@ -2,17 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp";
-import Menu from "./menu";
-import SideBar from "./sideBar";
-import * as actions from "../actions";
+import Menu from "../menu/menu";
+import SideBar from "../sidebar/sideBar";
+import * as actions from "../../redux/actions";
 import {
   List,
   Header,
   Button,
   Segment,
   Icon,
-  Responsive
+  Responsive,
 } from "semantic-ui-react";
+
+import "./home-page.scss";
 
 class HomePage extends Component {
   componentDidMount() {
@@ -95,7 +97,8 @@ class HomePage extends Component {
                               color="teal"
                               size="large"
                               onClick={() =>
-                                this.iconThumbsUp(post.id, "upVote")}
+                                this.iconThumbsUp(post.id, "upVote")
+                              }
                             />
                             <div className="vote-score">
                               <p className="vote-score-num">{post.voteScore}</p>
@@ -105,7 +108,8 @@ class HomePage extends Component {
                               color="red"
                               size="large"
                               onClick={() =>
-                                this.iconThumbsDown(post.id, "downVote")}
+                                this.iconThumbsDown(post.id, "downVote")
+                              }
                             />
                           </List.Content>
                           <List.Content className="comments" key={post.id}>
@@ -197,7 +201,7 @@ class HomePage extends Component {
 //Pass reducers directly into mapStateToProps (instead of the state), so we need less code.
 const mapStateToProps = ({ posts, sort }) => ({
   posts,
-  sort
+  sort,
 });
 
 //Imported all actions from action folder. Pass actions into connect,

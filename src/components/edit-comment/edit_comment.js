@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchEditComment, fetchComment } from "../actions";
-import Menu from "./menu";
-import SideBar from "./sideBar";
+import { fetchEditComment, fetchComment } from "../../redux/actions";
+import Menu from "../menu/menu";
+import SideBar from "../sidebar/sideBar";
 import { Form, Header, Icon } from "semantic-ui-react";
 
 class EditComment extends Component {
   state = {
     commentAuthor: "",
-    commentContent: ""
+    commentContent: "",
   };
 
   componentDidMount() {
@@ -18,7 +18,7 @@ class EditComment extends Component {
       const { author, body } = this.props.receiveComment;
       this.setState({
         commentAuthor: author,
-        commentContent: body
+        commentContent: body,
       });
     });
   }
@@ -29,7 +29,7 @@ class EditComment extends Component {
     const name = target.name;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -40,7 +40,7 @@ class EditComment extends Component {
     const data = {
       id: this.props.receiveComment.id,
       body: commentContent,
-      author: commentAuthor
+      author: commentAuthor,
     };
     //Dispatched editComment action with data from form
     this.props.fetchEditComment(data, data.id);
@@ -98,7 +98,7 @@ class EditComment extends Component {
 }
 
 const mapStateToProps = ({ receiveComment }) => ({
-  receiveComment
+  receiveComment,
 });
 
 export default connect(mapStateToProps, { fetchEditComment, fetchComment })(

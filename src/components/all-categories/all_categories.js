@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp";
-import Menu from "./menu";
-import SideBar from "./sideBar";
-import * as actions from "../actions";
+import Menu from "../menu/menu";
+import SideBar from "../sidebar/sideBar";
+import * as actions from "../../redux/actions";
 import {
   Header,
   Segment,
@@ -12,7 +12,7 @@ import {
   Icon,
   Button,
   Responsive,
-  Message
+  Message,
 } from "semantic-ui-react";
 
 class Categories extends Component {
@@ -90,11 +90,7 @@ class Categories extends Component {
                               </List.Header>
                             </Link>
                             <List.Content className="author">
-                              <Icon
-                                name="user"
-                                color="teal"
-                                size="large"
-                              />{" "}
+                              <Icon name="user" color="teal" size="large" />{" "}
                               author:
                               {post.author}
                             </List.Content>
@@ -112,7 +108,8 @@ class Categories extends Component {
                               <Icon
                                 name="thumbs up outline"
                                 onClick={() =>
-                                  this.iconThumbsUp(post.id, "upVote")}
+                                  this.iconThumbsUp(post.id, "upVote")
+                                }
                                 color="teal"
                                 size="large"
                               />
@@ -127,7 +124,8 @@ class Categories extends Component {
                                 color="red"
                                 size="large"
                                 onClick={() =>
-                                  this.iconThumbsDown(post.id, "downVote")}
+                                  this.iconThumbsDown(post.id, "downVote")
+                                }
                               />
                             </List.Content>
                             <List.Content className="comments" key={post.Id}>
@@ -225,7 +223,7 @@ class Categories extends Component {
 
 const mapStateToProps = ({ posts, sort }) => ({
   posts,
-  sort
+  sort,
 });
 
 //Imported all actions from action folder. Pass actions into connect,

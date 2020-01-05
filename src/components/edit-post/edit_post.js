@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchEditPost, fetchSinglePost } from "../actions";
-import Menu from "./menu";
-import SideBar from "./sideBar";
+import { fetchEditPost, fetchSinglePost } from "../../redux/actions";
+import Menu from "../menu/menu";
+import SideBar from "../sidebar/sideBar";
 import { Form, Header, Icon } from "semantic-ui-react";
 
 const options = [
   { key: 1, text: "React", value: "react" },
   { key: 2, text: "Redux", value: "redux" },
   { key: 3, text: "Udacity", value: "udacity" },
-  { key: 4, text: "Javascript", value: "javascript" }
+  { key: 4, text: "Javascript", value: "javascript" },
 ];
 
 class EditPost extends Component {
@@ -18,7 +18,7 @@ class EditPost extends Component {
     postCategory: "",
     postTitle: "",
     postAuthor: "",
-    postContent: ""
+    postContent: "",
   };
 
   componentDidMount() {
@@ -32,7 +32,7 @@ class EditPost extends Component {
         postTitle: title,
         postAuthor: author,
         postContent: body,
-        postCategory: category
+        postCategory: category,
       });
     });
   }
@@ -43,7 +43,7 @@ class EditPost extends Component {
     const name = target.name;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -60,7 +60,7 @@ class EditPost extends Component {
       title: postTitle,
       body: postContent,
       author: postAuthor,
-      category: postCategory
+      category: postCategory,
     };
     this.props.fetchEditPost(data, data.id);
     this.props.history.push("/");
@@ -136,7 +136,7 @@ class EditPost extends Component {
 }
 
 const mapStateToProps = ({ posts }) => ({
-  posts
+  posts,
 });
 
 export default connect(mapStateToProps, { fetchEditPost, fetchSinglePost })(

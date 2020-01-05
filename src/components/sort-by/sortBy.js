@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { changeSortAction } from "../actions";
+import { changeSortAction } from "../../redux/actions";
 import { Select } from "semantic-ui-react";
 
 //Variable that holds the values of the dropdown sort menu.
@@ -8,13 +8,13 @@ const options = [
   { value: "popular", text: "Popular" },
   { value: "unpopular", text: "Unpopular" },
   { value: "oldest", text: "Oldest" },
-  { value: "newest", text: "Newest" }
+  { value: "newest", text: "Newest" },
 ];
 
 class SortBy extends Component {
   //Keeps track of the value of the dropdown sort menu.
   state = {
-    value: ""
+    value: "",
   };
 
   //Sets the value of the dropdown sort menu.
@@ -43,7 +43,7 @@ class SortBy extends Component {
 }
 
 const mapStateToProps = ({ sort }) => ({
-  sort
+  sort,
 });
 
 export default connect(mapStateToProps, { changeSortAction })(SortBy);
