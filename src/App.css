@@ -1,19 +1,15 @@
-body {
-  background-color: #fcf8f8;
-}
-
-.content-wrapper{
-  margin: 3em 8em 0 8em
+/* .content-wrapper {
+  margin: 3em 8em 0 8em;
 }
 
 .container {
   text-align: center;
-}
+} */
 
-.postdetail-page-container, .category-page-container {
+.postdetail-page-container,
+.category-page-container {
   margin: 2em 10em 0 10em;
 }
-
 
 /*Wraps around Message (which displays the Category) on CategoryPage*/
 .category-message-wrapper {
@@ -21,12 +17,12 @@ body {
   justify-content: center;
 }
 
-.header-section {
+/* .header-section {
   margin-bottom: 2em;
   margin-top: 2em;
   display: flex;
   justify-content: center;
-}
+} */
 
 .editpost-header {
   margin: 2em 0 2em 0;
@@ -311,10 +307,11 @@ span.text:hover {
 
 @media (max-width: 980px) {
   .content-wrapper {
-    margin: 2.5em 5em 0 5em
+    margin: 2.5em 5em 0 5em;
   }
 
-  .postdetail-page-container, .category-page-container {
+  .postdetail-page-container,
+  .category-page-container {
     margin-left: 8em;
     margin-right: 8em;
   }
@@ -331,11 +328,11 @@ span.text:hover {
 
 @media (max-width: 900px) {
   .content-wrapper {
-    margin: 2.5em 3em 0 3em
-
+    margin: 2.5em 3em 0 3em;
   }
 
-  .postdetail-page-container, .category-page-container {
+  .postdetail-page-container,
+  .category-page-container {
     margin-left: 4em;
     margin-right: 4em;
   }
@@ -367,9 +364,9 @@ span.text:hover {
   .post-wrapper {
     padding-top: 1em;
   }
-.post-container {
-  margin-top: 1em;
-}
+  .post-container {
+    margin-top: 1em;
+  }
 }
 
 @media (max-width: 800px) {
@@ -398,7 +395,8 @@ span.text:hover {
     margin-bottom: 0;
   }
 
-  .postdetail-page-container, .category-page-container {
+  .postdetail-page-container,
+  .category-page-container {
     margin-left: 2em;
     margin-right: 2em;
   }
@@ -433,7 +431,8 @@ span.text:hover {
   .add.comments-form {
     width: 100%;
   }
-  .postdetail-page-container, .category-page-container {
+  .postdetail-page-container,
+  .category-page-container {
     margin-left: 0.5em;
     margin-right: 0.5em;
   }
@@ -472,7 +471,8 @@ span.text:hover {
     margin: 0;
   }
 
-  .postdetail-page-container, .category-page-container {
+  .postdetail-page-container,
+  .category-page-container {
     margin-left: 0.25em;
     margin-right: 0.25em;
   }

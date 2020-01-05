@@ -10,9 +10,9 @@ import {
   fetchDeleteComment,
   fetchVoteComment,
   fetchVotePost,
-} from "../redux/actions";
-import Menu from "./menu";
-import SideBar from "./sideBar";
+} from "../../redux/actions";
+import Menu from "../menu/menu";
+import SideBar from "../sidebar/sideBar";
 
 import {
   Header,

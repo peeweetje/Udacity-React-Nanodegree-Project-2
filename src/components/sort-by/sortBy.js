@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { changeSortAction } from "../redux/actions";
+import { changeSortAction } from "../../redux/actions";
 import { Select } from "semantic-ui-react";
 
 //Variable that holds the values of the dropdown sort menu.

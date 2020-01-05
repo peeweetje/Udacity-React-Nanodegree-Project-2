@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchEditComment, fetchComment } from "../redux/actions";
-import Menu from "./menu";
-import SideBar from "./sideBar";
+import { fetchEditComment, fetchComment } from "../../redux/actions";
+import Menu from "../menu/menu";
+import SideBar from "../sidebar/sideBar";
 import { Form, Header, Icon } from "semantic-ui-react";
 
 class EditComment extends Component {

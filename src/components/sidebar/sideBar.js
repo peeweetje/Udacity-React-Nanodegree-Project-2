@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchCategories, fetchPostsCategory } from "../redux/actions";
+import { fetchCategories, fetchPostsCategory } from "../../redux/actions";
 import { Sidebar, Menu, Image, Icon, Responsive } from "semantic-ui-react";
 
 class SideBar extends Component {

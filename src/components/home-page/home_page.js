@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Timestamp from "react-timestamp";
-import Menu from "./menu";
-import SideBar from "./sideBar";
-import * as actions from "../redux/actions";
+import Menu from "../menu/menu";
+import SideBar from "../sidebar/sideBar";
+import * as actions from "../../redux/actions";
 import {
   List,
   Header,
@@ -13,6 +13,8 @@ import {
   Icon,
   Responsive,
 } from "semantic-ui-react";
+
+import "./home-page.scss";
 
 class HomePage extends Component {
   componentDidMount() {

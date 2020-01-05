@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchCategories, fetchPostsCategory } from "../redux/actions";
-import SortBy from "./sortBy";
+import { fetchCategories, fetchPostsCategory } from "../../redux/actions";
+import SortBy from "../sort-by/sortBy";
 import { Grid, Button, Responsive } from "semantic-ui-react";
 
 class Menu extends Component {

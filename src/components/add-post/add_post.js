@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Form, Header, Icon } from "semantic-ui-react";
-import { fetchAddPost } from "../redux/actions";
-import Menu from "./menu";
-import SideBar from "./sideBar";
+import { fetchAddPost } from "../../redux/actions";
+import Menu from "../menu/menu";
+import SideBar from "../sidebar/sideBar";
 import uuidv1 from "uuid/v1";
 
 //Variable to hold the values of the dropdown menu for the post category.

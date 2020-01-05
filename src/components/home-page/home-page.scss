@@ -1,0 +1,32 @@
+.content-wrapper {
+  margin: 3em 8em 0 8em;
+
+  .container {
+    text-align: center;
+  }
+
+  .header-section {
+    margin-bottom: 2em;
+    margin-top: 2em;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 1150px) {
+  .content-wrapper {
+    margin: 3em 6em 0 6em;
+  }
+}
+
+@media (max-width: 980px) {
+  .content-wrapper {
+    margin: 2.5em 5em 0 5em;
+  }
+}
+
+@media (max-width: 900px) {
+  .content-wrapper {
+    margin: 2.5em 3em 0 3em;
+  }
+}
