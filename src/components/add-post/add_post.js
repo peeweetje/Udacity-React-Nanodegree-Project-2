@@ -6,6 +6,8 @@ import Menu from "../menu/menu";
 import SideBar from "../sidebar/sideBar";
 import uuidv1 from "uuid/v1";
 
+import './add-post.scss'
+
 //Variable to hold the values of the dropdown menu for the post category.
 const options = [
   { key: 1, text: "React", value: "react" },

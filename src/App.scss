@@ -1,28 +1,7 @@
-/* .content-wrapper {
-  margin: 3em 8em 0 8em;
-}
-
-.container {
-  text-align: center;
-} */
-
 .postdetail-page-container,
 .category-page-container {
   margin: 2em 10em 0 10em;
 }
-
-/*Wraps around Message (which displays the Category) on CategoryPage*/
-.category-message-wrapper {
-  display: flex;
-  justify-content: center;
-}
-
-/* .header-section {
-  margin-bottom: 2em;
-  margin-top: 2em;
-  display: flex;
-  justify-content: center;
-} */
 
 .editpost-header {
   margin: 2em 0 2em 0;
@@ -92,96 +71,6 @@ i.close.icon:hover {
   width: 20%;
 }
 
-/*Wraps around the Desktop Menu buttons */
-.categories {
-  margin-top: 1em;
-  margin-bottom: 1.5em;
-  display: flex;
-  justify-content: center;
-}
-
-div.header,
-h3.header {
-  color: #00b5ad;
-  font-size: 1.5em;
-  padding: 1em;
-}
-
-div.header:hover,
-h3.header:hover {
-  color: #009c95;
-}
-
-.author,
-.time,
-.votes,
-.comments {
-  color: #adadad;
-  font-size: 0.95em;
-  padding-right: 1em;
-  margin: 0 0 0.5em 1.2em;
-}
-
-.author,
-.time {
-  display: inline-block;
-}
-
-.votes {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.vote-score {
-  background-color: #00b5ad;
-  color: white;
-  border-radius: 8px;
-  width: 30px;
-  line-height: 30px;
-  text-align: center;
-}
-
-div.content.votes {
-  margin-top: 0.6em;
-}
-
-.post-body,
-.comment-body {
-  margin-left: 1.2em;
-}
-
-.no-posts {
-  display: flex;
-  margin-right: 10em;
-  margin-left: 10em;
-  justify-content: center;
-}
-
-h3.empty-category {
-  text-align: center;
-  margin-top: 1em;
-}
-
-.ui.divided.relaxed.list {
-  display: flex;
-  justify-content: center;
-}
-
-.ui.raised.segment {
-  padding: 0.5em 3em 1em 3em;
-  width: 75%;
-}
-
-.post-wrapper,
-.comments-wrapper .post-wrapper-categories {
-  display: flex;
-  justify-content: center;
-}
-
-.post-wrapper-categories {
-  margin-top: 1em;
-}
-
 .comment-wrapper {
   display: flex;
   justify-content: center;
@@ -217,14 +106,6 @@ button.ui.teal.large.compact.button {
 
 i.red.thumbs.down {
   margin-left: 0.25em;
-}
-
-.add-post-form {
-  margin: 3em 16em 0 16em;
-}
-
-h1.ui.add-post-header {
-  margin-bottom: 1em;
 }
 
 .add-comments-form {
@@ -337,10 +218,10 @@ span.text:hover {
     margin-right: 4em;
   }
 
-  .no-posts {
+  /* .no-posts {
     margin-right: 0;
     margin-left: 0;
-  }
+  } */
 
   .add-post-form {
     margin: 2em 12em 0 12em;

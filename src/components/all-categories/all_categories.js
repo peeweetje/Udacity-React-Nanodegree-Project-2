@@ -14,6 +14,7 @@ import {
   Responsive,
   Message,
 } from "semantic-ui-react";
+import "./all-categories.scss";
 
 class Categories extends Component {
   componentDidMount() {
