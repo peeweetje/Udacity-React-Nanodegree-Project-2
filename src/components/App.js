@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./home-page/home_page";
 import AllCategories from "./all-categories/all_categories";
@@ -9,19 +9,17 @@ import AddPost from "./add-post/add_post";
 
 import "../App.scss";
 
-class App extends Component {
-  render() {
-    return (
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/addPost" component={AddPost} />>
-        <Route exact path="/:category/" component={AllCategories} />
-        <Route exact path="/editPost/:postId" component={EditPost} />
-        <Route exact path="/editComment/:commentId" component={EditComment} />
-        <Route exact path="/:category/:post_id" component={PostDetail} />
-      </Switch>
-    );
-  }
-}
+const App = () => {
+  return (
+    <Switch>
+      <Route exact path="/" component={HomePage} />
+      <Route exact path="/addPost" component={AddPost} />>
+      <Route exact path="/:category/" component={AllCategories} />
+      <Route exact path="/editPost/:postId" component={EditPost} />
+      <Route exact path="/editComment/:commentId" component={EditComment} />
+      <Route exact path="/:category/:post_id" component={PostDetail} />
+    </Switch>
+  );
+};
 
 export default App;
