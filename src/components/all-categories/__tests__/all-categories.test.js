@@ -21,8 +21,14 @@ describe("Categories", () => {
     fireEvent.click(getByText(/Delete post/i));
     expect(onClick).toHaveBeenCalled();
   });
-});
 
-test("if on click post can be edited", () => {});
+  it("calls onclick prop on post can be edited", () => {
+    const onClick = jest.fn();
+    const { getByText } = render(<button onClick={onClick}>Edit post</button>);
+
+    fireEvent.click(getByText(/Edit post/i));
+    expect(onClick).toHaveBeenCalled();
+  });
+});
 
 test("if on click votes are up and down", () => {});
