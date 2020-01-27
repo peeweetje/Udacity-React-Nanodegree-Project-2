@@ -11,15 +11,16 @@ describe("Categories", () => {
     fireEvent.click(getByText(/Add Post/i));
     expect(onClick).toHaveBeenCalled();
   });
-  //   it("calls onclick prop on delete post button", () => {
-  //     const onClick = jest.fn();
-  //     const { getByText } = render(
-  //       <button onClick={onClick}>Delete Post</button>
-  //     );
 
-  //     fireEvent.click(getByText(/Delete Post/i));
-  //     expect(onClick).toBeNull();
-  //   });
+  it("calls onclick prop on delete post button", () => {
+    const onClick = jest.fn();
+    const { getByText } = render(
+      <button onClick={onClick}>Delete post</button>
+    );
+
+    fireEvent.click(getByText(/Delete post/i));
+    expect(onClick).toHaveBeenCalled();
+  });
 });
 
 test("if on click post can be edited", () => {});
