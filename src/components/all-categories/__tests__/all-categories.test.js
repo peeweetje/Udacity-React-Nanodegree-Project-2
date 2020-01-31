@@ -1,7 +1,23 @@
 import React from "react";
+import { unmountComponentAtNode } from "react-dom";
 import { render, fireEvent } from "@testing-library/react";
-
 import Categories from "../all_categories";
+
+// set-up and tear-down tests
+let container = null;
+beforeEach(() => {
+  // setup a DOM element as a render target
+  container = document.createElement("div");
+  // container *must* be attached to document so events work correctly.
+  document.body.appendChild(container);
+});
+
+afterEach(() => {
+  // cleanup on exiting
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+});
 
 describe("Categories", () => {
   it("calls onClick prop on add post button", () => {
