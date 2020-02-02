@@ -24,6 +24,7 @@ describe("Categories", () => {
     const onClick = jest.fn();
     const { getByText } = render(<button onClick={onClick}>Add Post</button>);
 
+    expect(getByText(/Add post/i)).toBeTruthy();
     fireEvent.click(getByText(/Add Post/i));
     expect(onClick).toHaveBeenCalled();
   });
@@ -33,7 +34,7 @@ describe("Categories", () => {
     const { getByText } = render(
       <button onClick={onClick}>Delete post</button>
     );
-
+    expect(getByText(/Delete post/i)).toBeTruthy();
     fireEvent.click(getByText(/Delete post/i));
     expect(onClick).toHaveBeenCalled();
   });
@@ -42,6 +43,7 @@ describe("Categories", () => {
     const onClick = jest.fn();
     const { getByText } = render(<button onClick={onClick}>Edit post</button>);
 
+    expect(getByText(/Edit post/i)).toBeTruthy();
     fireEvent.click(getByText(/Edit post/i));
     expect(onClick).toHaveBeenCalled();
   });
