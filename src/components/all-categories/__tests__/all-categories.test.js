@@ -1,7 +1,7 @@
 import React from "react";
 import { unmountComponentAtNode } from "react-dom";
 import { render, fireEvent } from "@testing-library/react";
-import Categories from "../all_categories";
+import "@testing-library/dom";
 
 // set-up and tear-down tests
 let container = null;
@@ -19,7 +19,7 @@ afterEach(() => {
   container = null;
 });
 
-describe("Categories", () => {
+describe("<Categories/>", () => {
   it("calls onClick prop on add post button", () => {
     const onClick = jest.fn();
     const { getByText } = render(<button onClick={onClick}>Add Post</button>);
@@ -48,5 +48,3 @@ describe("Categories", () => {
     expect(onClick).toHaveBeenCalled();
   });
 });
-
-test("if on click votes are up and down", () => {});
