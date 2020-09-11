@@ -5,13 +5,13 @@
 }
 
 .post-wrapper-categories {
-  margin-top: 1em;
+  margin-top: 1rem;
 }
 
 /*Wraps around the Desktop Menu buttons */
 .categories {
-  margin-top: 1em;
-  margin-bottom: 1.5em;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
 }
@@ -19,8 +19,8 @@
 div.header,
 h3.header {
   color: #00b5ad;
-  font-size: 1.5em;
-  padding: 1em;
+  font-size: 1.5rem;
+  padding: 1rem;
 }
 
 div.header:hover,
@@ -33,9 +33,9 @@ h3.header:hover {
 .votes,
 .comments {
   color: #adadad;
-  font-size: 0.95em;
-  padding-right: 1em;
-  margin: 0 0 0.5em 1.2em;
+  font-size: 0.95rem;
+  padding-right: 1rem;
+  margin: 0 0 0.5rem 1.2rem;
 }
 
 .author,
@@ -51,29 +51,29 @@ h3.header:hover {
 .vote-score {
   background-color: #00b5ad;
   color: white;
-  border-radius: 8px;
-  width: 30px;
-  line-height: 30px;
+  border-radius: 0.5rem;
+  width: 1.875rem;
+  line-height: 1.875rem;
   text-align: center;
 }
 
 div.content.votes {
-  margin-top: 0.6em;
+  margin-top: 0.6rem;
 }
 
 .post-body,
 .comment-body {
-  margin-left: 1.2em;
+  margin-left: 1.2rem;
 }
 
 .no-posts {
   display: flex;
-  margin-right: 10em;
-  margin-left: 10em;
+  margin-right: 10rem;
+  margin-left: 10rem;
   justify-content: center;
 }
 
 h3.empty-category {
   text-align: center;
-  margin-top: 1em;
+  margin-top: 1rem;
 }

@@ -1,14 +1,14 @@
 .postdetail-page-container,
 .category-page-container {
-  margin: 2em 10em 0 10em;
+  margin: 2rem 10rem 0 10rem;
 }
 
 .editpost-header {
-  margin: 2em 0 2em 0;
+  margin: 2rem 0 2rem 0;
 }
 
 .ui.center.aligned.header.editcomment-header {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 a:focus {
@@ -17,17 +17,17 @@ a:focus {
 
 /*Mobile Hamburger Button */
 .ui.top.attached.menu > .item:first-child {
-  padding-right: 3.8em;
+  padding-right: 3.8rem;
   color: #00b5ad;
 }
 
 i.sidebar.icon {
-  padding-right: 2em;
+  padding-right: 2rem;
 }
 
 /*SideBar for Mobile*/
 .ui.sidebar {
-  top: 3em;
+  top: 3rem;
 }
 
 .ui.inverted.menu {
@@ -37,12 +37,12 @@ i.sidebar.icon {
 i.close.icon {
   color: #fff;
   text-shadow: none;
-  padding-top: 0.1em !important;
+  padding-top: 0.1rem !important;
 }
 
 .close-btn {
-  padding-top: 0.3em !important;
-  padding-bottom: 0.2em !important;
+  padding-top: 0.3rem !important;
+  padding-bottom: 0.2rem !important;
 }
 
 /*Change color of Menu-items (buttons) on hover */
@@ -59,7 +59,7 @@ i.close.icon:hover {
 
 /*Menu Button for desktop Menu*/
 .menu-btn {
-  min-width: 6em;
+  min-width: 6rem;
 }
 
 .ui.centered.header,
@@ -74,7 +74,7 @@ i.close.icon:hover {
 .comment-wrapper {
   display: flex;
   justify-content: center;
-  margin: 1em 4em 1em 4em;
+  margin: 1rem 4rem 1rem 4rem;
 }
 
 .comments-form-wrapper {
@@ -90,59 +90,54 @@ i.close.icon:hover {
 
 .ui.basic.red.button.postdetail-deletepost-btn,
 .ui.basic.red.button.postdetail-deletecomment-btn {
-  margin-right: 1em;
+  margin-right: 1rem;
 }
 
 .btn-add,
 .add-btn-post {
-  margin: 2em 0 6em 12em;
-  display: flex;
-  justify-content: flex-start;
+  padding: 1rem 0;
 }
 
 button.ui.teal.large.compact.button {
-  margin-bottom: 6em;
+  margin-bottom: 6rem;
+  padding: 1rem;
 }
 
 i.red.thumbs.down {
-  margin-left: 0.25em;
+  margin-left: 0.25rem;
 }
 
 .add-comments-form {
   width: 70%;
-  margin-top: 2em;
-}
-
-.text {
-  margin-bottom: 1.5em;
+  margin-top: 2rem;
 }
 
 .ui.form textarea {
-  margin-bottom: 1.5em;
+  margin-bottom: 1.5rem;
 }
 
 .sort {
   display: flex;
   justify-content: flex-end;
-  font-size: 10px;
-  max-height: 0.5em;
-  margin-right: -3.5em;
+  font-size: 0.625rem;
+  max-height: 0.5rem;
+  margin-right: -3.5rem;
 }
 
 .ui.selection.dropdown {
-  border: 1px solid #00b5ad;
+  border: 0.0625rem solid #00b5ad;
   color: #00b5ad;
-  min-width: 10em;
+  min-width: 5rem;
 }
 
 .ui.selection.dropdown:hover {
-  border: 1px solid #009c95;
+  border: 0.0625rem solid #009c95;
   color: #009c95;
 }
 
 span.text {
   color: #00b5ad;
-  font-size: 10px;
+  font-size: 0.625rem;
 }
 
 span.text:hover {
@@ -151,8 +146,8 @@ span.text:hover {
 
 .post-not-found {
   text-align: center;
-  padding-top: 2em;
-  margin-bottom: 6em;
+  padding-top: 2rem;
+  margin-bottom: 6rem;
 }
 
 .post-not-found-wrapper {
@@ -165,41 +160,41 @@ span.text:hover {
 }
 
 .addpost-form {
-  margin-top: 2em;
+  margin-top: 2rem;
 }
 
 @media (max-width: 1150px) {
   .content-wrapper {
-    margin: 3em 6em 0 6em;
+    margin: 3rem 6rem 0 6rem;
   }
 
   .no-posts {
-    margin-right: 4em;
-    margin-left: 4em;
+    margin-right: 4rem;
+    margin-left: 4rem;
   }
 
   .add-comments-form {
-    margin: 2em 8em 0 8em;
+    margin: 2rem 8rem 0 8rem;
   }
   .menu-section.categories {
-    margin-left: 2em;
+    margin-left: 2rem;
   }
 }
 
 @media (max-width: 980px) {
   .content-wrapper {
-    margin: 2.5em 5em 0 5em;
+    margin: 2.5rem 5rem 0 5rem;
   }
 
   .postdetail-page-container,
   .category-page-container {
-    margin-left: 8em;
-    margin-right: 8em;
+    margin-left: 8rem;
+    margin-right: 8rem;
   }
 
   .no-posts {
-    margin-right: 1em;
-    margin-left: 1em;
+    margin-right: 1rem;
+    margin-left: 1rem;
   }
 
   .categories {
@@ -209,26 +204,21 @@ span.text:hover {
 
 @media (max-width: 900px) {
   .content-wrapper {
-    margin: 2.5em 3em 0 3em;
+    margin: 2.5rem 3rem 0 3rem;
   }
 
   .postdetail-page-container,
   .category-page-container {
-    margin-left: 4em;
-    margin-right: 4em;
+    margin-left: 4rem;
+    margin-right: 4rem;
   }
 
-  /* .no-posts {
-    margin-right: 0;
-    margin-left: 0;
-  } */
-
   .add-post-form {
-    margin: 2em 12em 0 12em;
+    margin: 2rem 12rem 0 12rem;
   }
 
   .add-comments-form {
-    margin: 2em 4.5em 0 4.5em;
+    margin: 2rem 4.5rem 0 4.5rem;
   }
 }
 
@@ -240,29 +230,29 @@ span.text:hover {
     margin-right: 0;
   }
   .categories {
-    margin: 1em 0 1em 0;
+    margin: 1rem 0 1rem 0;
   }
   .post-wrapper {
-    padding-top: 1em;
+    padding-top: 1rem;
   }
   .post-container {
-    margin-top: 1em;
+    margin-top: 1rem;
   }
 }
 
 @media (max-width: 800px) {
   .add-post-form {
-    margin: 2em 8em 0 8em;
+    margin: 2rem 8rem 0 8rem;
   }
   .add-comments-form {
-    margin: 1.5em 4em 0 4em;
+    margin: 1.5rem 4rem 0 4rem;
   }
   .editpost-header {
     margin-bottom: 0;
   }
   .ui.small.message.header-categories {
     width: 30%;
-    margin-top: 1em;
+    margin-top: 1rem;
   }
 }
 
@@ -270,7 +260,7 @@ span.text:hover {
   .content-wrapper,
   .post-wrapper,
   .post-wrapper-categories {
-    margin: 0.5em 1em 0 1em;
+    margin: 0.5rem 1rem 0 1rem;
   }
   .header-section {
     margin-bottom: 0;
@@ -278,44 +268,44 @@ span.text:hover {
 
   .postdetail-page-container,
   .category-page-container {
-    margin-left: 2em;
-    margin-right: 2em;
+    margin-left: 2rem;
+    margin-right: 2rem;
   }
 
   .menu-btn {
-    max-width: 3.5em;
+    max-width: 3.5rem;
   }
   .ui.teal.raised.segment {
     width: 85%;
   }
   .add-post-form {
-    margin: 2em 5em 0 5em;
+    margin: 2rem 5rem 0 5rem;
   }
   .add-comments-form {
-    margin: 1.5em 2.5em 0 2.5em;
+    margin: 1.5rem 2.5rem 0 2.5rem;
   }
   .ui.small.message.header-categories {
     width: 35%;
   }
   .ui-header {
-    padding-bottom: 0.25em;
+    padding-bottom: 0.25rem;
   }
 }
 
 @media (max-width: 500px) {
   .add-post-form {
-    margin: 2em 2.5em 0 2.5em;
+    margin: 2rem 2.5rem 0 2.5rem;
   }
   .comment-wrapper {
-    margin: 0.75em 1.5em 0.75em 1.5em;
+    margin: 0.75rem 1.5rem 0.75rem 1.5rem;
   }
   .add.comments-form {
     width: 100%;
   }
   .postdetail-page-container,
   .category-page-container {
-    margin-left: 0.5em;
-    margin-right: 0.5em;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
   }
 
   .title {
@@ -325,19 +315,19 @@ span.text:hover {
   div.header,
   h3.header,
   .title {
-    padding: 0.5em 0 0.3em 0.4em;
-    font-size: 1.4em;
+    padding: 0.5rem 0 0.3rem 0.4rem;
+    font-size: 1.4rem;
   }
   .author,
   .time,
   .votes {
-    margin: 0 0 0.2em 0;
+    margin: 0 0 0.2rem 0;
   }
   .comments {
-    margin: -2em 0 1em 10em;
+    margin: -2rem 0 1rem 10rem;
   }
   .comment-btn-wrapper {
-    margin-top: 1em;
+    margin-top: 1rem;
   }
   .ui.teal.raised.segment {
     width: 90%;
@@ -354,8 +344,8 @@ span.text:hover {
 
   .postdetail-page-container,
   .category-page-container {
-    margin-left: 0.25em;
-    margin-right: 0.25em;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
   }
 }
 
@@ -364,11 +354,11 @@ span.text:hover {
     width: 95%;
   }
   .btn-add {
-    margin-left: 1em;
+    margin-left: 1rem;
   }
 
   .add-btn-post {
     justify-content: center;
-    margin-left: 1em;
+    margin-left: 1rem;
   }
 }
