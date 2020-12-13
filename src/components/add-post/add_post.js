@@ -4,7 +4,7 @@ import { Form, Header, Icon } from "semantic-ui-react";
 import { fetchAddPost } from "../../redux/actions";
 import Menu from "../menu/menu";
 import SideBar from "../sidebar/sideBar";
-import uuidv1 from "uuid/v1";
+import { v1 as uuidv1 } from 'uuid';
 
 import './add-post.scss'
 

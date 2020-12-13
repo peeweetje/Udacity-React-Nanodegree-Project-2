@@ -23,7 +23,7 @@ import {
   Form,
   Responsive,
 } from "semantic-ui-react";
-import uuidv1 from "uuid/v1";
+import { v1 as uuidv1 } from 'uuid';
 
 class PostDetail extends Component {
   state = {
