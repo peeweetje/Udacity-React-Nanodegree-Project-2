@@ -11,7 +11,6 @@ import reducer from "./redux/reducers";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { ThemeProvider } from 'styled-components';
-import { darkTheme } from './themes';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -23,7 +22,7 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider  theme={theme}>
       <App />
       </ThemeProvider>
     </BrowserRouter>
