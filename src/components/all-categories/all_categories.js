@@ -98,9 +98,8 @@ const Categories = (props) => {
                             <List.Content className='time'>
                               <Icon name='clock' />
                               <Timestamp
-                                relative
-                                date={Date}
-                                relativeTo={Date}
+                                time={post.timestamp / 1000}
+                                format='full'
                               />
                             </List.Content>
                             <List.Content className='post-body'>
