@@ -22,7 +22,7 @@ specifiers:
   react-router: ^5.2.0
   react-router-dom: ^5.2.0
   react-scripts: ^5.0.1
-  react-timestamp: ^5.1.0
+  react-timestamp: ^6.0.0
   redux: ^4.0.5
   redux-logger: ^3.0.6
   redux-thunk: ^2.3.0
@@ -41,7 +41,7 @@ dependencies:
   react-router: 5.3.4_react@18.3.1
   react-router-dom: 5.3.4_react@18.3.1
   react-scripts: 5.0.1_io3ms4z2irkt4uxkqq4msphl44
-  react-timestamp: 5.3.0_react@18.3.1
+  react-timestamp: 6.0.0_react@18.3.1
   redux: 4.2.1
   redux-logger: 3.0.6
   redux-thunk: 2.4.2_redux@4.2.1
@@ -9885,10 +9885,10 @@ packages:
       - webpack-plugin-serve
     dev: false
 
-  /react-timestamp/5.3.0_react@18.3.1:
-    resolution: {integrity: sha512-nooYc2u7IOcbtKRh4WR9a4vNOiO/799NhKl8ZwIoHW3MoJKzC0xMC037dKBL6MwISAw9QcUG3iF/oqMMGDpAgA==}
+  /react-timestamp/6.0.0_react@18.3.1:
+    resolution: {integrity: sha512-ZVyVuVp1MBWQGmcip3Nzb9n1uzAqkyGJgngiAa7WbQbWuw+IS3qlnYBoXThlHAt1Yby9eOuzMZse/jRQfq/LeQ==}
     peerDependencies:
-      react: ^16.9.0
+      react: ^18.2.0
     dependencies:
       react: 18.3.1
     dev: false
