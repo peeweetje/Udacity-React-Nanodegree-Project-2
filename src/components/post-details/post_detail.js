@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams, useHistory } from 'react-router-dom';
-import Timestamp from 'react-timestamp';
+import { useParams, useHistory } from 'react-router-dom';
 import {
   fetchSinglePost,
   fetchComments,
@@ -13,16 +12,9 @@ import {
 } from '../../redux/actions';
 import Menu from '../menu/menu';
 import SideBar from '../sidebar/sideBar';
-
-import {
-  Header,
-  Segment,
-  Button,
-  Icon,
-  List,
-  Form,
-  Responsive,
-} from 'semantic-ui-react';
+import SinglePost from './single_post';
+import SingleComment from './single_comment';
+import { Header, Button, Icon, Form } from 'semantic-ui-react';
 import { v1 as uuidv1 } from 'uuid';
 
 const PostDetail = () => {
@@ -122,114 +114,31 @@ const PostDetail = () => {
         <Menu />
 
         {posts &&
-          posts.length > 0 &&
+          posts?.length > 0 &&
           posts
             .filter(
               (post) =>
                 !post.deleted && Object.keys(post).length > 0 && !post.error
             )
             .map((post) => (
-              <div key={post.id} className='post-wrapper'>
-                <Segment color='teal' raised>
-                  <h3 className='title'>{post.title}</h3>
-                  <List.Content className='author'>
-                    <Icon name='user' color='teal' size='large' />
-                    {post.author}
-                  </List.Content>
-                  <List.Content className='time'>
-                    <Icon color='teal' name='clock' size='large' />
-                    <Timestamp time={post.timestamp / 1000} format='full' />
-                  </List.Content>
-                  <List.Content className='post-body'>{post.body}</List.Content>
-                  <List.Content className='votes'>
-                    <Icon
-                      name='thumbs up outline'
-                      color='teal'
-                      size='large'
-                      onClick={() => iconThumbsUp(post.id)}
-                    />
-                    <div className='vote-score'>
-                      <p className='vote-score-num'>{post.voteScore}</p>
-                    </div>
-                    <Icon
-                      name='thumbs down outline'
-                      color='red'
-                      size='large'
-                      onClick={() => iconThumbsDown(post.id)}
-                    />
-                  </List.Content>
-                  <List.Content className='comments'>
-                    <Icon name='comment outline' color='teal' size='large' />
-                    {comments && comments.length}
-                  </List.Content>
-                  <div className='post-btn-wrapper'>
-                    <Responsive
-                      as={Button}
-                      onClick={() => deletePost(post.id)}
-                      compact
-                      basic
-                      color='red'
-                      size='tiny'
-                      floated='right'
-                      maxWidth={680}
-                      className='postdetail-deletepost-btn'
-                    >
-                      <Icon name='trash' />
-                      Delete
-                    </Responsive>
-                    <Responsive
-                      as={Button}
-                      onClick={() => deletePost(post.id)}
-                      compact
-                      basic
-                      color='red'
-                      size='tiny'
-                      floated='right'
-                      minWidth={681}
-                    >
-                      <Icon name='trash' />
-                      Delete post
-                    </Responsive>
-
-                    <Link to={`/editpost/${post.id}`}>
-                      <Responsive
-                        as={Button}
-                        compact
-                        basic
-                        color='teal'
-                        size='tiny'
-                        floated='left'
-                        maxWidth={680}
-                        className='postdetail-editpost-btn'
-                      >
-                        <Icon name='edit' />
-                        Edit
-                      </Responsive>
-                      <Responsive
-                        as={Button}
-                        compact
-                        basic
-                        color='teal'
-                        size='tiny'
-                        floated='right'
-                        minWidth={681}
-                      >
-                        <Icon name='edit' />
-                        Edit post
-                      </Responsive>
-                    </Link>
-                  </div>
-                </Segment>
-              </div>
+              <SinglePost
+                key={post.id}
+                post={post}
+                commentsCount={comments?.length > 0 ? comments.length : 0}
+                onUpvote={iconThumbsUp}
+                onDownvote={iconThumbsDown}
+                onDelete={deletePost}
+              />
             ))}
 
         <div className='comments-wrapper'>
           {posts &&
-            posts.length > 0 &&
+            posts?.length > 0 &&
             posts.filter(
               (post) => !post.deleted && Object.keys(post).length > 0
             ).length > 0 &&
             comments &&
+            comments?.length > 0 &&
             comments
               .filter((comment) => !comment.deleted)
               .filter((comment) => !comment.parentDeleted)
@@ -246,98 +155,13 @@ const PostDetail = () => {
                 }
               })
               .map((comment) => (
-                <div key={comment.id} className='comment-wrapper'>
-                  <Segment color='teal' raised className='comments-segment'>
-                    <List.Content className='author'>
-                      <Icon name='user' color='teal' size='large' />
-                      {comment.author}
-                    </List.Content>
-                    <List.Content className='time'>
-                      <Icon color='teal' name='clock' size='large' />
-                      <Timestamp
-                        format='full'
-                        time={comment.timestamp / 1000}
-                      />
-                    </List.Content>
-                    <List.Content className='comment-body'>
-                      {comment.body}
-                    </List.Content>
-                    <List.Content className='votes'>
-                      <Icon
-                        name='thumbs up outline'
-                        color='teal'
-                        size='large'
-                        onClick={() => iconThumbsUpComment(comment.id)}
-                      />
-                      <div className='vote-score'>
-                        <p className='vote-score-num'>{comment.voteScore}</p>
-                      </div>
-
-                      <Icon
-                        name='thumbs down outline'
-                        color='red'
-                        size='large'
-                        onClick={() => iconThumbsDownComment(comment.id)}
-                      />
-                    </List.Content>
-                    <div className='comment-btn-wrapper'>
-                      <Responsive
-                        as={Button}
-                        compact
-                        basic
-                        color='red'
-                        size='tiny'
-                        floated='right'
-                        onClick={() => onDeleteComment(comment.id)}
-                        maxWidth={680}
-                        className='postdetail-deletecomment-btn'
-                      >
-                        <Icon name='trash' />
-                        Delete
-                      </Responsive>
-                      <Responsive
-                        as={Button}
-                        compact
-                        basic
-                        color='red'
-                        size='tiny'
-                        floated='right'
-                        onClick={() => onDeleteComment(comment.id)}
-                        minWidth={681}
-                      >
-                        <Icon name='trash' />
-                        Delete comment
-                      </Responsive>
-
-                      <Link to={`/editcomment/${comment.id}`}>
-                        <Responsive
-                          as={Button}
-                          compact
-                          basic
-                          color='teal'
-                          size='tiny'
-                          floated='left'
-                          maxWidth={680}
-                        >
-                          <Icon name='edit' />
-                          Edit
-                        </Responsive>
-                        <Responsive
-                          as={Button}
-                          compact
-                          basic
-                          color='teal'
-                          size='tiny'
-                          floated='right'
-                          minWidth={681}
-                        >
-                          <Icon name='edit' />
-                          Edit comment
-                        </Responsive>
-                      </Link>
-                    </div>
-                  </Segment>
-                </div>
+                <SingleComment
+                  key={comment.id}
+                  comment={comments?.length > 0 ? comment : null}
+                  onUpvote={iconThumbsUpComment}
+                  onDownvote={iconThumbsDownComment}
+                  onDelete={onDeleteComment}
+                />
               ))}
 
           {posts &&
