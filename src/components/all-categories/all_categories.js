@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
 import CategoryItem from '../category-item/catergory-item';
 import Menu from '../menu/menu';
 import SideBar from '../sidebar/sideBar';
@@ -8,23 +8,24 @@ import * as actions from '../../redux/actions';
 import { Header, Icon, Button, Message } from 'semantic-ui-react';
 import './all-categories.scss';
 
-const Categories = (props) => {
+const Categories = () => {
+  const dispatch = useDispatch();
+  const { posts } = useSelector((state) => state.posts);
+  const { sort } = useSelector((state) => state.sort);
+  const { category: categoryName } = useParams();
+
   useEffect(() => {
-    const { category } = props.match.params;
-    props.fetchPostsCategory(category);
-  }, [props.match.params.category, props.fetchPostsCategory]);
+    dispatch(actions.fetchPostsCategory(categoryName));
+  }, [categoryName, dispatch]);
 
   const handleDeletePost = (postId) => {
-    props.fetchDeletePost(postId);
+    dispatch(actions.fetchDeletePost(postId));
   };
 
   const handleVotePost = (postId, option) => {
-    props.fetchVotePost(postId, option);
+    dispatch(actions.fetchVotePost(postId, option));
   };
 
-  const { posts } = props.posts;
-  const { sort } = props.sort;
-  const { category: categoryName } = props.match.params;
   const formattedCategoryName =
     categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
 
@@ -89,12 +90,4 @@ const Categories = (props) => {
   );
 };
 
-const mapStateToProps = ({ posts, sort }) => ({
-  posts,
-  sort,
-});
-
-//Imported all actions from action folder. Pass actions into connect,
-//so they can be accessed via this.props and a mapDispatchToProps function isn't needed.
-
-export default connect(mapStateToProps, actions)(Categories);
+export default Categories;
