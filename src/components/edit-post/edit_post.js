@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchEditPost, fetchSinglePost } from '../../redux/actions';
 import SideBar from '../sidebar/sideBar';
 import { Form, Header, Icon } from 'semantic-ui-react';
@@ -11,13 +11,9 @@ const options = [
   { key: 4, text: 'Javascript', value: 'javascript' },
 ];
 
-const EditPost = ({
-  match,
-  fetchSinglePost,
-  fetchEditPost,
-  posts,
-  history,
-}) => {
+const EditPost = ({ match, history }) => {
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts.posts);
   const [post, setPost] = useState({
     id: '',
     postCategory: '',
@@ -28,8 +24,8 @@ const EditPost = ({
 
   useEffect(() => {
     const { postId } = match.params;
-    fetchSinglePost(postId).then(() => {
-      const fetchedPost = posts.posts.find((post) => post.id === postId);
+    dispatch(fetchSinglePost(postId)).then(() => {
+      const fetchedPost = posts.find((post) => post.id === postId);
       if (fetchedPost) {
         const { id, title, author, body, category } = fetchedPost;
         setPost({
@@ -42,7 +38,6 @@ const EditPost = ({
       }
     });
   }, [match.params, fetchSinglePost]);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setPost((prevPost) => ({
@@ -68,7 +63,7 @@ const EditPost = ({
       author: postAuthor,
       category: postCategory,
     };
-    fetchEditPost(data, data.id);
+    dispatch(fetchEditPost(data, data.id));
     history.push('/');
   };
 
@@ -135,13 +130,4 @@ const EditPost = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  posts: state.posts,
-});
-
-const mapDispatchToProps = {
-  fetchSinglePost,
-  fetchEditPost,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(EditPost);
+export default EditPost;
