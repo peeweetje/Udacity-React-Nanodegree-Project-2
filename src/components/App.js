@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import HomePage from './home-page/home_page';
 import AllCategories from './all-categories/all_categories';
 import PostDetail from './post-details/post_detail';
@@ -11,14 +11,14 @@ import '../App.scss';
 
 const App = () => {
   return (
-    <Switch>
-      <Route exact path='/' component={HomePage} />
-      <Route exact path='/addPost' component={AddPost} />
-      <Route exact path='/:category/' component={AllCategories} />
-      <Route exact path='/editPost/:postId' component={EditPost} />
-      <Route exact path='/editComment/:commentId' component={EditComment} />
-      <Route exact path='/:category/:post_id' component={PostDetail} />
-    </Switch>
+    <Routes>
+      <Route path='/' element={<HomePage />} />
+      <Route path='/addPost' element={<AddPost />} />
+      <Route path='/:category/' element={<AllCategories />} />
+      <Route path='/editPost/:postId' element={<EditPost />} />
+      <Route path='/editComment/:commentId' element={<EditComment />} />
+      <Route path='/:category/:post_id' element={<PostDetail />} />
+    </Routes>
   );
 };
 
