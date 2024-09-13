@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEditPost, fetchSinglePost } from '../../redux/actions';
 import SideBar from '../sidebar/sideBar';
@@ -11,7 +12,7 @@ const options = [
   { key: 4, text: 'Javascript', value: 'javascript' },
 ];
 
-const EditPost = ({ match, history }) => {
+const EditPost = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.posts);
   const [post, setPost] = useState({
@@ -22,22 +23,26 @@ const EditPost = ({ match, history }) => {
     postContent: '',
   });
 
+  const { postId } = useParams();
+  let navigate = useNavigate();
+
   useEffect(() => {
-    const { postId } = match.params;
-    dispatch(fetchSinglePost(postId)).then(() => {
-      const fetchedPost = posts.find((post) => post.id === postId);
-      if (fetchedPost) {
-        const { id, title, author, body, category } = fetchedPost;
-        setPost({
-          id,
-          postTitle: title,
-          postAuthor: author,
-          postContent: body,
-          postCategory: category,
-        });
-      }
-    });
-  }, [match.params, fetchSinglePost]);
+    if (postId) {
+      dispatch(fetchSinglePost(postId)).then(() => {
+        const fetchedPost = posts.find((post) => post.id === postId);
+        if (fetchedPost) {
+          const { id, title, author, body, category } = fetchedPost;
+          setPost({
+            id,
+            postTitle: title,
+            postAuthor: author,
+            postContent: body,
+            postCategory: category,
+          });
+        }
+      });
+    }
+  }, [postId, fetchSinglePost]);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setPost((prevPost) => ({
@@ -64,7 +69,7 @@ const EditPost = ({ match, history }) => {
       category: postCategory,
     };
     dispatch(fetchEditPost(data, data.id));
-    history.push('/');
+    navigate('/');
   };
 
   return (

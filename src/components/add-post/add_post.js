@@ -14,12 +14,13 @@ const options = [
   { key: 4, text: 'Javascript', value: 'javascript' },
 ];
 
-const AddPost = ({ history }) => {
+const AddPost = () => {
   const [postCategory, setPostCategory] = useState('react');
   const [postTitle, setPostTitle] = useState('');
   const [postAuthor, setPostAuthor] = useState('');
   const [postContent, setPostContent] = useState('');
   const dispatch = useDispatch();
+  let navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -41,7 +42,7 @@ const AddPost = ({ history }) => {
       voteScore: 1,
     };
     dispatch(fetchAddPost(data));
-    history.push('/');
+    navigate('/');
   };
 
   return (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   fetchSinglePost,
   fetchComments,
@@ -22,7 +22,7 @@ const PostDetail = () => {
   const [commentContent, setCommentContent] = useState('');
 
   const dispatch = useDispatch();
-  const history = useHistory();
+  const history = useNavigate();
   const { post_id } = useParams();
 
   const posts = useSelector((state) => state.posts.posts);
