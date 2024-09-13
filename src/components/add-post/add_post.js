@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Form, Header, Icon } from 'semantic-ui-react';
 import { fetchAddPost } from '../../redux/actions';
