@@ -5,15 +5,9 @@ import { Form, Header, Icon } from 'semantic-ui-react';
 import { fetchAddPost } from '../../redux/actions';
 import SideBar from '../sidebar/sideBar';
 import { v1 as uuidv1 } from 'uuid';
+import { options } from '../../utils/options';
 
 import './add-post.scss';
-
-const options = [
-  { key: 1, text: 'React', value: 'react' },
-  { key: 2, text: 'Redux', value: 'redux' },
-  { key: 3, text: 'Udacity', value: 'udacity' },
-  { key: 4, text: 'Javascript', value: 'javascript' },
-];
 
 const AddPost = () => {
   const [postCategory, setPostCategory] = useState('react');

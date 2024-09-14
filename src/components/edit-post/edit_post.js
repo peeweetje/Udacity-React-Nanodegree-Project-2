@@ -4,13 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchEditPost, fetchSinglePost } from '../../redux/actions';
 import SideBar from '../sidebar/sideBar';
 import { Form, Header, Icon } from 'semantic-ui-react';
-
-const options = [
-  { key: 1, text: 'React', value: 'react' },
-  { key: 2, text: 'Redux', value: 'redux' },
-  { key: 3, text: 'Udacity', value: 'udacity' },
-  { key: 4, text: 'Javascript', value: 'javascript' },
-];
+import { options } from '../../utils/options';
 
 const EditPost = () => {
   const dispatch = useDispatch();

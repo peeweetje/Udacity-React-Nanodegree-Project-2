@@ -2,13 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { changeSortAction } from '../../redux/actions';
 import { Select } from 'semantic-ui-react';
-
-const options = [
-  { value: 'popular', text: 'Popular' },
-  { value: 'unpopular', text: 'Unpopular' },
-  { value: 'oldest', text: 'Oldest' },
-  { value: 'newest', text: 'Newest' },
-];
+import { valueOptions } from '../../utils/options';
 
 const SortBy = () => {
   const dispatch = useDispatch();
@@ -26,7 +20,7 @@ const SortBy = () => {
         color='teal'
         name='sort'
         placeholder='Sort By'
-        options={options}
+        options={valueOptions}
         value={value}
       />
     </div>
