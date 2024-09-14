@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import CategoryItem from '../category-item/catergory-item';
 import Menu from '../menu/menu';
 import SideBar from '../sidebar/sideBar';
+import { sortPosts } from '../../utils/sortPosts';
 import * as actions from '../../redux/actions';
 import { Header, Icon, Button, Message } from 'semantic-ui-react';
 import './all-categories.scss';
@@ -29,6 +30,14 @@ const Categories = () => {
   const formattedCategoryName =
     categoryName.charAt(0).toUpperCase() + categoryName.slice(1);
 
+  const filteredAndSortedPosts =
+    posts && posts.length > 0
+      ? sortPosts(
+          posts.filter((post) => !post.deleted && !post.error),
+          sort.value
+        )
+      : [];
+
   return (
     <div className='page-wrapper'>
       <SideBar />
@@ -46,29 +55,15 @@ const Categories = () => {
         </div>
 
         <div>
-          {posts && posts.length > 0 ? (
-            posts
-              .filter((post) => !post.deleted && !post.error)
-              .sort((a, b) => {
-                switch (sort.value) {
-                  case 'unpopular':
-                    return a.voteScore - b.voteScore;
-                  case 'oldest':
-                    return a.timestamp - b.timestamp;
-                  case 'newest':
-                    return b.timestamp - a.timestamp;
-                  default:
-                    return b.voteScore - a.voteScore;
-                }
-              })
-              .map((post) => (
-                <CategoryItem
-                  key={post.id}
-                  post={post}
-                  onDelete={handleDeletePost}
-                  onVote={handleVotePost}
-                />
-              ))
+          {filteredAndSortedPosts.length > 0 ? (
+            filteredAndSortedPosts.map((post) => (
+              <CategoryItem
+                key={post.id}
+                post={post}
+                onDelete={handleDeletePost}
+                onVote={handleVotePost}
+              />
+            ))
           ) : (
             <div className='no-posts'>
               <h3 className='empty-category'>
@@ -76,14 +71,14 @@ const Categories = () => {
               </h3>
             </div>
           )}
-          <div className='add-btn-post'>
-            <Link to='/addpost'>
-              <Button compact color='teal' size='large' floated='right'>
-                <Icon name='plus circle' />
-                Add Post
-              </Button>
-            </Link>
-          </div>
+        </div>
+        <div className='add-btn-post'>
+          <Link to='/addpost'>
+            <Button compact color='teal' size='large' floated='right'>
+              <Icon name='plus circle' />
+              Add Post
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
