@@ -23,7 +23,10 @@ const CategoryItem = ({ post, onDelete, onVote }) => {
               </List.Content>
               <List.Content className='time'>
                 <Icon name='clock' />
-                <Timestamp time={post.timestamp / 1000} format='full' />
+                <Timestamp
+                  date={post.timestamp / 1000}
+                  options={{ twentyFourHour: true }}
+                />
               </List.Content>
               <List.Content className='post-body'>{post.body}</List.Content>
               <List.Content className='votes'>

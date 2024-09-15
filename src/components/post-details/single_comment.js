@@ -3,8 +3,14 @@ import { Link } from 'react-router-dom';
 import Timestamp from 'react-timestamp';
 import { Segment, List, Icon, Button, Responsive } from 'semantic-ui-react';
 
-const SingleComment = ({ comment, onUpvote, onDownvote, onDelete }) => {
-  const { id, author, timestamp, body, voteScore } = comment;
+const SingleComment = ({
+  comment,
+  onUpvote,
+  onDownvote,
+  onDelete,
+  timestamp,
+}) => {
+  const { id, author, body, voteScore } = comment;
 
   return (
     <div className='comment-wrapper'>
@@ -15,7 +21,10 @@ const SingleComment = ({ comment, onUpvote, onDownvote, onDelete }) => {
         </List.Content>
         <List.Content className='time'>
           <Icon color='teal' name='clock' size='large' />
-          <Timestamp format='full' time={timestamp / 1000} />
+          <Timestamp
+            date={comment.timestamp ? comment.timestamp / 1000 : undefined}
+            options={{ twentyFourHour: true }}
+          />
         </List.Content>
         <List.Content className='comment-body'>{body}</List.Content>
         <List.Content className='votes'>

@@ -22,7 +22,10 @@ const SinglePost = ({
         </List.Content>
         <List.Content className='time'>
           <Icon color='teal' name='clock' size='large' />
-          <Timestamp time={timestamp / 1000} format='full' />
+          <Timestamp
+            date={post.timestamp ? post.timestamp / 1000 : undefined}
+            options={{ twentyFourHour: true }}
+          />
         </List.Content>
         <List.Content className='post-body'>{body}</List.Content>
         <List.Content className='votes'>

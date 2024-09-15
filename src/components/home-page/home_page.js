@@ -73,7 +73,10 @@ const HomePage = () => {
                       </List.Content>
                       <List.Content className='time'>
                         <Icon name='clock' color='teal' size='large' />
-                        <Timestamp time={post.timestamp / 1000} format='full' />
+                        <Timestamp
+                          options={{ twentyFourHour: true }}
+                          date={post.timestamp / 1000}
+                        />
                       </List.Content>
                       <List.Content className='votes'>
                         <Icon
