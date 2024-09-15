@@ -5,7 +5,7 @@ let db = {};
 const defaultData = {
   '8xf0y6ziyjabvozdd253nd': {
     id: '8xf0y6ziyjabvozdd253nd',
-    timestamp: 1467166872634,
+    timestamp: 1678796500130,
     title: 'Udacity is the best place to learn React',
     body: 'Everyone says so after all.',
     author: 'thingtwo',
@@ -15,7 +15,7 @@ const defaultData = {
   },
   '6ni6ok3ym7mf1p33lnez': {
     id: '6ni6ok3ym7mf1p33lnez',
-    timestamp: 1468479767190,
+    timestamp: 1622636500170,
     title: 'Learn Redux in 10 minutes!',
     body: 'Just kidding. It takes more than 10 minutes to learn technology.',
     author: 'thingone',
@@ -25,7 +25,7 @@ const defaultData = {
   },
   '4rj0m6ziyjartgzdd133nd': {
     id: '4rj0m6ziyjartgzdd133nd',
-    timestamp: 1467166872645,
+    timestamp: 1667391160645,
     title: 'Javascript is the best language to learn ',
     body: 'Learn it and you rule the world.',
     author: 'mememe',
@@ -35,7 +35,7 @@ const defaultData = {
   },
   '3xf0y7ziyjabvozdd253ea': {
     id: '3xf0y7ziyjabvozdd253ea',
-    timestamp: 1467166872635,
+    timestamp: 1767166872635,
     title: 'React is the best framework!',
     body: 'Not sure about that!',
     author: 'Petra Vos',
@@ -45,7 +45,7 @@ const defaultData = {
   },
   '8xf0y7ziyjabvozdd253kl': {
     id: '8xf0y7ziyjabvozdd253kl',
-    timestamp: 1467166872635,
+    timestamp: 1570166872635,
     title: 'Is redux still relevant???',
     body: 'Yes ofcourse it is!',
     author: 'Harry Potter',
