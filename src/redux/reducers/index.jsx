@@ -15,7 +15,7 @@ import {
   VOTE,
   VOTE_COMMENT,
   CHANGE_SORT,
-} from "../../redux/actions";
+} from "../actions";
 
 function posts(state = {}, action) {
   switch (action.type) {

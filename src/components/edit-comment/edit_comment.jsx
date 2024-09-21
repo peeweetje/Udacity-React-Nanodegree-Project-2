@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEditComment, fetchComment } from '../../redux/actions';
-import Menu from '../menu/menu';
 import SideBar from '../sidebar/sideBar';
 import { Form, Header, Icon } from 'semantic-ui-react';
+import { useParams,useNavigate  } from 'react-router-dom';
 
-const EditComment = ({ match, history }) => {
+const EditComment = () => {
   const [commentAuthor, setCommentAuthor] = useState('');
   const [commentContent, setCommentContent] = useState('');
   const dispatch = useDispatch();
+  const params = useParams();
+  const navigate = useNavigate();
   const receiveComment = useSelector((state) => state.receiveComment);
 
   useEffect(() => {
-    dispatch(fetchComment(match.params.commentId));
-  }, [dispatch, match.params.commentId]);
+    const commentId = params?.commentId;
+    if (commentId) {
+      dispatch(fetchComment(commentId));
+    }
+  }, [dispatch, params]);
 
   useEffect(() => {
     if (receiveComment) {
@@ -40,7 +45,7 @@ const EditComment = ({ match, history }) => {
       author: commentAuthor,
     };
     dispatch(fetchEditComment(data, data.id));
-    history.goBack();
+   navigate(-1);
   };
 
   return (
@@ -53,11 +58,9 @@ const EditComment = ({ match, history }) => {
           color='teal'
           as='h1'
         >
+           <Icon name='edit' />
           Edit Comment
         </Header>
-
-        <Menu />
-
         <Form onSubmit={handleSubmit}>
           <Form.Input
             required
