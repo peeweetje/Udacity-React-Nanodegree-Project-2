@@ -62,7 +62,6 @@ const AddPost = () => {
           />
           <Form.Input
             required
-            label='Title'
             name='postTitle'
             value={postTitle}
             onChange={handleInputChange}
@@ -75,7 +74,6 @@ const AddPost = () => {
             name='postAuthor'
             value={postAuthor}
             onChange={handleInputChange}
-            label='Author'
             placeholder='Author'
           />
           <Form.TextArea

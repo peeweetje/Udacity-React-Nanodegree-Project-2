@@ -86,7 +86,6 @@ const EditPost = () => {
           />
           <Form.Input
             required
-            label='Title'
             name='postTitle'
             value={post.postTitle}
             onChange={handleInputChange}
@@ -95,10 +94,8 @@ const EditPost = () => {
           />
           <Form.Input
             required
-            label='Author'
             name='postAuthor'
             value={post.postAuthor}
-            onChange={handleInputChange}
             onChange={handleInputChange}
             label='Author'
             placeholder='Author'
