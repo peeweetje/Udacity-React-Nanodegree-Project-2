@@ -1,30 +1,33 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { changeSortAction } from '../../redux/actions';
-import { Select } from 'semantic-ui-react';
-import { valueOptions } from '../../utils/options';
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeSortAction } from '../../redux/actions'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { valueOptions } from '../../utils/options'
 
-const SortBy = () => {
-  const dispatch = useDispatch();
-  const [value, setValue] = useState('');
+const SortBy=()=> {
+  const dispatch = useDispatch()
+  const value = useSelector((state) => state.sort.value)
 
-  const handleChange = (e, data) => {
-    setValue(data.value);
-    dispatch(changeSortAction({ value: data.value }));
-  };
+  const handleChange = (newValue) => {
+    dispatch(changeSortAction({ value: newValue }))
+  }
 
   return (
-    <div className='sort'>
-      <Select
-        onChange={handleChange}
-        color='teal'
-        name='sort'
-        placeholder='Sort By'
-        options={valueOptions}
-        value={value}
-      />
+    <div className="w-[100px]">
+      <Select value={value} onValueChange={handleChange}>
+        <SelectTrigger className="w-full">
+          <SelectValue placeholder="Sort By" />
+        </SelectTrigger>
+        <SelectContent>
+          {valueOptions.map((option) => (
+            <SelectItem key={option.value} value={option.value}>
+              {option.text}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </div>
-  );
-};
+  )
+}
 
-export default SortBy;
+export default SortBy
