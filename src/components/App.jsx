@@ -7,6 +7,8 @@ import EditPost from './edit-post/edit_post';
 import EditComment from './edit-comment/edit_comment';
 import AddPost from './add-post/add_post';
 
+import '../index.css'
+
 import '../App.scss';
 
 const App = () => {
