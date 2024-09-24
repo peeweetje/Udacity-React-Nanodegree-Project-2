@@ -20,11 +20,10 @@ const Menu= () => {
   }
 
   return (
-    <div className="categories">
-      <div className="hidden md:grid grid-cols-6 gap-2">
+    <div className="flex justify-center my-6">
+      <div className="hidden md:grid grid-cols-6 gap-6">
         <div>
           <Button
-            
             size="sm"
             className="w-full"
             onClick={() => navigate('/')}
@@ -36,7 +35,6 @@ const Menu= () => {
           receiveCategories.map((category) => (
             <div key={category.path}>
               <Button
-               
                 size="sm"
                 className="w-full"
                 onClick={() => handleCategoryClick(category.name)}
