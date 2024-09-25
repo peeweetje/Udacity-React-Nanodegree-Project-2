@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@radix-ui/react-dialog': ^1.1.1
   '@radix-ui/react-select': ^2.1.1
   '@radix-ui/react-slot': ^1.1.0
   '@testing-library/dom': ^7.29.0
@@ -44,6 +45,7 @@ specifiers:
   vite: ^5.4.7
 
 dependencies:
+  '@radix-ui/react-dialog': 1.1.1_nnrd3gsncyragczmpvfhocinkq
   '@radix-ui/react-select': 2.1.1_nnrd3gsncyragczmpvfhocinkq
   '@radix-ui/react-slot': 1.1.0_react@18.3.1
   class-variance-authority: 0.7.0
@@ -841,6 +843,37 @@ packages:
       react: 18.3.1
     dev: false
 
+  /@radix-ui/react-dialog/1.1.1_nnrd3gsncyragczmpvfhocinkq:
+    resolution: {integrity: sha512-zysS+iU4YP3STKNS6USvFVqI4qqx8EpiwmT5TuCApVEBca+eRCbONi4EgzfNSuVnOXvC5UPHHMjs8RXO6DH9Bg==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@radix-ui/primitive': 1.1.0
+      '@radix-ui/react-compose-refs': 1.1.0_react@18.3.1
+      '@radix-ui/react-context': 1.1.0_react@18.3.1
+      '@radix-ui/react-dismissable-layer': 1.1.0_nnrd3gsncyragczmpvfhocinkq
+      '@radix-ui/react-focus-guards': 1.1.0_react@18.3.1
+      '@radix-ui/react-focus-scope': 1.1.0_nnrd3gsncyragczmpvfhocinkq
+      '@radix-ui/react-id': 1.1.0_react@18.3.1
+      '@radix-ui/react-portal': 1.1.1_nnrd3gsncyragczmpvfhocinkq
+      '@radix-ui/react-presence': 1.1.0_nnrd3gsncyragczmpvfhocinkq
+      '@radix-ui/react-primitive': 2.0.0_nnrd3gsncyragczmpvfhocinkq
+      '@radix-ui/react-slot': 1.1.0_react@18.3.1
+      '@radix-ui/react-use-controllable-state': 1.1.0_react@18.3.1
+      aria-hidden: 1.2.4
+      react: 18.3.1
+      react-dom: 18.3.1_react@18.3.1
+      react-remove-scroll: 2.5.7_react@18.3.1
+    dev: false
+
   /@radix-ui/react-direction/1.1.0_react@18.3.1:
     resolution: {integrity: sha512-BUuBvgThEiAXh2DWu93XsT+a3aWrGqolGlqqw5VU1kG7p/ZH2cuDlM1sRLNnY3QcBS69UIz2mcKhMxDsdewhjg==}
     peerDependencies:
@@ -961,6 +994,25 @@ packages:
         optional: true
     dependencies:
       '@radix-ui/react-primitive': 2.0.0_nnrd3gsncyragczmpvfhocinkq
+      '@radix-ui/react-use-layout-effect': 1.1.0_react@18.3.1
+      react: 18.3.1
+      react-dom: 18.3.1_react@18.3.1
+    dev: false
+
+  /@radix-ui/react-presence/1.1.0_nnrd3gsncyragczmpvfhocinkq:
+    resolution: {integrity: sha512-Gq6wuRN/asf9H/E/VzdKoUtT8GC9PQc9z40/vEr0VCJ4u5XvvhWIrSsCB6vD2/cH7ugTdSfYq9fLJCcM00acrQ==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@radix-ui/react-compose-refs': 1.1.0_react@18.3.1
       '@radix-ui/react-use-layout-effect': 1.1.0_react@18.3.1
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
