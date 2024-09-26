@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchCategories, fetchPostsCategory } from '../../redux/actions';
-import { Sidebar, Menu, Image, Icon, Responsive } from 'semantic-ui-react';
+import { fetchCategories } from '../../redux/actions';
+import { Button } from "@/components/ui/button"
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetTitle,
+} from "@/components/ui/sheet"
+import { MenuIcon } from 'lucide-react'
 
-const SideBar = () => {
-  const [visible, setVisible] = useState(false);
+const SideBar=()=> {
   const dispatch = useDispatch();
   const receiveCategories = useSelector((state) => state.receiveCategories);
 
@@ -13,65 +19,33 @@ const SideBar = () => {
     dispatch(fetchCategories());
   }, [dispatch]);
 
-  const getPostsByCategory = (category) => {
-    dispatch(fetchPostsCategory(category));
-  };
-
-  const toggleVisibility = () => setVisible(!visible);
 
   return (
-    <div>
-      <Responsive
-        as={Menu}
-        maxWidth={767}
-        className='hamburger-menu'
-        size='large'
-        secondary
-        attached='top'
-      >
-        <Menu.Item onClick={toggleVisibility}>
-          <Icon name='sidebar' />
-          Menu
-        </Menu.Item>
-      </Responsive>
-      <Responsive maxWidth={767} as={Image}>
-        <Sidebar
-          as={Menu}
-          width='thin'
-          animation='overlay'
-          visible={visible}
-          icon='labeled'
-          vertical
-          inverted
-        >
-          <Link to='/'>
-            <Menu.Item className='mobile-menu-btn' name='home'>
-              Home
-            </Menu.Item>
-          </Link>
-          {receiveCategories.length > 0 &&
-            receiveCategories.map((category) => (
-              <Link
-                onClick={() => getPostsByCategory(category.name)}
-                key={category.path}
-                to={`/${category.name}`}
-              >
-                <Menu.Item name='menu-item'>
-                  {category.name.charAt(0).toUpperCase() +
-                    category.name.slice(1)}
-                </Menu.Item>
-              </Link>
-            ))}
-          <Link onClick={toggleVisibility} to='#'>
-            <Menu.Item className='close-btn'>
-              <Icon name='close' />
-            </Menu.Item>
-          </Link>
-        </Sidebar>
-        <Sidebar.Pusher />
-      </Responsive>
+    <div className="md:hidden">
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button className="mx-4 my-4" variant="outline" size="icon">
+            <MenuIcon className="h-4 w-4" />
+            <span className="sr-only">Toggle menu</span>
+          </Button>
+        </SheetTrigger>
+        <SheetContent className="w-[175px] sm:w-[250px] bg-teal-500" side="left" aria-describedby={undefined}>
+      <SheetTitle className="py-4">Categories</SheetTitle>
+          <nav className="flex flex-col space-y-4">
+            {receiveCategories.length > 0 &&
+              receiveCategories.map((category) => (
+                <Link
+                  key={category.path}
+                  to={`/${category.name}`}
+                  className="text-md font-bold text-neutral-100 hover:text-teal-700"
+                >
+                  {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
+                </Link>
+              ))}
+          </nav>
+        </SheetContent>
+      </Sheet>
     </div>
   );
-};
-
-export default SideBar;
+}
+export default SideBar
