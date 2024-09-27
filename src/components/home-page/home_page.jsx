@@ -51,21 +51,22 @@ export default function HomePage() {
           <Menu />
         </div>
 
-        <div className="grid gap-6 mt-8">
+        <div className="grid gap-6 mt-8 w-4/5 mx-auto">
           {posts &&
             posts.length > 0 &&
             sortPosts(
               posts.filter((post) => !post.deleted),
               sort.value
             ).map((post) => (
-              <Card key={post.id}>
+              <Card className="w-full" key={post.id}>
                 <CardHeader>
                   <CardTitle>
-                    <Link to={`/${post.category}/${post.id}`} className="hover:underline">
+                    <Link to={`/${post.category}/${post.id}`} className="hover:text-teal-500 transition-colors duration-200">
                       {post.title}
                     </Link>
                   </CardTitle>
                   <CardDescription>
+                  <div className="flex items-center space-x-4">
                     <div className="flex items-center space-x-2">
                       <User className="h-4 w-4" />
                       <span>{post.author}</span>
@@ -74,24 +75,27 @@ export default function HomePage() {
                       <Clock className="h-4 w-4" />
                       <Timestamp date={post.timestamp / 1000} options={{ twentyFourHour: true }} />
                     </div>
+                    </div>
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
+                <div className="flex flex-col space-y-4">
                   <div className="flex items-center space-x-4">
-                    <Button variant="ghost" size="sm" onClick={() => iconThumbsUp(post.id)}>
-                      <ThumbsUp className="h-4 w-4 mr-2" />
+                    <Button className="w-18" size="sm" onClick={() => iconThumbsUp(post.id)}>
+                      <ThumbsUp className="h-4 w-4" />
                     </Button>
                     <span className="font-bold">{post.voteScore}</span>
-                    <Button variant="ghost" size="sm" onClick={() => iconThumbsDown(post.id)}>
-                      <ThumbsDown className="h-4 w-4 mr-2" />
+                    <Button className="w-18" variant="destructive" size="sm" onClick={() => iconThumbsDown(post.id)}>
+                      <ThumbsDown className="h-4 w-4" />
                     </Button>
+                    </div>
                     <div className="flex items-center">
                       <MessageSquare className="h-4 w-4 mr-2" />
                       <span>{post.comments && post.comments.length}</span>
                     </div>
                   </div>
                 </CardContent>
-                <CardFooter className="justify-between">
+                <CardFooter className="flex justify-end space-x-2">
                   <Button variant="outline" size="sm" asChild>
                     <Link to={`/editpost/${post.id}`}>
                       <Edit className="h-4 w-4 mr-2" />
