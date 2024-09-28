@@ -54,7 +54,6 @@ const HomePage=()=> {
     return <Loading />
   }
 
- 
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -112,14 +111,14 @@ const HomePage=()=> {
                   </div>
                 </CardContent>
                 <CardFooter className="flex justify-end space-x-2">
-                  <Button variant="outline" size="sm" asChild>
+                  <Button asChild  size="sm" className="w-25">
                     <Link to={`/editpost/${post.id}`} >
-                      <Edit className="h-4 w-4 mr-1" />
+                      <Edit className="h-4 w-4 mr-2" />
                       <span>Edit post</span>
                     </Link>
                   </Button>
                   <Button variant="destructive" size="sm" onClick={() => deletePost(post.id)}>
-                    <Trash2 className="h-4 w-4 mr-1" />
+                    <Trash2 className="h-4 w-4 mr-2" />
                     <span>Delete</span>
                   </Button>
                 </CardFooter>
@@ -127,7 +126,7 @@ const HomePage=()=> {
             ))}
         </div>
         <div className="mt-8 text-center">
-          <Button asChild>
+          <Button asChild className="w-30">
             <Link to="/addpost">
               <PlusCircle className="h-4 w-4 mr-2" />
               Add Post
