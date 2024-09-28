@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Timestamp from 'react-timestamp'
 import * as actions from '../../redux/actions'
 import { sortPosts } from '../../utils/sortPosts'
+import  Loading  from '../loading/loading'	
 
 import { Button } from "@/components/ui/button"
 import {
@@ -19,14 +20,26 @@ import { ThumbsUp, ThumbsDown, MessageSquare, Trash2, Edit, PlusCircle, User, Cl
 import Menu from '../menu/menu'
 import SideBar from '../sidebar/sideBar'
 
-export default function HomePage() {
+const HomePage=()=> {
   const dispatch = useDispatch()
   const posts = useSelector((state) => state.posts.posts)
   const sort = useSelector((state) => state.sort.sort)
+  const postsLoading = useSelector((state) => state.posts.loading)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    dispatch(actions.fetchPosts())
+    const fetchData = async () => {
+      dispatch(actions.fetchPosts())
+      const timer = setTimeout(() => {
+        setLoading(false)
+      }, 3000)
+      return () => clearTimeout(timer)
+    }
+    fetchData()
   }, [dispatch])
+
+
+
 
   const deletePost = (postId) => {
     dispatch(actions.fetchDeletePost(postId))
@@ -39,6 +52,12 @@ export default function HomePage() {
   const iconThumbsDown = (postId) => {
     dispatch(actions.fetchVotePost(postId, 'downVote'))
   }
+
+  if (loading || postsLoading) {
+    return <Loading />
+  }
+
+ 
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -124,3 +143,5 @@ export default function HomePage() {
     </div>
   )
 }
+
+export default HomePage
