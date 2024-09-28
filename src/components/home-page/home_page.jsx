@@ -24,7 +24,6 @@ const HomePage=()=> {
   const dispatch = useDispatch()
   const posts = useSelector((state) => state.posts.posts)
   const sort = useSelector((state) => state.sort.sort)
-  const postsLoading = useSelector((state) => state.posts.loading)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -32,13 +31,11 @@ const HomePage=()=> {
       dispatch(actions.fetchPosts())
       const timer = setTimeout(() => {
         setLoading(false)
-      }, 3000)
+      }, 1000)
       return () => clearTimeout(timer)
     }
     fetchData()
   }, [dispatch])
-
-
 
 
   const deletePost = (postId) => {
@@ -53,7 +50,7 @@ const HomePage=()=> {
     dispatch(actions.fetchVotePost(postId, 'downVote'))
   }
 
-  if (loading || postsLoading) {
+  if (loading) {
     return <Loading />
   }
 
@@ -116,16 +113,14 @@ const HomePage=()=> {
                 </CardContent>
                 <CardFooter className="flex justify-end space-x-2">
                   <Button variant="outline" size="sm" asChild>
-                    <Link to={`/editpost/${post.id}`}>
-                      <Edit className="h-4 w-4 mr-2" />
-                      <span className="hidden sm:inline">Edit post</span>
-                      <span className="sm:hidden">Edit</span>
+                    <Link to={`/editpost/${post.id}`} >
+                      <Edit className="h-4 w-4 mr-1" />
+                      <span>Edit post</span>
                     </Link>
                   </Button>
                   <Button variant="destructive" size="sm" onClick={() => deletePost(post.id)}>
-                    <Trash2 className="h-4 w-4 mr-2" />
-                    <span className="hidden sm:inline">Delete post</span>
-                    <span className="sm:hidden">Delete</span>
+                    <Trash2 className="h-4 w-4 mr-1" />
+                    <span>Delete</span>
                   </Button>
                 </CardFooter>
               </Card>
