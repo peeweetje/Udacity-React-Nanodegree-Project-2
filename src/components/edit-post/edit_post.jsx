@@ -1,129 +1,187 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchEditPost, fetchSinglePost } from '../../redux/actions';
-import SideBar from '../sidebar/sideBar';
-import { Form, Header, Icon } from 'semantic-ui-react';
-import { options } from '../../utils/options';
+import React, { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchEditPost, fetchSinglePost } from '../../redux/actions'
+import SideBar from '../sidebar/sideBar'
+import { options } from '../../utils/options'
+import  Loading  from '../loading/loading'	
+import { Button } from "@/components/ui/button"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Edit } from "lucide-react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from "zod"
 
-const EditPost = () => {
-  const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts.posts);
-  const [post, setPost] = useState({
-    id: '',
-    postCategory: '',
-    postTitle: '',
-    postAuthor: '',
-    postContent: '',
-  });
+const formSchema = z.object({
+  postCategory: z.string().min(1, "Category is required"),
+  postTitle: z.string().min(1, "Post title is required"),
+  postAuthor: z.string().min(1, "Author is required"),
+  postContent: z.string().min(1, "Content is required"),
+})
 
-  const { postId } = useParams();
-  let navigate = useNavigate();
+const EditPost=() =>{
+  const dispatch = useDispatch()
+  const { postId } = useParams()
+  const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(true)
+
+  const post = useSelector((state) => 
+    state.posts.posts.find((p) => p.id === postId)
+  )
+
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      postCategory: '',
+      postTitle: '',
+      postAuthor: '',
+      postContent: '',
+    },
+  })
 
   useEffect(() => {
-    if (postId) {
-      dispatch(fetchSinglePost(postId)).then(() => {
-        const fetchedPost = posts.find((post) => post.id === postId);
-        if (fetchedPost) {
-          const { id, title, author, body, category } = fetchedPost;
-          setPost({
-            id,
-            postTitle: title,
-            postAuthor: author,
-            postContent: body,
-            postCategory: category,
-          });
-        }
-      });
+    const loadPost = async () => {
+      if (postId) {
+        setIsLoading(true)
+        await dispatch(fetchSinglePost(postId))
+        setIsLoading(false)
+      }
     }
-  }, [postId, fetchSinglePost]);
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setPost((prevPost) => ({
-      ...prevPost,
-      [name]: value,
-    }));
-  };
+    loadPost()
+  }, [dispatch, postId])
 
-  const setPostCategory = (e, data) => {
-    setPost((prevPost) => ({
-      ...prevPost,
-      postCategory: data.value,
-    }));
-  };
+  useEffect(() => {
+    if (post && !isLoading) {
+      form.reset({
+        postCategory: post.category,
+        postTitle: post.title,
+        postAuthor: post.author,
+        postContent: post.body,
+      })
+    }
+  }, [post, isLoading, form])
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const { id, postTitle, postCategory, postContent, postAuthor } = post;
+  const onSubmit = async (values) => {
     const data = {
-      id,
-      title: postTitle,
-      body: postContent,
-      author: postAuthor,
-      category: postCategory,
-    };
-    dispatch(fetchEditPost(data, data.id));
-    navigate('/');
-  };
+      id: postId,
+      title: values.postTitle,
+      body: values.postContent,
+      author: values.postAuthor,
+      category: values.postCategory,
+    }
+    await dispatch(fetchEditPost(data, postId))
+    navigate('/')
+  }
+
+  if (isLoading) {
+    return <Loading />
+  }
 
   return (
-    <div className='page-wrapper'>
+    <div className="flex min-h-screen bg-neutral-10">
       <SideBar />
-      <div className='editpost-header'>
-        <Header color='teal' as='h1' textAlign='center'>
-          <Icon name='edit' />
-          Edit Post
-        </Header>
-      </div>
-      <div className='add-post-form'>
-        <Form onSubmit={handleSubmit}>
-          <Form.Dropdown
-            label='Category'
-            options={options}
-            value={post.postCategory}
-            onChange={setPostCategory}
-            selection
-          />
-          <Form.Input
-            required
-            name='postTitle'
-            value={post.postTitle}
-            onChange={handleInputChange}
-            label='Post Title'
-            placeholder='Post Title'
-          />
-          <Form.Input
-            required
-            name='postAuthor'
-            value={post.postAuthor}
-            onChange={handleInputChange}
-            label='Author'
-            placeholder='Author'
-          />
-          <Form.TextArea
-            required
-            label='Content'
-            name='postContent'
-            value={post.postContent}
-            onChange={handleInputChange}
-            placeholder='Post Content'
-            rows={6}
-          />
-
-          <Form.Button
-            type='submit'
-            name='form-button-control-public'
-            color='teal'
-            compact
-            size='large'
-          >
-            <Icon name='edit' />
+      <div className="flex-1 p-8">
+        <div className="mb-8 text-center">
+          <h1 className=" text-teal-500 text-3xl font-bold text-primary">
+            <Edit className=" text-teal-500 inline-block mr-2" />
             Edit Post
-          </Form.Button>
-        </Form>
+          </h1>
+        </div>
+        <div className="max-w-2xl mx-auto bg-card bg-neutral-100 p-8 rounded-lg shadow-inner">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <FormField
+                control={form.control}
+                name="postCategory"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category</FormLabel>
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a category" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {options.map((option) => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.text}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="postTitle"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Post Title</FormLabel>
+                    <FormControl>
+                      <Input className="border-teal-200" placeholder="Post Title" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="postAuthor"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Author</FormLabel>
+                    <FormControl>
+                      <Input className="border-teal-200" placeholder="Author" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="postContent"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Content</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Post Content"
+                        className="resize-none border-teal-200"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit" className="w-32">
+                <Edit className="mr-2 h-4 w-4" /> Edit Post
+              </Button>
+            </form>
+          </Form>
+        </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default EditPost;
+export default EditPost
