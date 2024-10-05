@@ -1,104 +1,167 @@
-import React, { useState } from 'react';
+import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { Form, Header, Icon } from 'semantic-ui-react';
-import { fetchAddPost } from '../../redux/actions';
-import SideBar from '../sidebar/sideBar';
-import { v1 as uuidv1 } from 'uuid';
-import { options } from '../../utils/options';
+import { useDispatch } from 'react-redux'
+import { v1 as uuidv1 } from 'uuid'
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import * as z from "zod"
 
-import './add-post.scss';
+import { Button } from "@/components/ui/button"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
-const AddPost = () => {
-  const [postCategory, setPostCategory] = useState('react');
-  const [postTitle, setPostTitle] = useState('');
-  const [postAuthor, setPostAuthor] = useState('');
-  const [postContent, setPostContent] = useState('');
-  const dispatch = useDispatch();
+import { fetchAddPost } from '../../redux/actions'
+import SideBar from '../sidebar/sideBar'
+import { options } from '../../utils/options'
+import { PlusCircle } from "lucide-react"
+
+const formSchema = z.object({
+  category: z.string().min(1, {
+    message: "Please select a category.",
+  }),
+  title: z.string().min(2, {
+    message: "Title must be at least 2 characters.",
+  }),
+  author: z.string().min(2, {
+    message: "Author name must be at least 2 characters.",
+  }),
+  content: z.string().min(10, {
+    message: "Content must be at least 10 characters.",
+  }),
+})
+
+const AddPost=() =>{
+  const dispatch = useDispatch()
   let navigate = useNavigate();
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    if (name === 'postTitle') setPostTitle(value);
-    if (name === 'postAuthor') setPostAuthor(value);
-    if (name === 'postContent') setPostContent(value);
-  };
+  const form = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      category: "react",
+      title: "",
+      author: "",
+      content: "",
+    },
+  })
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  function onSubmit(values) {
     const data = {
       id: uuidv1(),
       timestamp: Date.now(),
-      title: postTitle,
-      body: postContent,
-      author: postAuthor,
-      category: postCategory,
+      title: values.title,
+      body: values.content,
+      author: values.author,
+      category: values.category,
       deleted: false,
       voteScore: 1,
-    };
-    dispatch(fetchAddPost(data));
+    }
+    dispatch(fetchAddPost(data))
     navigate('/');
-  };
+  }
 
   return (
-    <div className='page-wrapper'>
+    <div className="flex min-h-screen bg-neutral-10">
       <SideBar />
-      <div className='add-post-form'>
-        <Header
-          className='add-post-header'
-          textAlign='center'
-          color='teal'
-          as='h1'
-        >
-          <Icon name='edit' /> Add New Post
-        </Header>
-        <Form className='addpost-form' onSubmit={handleSubmit}>
-          <Form.Dropdown
-            label='Category'
-            options={options}
-            value={postCategory}
-            onChange={(e, data) => setPostCategory(data.value)}
-            selection
-          />
-          <Form.Input
-            required
-            name='postTitle'
-            value={postTitle}
-            onChange={handleInputChange}
-            label='Post Title'
-            placeholder='Post Title'
-          />
-          <Form.Input
-            required
-            label='Author'
-            name='postAuthor'
-            value={postAuthor}
-            onChange={handleInputChange}
-            placeholder='Author'
-          />
-          <Form.TextArea
-            required
-            label='Content'
-            name='postContent'
-            value={postContent}
-            onChange={handleInputChange}
-            placeholder='Post Content'
-            rows={6}
-          />
-
-          <Form.Button
-            name='form-button-control-public'
-            color='teal'
-            compact
-            size='large'
-          >
-            <Icon name='plus circle' />
-            Add Post
-          </Form.Button>
+      <div className="flex-1 p-8">
+      <div className="mb-8 text-center">
+      <h1 className="text-3xl font-bold text-center text-teal-500 mb-6 flex items-center justify-center">
+          <PlusCircle className="inline-block mr-2 h-8 w-8" />
+          Add New Post
+        </h1>
+        </div>
+        <div className="max-w-2xl mx-auto bg-card bg-neutral-100 p-8 rounded-lg shadow-inner">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <FormField
+              control={form.control}
+              name="category"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Category</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a category" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {options.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.text}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Post Title</FormLabel>
+                  <FormControl>
+                    <Input className="border-teal-200" placeholder="Enter post title" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="author"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Author</FormLabel>
+                  <FormControl>
+                    <Input className="border-teal-200" placeholder="Enter author name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="content"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Content</FormLabel>
+                  <FormControl>
+                    <Textarea 
+                      placeholder="Enter post content" 
+                       className="resize-none border-teal-200"
+                      {...field} 
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit" className="w-32">
+              <PlusCircle className="mr-2 h-4 w-4 " />Add Post
+              </Button>
+          </form>
         </Form>
+        </div>
       </div>
     </div>
-  );
-};
-
-export default AddPost;
+  )
+}
+export default AddPost
