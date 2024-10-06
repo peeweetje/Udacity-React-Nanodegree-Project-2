@@ -1,86 +1,67 @@
 import React from 'react';
 import Timestamp from 'react-timestamp';
 import { Link } from 'react-router-dom';
-import { Segment, List, Icon, Button, Responsive } from 'semantic-ui-react';
+import { ThumbsUp, ThumbsDown, User, Clock, MessageSquare, Trash, Edit } from 'lucide-react'
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardFooter, CardHeader,CardDescription, CardTitle } from "@/components/ui/card"
 
-const CategoryItem = ({ post, onDelete, onVote }) => {
-  const handleDelete = () => onDelete(post.id);
-  const handleUpVote = () => onVote(post.id, 'upVote');
-  const handleDownVote = () => onVote(post.id, 'downVote');
+const CategoryItem= ({ post, onDelete, onVote })=> {
+  const handleDelete = () => onDelete(post.id)
+  const handleUpVote = () => onVote(post.id, 'upVote')
+  const handleDownVote = () => onVote(post.id, 'downVote')
 
   return (
-    <div className='post-wrapper-categories'>
-      <List divided relaxed>
-        <Segment color='teal' raised>
-          <List.Item>
-            <List.Content>
-              <Link to={`/${post.category}/${post.id}`}>
-                <List.Header className='header'>{post.title}</List.Header>
-              </Link>
-              <List.Content className='author'>
-                <Icon name='user' color='teal' size='large' /> author:{' '}
-                {post.author}
-              </List.Content>
-              <List.Content className='time'>
-                <Icon name='clock' />
-                <Timestamp
-                  date={post.timestamp / 1000}
-                  options={{ twentyFourHour: true }}
-                />
-              </List.Content>
-              <List.Content className='post-body'>{post.body}</List.Content>
-              <List.Content className='votes'>
-                <Icon
-                  name='thumbs up outline'
-                  onClick={handleUpVote}
-                  color='teal'
-                  size='large'
-                />
-                <div className='vote-score'>
-                  <p className='vote-score-num'>{post.voteScore}</p>
-                </div>
-                <Icon
-                  name='thumbs down outline'
-                  color='red'
-                  size='large'
-                  onClick={handleDownVote}
-                />
-              </List.Content>
-              <List.Content className='comments'>
-                <Icon name='comment outline' color='teal' size='large' />
-                {post.comments && post.comments.length}
-              </List.Content>
-            </List.Content>
-          </List.Item>
-          <div className='post-btn-wrapper'>
-            <Responsive
-              as={Button}
-              onClick={handleDelete}
-              compact
-              basic
-              color='red'
-              size='tiny'
-              floated='right'
-            >
-              <Icon name='trash' /> Delete
-            </Responsive>
-            <Link to={`/editpost/${post.id}`}>
-              <Responsive
-                as={Button}
-                compact
-                basic
-                color='teal'
-                size='tiny'
-                floated='left'
-              >
-                <Icon name='edit' /> Edit
-              </Responsive>
-            </Link>
+    <Card className="w-4/5 mx-auto mb-4">
+      <CardHeader>
+        <CardTitle>
+          <Link href={`/${post.category}/${post.id}`} className="hover:text-teal-500">
+            {post.title}
+          </Link>
+        </CardTitle>
+        <CardDescription>
+         <div className="flex items-center space-x-4">
+         <div className="flex items-center space-x-2">
+           <User className="h-4 w-4" />
+             <span>{post.author}</span>
+           </div>
+           <div className="flex items-center space-x-2 mt-1">
+             <Clock className="h-4 w-4" />
+              <Timestamp date={post.timestamp / 1000} options={{ twentyFourHour: true }} />
+             </div>
+             </div>
+         </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p className="text-md mb-6">{post.body}</p>
+        <div className="flex flex-col space-y-2">
+          <div className="flex items-center space-x-4">
+            <Button className="w-18" size="sm" onClick={handleUpVote}>
+              <ThumbsUp className="h-4 w-4 mr-1" />
+            </Button>
+            <span className="text-sm font-medium">{post.voteScore}</span>
+            <Button className="w-18" variant="destructive" size="sm" onClick={handleDownVote}>
+              <ThumbsDown className="h-4 w-4" />
+            </Button>
           </div>
-        </Segment>
-      </List>
-    </div>
-  );
-};
-
-export default CategoryItem;
+          <div className="flex items-center text-md text-muted-foreground">
+            <MessageSquare  className="h-5 w-5 mr-1" />
+            <span>{post.comments ? post.comments.length : 0} comments</span>
+          </div>
+        </div>
+      </CardContent>
+      <CardFooter className="flex justify-end space-x-2">
+        <Link to={`/editpost/${post.id}`}>
+          <Button size="sm">
+            <Edit className="h-4 w-4 mr-1" />
+            Edit
+          </Button>
+        </Link>
+        <Button  variant="destructive" size="sm" onClick={handleDelete}>
+          <Trash className="h-4 w-4 mr-1" />
+          Delete
+        </Button>
+      </CardFooter>
+    </Card>
+  )
+}
+export default CategoryItem
