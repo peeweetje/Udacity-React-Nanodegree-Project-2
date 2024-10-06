@@ -80,10 +80,10 @@ const Categories=() =>{
               )}
             </div>
             <div className="mt-8 text-center">
-          <Button asChild className="w-30">
+          <Button asChild className="w-34 text-sm">
             <Link to="/addpost">
-              <PlusCircle className="h-4 w-4 mr-2" />
-              Add Post
+              <PlusCircle className="h-5 w-5 mr-2" />
+             <span className="font-semibold">Add Post</span> 
             </Link>
           </Button>
         </div>
