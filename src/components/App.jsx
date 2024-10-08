@@ -9,7 +9,7 @@ import AddPost from './add-post/add_post';
 
 import '../index.css'
 
-import '../App.scss';
+
 
 const App = () => {
   return (
