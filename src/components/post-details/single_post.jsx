@@ -1,114 +1,59 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Timestamp from 'react-timestamp';
-import { Segment, List, Icon, Button, Responsive } from 'semantic-ui-react';
+import React  from 'react'
+import { Link } from 'react-router-dom'
+import Timestamp from 'react-timestamp'
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { ThumbsUp, ThumbsDown, MessageCircle, Trash2, Edit, User } from "lucide-react"
 
-const SinglePost = ({
-  post,
-  commentsCount,
-  onUpvote,
-  onDownvote,
-  onDelete,
-}) => {
-  const { id, title, author, timestamp, body, voteScore } = post;
+const SinglePost=({ post, commentsCount, onUpvote, onDownvote, onDelete })=> {
+  const { id, title, author, timestamp, body, voteScore } = post
+
 
   return (
-    <div className='post-wrapper'>
-      <Segment color='teal' raised>
-        <h3 className='title'>{title}</h3>
-        <List.Content className='author'>
-          <Icon name='user' color='teal' size='large' />
-          {author}
-        </List.Content>
-        <List.Content className='time'>
-          <Icon color='teal' name='clock' size='large' />
-          <Timestamp
-            date={post.timestamp ? post.timestamp / 1000 : undefined}
-            options={{ twentyFourHour: true }}
-          />
-        </List.Content>
-        <List.Content className='post-body'>{body}</List.Content>
-        <List.Content className='votes'>
-          <Icon
-            name='thumbs up outline'
-            color='teal'
-            size='large'
-            onClick={() => onUpvote(id)}
-          />
-          <div className='vote-score'>
-            <p className='vote-score-num'>{voteScore}</p>
-          </div>
-          <Icon
-            name='thumbs down outline'
-            color='red'
-            size='large'
-            onClick={() => onDownvote(id)}
-          />
-        </List.Content>
-        <List.Content className='comments'>
-          <Icon name='comment outline' color='teal' size='large' />
-          {commentsCount}
-        </List.Content>
-        <div className='post-btn-wrapper'>
-          <Responsive
-            as={Button}
-            onClick={() => onDelete(id)}
-            compact
-            basic
-            color='red'
-            size='tiny'
-            floated='right'
-            maxWidth={680}
-            className='postdetail-deletepost-btn'
-          >
-            <Icon name='trash' />
-            Delete
-          </Responsive>
-          <Responsive
-            as={Button}
-            onClick={() => onDelete(id)}
-            compact
-            basic
-            color='red'
-            size='tiny'
-            floated='right'
-            minWidth={681}
-          >
-            <Icon name='trash' />
-            Delete post
-          </Responsive>
-
-          <Link to={`/editpost/${id}`}>
-            <Responsive
-              as={Button}
-              compact
-              basic
-              color='teal'
-              size='tiny'
-              floated='left'
-              maxWidth={680}
-              className='postdetail-editpost-btn'
-            >
-              <Icon name='edit' />
-              Edit
-            </Responsive>
-            <Responsive
-              as={Button}
-              compact
-              basic
-              color='teal'
-              size='tiny'
-              floated='right'
-              minWidth={681}
-            >
-              <Icon name='edit' />
-              Edit post
-            </Responsive>
-          </Link>
+    <div className="flex flex-col mx-auto w-full  px-4">
+    <Card className="flex flex-col w-full mx-auto overflow-hidden">
+      <CardHeader className="space-y-2">
+        <CardTitle className="text-xl sm:text-2xl break-words">{title}</CardTitle>
+        <div className="flex flex-col sm:flex-row sm:items-center text-sm text-muted-foreground">
+        <User className="w-5 h-5 mr-1" />
+          <span className="mr-2 break-words">{author}</span>
+          <Timestamp date={timestamp ? timestamp / 1000 : undefined} options={{ twentyFourHour: true }} />
         </div>
-      </Segment>
-    </div>
-  );
-};
-
-export default SinglePost;
+      </CardHeader>
+      <CardContent>
+        <p className="text-sm sm:text-base break-words">{body}</p>
+      </CardContent>
+      <CardFooter className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div className="flex items-center space-x-2 flex-wrap">
+          <Button className="w-12 sm:w-18" size="sm" onClick={() => onUpvote(id)}>
+            <ThumbsUp className="w-4 h-4" />
+          </Button>
+          <span className="font-bold text-sm sm:text-base">{voteScore}</span>
+          <Button className="w-12 sm:w-18" variant="destructive" size="sm" onClick={() => onDownvote(id)}>
+            <ThumbsDown className="w-4 h-4" />
+          </Button>
+          <Button variant="ghost" size="sm" className="ml-2">
+            <MessageCircle className="w-4 h-4 mr-1" />
+            <span className="text-sm sm:text-base">{commentsCount}</span>
+          </Button>
+        </div>
+        <div className="flex space-x-2 w-full sm:w-auto">
+          <Button className="w-34" size="sm" asChild >
+            <Link to={`/editpost/${id}`} className="flex items-center justify-center">
+              <Edit className="w-4 h-4 mr-1" />
+              <span className="hidden sm:inline">Edit post</span>
+              <span className="sm:hidden">Edit</span>
+            </Link>
+          </Button>
+          <Button className="w-34" variant="destructive" size="sm" onClick={() => onDelete(id)} >
+            <Trash2 className="w-4 h-4 mr-1" />
+            <span className="hidden sm:inline">Delete post</span>
+            <span className="sm:hidden">Delete</span>
+          </Button>
+        </div>
+      </CardFooter>
+    </Card>
+  </div>
+  )
+}
+export default SinglePost
