@@ -9,7 +9,7 @@ const SingleComment = ({ comment, onUpvote, onDownvote, onDelete }) => {
   const { id, author, body, voteScore, timestamp } = comment
 
   return (
-    <div className=" flex flex-col w-full md:w-1/2 mx-auto mt-8 px-4">
+    <div className=" flex flex-col w-full md:w-3/4 mx-auto mt-8 px-4">
       <Card className="mb-4 flex flex-col">
         <CardContent className="p-4 flex flex-col h-full">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
