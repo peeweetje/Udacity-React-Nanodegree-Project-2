@@ -1,3 +1,9 @@
+## update 2024
+
+- Update project using Vite instead of react-create-app.
+- Refactor styling using `shadcn/ui` and `Tailwind`
+- Adding typescript to the project.
+
 ## Readable: A Reddit clone
 
 This is the second project for the Udacity React Nanodegree programm.
