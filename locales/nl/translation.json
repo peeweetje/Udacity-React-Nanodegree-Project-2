@@ -1,17 +1,25 @@
 {
-  "add-post": {
-    "newPost": "Nieuw bericht",
-    "formlabel": {
+  "common": {
+    "git-talks": "Git Talks",
+    "category": "Categorie",
+    "no-posts": "geen berichten in deze categorie.",
+    "add-post": "Voeg bericht toe"
+  },
+
+  "addPost": {
+    "new-post": "Nieuw bericht",
+    "category": "Categorie",
+    "form-label": {
       "category": "Categorie",
       "title": "Titel",
       "author": "Auteur",
       "content": "Inhoud"
     },
     "placeholder": {
-      "enterTitle": "Voer titel in",
-      "enterAuthor": "Voer naam in",
-      "enterContent": "Voeg inhoud toe"
+      "enter-title": "Voer titel in",
+      "enter-author": "Voer naam in",
+      "enter-content": "Voeg inhoud toe"
     },
-    "addPost": "Voeg bericht toe"
+    "add-Post": "Voeg bericht toe"
   }
 }
