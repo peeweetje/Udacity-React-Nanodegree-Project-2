@@ -30,8 +30,8 @@ import {
 } from 'lucide-react';
 import Menu from '../menu/menu';
 import SideBar from '../sidebar/sideBar';
-import SinglePost from './single_post';
-import SingleComment from './single_comment';
+import SinglePost from './single-post';
+import SingleComment from './single-comment';
 
 interface Post {
   id: string;

@@ -1,15 +1,13 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import HomePage from './home-page/home_page';
-import AllCategories from './all-categories/all_categories';
-import PostDetail from './post-details/post_detail';
-import EditPost from './edit-post/edit_post';
-import EditComment from './edit-comment/edit_comment';
-import AddPost from './add-post/add_post';
+import HomePage from './home-page/home-page';
+import AllCategories from './all-categories/all-categories';
+import PostDetail from './post-details/post-detail';
+import EditPost from './edit-post/edit-post';
+import EditComment from './edit-comment/edit-comment';
+import AddPost from './add-post/add-post';
 
-import '../index.css'
-
-
+import '../index.css';
 
 const App = () => {
   return (
