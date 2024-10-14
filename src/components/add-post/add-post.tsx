@@ -31,7 +31,6 @@ import { fetchAddPost } from '../../redux/actions';
 import SideBar from '../sidebar/sideBar';
 import { options } from '../../utils/options';
 import { PlusCircle } from 'lucide-react';
-import { t } from 'i18next';
 
 const formSchema = z.object({
   category: z.string().min(1, {
@@ -96,7 +95,7 @@ const AddPost: React.FC = () => {
         <div className='mb-8 text-center'>
           <h1 className='text-3xl font-bold text-center text-teal-500 mb-6 flex items-center justify-center'>
             <PlusCircle className='inline-block mr-2 h-8 w-8' />
-            {t('add-post.newPost')}
+            {t('addPost.new-post')}
           </h1>
         </div>
         <div className='max-w-2xl mx-auto bg-card bg-neutral-100 p-8 rounded-lg shadow-inner'>
@@ -107,14 +106,14 @@ const AddPost: React.FC = () => {
                 name='category'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('add-post.formlabel.category')}</FormLabel>
+                    <FormLabel>{t('addPost.form-label.category')}</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder={t('add-post.category')} />
+                          <SelectValue placeholder={t('addPost.category')} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -134,11 +133,11 @@ const AddPost: React.FC = () => {
                 name='title'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('add-post.formlabel.title')}</FormLabel>
+                    <FormLabel>{t('addPost.form-label.title')}</FormLabel>
                     <FormControl>
                       <Input
                         className='border-teal-200'
-                        placeholder={t('add-post.placeholder.enterTitle')}
+                        placeholder={t('addPost.placeholder.enter-title')}
                         {...field}
                       />
                     </FormControl>
@@ -151,11 +150,11 @@ const AddPost: React.FC = () => {
                 name='author'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('add-post.formlabel.author')}</FormLabel>
+                    <FormLabel>{t('addPost.form-label.author')}</FormLabel>
                     <FormControl>
                       <Input
                         className='border-teal-200'
-                        placeholder={t('add-post.placeholder.enterAuthor')}
+                        placeholder={t('addPost.placeholder.enter-author')}
                         {...field}
                       />
                     </FormControl>
@@ -168,10 +167,10 @@ const AddPost: React.FC = () => {
                 name='content'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('add-post.formlabel.content')}</FormLabel>
+                    <FormLabel>{t('addPost.form-label.content')}</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder={t('add-post.placeholder.enterContent')}
+                        placeholder={t('addPost.placeholder.enter-content')}
                         className='resize-none border-teal-200'
                         {...field}
                       />
@@ -182,7 +181,7 @@ const AddPost: React.FC = () => {
               />
               <Button type='submit' className='w-32'>
                 <PlusCircle className='mr-2 h-4 w-4' />
-                {t('add-post.addPost')}
+                {t('addPost.add-Post')}
               </Button>
             </form>
           </Form>
