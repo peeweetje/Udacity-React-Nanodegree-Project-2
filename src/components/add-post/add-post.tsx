@@ -35,16 +35,16 @@ import { t } from 'i18next';
 
 const formSchema = z.object({
   category: z.string().min(1, {
-    message: t('add-post.category'),
+    message: 'Please select a category.',
   }),
   title: z.string().min(2, {
-    message: t('add-post.title'),
+    message: 'Title must be at least 2 characters.',
   }),
   author: z.string().min(2, {
-    message: t('add-post.author'),
+    message: 'Author name must be at least 2 characters.',
   }),
   content: z.string().min(10, {
-    message: t('add-post.content'),
+    message: 'Content must be at least 10 characters.',
   }),
 });
 
@@ -104,10 +104,10 @@ const AddPost: React.FC = () => {
             <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
               <FormField
                 control={form.control}
-                name={t('add-post.formfield.category')}
+                name='category'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Category</FormLabel>
+                    <FormLabel>{t('add-post.formfield.category')}</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
@@ -131,10 +131,10 @@ const AddPost: React.FC = () => {
               />
               <FormField
                 control={form.control}
-                name={t('add-post.formfield.title')}
+                name='title'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Post Title</FormLabel>
+                    <FormLabel>{t('add-post.formfield.title')}</FormLabel>
                     <FormControl>
                       <Input
                         className='border-teal-200'
@@ -148,10 +148,10 @@ const AddPost: React.FC = () => {
               />
               <FormField
                 control={form.control}
-                name={t('add-post.formfield.author')}
+                name='author'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Author</FormLabel>
+                    <FormLabel>{t('add-post.formfield.author')}</FormLabel>
                     <FormControl>
                       <Input
                         className='border-teal-200'
@@ -165,10 +165,10 @@ const AddPost: React.FC = () => {
               />
               <FormField
                 control={form.control}
-                name={t('add-post.formfield.content')}
+                name='content'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Content</FormLabel>
+                    <FormLabel>{t('add-post.formfield.content')}</FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder={t('add-post.placeholder.enterContent')}
