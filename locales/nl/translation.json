@@ -1,11 +1,7 @@
 {
   "add-post": {
-    "category": "selecteer een categorie.",
-    "title": "titel moet minimaal 2 tekens bevatten.",
-    "author": "auteur moet minimaal 2 tekens bevatten.",
-    "content": "inhoud moet minimaal 2 tekens bevatten.",
     "newPost": "Nieuw bericht",
-    "formfield": {
+    "formlabel": {
       "category": "Categorie",
       "title": "Titel",
       "author": "Auteur",
