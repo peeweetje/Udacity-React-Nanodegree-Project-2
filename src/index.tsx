@@ -12,6 +12,7 @@ import { thunk } from 'redux-thunk';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './themes';
 import '../i18n.ts';
+import Loading from './components/loading/loading';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -25,7 +26,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
       <BrowserRouter>
         <ThemeProvider theme={theme}>
-          <App />
+          <React.Suspense fallback={<Loading />}>
+            <App />
+          </React.Suspense>
         </ThemeProvider>
       </BrowserRouter>
     </Provider>

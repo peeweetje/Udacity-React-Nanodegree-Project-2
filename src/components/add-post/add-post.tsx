@@ -107,7 +107,7 @@ const AddPost: React.FC = () => {
                 name='category'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('add-post.formfield.category')}</FormLabel>
+                    <FormLabel>{t('add-post.formlabel.category')}</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
@@ -134,7 +134,7 @@ const AddPost: React.FC = () => {
                 name='title'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('add-post.formfield.title')}</FormLabel>
+                    <FormLabel>{t('add-post.formlabel.title')}</FormLabel>
                     <FormControl>
                       <Input
                         className='border-teal-200'
@@ -151,7 +151,7 @@ const AddPost: React.FC = () => {
                 name='author'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('add-post.formfield.author')}</FormLabel>
+                    <FormLabel>{t('add-post.formlabel.author')}</FormLabel>
                     <FormControl>
                       <Input
                         className='border-teal-200'
@@ -168,7 +168,7 @@ const AddPost: React.FC = () => {
                 name='content'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('add-post.formfield.content')}</FormLabel>
+                    <FormLabel>{t('add-post.formlabel.content')}</FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder={t('add-post.placeholder.enterContent')}
