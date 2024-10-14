@@ -1,0 +1,21 @@
+{
+  "add-post": {
+    "category": "Please select a category.",
+    "title": "title must be at least 2 characters.",
+    "author": "author must be at least 2 characters.",
+    "content": "content must be at least 2 characters.",
+    "newPost": " Add New Post",
+    "formfield": {
+      "category": "Category",
+      "title": "Title",
+      "author": "Author",
+      "content": "Content"
+    },
+    "placeholder": {
+      "enterTitle": "enter post title",
+      "enterAuthor": "enter author name",
+      "enterContent": "enter post content"
+    },
+    "addPost": "Add Post"
+  }
+}
