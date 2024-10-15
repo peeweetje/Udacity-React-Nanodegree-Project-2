@@ -21,5 +21,10 @@
       "enter-content": "Voeg inhoud toe"
     },
     "add-Post": "Voeg bericht toe"
+  },
+
+  "categoryItem": {
+    "edit": "Bewerken",
+    "delete": "Verwijder"
   }
 }

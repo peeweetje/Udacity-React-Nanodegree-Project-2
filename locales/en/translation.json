@@ -19,5 +19,10 @@
       "enter-content": "enter post content"
     },
     "add-post": "Add Post"
+  },
+
+  "categoryItem": {
+    "edit": "Edit",
+    "delete": "Delete"
   }
 }
