@@ -19,6 +19,7 @@ import {
   CardDescription,
   CardTitle,
 } from '@/components/ui/card';
+import { useTranslation } from 'react-i18next';
 
 interface Post {
   id: string;
@@ -42,6 +43,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({
   onDelete,
   onVote,
 }) => {
+  const { t } = useTranslation();
   const handleDelete = () => onDelete(post.id);
   const handleUpVote = () => onVote(post.id, 'upVote');
   const handleDownVote = () => onVote(post.id, 'downVote');
@@ -98,14 +100,14 @@ const CategoryItem: React.FC<CategoryItemProps> = ({
       </CardContent>
       <CardFooter className='flex justify-end space-x-2'>
         <Link to={`/editpost/${post.id}`}>
-          <Button size='sm'>
+          <Button className='w-32'>
             <Edit className='h-4 w-4 mr-1' />
-            Edit
+            {t('categoryItem.edit')}
           </Button>
         </Link>
-        <Button variant='destructive' size='sm' onClick={handleDelete}>
+        <Button className='w-32' variant='destructive' onClick={handleDelete}>
           <Trash className='h-4 w-4 mr-1' />
-          Delete
+          {t('categoryItem.delete')}
         </Button>
       </CardFooter>
     </Card>
