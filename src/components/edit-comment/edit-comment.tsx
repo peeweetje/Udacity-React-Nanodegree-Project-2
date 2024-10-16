@@ -1,3 +1,4 @@
+import { editComment } from './../../utils/api';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEditComment, fetchComment } from '../../redux/actions';
@@ -15,6 +16,7 @@ import {
 } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Edit } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface Comment {
   id: string;
@@ -27,6 +29,7 @@ interface RootState {
 }
 
 const EditComment: React.FC = () => {
+  const { t } = useTranslation();
   const [commentAuthor, setCommentAuthor] = useState<string>('');
   const [commentContent, setCommentContent] = useState<string>('');
   const dispatch = useDispatch();
@@ -45,9 +48,8 @@ const EditComment: React.FC = () => {
 
   useEffect(() => {
     if (receiveComment) {
-      const { author, body } = receiveComment;
-      setCommentAuthor(author);
-      setCommentContent(body);
+      setCommentAuthor(receiveComment.author || '');
+      setCommentContent(receiveComment.body || '');
     }
   }, [receiveComment]);
 
@@ -81,16 +83,18 @@ const EditComment: React.FC = () => {
         <Card className='w-full max-w-md mx-auto'>
           <CardHeader>
             <CardTitle className='text-2xl font-bold text-center text-primary'>
-              Edit Comment
+              {t('editComment.edit-comment')}
             </CardTitle>
             <CardDescription className='text-center'>
-              Make changes to your comment here
+              {t('editComment.edit-description')}
             </CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit}>
             <CardContent className='space-y-4'>
               <div className='space-y-2'>
-                <Label htmlFor='commentAuthor'>Author</Label>
+                <Label htmlFor='commentAuthor'>
+                  {t('editComment.label-author')}
+                </Label>
                 <Input
                   className='border-teal-200'
                   id='commentAuthor'
@@ -102,7 +106,9 @@ const EditComment: React.FC = () => {
                 />
               </div>
               <div className='space-y-2'>
-                <Label htmlFor='commentContent'>Comment Content</Label>
+                <Label htmlFor='commentContent'>
+                  {t('editComment.label-content')}
+                </Label>
                 <Textarea
                   className='border-teal-200'
                   id='commentContent'
@@ -118,7 +124,7 @@ const EditComment: React.FC = () => {
             <CardFooter>
               <Button type='submit' className='w-full'>
                 <Edit className='w-4 h-4 mr-2' aria-hidden='true' />
-                <span>Edit Comment</span>
+                <span> {t('editComment.button-edit')}</span>
               </Button>
             </CardFooter>
           </form>
