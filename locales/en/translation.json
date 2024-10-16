@@ -33,5 +33,16 @@
     "label-author": "Author",
     "label-content": " comment content",
     "button-edit": "Edit comment"
+  },
+
+  "editPost": {
+    "edit-post": "Edit Post",
+    "category": "Category",
+    "placeholder-category": "Select a category",
+    "label-title": "Title",
+    "label-author": "Author",
+    "label-content": "Content",
+    "placeholder-text-area": "enter post content...",
+    "button-edit": "Edit post"
   }
 }

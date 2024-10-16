@@ -34,5 +34,16 @@
     "label-author": "Auteur",
     "label-content": "Inhoud commentaar",
     "button-edit": "Bewerk commentaar"
+  },
+
+  "editPost": {
+    "edit-post": "Bericht bewerken",
+    "category": "Categorie",
+    "placeholder-category": "Selecteer een categorie",
+    "label-title": "Titel",
+    "label-author": "Auteur",
+    "label-content": "Inhoud",
+    "placeholder-text-area": "Voer hier uw inhoud in...",
+    "button-edit": "Bewerk bericht"
   }
 }
