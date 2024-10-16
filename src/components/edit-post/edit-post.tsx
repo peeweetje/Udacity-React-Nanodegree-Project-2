@@ -27,6 +27,7 @@ import { Edit } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { useTranslation } from 'react-i18next';
 
 interface RootState {
   posts: {
@@ -57,6 +58,7 @@ const formSchema = z.object({
 });
 
 const EditPost: React.FC = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { postId } = useParams<{ postId: string }>();
   const navigate = useNavigate();
@@ -121,7 +123,7 @@ const EditPost: React.FC = () => {
         <div className='mb-8 text-center'>
           <h1 className=' text-teal-500 text-3xl font-bold text-primary'>
             <Edit className=' text-teal-500 inline-block mr-2' />
-            Edit Post
+            {t('editPost.edit-post')}
           </h1>
         </div>
         <div className='max-w-2xl mx-auto bg-card bg-neutral-100 p-8 rounded-lg shadow-inner'>
@@ -132,11 +134,13 @@ const EditPost: React.FC = () => {
                 name='postCategory'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Category</FormLabel>
+                    <FormLabel>{t('editPost.category')}</FormLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder='Select a category' />
+                          <SelectValue
+                            placeholder={t('editPost.placeholder-category')}
+                          />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -156,11 +160,11 @@ const EditPost: React.FC = () => {
                 name='postTitle'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Post Title</FormLabel>
+                    <FormLabel>{t('editPost.label-title')}</FormLabel>
                     <FormControl>
                       <Input
                         className='border-teal-200'
-                        placeholder='Post Title'
+                        placeholder={t('editPost.label-title')}
                         {...field}
                       />
                     </FormControl>
@@ -173,11 +177,11 @@ const EditPost: React.FC = () => {
                 name='postAuthor'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Author</FormLabel>
+                    <FormLabel>{t('editPost.label-author')}</FormLabel>
                     <FormControl>
                       <Input
                         className='border-teal-200'
-                        placeholder='Author'
+                        placeholder={t('editPost.label-author')}
                         {...field}
                       />
                     </FormControl>
@@ -190,10 +194,10 @@ const EditPost: React.FC = () => {
                 name='postContent'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Content</FormLabel>
+                    <FormLabel>{t('editPost.label-content')}</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder='Post Content'
+                        placeholder={t('editPost.placeholder-text-area')}
                         className='resize-none border-teal-200'
                         {...field}
                       />
@@ -203,7 +207,7 @@ const EditPost: React.FC = () => {
                 )}
               />
               <Button type='submit' className='w-32'>
-                <Edit className='mr-2 h-4 w-4' /> Edit Post
+                <Edit className='mr-2 h-4 w-4' /> {t('editPost.button-edit')}
               </Button>
             </form>
           </Form>
