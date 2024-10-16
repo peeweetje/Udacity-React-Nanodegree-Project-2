@@ -4,6 +4,7 @@
     "category": "Category",
     "no-posts": "There are no posts in this category."
   },
+
   "addPost": {
     "new-post": "Nieuw bericht",
     "category": "Categorie",
@@ -24,5 +25,13 @@
   "categoryItem": {
     "edit": "Edit",
     "delete": "Delete"
+  },
+
+  "editComment": {
+    "edit-comment": "Edit Comment",
+    "edit-description": "Make changes to your comment here",
+    "label-author": "Author",
+    "label-content": " comment content",
+    "button-edit": "Edit comment"
   }
 }

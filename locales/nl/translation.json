@@ -26,5 +26,13 @@
   "categoryItem": {
     "edit": "Bewerken",
     "delete": "Verwijder"
+  },
+
+  "editComment": {
+    "edit-comment": "Bewerk commentaar",
+    "edit-description": "Wijzig hier uw opmerking",
+    "label-author": "Auteur",
+    "label-content": "Inhoud commentaar",
+    "button-edit": "Bewerk commentaar"
   }
 }
