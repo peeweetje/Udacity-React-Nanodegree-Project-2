@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   fetchSinglePost,
   fetchComments,
@@ -65,6 +66,7 @@ interface RootState {
 }
 
 const PostDetail: React.FC = () => {
+  const { t } = useTranslation();
   const [commentAuthor, setCommentAuthor] = useState<string>('');
   const [commentContent, setCommentContent] = useState<string>('');
 
@@ -180,7 +182,7 @@ const PostDetail: React.FC = () => {
       <SideBar />
       <main className='flex-1 p-8'>
         <h1 className='text-3xl font-bold text-center text-primary mb-8'>
-          Git Talks
+          {t('common.git-talks')}
         </h1>
         <Menu />
         <div className='w-4/5 mx-auto'>
@@ -209,7 +211,7 @@ const PostDetail: React.FC = () => {
             {filteredPosts?.length > 0 ? (
               <Card className='mt-8'>
                 <CardHeader>
-                  <CardTitle>Add a Comment</CardTitle>
+                  <CardTitle>{t('postDetails.add-comment')}</CardTitle>
                 </CardHeader>
                 <form onSubmit={handleSubmit}>
                   <CardContent className='space-y-4'>
@@ -218,7 +220,7 @@ const PostDetail: React.FC = () => {
                         htmlFor='commentAuthor'
                         className='text-sm font-medium'
                       >
-                        Author
+                        {t('postDetails.label-author')}
                       </label>
                       <Input
                         className='border-teal-200'
@@ -226,7 +228,7 @@ const PostDetail: React.FC = () => {
                         name='commentAuthor'
                         value={commentAuthor}
                         onChange={handleInputChange}
-                        placeholder='Author'
+                        placeholder={t('postDetails.label-author')}
                         required
                       />
                     </div>
@@ -235,7 +237,7 @@ const PostDetail: React.FC = () => {
                         htmlFor='commentContent'
                         className='text-sm font-medium'
                       >
-                        Comment Content
+                        {t('postDetails.comment-content')}
                       </label>
                       <Textarea
                         className='border-teal-200'
@@ -243,7 +245,7 @@ const PostDetail: React.FC = () => {
                         name='commentContent'
                         value={commentContent}
                         onChange={handleInputChange}
-                        placeholder='Add a comment'
+                        placeholder={t('postDetails.add-comment')}
                         rows={6}
                         required
                       />
@@ -252,7 +254,7 @@ const PostDetail: React.FC = () => {
                   <CardFooter>
                     <Button className='w-34' type='submit' size='sm'>
                       <PlusCircle className='mr-2 w-4 h-4' />
-                      Add Comment
+                      {t('postDetails.add-comment-button')}
                     </Button>
                   </CardFooter>
                 </form>

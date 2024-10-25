@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchCategories, fetchPostsCategory } from '../../redux/actions';
 import SortBy from '../sort-by/sortBy';
 import { Button } from '@/components/ui/button';
+import { useTranslation } from 'react-i18next';
 
 interface Category {
   path: string;
@@ -15,6 +16,7 @@ interface RootState {
 }
 
 const Menu: React.FC = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const receiveCategories = useSelector(
@@ -35,7 +37,7 @@ const Menu: React.FC = () => {
       <div className='hidden md:grid grid-cols-6 gap-6'>
         <div>
           <Button size='sm' className='w-full' onClick={() => navigate('/')}>
-            All
+            {t('common.all')}
           </Button>
         </div>
         {receiveCategories.length > 0 &&
