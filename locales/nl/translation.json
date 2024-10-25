@@ -3,7 +3,10 @@
     "git-talks": "Git Talks",
     "category": "Categorie",
     "no-posts": "geen berichten in deze categorie.",
-    "add-post": "Voeg bericht toe"
+    "add-post": "Voeg bericht toe",
+    "edit-post": "Bericht bewerken",
+    "delete-post": "Verwijder",
+    "all": "Alle"
   },
 
   "addPost": {
@@ -45,5 +48,12 @@
     "label-content": "Inhoud",
     "placeholder-text-area": "Voer hier uw inhoud in...",
     "button-edit": "Bewerk bericht"
+  },
+
+  "postDetails": {
+    "label-author": "auteur",
+    "comment-content": "Inhoud commentaar",
+    "add-comment": "Commentaar toevoegen",
+    "add-comment-button": "Commentaar toevoegen"
   }
 }

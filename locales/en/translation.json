@@ -2,7 +2,10 @@
   "common": {
     "git-talks": "Git Talks",
     "category": "Category",
-    "no-posts": "There are no posts in this category."
+    "no-posts": "There are no posts in this category.",
+    "edit-post": "Edit Post",
+    "delete-post": "Delete",
+    "all": "All"
   },
 
   "addPost": {
@@ -44,5 +47,12 @@
     "label-content": "Content",
     "placeholder-text-area": "enter post content...",
     "button-edit": "Edit post"
+  },
+
+  "postDetails": {
+    "label-author": "author",
+    "comment-content": "Comment content",
+    "add-comment": "add a comment",
+    "add-comment-button": "Add comment"
   }
 }
