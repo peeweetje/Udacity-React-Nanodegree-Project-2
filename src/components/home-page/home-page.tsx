@@ -28,6 +28,7 @@ import {
 
 import Menu from '../menu/menu';
 import SideBar from '../sidebar/sideBar';
+import { useTranslation } from 'react-i18next';
 
 interface Post {
   id: string;
@@ -58,6 +59,7 @@ interface RootState {
 }
 
 const HomePage: React.FC = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const posts = useSelector((state: RootState) => state.posts.posts);
   const sort = useSelector((state: RootState) => state.sort.sort);
@@ -164,16 +166,17 @@ const HomePage: React.FC = () => {
                   <Button asChild size='sm' className='w-25'>
                     <Link to={`/editpost/${post.id}`}>
                       <Edit className='h-4 w-4 mr-2' />
-                      <span>Edit post</span>
+                      <span>{t('common.edit-post')}</span>
                     </Link>
                   </Button>
                   <Button
+                    className='w-25'
                     variant='destructive'
                     size='sm'
                     onClick={() => deletePost(post.id)}
                   >
-                    <Trash2 className='h-4 w-4 mr-2' />
-                    <span>Delete</span>
+                    <Trash2 className='h-4 w-4 mr-2 ' />
+                    <span>{t('common.delete-post')}</span>
                   </Button>
                 </CardFooter>
               </Card>
@@ -183,7 +186,7 @@ const HomePage: React.FC = () => {
           <Button asChild className='w-30'>
             <Link to='/addpost'>
               <PlusCircle className='h-4 w-4 mr-2' />
-              Add Post
+              {t('common.add-post')}
             </Link>
           </Button>
         </div>
