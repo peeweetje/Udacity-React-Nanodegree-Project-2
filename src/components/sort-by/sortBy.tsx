@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { changeSortAction } from '../../redux/actions';
 import {
   Select,
@@ -8,7 +9,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { valueOptions } from '../../utils/options';
+
+import { createValueOptions, ValueOptions } from '../../utils/options';
 
 interface RootState {
   sort: {
@@ -22,8 +24,10 @@ interface ValueOption {
 }
 
 const SortBy: React.FC = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const value = useSelector((state: RootState) => state.sort.value);
+  const valueOptions = createValueOptions(t);
 
   const handleChange = (newValue: string) => {
     dispatch(changeSortAction({ value: newValue }));
@@ -33,7 +37,7 @@ const SortBy: React.FC = () => {
     <div className='w-[100px]'>
       <Select value={value} onValueChange={handleChange}>
         <SelectTrigger className='w-full'>
-          <SelectValue placeholder='Sort By' />
+          <SelectValue placeholder={t('common.sort-by')} />
         </SelectTrigger>
         <SelectContent>
           {valueOptions.map((option: ValueOption) => (
