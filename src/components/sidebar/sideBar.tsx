@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { fetchCategories } from '../../redux/actions';
 import { Button } from '@/components/ui/button';
 import {
@@ -21,6 +22,7 @@ interface RootState {
 }
 
 const SideBar: React.FC = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const receiveCategories = useSelector(
     (state: RootState) => state.receiveCategories
@@ -36,7 +38,7 @@ const SideBar: React.FC = () => {
         <SheetTrigger asChild>
           <Button className='mx-4 my-4' variant='outline' size='icon'>
             <MenuIcon className='h-4 w-4' />
-            <span className='sr-only'>Toggle menu</span>
+            <span className='sr-only'>{t('common.toggle-menu')}</span>
           </Button>
         </SheetTrigger>
         <SheetContent

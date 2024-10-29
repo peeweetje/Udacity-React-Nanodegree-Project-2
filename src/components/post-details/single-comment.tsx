@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Timestamp from 'react-timestamp';
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ThumbsUp, ThumbsDown, Trash2, Edit, Clock, User } from 'lucide-react';
@@ -27,6 +28,7 @@ const SingleComment: React.FC<SingleCommentProps> = ({
   onDelete,
 }) => {
   const { id, author, body, voteScore, timestamp } = comment;
+  const { t } = useTranslation();
 
   return (
     <div className=' flex flex-col w-full md:w-3/4 mx-auto mt-8 px-4'>
@@ -65,8 +67,10 @@ const SingleComment: React.FC<SingleCommentProps> = ({
               <Link to={`/editcomment/${id}`}>
                 <Button className='w-34' size='sm'>
                   <Edit className='w-4 h-4 mr-2' />
-                  <span className='hidden lg:inline p-1'>Edit comment</span>
-                  <span className='lg:hidden'>Edit</span>
+                  <span className='hidden lg:inline p-1'>
+                    {t('singleComment.edit-comment')}
+                  </span>
+                  <span className='lg:hidden'> {t('singleComment.edit')}</span>
                 </Button>
               </Link>
               <Button
@@ -76,8 +80,10 @@ const SingleComment: React.FC<SingleCommentProps> = ({
                 onClick={() => onDelete(id)}
               >
                 <Trash2 className='w-4 h-4 mr-2' />
-                <span className='hidden lg:inline '>Delete comment</span>
-                <span className='lg:hidden'>Delete</span>
+                <span className='hidden lg:inline '>
+                  {t('singleComment.delete-comment')}
+                </span>
+                <span className='lg:hidden'> {t('singleComment.delete')}</span>
               </Button>
             </div>
           </div>

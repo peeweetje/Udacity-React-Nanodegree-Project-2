@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Timestamp from 'react-timestamp';
+import { useTranslation } from 'react-i18next';
 import {
   Card,
   CardContent,
@@ -43,6 +44,7 @@ const SinglePost: React.FC<SinglePostProps> = ({
   onDelete,
 }) => {
   const { id, title, author, timestamp, body, voteScore } = post;
+  const { t } = useTranslation();
 
   return (
     <div className='flex flex-col mx-auto w-full  px-4'>
@@ -93,8 +95,10 @@ const SinglePost: React.FC<SinglePostProps> = ({
                 className='flex items-center justify-center'
               >
                 <Edit className='w-4 h-4 mr-1' />
-                <span className='hidden sm:inline'>Edit post</span>
-                <span className='sm:hidden'>Edit</span>
+                <span className='hidden sm:inline'>
+                  {t('singlePost.edit-post')}
+                </span>
+                <span className='sm:hidden'>{t('singlePost.edit')}</span>
               </Link>
             </Button>
             <Button
@@ -104,8 +108,11 @@ const SinglePost: React.FC<SinglePostProps> = ({
               onClick={() => onDelete(id)}
             >
               <Trash2 className='w-4 h-4 mr-1' />
-              <span className='hidden sm:inline'>Delete post</span>
-              <span className='sm:hidden'>Delete</span>
+              <span className='hidden sm:inline'>
+                {' '}
+                {t('singlePost.delete-post')}
+              </span>
+              <span className='sm:hidden'> {t('singlePost.delete')}</span>
             </Button>
           </div>
         </CardFooter>
