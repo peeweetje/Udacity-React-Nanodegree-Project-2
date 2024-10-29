@@ -16,8 +16,9 @@
   },
 
   "addPost": {
-    "new-post": "Nieuw bericht",
-    "category": "Categorie",
+    "new-post": "New Post",
+    "add-post": "Add Post",
+    "category": "Category",
     "form-label": {
       "category": "Category",
       "title": "Title",
@@ -28,8 +29,7 @@
       "enter-title": "enter post title",
       "enter-author": "enter author name",
       "enter-content": "enter post content"
-    },
-    "add-post": "Add Post"
+    }
   },
 
   "categoryItem": {

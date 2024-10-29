@@ -181,7 +181,7 @@ const AddPost: React.FC = () => {
               />
               <Button type='submit' className='w-32'>
                 <PlusCircle className='mr-2 h-4 w-4' />
-                {t('addPost.add-Post')}
+                {t('addPost.add-post')}
               </Button>
             </form>
           </Form>
