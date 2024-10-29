@@ -5,7 +5,14 @@
     "no-posts": "There are no posts in this category.",
     "edit-post": "Edit Post",
     "delete-post": "Delete",
-    "all": "All"
+    "all": "All",
+    "toggle-menu": "Toggle menu",
+    "sort-by": "Sort By",
+    "loading": "Loading...",
+    "popular": "popular",
+    "unpopular": "not popular",
+    "new": "new",
+    "old": "old"
   },
 
   "addPost": {
@@ -54,5 +61,19 @@
     "comment-content": "Comment content",
     "add-comment": "add a comment",
     "add-comment-button": "Add comment"
+  },
+
+  "singleComment": {
+    "edit-comment": "Edit Comment",
+    "delete-comment": "Delete Comment",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+
+  "singlePost": {
+    "edit-post": "Edit Post",
+    "delete-post": "Delete Post",
+    "edit": "Edit",
+    "delete": "Delete"
   }
 }

@@ -6,7 +6,14 @@
     "add-post": "Voeg bericht toe",
     "edit-post": "Bericht bewerken",
     "delete-post": "Verwijder",
-    "all": "Alle"
+    "all": "Alle",
+    "toggle-menu": "Wissel menu",
+    "sort-by": "Sorteer op",
+    "loading": "Laden...",
+    "popular": "populair",
+    "unpopular": "niet populair",
+    "new": "nieuw",
+    "old": "oud"
   },
 
   "addPost": {
@@ -55,5 +62,19 @@
     "comment-content": "Inhoud commentaar",
     "add-comment": "Commentaar toevoegen",
     "add-comment-button": "Commentaar toevoegen"
+  },
+
+  "singleComment": {
+    "edit-comment": "Bewerk commentaar",
+    "delete-comment": "Verwijder commentaar",
+    "edit": "Bewerk",
+    "delete": "Verwijder"
+  },
+
+  "singlePost": {
+    "edit-post": "Bericht bewerken",
+    "delete-post": "Verwijder bericht",
+    "edit": "Bewerk",
+    "delete": "Verwijder"
   }
 }
