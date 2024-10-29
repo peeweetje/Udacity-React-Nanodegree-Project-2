@@ -3,6 +3,7 @@
 - Update project using Vite instead of react-create-app.
 - Refactor styling using `shadcn/ui` and `Tailwind`
 - Adding typescript to the project.
+- Implemented `internationalization` to the project => languages are `dutch` and `english`.
 
 ## Readable: A Reddit clone
 
