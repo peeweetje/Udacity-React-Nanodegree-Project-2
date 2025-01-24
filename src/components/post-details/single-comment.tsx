@@ -47,7 +47,7 @@ const SingleComment: React.FC<SingleCommentProps> = ({
               />
             </div>
           </div>
-          <p className='my-4 flex-grow line-clamp-3'>{body}</p>
+          <p className='my-4 grow line-clamp-3'>{body}</p>
           <div className='flex flex-col sm:flex-row md:items-center md:justify-between space-y-2 md:space-y-0'>
             <div className='flex items-center space-x-2'>
               <Button className='w-18' size='sm' onClick={() => onUpvote(id)}>
