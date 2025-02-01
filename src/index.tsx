@@ -9,8 +9,6 @@ import logger from 'redux-logger';
 import reducer from './redux/reducers';
 import { Provider } from 'react-redux';
 import { thunk } from 'redux-thunk';
-import { ThemeProvider } from 'styled-components';
-import { theme } from './themes';
 import '../i18n.ts';
 import Loading from './components/loading/loading';
 
@@ -25,11 +23,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          <React.Suspense fallback={<Loading />}>
-            <App />
-          </React.Suspense>
-        </ThemeProvider>
+        <React.Suspense fallback={<Loading />}>
+          <App />
+        </React.Suspense>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>
