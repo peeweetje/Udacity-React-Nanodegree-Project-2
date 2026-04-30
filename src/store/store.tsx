@@ -4,14 +4,31 @@ import type { ReactNode, Dispatch } from "react";
 
 // Define generic types for our store
 export type Action = { type: string; [key: string]: any };
+export type ThunkAction = (dispatch: Dispatch<any>) => Promise<any> | void;
 export type Reducers<S, A> = Record<string, (state: S, action: A) => S>;
 
 export interface StoreContextValue<S, A> {
   state: S;
-  dispatch: Dispatch<A>;
+  dispatch: Dispatch<A | ThunkAction>;
 }
 
 export const Store = createContext<StoreContextValue<any, any> | undefined>(undefined);
+
+export function useDispatch() {
+  const context = React.useContext(Store);
+  if (!context) {
+    throw new Error('useDispatch must be used within Store Provider');
+  }
+  return context.dispatch;
+}
+
+export function useSelector<T>(selector: (state: any) => T): T {
+  const context = React.useContext(Store);
+  if (!context) {
+    throw new Error('useSelector must be used within Store Provider');
+  }
+  return selector(context.state);
+}
 
 export interface CreateStoreProviderProps<S, A> {
   initialState: S;
