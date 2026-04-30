@@ -82,7 +82,7 @@ const EditPost: React.FC = () => {
     const loadPost = async () => {
       if (postId) {
         setIsLoading(true);
-        await dispatch(fetchSinglePost(postId));
+        await (fetchSinglePost(postId))(dispatch);
         setIsLoading(false);
       }
     };
@@ -108,7 +108,7 @@ const EditPost: React.FC = () => {
       author: values.postAuthor,
       category: values.postCategory,
     };
-    await dispatch(fetchEditPost(data, postId));
+    await (fetchEditPost(data, postId))(dispatch);
     navigate('/');
   };
 

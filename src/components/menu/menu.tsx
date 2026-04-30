@@ -41,7 +41,9 @@ const Menu: React.FC = () => {
           </Button>
         </div>
         {receiveCategories.length > 0 &&
-          receiveCategories.map((category) => (
+          [...receiveCategories]
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((category) => (
             <div key={category.path}>
               <Button
                 size='sm'

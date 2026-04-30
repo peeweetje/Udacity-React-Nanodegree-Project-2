@@ -1,4 +1,3 @@
-import { editComment } from './../../utils/api';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEditComment, fetchComment } from '../../redux/actions';
@@ -42,7 +41,7 @@ const EditComment: React.FC = () => {
   useEffect(() => {
     const commentId = params?.commentId;
     if (commentId) {
-      dispatch(fetchComment(commentId));
+      (fetchComment(commentId))(dispatch);
     }
   }, [dispatch, params]);
 
@@ -72,7 +71,7 @@ const EditComment: React.FC = () => {
         body: commentContent,
         author: commentAuthor,
       };
-      dispatch(fetchEditComment(data, data.id));
+      (fetchEditComment(data, data.id))(dispatch);
       navigate(-1);
     }
   };
