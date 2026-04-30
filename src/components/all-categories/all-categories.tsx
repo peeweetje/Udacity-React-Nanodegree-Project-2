@@ -12,12 +12,7 @@ import SideBar from '../sidebar/sideBar';
 import { sortPosts } from '../../utils/sortPosts';
 import * as actions from '../../redux/actions';
 import { useTranslation } from 'react-i18next';
-
-interface Post {
-  id: string;
-  deleted: boolean;
-  error: boolean;
-}
+import { Post } from '../../types/post';
 
 interface SortState {
   value: string;
@@ -27,21 +22,23 @@ interface RootState {
   posts: {
     posts: Post[];
   };
-  sort: SortState;
+  sort: {
+    sort: SortState;
+  };
 }
 
 const Categories: React.FC = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
   const { posts } = useSelector((state: RootState) => state.posts);
-  const { sort } = useSelector((state: RootState) => state.sort);
+  const sort = useSelector((state: RootState) => state.sort.sort);
   const { category: categoryName } = useParams<{ category: string }>();
 
   useEffect(() => {
     if (categoryName) {
       dispatch(actions.fetchPostsCategory(categoryName));
     }
-  }, [categoryName, dispatch]);
+  }, [categoryName, dispatch, sort]);
 
   const handleDeletePost = (postId: string) => {
     dispatch(actions.fetchDeletePost(postId));

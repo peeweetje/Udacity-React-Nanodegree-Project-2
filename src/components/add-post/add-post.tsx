@@ -48,10 +48,13 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-interface PostData extends FormValues {
+interface PostData {
   id: string;
   timestamp: number;
+  title: string;
   body: string;
+  author: string;
+  category: string;
   deleted: boolean;
   voteScore: number;
 }
@@ -81,9 +84,8 @@ const AddPost: React.FC = () => {
       category: values.category,
       deleted: false,
       voteScore: 1,
-      content: values.content, // Added to satisfy PostData interface
     };
-    dispatch(fetchAddPost(data));
+    (fetchAddPost(data))(dispatch);
     navigate('/');
   }
 

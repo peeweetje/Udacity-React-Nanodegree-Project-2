@@ -42,7 +42,7 @@ const SingleComment: React.FC<SingleCommentProps> = ({
             <div className='flex items-center text-sm text-gray-500'>
               <Clock className='w-4 h-4 mr-1 text-primary' />
               <Timestamp
-                date={timestamp ? timestamp / 1000 : undefined}
+                date={timestamp / 1000}
                 options={{ twentyFourHour: true }}
               />
             </div>

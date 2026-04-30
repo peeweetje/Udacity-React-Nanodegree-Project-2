@@ -57,7 +57,7 @@ const SinglePost: React.FC<SinglePostProps> = ({
             <User className='w-5 h-5 mr-1' />
             <span className='mr-2 break-words'>{author}</span>
             <Timestamp
-              date={timestamp ? timestamp / 1000 : undefined}
+              date={timestamp / 1000}
               options={{ twentyFourHour: true }}
             />
           </div>

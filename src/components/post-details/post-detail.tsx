@@ -25,20 +25,12 @@ import {
 import {
   ArrowLeft,
   PlusCircle,
-  ThumbsUp,
-  ThumbsDown,
-  Trash2,
 } from 'lucide-react';
 import Menu from '../menu/menu';
 import SideBar from '../sidebar/sideBar';
 import SinglePost from './single-post';
 import SingleComment from './single-comment';
-
-interface Post {
-  id: string;
-  deleted: boolean;
-  error?: boolean;
-}
+import { Post } from '../../types/post';
 
 interface Comment {
   id: string;
@@ -65,7 +57,7 @@ interface RootState {
   };
 }
 
-const PostDetail: React.FC = () => {
+const PostDetail= () => {
   const { t } = useTranslation();
   const [commentAuthor, setCommentAuthor] = useState<string>('');
   const [commentContent, setCommentContent] = useState<string>('');

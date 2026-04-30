@@ -29,23 +29,9 @@ import {
 import Menu from '../menu/menu';
 import SideBar from '../sidebar/sideBar';
 import { useTranslation } from 'react-i18next';
+import { Post } from '../../types/post';
 
-interface Post {
-  id: string;
-  title: string;
-  author: string;
-  timestamp: number;
-  category: string;
-  voteScore: number;
-  comments?: Comment[];
-  deleted: boolean;
-  body: string;
-}
 
-interface Comment {
-  id: string;
-  body: string;
-}
 
 interface RootState {
   posts: {
@@ -60,7 +46,7 @@ interface RootState {
 
 const HomePage: React.FC = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
   const posts = useSelector((state: RootState) => state.posts.posts);
   const sort = useSelector((state: RootState) => state.sort.sort);
   const [loading, setLoading] = useState<boolean>(true);
