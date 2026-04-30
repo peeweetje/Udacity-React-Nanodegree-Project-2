@@ -1,5 +1,7 @@
-export const sortPosts = (posts, sortValue) => {
-  return posts.sort((a, b) => {
+import { Post } from '../types/post';
+
+export const sortPosts = (posts: Post[], sortValue: string) => {
+  return [...posts].sort((a: Post, b: Post) => {
     switch (sortValue) {
       case 'unpopular':
         return a.voteScore - b.voteScore;

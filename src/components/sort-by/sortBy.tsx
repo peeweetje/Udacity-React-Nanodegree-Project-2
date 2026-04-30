@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-import { createValueOptions, ValueOptions } from '../../utils/options';
+import { createValueOptions, ValueOption } from '../../utils/options';
 
 interface RootState {
   sort: {
@@ -18,10 +18,7 @@ interface RootState {
   };
 }
 
-interface ValueOption {
-  value: string;
-  text: string;
-}
+
 
 const SortBy: React.FC = () => {
   const { t } = useTranslation();

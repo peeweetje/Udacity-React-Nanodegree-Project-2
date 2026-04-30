@@ -18,7 +18,7 @@ export const options: Option[] = [
   { key: 4, text: 'Javascript', value: 'javascript' },
 ];
 
-export const createValueOptions = (t: TFunction): ValueOptions[] => [
+export const createValueOptions = (t: TFunction): ValueOption[] => [
   { value: 'popular', text: t('common.popular') },
   { value: 'unpopular', text: t('common.unpopular') },
   { value: 'oldest', text: t('common.old') },
