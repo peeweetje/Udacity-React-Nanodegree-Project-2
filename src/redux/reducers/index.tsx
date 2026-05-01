@@ -1,126 +1,143 @@
-import { combineReducers } from "redux";
-import {
-  RECEIVE_POSTS,
-  RECEIVE_CATEGORIES,
-  GET_POSTS_CATEGORY,
-  GET_SINGLE_POST,
-  EDIT_POST,
-  DELETE_POST,
-  ADD_POST,
-  DELETE_COMMENT,
-  EDIT_COMMENT,
-  GET_COMMENT,
-  GET_COMMENTS,
-  ADD_COMMENT,
-  VOTE,
-  VOTE_COMMENT,
-  CHANGE_SORT,
-} from "../actions";
+import { createSlice, combineReducers } from '@reduxjs/toolkit';
 
-function posts(state = {}, action) {
-  switch (action.type) {
-    case RECEIVE_POSTS:
-      return { ...state, posts: action.posts };
-    case GET_SINGLE_POST:
-      return { ...state, posts: [action.posts] };
-    case GET_POSTS_CATEGORY:
-      return { ...state, posts: action.posts };
-    case DELETE_POST:
-      const availablePosts = state.posts.filter(
-        item => item.id !== action.postId
-      );
-      return {
-        ...state,
-        posts: availablePosts,
-      };
-    case VOTE:
-      const updatedPosts = state.posts.map(item => {
-        if (item.id === action.payload.id) {
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState: { posts: [] } as any,
+  reducers: {
+    receivePosts: (state, action) => {
+      state.posts = action.payload;
+    },
+    receiveSinglePost: (state, action) => {
+      state.posts = [action.payload];
+    },
+    getPostsCategory: (state, action) => {
+      state.posts = action.payload;
+    },
+    deletePost: (state, action) => {
+      if (state.posts) {
+        state.posts = state.posts.filter((item: any) => item.id !== action.payload);
+      }
+    },
+    votePost: (state, action) => {
+      if (state.posts) {
+        const item = state.posts.find((i: any) => i.id === action.payload.id);
+        if (item) {
           item.voteScore = action.payload.voteScore;
         }
-        return item;
-      });
-      return {
-        ...state,
-        posts: updatedPosts,
-      };
-    case ADD_POST:
-      return { ...state, ...action.post };
-    case EDIT_POST:
-      return { ...state, ...action.post };
-
-    default:
-      return state;
-  }
-}
-
-function receiveCategories(state = {}, action) {
-  switch (action.type) {
-    case RECEIVE_CATEGORIES:
-      return action.categories;
-    default:
-      return state;
-  }
-}
-
-function receiveComment(state = {}, action) {
-  switch (action.type) {
-    case GET_COMMENT:
-      return action.comments;
-    default:
-      return state;
-  }
-}
-
-function getComments(state = {}, action) {
-  switch (action.type) {
-    case GET_COMMENTS:
-      return { ...state, comments: action.comments };
-    case VOTE_COMMENT:
-      const updatedComments = state.comments.map(item => {
-        if (item.id === action.commentId.id) {
-          item.voteScore = action.commentId.voteScore;
+      }
+    },
+    addPost: (state, action) => {
+      if (state.posts) {
+        state.posts.push(action.payload);
+      } else {
+        state.posts = [action.payload];
+      }
+    },
+    editPost: (state, action) => {
+      if (state.posts) {
+        const index = state.posts.findIndex((i: any) => i.id === action.payload.id);
+        if (index !== -1) {
+          state.posts[index] = action.payload;
+        } else {
+          state.posts.push(action.payload);
         }
-        return item;
-      });
-      return {
-        ...state,
-        comments: updatedComments,
-      };
-    case DELETE_COMMENT:
-      const availableComments = state.comments.filter(
-        item => item.id !== action.commentId
-      );
-      return {
-        ...state,
-        comments: availableComments,
-      };
-    case ADD_COMMENT:
-      return { ...state, comments: state.comments.concat(action.comment) };
-    case EDIT_COMMENT:
-      return { ...state, ...action.comment };
-    default:
-      return state;
+      } else {
+        state.posts = [action.payload];
+      }
+    }
   }
-}
+});
 
-function sort(state = { sort: "popular" }, action) {
-  switch (action.type) {
-    case CHANGE_SORT:
-      const newValue = action.value;
-      return {
-        ...state,
-        sort: newValue,
-      };
-    default:
-      return state;
+export const {
+  receivePosts,
+  receiveSinglePost,
+  getPostsCategory,
+  deletePost,
+  votePost,
+  addPost,
+  editPost
+} = postsSlice.actions;
+
+const categoriesSlice = createSlice({
+  name: 'categories',
+  initialState: [] as any,
+  reducers: {
+    receiveCategories: (state, action) => action.payload,
   }
-}
+});
+
+export const { receiveCategories } = categoriesSlice.actions;
+
+const commentSlice = createSlice({
+  name: 'comment',
+  initialState: [] as any,
+  reducers: {
+    receiveComment: (state, action) => action.payload,
+  }
+});
+
+export const { receiveComment } = commentSlice.actions;
+
+const commentsSlice = createSlice({
+  name: 'comments',
+  initialState: { comments: [] } as any,
+  reducers: {
+    getComments: (state, action) => {
+      state.comments = action.payload;
+    },
+    voteComment: (state, action) => {
+      if (state.comments) {
+        const item = state.comments.find((i: any) => i.id === action.payload.id);
+        if (item) {
+          item.voteScore = action.payload.voteScore;
+        }
+      }
+    },
+    deleteComment: (state, action) => {
+      if (state.comments) {
+        state.comments = state.comments.filter((item: any) => item.id !== action.payload);
+      }
+    },
+    addComment: (state, action) => {
+      if (state.comments) {
+        state.comments.push(action.payload);
+      } else {
+        state.comments = [action.payload];
+      }
+    },
+    editComment: (state, action) => {
+      if (state.comments) {
+        const index = state.comments.findIndex((i: any) => i.id === action.payload.id);
+        if (index !== -1) {
+          state.comments[index] = action.payload;
+        } else {
+          state.comments.push(action.payload);
+        }
+      } else {
+        state.comments = [action.payload];
+      }
+    }
+  }
+});
+
+export const { getComments, voteComment, deleteComment, addComment, editComment } = commentsSlice.actions;
+
+const sortSlice = createSlice({
+  name: 'sort',
+  initialState: { sort: "popular" } as any,
+  reducers: {
+    changeSortAction: (state, action) => {
+      state.sort = action.payload;
+    }
+  }
+});
+
+export const { changeSortAction } = sortSlice.actions;
 
 export default combineReducers({
-  posts,
-  receiveCategories,
-  receiveComment,
-  getComments,
-  sort,
+  posts: postsSlice.reducer,
+  receiveCategories: categoriesSlice.reducer,
+  receiveComment: commentSlice.reducer,
+  getComments: commentsSlice.reducer,
+  sort: sortSlice.reducer,
 });
