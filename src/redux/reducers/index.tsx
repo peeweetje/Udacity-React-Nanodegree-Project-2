@@ -30,7 +30,7 @@ const postsSlice = createSlice({
       if (state.posts) {
         state.posts.push(action.payload);
       } else {
-        Object.assign(state, action.payload);
+        state.posts = [action.payload];
       }
     },
     editPost: (state, action) => {
@@ -39,10 +39,10 @@ const postsSlice = createSlice({
         if (index !== -1) {
           state.posts[index] = action.payload;
         } else {
-          Object.assign(state, action.payload);
+          state.posts.push(action.payload);
         }
       } else {
-        Object.assign(state, action.payload);
+        state.posts = [action.payload];
       }
     }
   }
@@ -111,10 +111,10 @@ const commentsSlice = createSlice({
         if (index !== -1) {
           state.comments[index] = action.payload;
         } else {
-          Object.assign(state, action.payload);
+          state.comments.push(action.payload);
         }
       } else {
-        Object.assign(state, action.payload);
+        state.comments = [action.payload];
       }
     }
   }
