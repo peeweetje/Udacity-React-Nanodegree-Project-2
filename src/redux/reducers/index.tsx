@@ -60,9 +60,9 @@ export const {
 
 const categoriesSlice = createSlice({
   name: 'categories',
-  initialState: [] as any,
+  initialState: [],
   reducers: {
-    receiveCategories: (state, action) => action.payload,
+    receiveCategories: (_state, action) => action.payload,
   }
 });
 
@@ -70,9 +70,9 @@ export const { receiveCategories } = categoriesSlice.actions;
 
 const commentSlice = createSlice({
   name: 'comment',
-  initialState: [] as any,
+  initialState: [],
   reducers: {
-    receiveComment: (state, action) => action.payload,
+    receiveComment: (_state, action) => action.payload,
   }
 });
 
