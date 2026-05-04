@@ -3,7 +3,7 @@
     "git-talks": "Git Talks",
     "category": "Category",
     "no-posts": "There are no posts in this category.",
-    "edit-post": "Edit Post",
+    "edit-post": "Edit",
     "delete-post": "Delete",
     "add-post": "Add Post",
     "all": "All",
@@ -65,15 +65,15 @@
   },
 
   "singleComment": {
-    "edit-comment": "Edit Comment",
-    "delete-comment": "Delete Comment",
+    "edit-comment": "Edit",
+    "delete-comment": "Delete",
     "edit": "Edit",
     "delete": "Delete"
   },
 
   "singlePost": {
-    "edit-post": "Edit Post",
-    "delete-post": "Delete Post",
+    "edit-post": "Edit",
+    "delete-post": "Delete",
     "edit": "Edit",
     "delete": "Delete"
   }
