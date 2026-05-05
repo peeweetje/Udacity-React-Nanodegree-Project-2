@@ -1,10 +1,13 @@
 @import 'tailwindcss';
-@config '../tailwind.config.ts';
-
-@tailwind utilities;
+@plugin 'tailwindcss-animate';
 
 @layer base {
   :root {
     --radius: 0.5rem;
+    --radius-lg: var(--radius);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-sm: calc(var(--radius) - 4px);
   }
 }
+
+
