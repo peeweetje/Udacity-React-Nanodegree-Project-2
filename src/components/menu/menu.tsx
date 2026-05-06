@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { fetchCategories, fetchPostsCategory } from '../../redux/actions';
+import { fetchCategories, fetchPostsCategory, fetchPosts } from '../../redux/actions';
 import SortBy from '../sort-by/sortBy';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
@@ -36,7 +36,7 @@ const Menu: React.FC = () => {
     <div className='flex justify-center my-6'>
       <div className='hidden md:grid grid-cols-6 gap-6'>
         <div>
-          <Button size='sm' className='w-full' onClick={() => navigate('/')}>
+          <Button size='sm' className='w-full' onClick={() => { dispatch(fetchPosts() as any); navigate('/posts'); }}>
             {t('common.all')}
           </Button>
         </div>
