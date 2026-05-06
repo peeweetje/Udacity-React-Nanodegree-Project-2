@@ -13,7 +13,16 @@
     "popular": "populair",
     "unpopular": "niet populair",
     "new": "nieuw",
-    "old": "oud"
+    "old": "oud",
+    "welcome-message": "Een plek om je favoriete onderwerpen te bespreken. Blader door berichten, deel je gedachten en maak verbinding met de community.",
+    "view-posts": "Bekijk alle berichten",
+    "create-post": "Maak een bericht",
+    "discuss": "Discussieer",
+    "discuss-desc": "Voer gesprekken over verschillende onderwerpen die je interesseren.",
+    "browse": "Bladeren",
+    "browse-desc": "Verken berichten op categorie en ontdek nieuwe discussies.",
+    "share": "Delen",
+    "share-desc": "Maak je eigen berichten en deel je gedachten met de community."
   },
 
   "addPost": {
