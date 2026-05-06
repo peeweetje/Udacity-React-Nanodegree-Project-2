@@ -13,7 +13,16 @@
     "popular": "popular",
     "unpopular": "not popular",
     "new": "new",
-    "old": "old"
+    "old": "old",
+    "welcome-message": "A place to discuss your favorite topics. Browse posts, share your thoughts, and connect with the community.",
+    "view-posts": "View All Posts",
+    "create-post": "Create a Post",
+    "discuss": "Discuss",
+    "discuss-desc": "Engage in conversations about various topics that interest you.",
+    "browse": "Browse",
+    "browse-desc": "Explore posts by category and discover new discussions.",
+    "share": "Share",
+    "share-desc": "Create your own posts and share your thoughts with the community."
   },
 
   "addPost": {
