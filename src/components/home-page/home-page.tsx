@@ -1,180 +1,66 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import Timestamp from 'react-timestamp';
-import * as actions from '../../redux/actions';
-import { sortPosts } from '../../utils/sortPosts';
-import Loading from '../loading/loading';
-
 import { Button } from '@/components/ui/button';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import {
-  ThumbsUp,
-  ThumbsDown,
   MessageSquare,
-  Trash2,
-  Edit,
   PlusCircle,
-  User,
-  Clock,
+  List,
+  ArrowRight,
 } from 'lucide-react';
-
-import Menu from '../menu/menu';
-import SideBar from '../sidebar/sideBar';
 import { useTranslation } from 'react-i18next';
-import { Post } from '../../types/post';
-
-
-
-interface RootState {
-  posts: {
-    posts: Post[];
-  };
-  sort: {
-    sort: {
-      value: string;
-    };
-  };
-}
 
 const HomePage: React.FC = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch<any>();
-  const posts = useSelector((state: RootState) => state.posts.posts);
-  const sort = useSelector((state: RootState) => state.sort.sort);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      dispatch(actions.fetchPosts());
-      const timer = setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-      return () => clearTimeout(timer);
-    };
-    fetchData();
-  }, [dispatch]);
-
-  const deletePost = (postId: string) => {
-    dispatch(actions.fetchDeletePost(postId));
-  };
-
-  const iconThumbsUp = (postId: string) => {
-    dispatch(actions.fetchVotePost(postId, 'upVote'));
-  };
-
-  const iconThumbsDown = (postId: string) => {
-    dispatch(actions.fetchVotePost(postId, 'downVote'));
-  };
-
-  if (loading) {
-    return <Loading />;
-  }
 
   return (
-    <div className='flex min-h-screen bg-background'>
-      <SideBar />
-      <div className='flex-1 p-8'>
-        <div className='container mx-auto'>
-          <div className='text-center mb-8'>
-            <h1 className='text-4xl font-bold text-primary'>Git Talks</h1>
-          </div>
-          <Menu />
+    <div className='flex min-h-screen bg-background items-center justify-center'>
+      <div className='container mx-auto px-4 text-center'>
+        <div className='mb-8'>
+          <h1 className='text-5xl font-bold text-primary mb-4'>Git Talks</h1>
+          <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
+            {t('common.welcome-message', 'A place to discuss your favorite topics. Browse posts, share your thoughts, and connect with the community.')}
+          </p>
         </div>
 
-        <div className='grid gap-6 mt-8 w-4/5 mx-auto'>
-          {posts &&
-            posts.length > 0 &&
-            sortPosts(
-              posts.filter((post) => !post.deleted),
-              sort.value
-            ).map((post) => (
-              <Card className='w-full' key={post.id}>
-                <CardHeader>
-                  <CardTitle>
-                    <Link
-                      to={`/${post.category}/${post.id}`}
-                      className='hover:text-teal-500 transition-colors duration-200'
-                    >
-                      {post.title}
-                    </Link>
-                  </CardTitle>
-                  <CardDescription>
-                    <div className='flex items-center space-x-4'>
-                      <div className='flex items-center space-x-2'>
-                        <User className='h-4 w-4' />
-                        <span>{post.author}</span>
-                      </div>
-                      <div className='flex items-center space-x-2 mt-1'>
-                        <Clock className='h-4 w-4' />
-                        <Timestamp
-                          date={post.timestamp / 1000}
-                          options={{ twentyFourHour: true }}
-                        />
-                      </div>
-                    </div>
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className='flex flex-col space-y-4'>
-                    <div className='flex items-center space-x-4'>
-                      <Button
-                        className='w-18'
-                        size='sm'
-                        onClick={() => iconThumbsUp(post.id)}
-                      >
-                        <ThumbsUp className='h-4 w-4' />
-                      </Button>
-                      <span className='font-bold'>{post.voteScore}</span>
-                      <Button
-                        className='w-18'
-                        variant='destructive'
-                        size='sm'
-                        onClick={() => iconThumbsDown(post.id)}
-                      >
-                        <ThumbsDown className='h-4 w-4' />
-                      </Button>
-                    </div>
-                    <div className='flex items-center'>
-                      <MessageSquare className='h-4 w-4 mr-2' />
-                      <span>{post.comments && post.comments.length}</span>
-                    </div>
-                  </div>
-                </CardContent>
-                <CardFooter className='flex justify-end space-x-2'>
-                  <Button asChild size='sm' className='w-25'>
-                    <Link to={`/editpost/${post.id}`}>
-                      <Edit className='h-4 w-4 mr-2' />
-                      <span>{t('common.edit-post')}</span>
-                    </Link>
-                  </Button>
-                  <Button
-                    className='w-25'
-                    variant='destructive'
-                    size='sm'
-                    onClick={() => deletePost(post.id)}
-                  >
-                    <Trash2 className='h-4 w-4 mr-2 ' />
-                    <span>{t('common.delete-post')}</span>
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
-        </div>
-        <div className='mt-8 text-center'>
-          <Button asChild className='w-30'>
-            <Link to='/addpost'>
-              <PlusCircle className='h-4 w-4 mr-2' />
-              {t('common.add-post')}
+        <div className='flex flex-col sm:flex-row items-center justify-center gap-4 mt-8'>
+          <Button asChild size='lg' className='w-56 text-base'>
+            <Link to='/posts'>
+              <List className='h-5 w-5 mr-2' />
+              {t('common.view-posts', 'View All Posts')}
+              <ArrowRight className='h-5 w-5 ml-2' />
             </Link>
           </Button>
+
+          <Button asChild variant='outline' size='lg' className='w-56 text-base'>
+            <Link to='/addpost'>
+              <PlusCircle className='h-5 w-5 mr-2' />
+              {t('common.create-post', 'Create a Post')}
+            </Link>
+          </Button>
+        </div>
+
+        <div className='mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto'>
+          <div className='bg-card rounded-lg p-6 shadow-sm border'>
+            <MessageSquare className='h-10 w-10 text-primary mx-auto mb-4' />
+            <h3 className='text-lg font-semibold mb-2'>{t('common.discuss', 'Discuss')}</h3>
+            <p className='text-muted-foreground text-sm'>
+              {t('common.discuss-desc', 'Engage in conversations about various topics that interest you.')}
+            </p>
+          </div>
+          <div className='bg-card rounded-lg p-6 shadow-sm border'>
+            <List className='h-10 w-10 text-primary mx-auto mb-4' />
+            <h3 className='text-lg font-semibold mb-2'>{t('common.browse', 'Browse')}</h3>
+            <p className='text-muted-foreground text-sm'>
+              {t('common.browse-desc', 'Explore posts by category and discover new discussions.')}
+            </p>
+          </div>
+          <div className='bg-card rounded-lg p-6 shadow-sm border'>
+            <PlusCircle className='h-10 w-10 text-primary mx-auto mb-4' />
+            <h3 className='text-lg font-semibold mb-2'>{t('common.share', 'Share')}</h3>
+            <p className='text-muted-foreground text-sm'>
+              {t('common.share-desc', 'Create your own posts and share your thoughts with the community.')}
+            </p>
+          </div>
         </div>
       </div>
     </div>
