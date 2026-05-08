@@ -5,8 +5,8 @@ import {
   List,
 } from 'lucide-react';
 import HomePageButton from './home-page-button';
+import HomePageCard from './home-page-card';
 import { useTranslation } from 'react-i18next';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   animateArrow,
   animateTitle,
@@ -69,48 +69,24 @@ const HomePage = () => {
         </div>
 
         <div className='mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto'>
-          <Card
-            ref={(el) => { if (el) cardsRef.current[0] = el; }}
-            className='text-center'
-          >
-            <CardHeader>
-              <MessageSquare className='h-10 w-10 text-primary mx-auto' />
-              <CardTitle>{t('common.discuss')}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className='text-muted-foreground text-sm'>
-                {t('common.discuss-desc')}
-              </p>
-            </CardContent>
-          </Card>
-          <Card
-            ref={(el) => { if (el) cardsRef.current[1] = el; }}
-            className='text-center'
-          >
-            <CardHeader>
-              <List className='h-10 w-10 text-primary mx-auto' />
-              <CardTitle>{t('common.browse')}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className='text-muted-foreground text-sm'>
-                {t('common.browse-desc')}
-              </p>
-            </CardContent>
-          </Card>
-          <Card
-            ref={(el) => { if (el) cardsRef.current[2] = el; }}
-            className='text-center'
-          >
-            <CardHeader>
-              <PlusCircle className='h-10 w-10 text-primary mx-auto' />
-              <CardTitle>{t('common.share')}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className='text-muted-foreground text-sm'>
-                {t('common.share-desc')}
-              </p>
-            </CardContent>
-          </Card>
+          <HomePageCard
+            icon={MessageSquare}
+            title={t('common.discuss')}
+            description={t('common.discuss-desc')}
+            cardRef={(el) => { if (el) cardsRef.current[0] = el; }}
+          />
+          <HomePageCard
+            icon={List}
+            title={t('common.browse')}
+            description={t('common.browse-desc')}
+            cardRef={(el) => { if (el) cardsRef.current[1] = el; }}
+          />
+          <HomePageCard
+            icon={PlusCircle}
+            title={t('common.share')}
+            description={t('common.share-desc')}
+            cardRef={(el) => { if (el) cardsRef.current[2] = el; }}
+          />
         </div>
       </div>
     </div>
