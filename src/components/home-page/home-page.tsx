@@ -1,12 +1,10 @@
 import React, { useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
 import {
   MessageSquare,
   PlusCircle,
   List,
-  ArrowRight,
 } from 'lucide-react';
+import HomePageButton from './home-page-button';
 import { useTranslation } from 'react-i18next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -53,20 +51,21 @@ const HomePage = () => {
         </div>
 
         <div className='flex flex-col sm:flex-row items-center justify-center gap-4 mt-8'>
-          <Button asChild size='lg' className='w-56 text-base'>
-            <Link to='/posts'>
-              <List className='h-5 w-5 mr-2' />
-              {t('common.view-posts')}
-              <ArrowRight ref={arrowRef} className='h-5 w-5 ml-2' />
-            </Link>
-          </Button>
+          <HomePageButton
+            to='/posts'
+            icon={List}
+            label={t('common.view-posts')}
+            showArrow
+            arrowRef={arrowRef}
+          />
 
-          <Button asChild variant='outline' size='lg' className='w-56 text-base'>
-            <Link to='/addpost'>
-              <PlusCircle ref={plusIconRef} className='h-5 w-5 mr-2' />
-              {t('common.create-post')}
-            </Link>
-          </Button>
+          <HomePageButton
+            to='/addpost'
+            icon={PlusCircle}
+            label={t('common.create-post')}
+            variant='outline'
+            iconRef={plusIconRef}
+          />
         </div>
 
         <div className='mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto'>
