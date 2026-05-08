@@ -13,7 +13,7 @@ const HomePageCard = ({ icon: Icon, title, description, cardRef }: HomePageCardP
   return (
     <Card ref={cardRef} className='text-center'>
       <CardHeader>
-        <Icon className='h-10 w-10 text-primary mx-auto' />
+        <Icon className='h-10 w-10 text-teal-500 mx-auto' />
         <CardTitle>{title}</CardTitle>
       </CardHeader>
       <CardContent>
