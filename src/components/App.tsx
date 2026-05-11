@@ -1,6 +1,10 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './home-page/home-page';
+import DashboardPage from './dashboard-page/dashboard-page';
+import NotificationsPage from './dashboard-page/notifications-page';
+import MessagesPage from './dashboard-page/messages-page';
+import SettingsPage from './dashboard-page/settings-page';
 import PostsPage from './posts-page/posts-page';
 import AllCategories from './all-categories/all-categories';
 import PostDetail from './post-details/post-detail';
@@ -14,6 +18,10 @@ const App = () => {
   return (
     <Routes>
       <Route path='/' element={<HomePage />} />
+      <Route path='/home' element={<DashboardPage />} />
+      <Route path='/notifications' element={<NotificationsPage />} />
+      <Route path='/messages' element={<MessagesPage />} />
+      <Route path='/settings' element={<SettingsPage />} />
       <Route path='/posts' element={<PostsPage />} />
       <Route path='/addPost' element={<AddPost />} />
       <Route path='/:category/' element={<AllCategories />} />
