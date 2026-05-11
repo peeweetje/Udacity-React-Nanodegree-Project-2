@@ -17,6 +17,8 @@
     "welcome-message": "A place to discuss your favorite topics. Browse posts, share your thoughts, and connect with the community.",
     "view-posts": "View All Posts",
     "create-post": "Create a Post",
+    "dashboard": "Dashboard",
+    "go-to-dashboard": "Go to Dashboard",
     "discuss": "Discuss",
     "discuss-desc": "Engage in conversations about various topics that interest you.",
     "browse": "Browse",
@@ -85,5 +87,33 @@
     "delete-post": "Delete",
     "edit": "Edit",
     "delete": "Delete"
+  },
+
+  "dashboard": {
+    "home": "Home",
+    "topics": "Topics",
+    "categories": "Categories",
+    "notifications": "Notifications",
+    "settings": "Settings",
+    "messages": "Messages",
+    "appearance": "Appearance",
+    "language": "Language",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "english": "English",
+    "dutch": "Dutch",
+    "active-topics": "Active Topics",
+    "new-comments": "New Comments",
+    "trending-categories": "Trending Categories",
+    "page-views": "Page Views",
+    "recent-activity": "Recent Activity",
+    "search-placeholder": "Search posts...",
+    "user-badge": "User Badge",
+    "topic": "Topic",
+    "date": "Date",
+    "status": "Status",
+    "active": "Active",
+    "resolved": "Resolved"
   }
 }

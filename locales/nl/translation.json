@@ -17,6 +17,8 @@
     "welcome-message": "Een plek om je favoriete onderwerpen te bespreken. Blader door berichten, deel je gedachten en maak verbinding met de community.",
     "view-posts": "Bekijk alle berichten",
     "create-post": "Maak een bericht",
+    "dashboard": "Dashboard",
+    "go-to-dashboard": "Ga naar Dashboard",
     "discuss": "Discussieer",
     "discuss-desc": "Voer gesprekken over verschillende onderwerpen die je interesseren.",
     "browse": "Bladeren",
@@ -85,5 +87,33 @@
     "delete-post": "bericht",
     "edit": "Bewerk",
     "delete": "Verwijder"
+  },
+
+  "dashboard": {
+    "home": "Home",
+    "topics": "Onderwerpen",
+    "categories": "Categorieën",
+    "notifications": "Meldingen",
+    "settings": "Instellingen",
+    "messages": "Berichten",
+    "appearance": "Weergave",
+    "language": "Taal",
+    "theme": "Thema",
+    "light": "Licht",
+    "dark": "Donker",
+    "english": "Engels",
+    "dutch": "Nederlands",
+    "active-topics": "Actieve onderwerpen",
+    "new-comments": "Nieuwe reacties",
+    "trending-categories": "Trending categorieën",
+    "page-views": "Paginaweergaven",
+    "recent-activity": "Recente activiteit",
+    "search-placeholder": "Zoek berichten...",
+    "user-badge": "Gebruikersbadge",
+    "topic": "Onderwerp",
+    "date": "Datum",
+    "status": "Status",
+    "active": "Actief",
+    "resolved": "Opgelost"
   }
 }
