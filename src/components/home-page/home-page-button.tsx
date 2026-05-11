@@ -7,7 +7,7 @@ interface HomePageButtonProps {
   to: string;
   icon: LucideIcon;
   label: string;
-  variant?: 'default' | 'outline';
+  variant?: 'default' | 'outline' | 'secondary';
   iconRef?: RefObject<SVGSVGElement | null>;
   showArrow?: boolean;
   arrowRef?: RefObject<SVGSVGElement | null>;

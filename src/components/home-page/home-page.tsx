@@ -3,6 +3,7 @@ import {
   MessageSquare,
   PlusCircle,
   List,
+  LayoutDashboard,
 } from 'lucide-react';
 import HomePageButton from './home-page-button';
 import HomePageCard from './home-page-card';
@@ -18,6 +19,7 @@ import {
 const HomePage = () => {
   const { t } = useTranslation();
   const arrowRef = useRef<SVGSVGElement>(null);
+  const dashboardArrowRef = useRef<SVGSVGElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
   const plusIconRef = useRef<SVGSVGElement>(null);
@@ -25,6 +27,7 @@ const HomePage = () => {
 
   useEffect(() => {
     animateArrow(arrowRef);
+    animateArrow(dashboardArrowRef);
     animateTitle(titleRef);
     animatePlusIcon(plusIconRef);
     animateOrbs(bgRef);
@@ -65,6 +68,14 @@ const HomePage = () => {
             label={t('common.create-post')}
             variant='outline'
             iconRef={plusIconRef}
+          />
+
+          <HomePageButton
+            to='/home'
+            icon={LayoutDashboard}
+            label={t('common.dashboard')}
+            showArrow
+            arrowRef={dashboardArrowRef}
           />
         </div>
 

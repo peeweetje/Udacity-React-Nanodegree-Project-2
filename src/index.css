@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 @plugin 'tailwindcss-animate';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
   :root {
     --radius: 0.5rem;
@@ -9,5 +11,3 @@
     --radius-sm: calc(var(--radius) - 4px);
   }
 }
-
-
