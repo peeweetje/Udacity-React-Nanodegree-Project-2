@@ -9,7 +9,6 @@ i18n
   .use(HttpApi)
   .init({
     supportedLngs: ['en', 'nl'],
-    lng: 'en',
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
@@ -25,7 +24,7 @@ i18n
         'path',
         'subdomain',
       ],
-      caches: ['cookie'],
+      caches: ['localStorage', 'cookie'],
     },
     backend: {
       loadPath: '/locales/{{lng}}/translation.json',
