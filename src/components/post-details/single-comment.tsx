@@ -32,14 +32,14 @@ const SingleComment: React.FC<SingleCommentProps> = ({
 
   return (
     <div className=' flex flex-col w-full md:w-3/4 mx-auto mt-8 px-4'>
-      <Card className='mb-4 flex flex-col'>
+      <Card className='mb-4 flex flex-col dark:bg-gray-800 dark:border-gray-700'>
         <CardContent className='p-4 flex flex-col h-full'>
           <div className='flex flex-col md:flex-row md:items-center md:justify-between mb-2'>
             <div className='flex items-center space-x-2 mb-2 sm:mb-0'>
-              <User className='w-5 h-5 text-primary' />
-              <span className='font-medium'>{author}</span>
+              <User className='w-5 h-5 text-primary dark:text-teal-400' />
+              <span className='font-medium dark:text-white'>{author}</span>
             </div>
-            <div className='flex items-center text-sm text-gray-500'>
+            <div className='flex items-center text-sm text-gray-500 dark:text-gray-400'>
               <Clock className='w-4 h-4 mr-1 text-primary' />
               <Timestamp
                 date={timestamp / 1000}
@@ -47,20 +47,20 @@ const SingleComment: React.FC<SingleCommentProps> = ({
               />
             </div>
           </div>
-          <p className='my-4 grow line-clamp-3'>{body}</p>
+          <p className='my-4 grow line-clamp-3 dark:text-gray-300'>{body}</p>
           <div className='flex flex-col sm:flex-row md:items-center md:justify-between space-y-2 md:space-y-0'>
             <div className='flex items-center space-x-2'>
               <Button className='w-18' size='sm' onClick={() => onUpvote(id)}>
-                <ThumbsUp className='w-4 h-4 mr-1 text-primary' />
+                <ThumbsUp className='w-4 h-4 mr-1 text-primary dark:text-white' />
               </Button>
-              <span className='font-medium'>{voteScore}</span>
+              <span className='font-medium dark:text-white'>{voteScore}</span>
               <Button
                 className='w-18'
                 variant='destructive'
                 size='sm'
                 onClick={() => onDownvote(id)}
               >
-                <ThumbsDown className='w-4 h-4 mr-1 text-destructive' />
+                <ThumbsDown className='w-4 h-4 mr-1 text-destructive dark:text-white' />
               </Button>
             </div>
             <div className='flex flex-row space-x-2 sm:m-1'>

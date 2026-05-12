@@ -35,7 +35,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className='relative flex min-h-screen bg-background items-center justify-center overflow-hidden'>
+    <div className='relative flex min-h-screen bg-background dark:bg-gray-900 items-center justify-center overflow-hidden'>
       <div
         ref={bgRef}
         className='absolute inset-0 pointer-events-none'
@@ -47,8 +47,8 @@ const HomePage = () => {
       </div>
       <div className='relative container mx-auto px-4 text-center'>
         <div className='mb-8'>
-          <h1 ref={titleRef} className='text-5xl font-bold text-primary mb-4'>{t('common.git-talks')}</h1>
-          <p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
+          <h1 ref={titleRef} className='text-5xl font-bold text-primary dark:text-white mb-4'>{t('common.git-talks')}</h1>
+          <p className='text-xl text-muted-foreground dark:text-gray-300 max-w-2xl mx-auto'>
             {t('common.welcome-message')}
           </p>
         </div>

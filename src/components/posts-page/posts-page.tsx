@@ -25,6 +25,7 @@ import {
   User,
   Clock,
   Home,
+  LayoutDashboard,
 } from 'lucide-react';
 
 import Menu from '../menu/menu';
@@ -78,17 +79,23 @@ const PostsPage: React.FC = () => {
   }
 
   return (
-    <div className='flex min-h-screen bg-background'>
+    <div className='flex min-h-screen bg-background dark:bg-gray-900'>
       <SideBar />
       <div className='flex-1 p-8'>
         <div className='container mx-auto'>
           <div className='text-center mb-8'>
-            <h1 className='text-4xl font-bold text-primary'>Git Talks</h1>
-            <div className='mt-4'>
+            <h1 className='text-4xl font-bold text-primary dark:text-white'>Git Talks</h1>
+            <div className='mt-4 flex items-center justify-center gap-2'>
               <Button asChild variant='outline' size='sm'>
                 <Link to='/'>
                   <Home className='h-4 w-4 mr-2' />
                   {t('common.home', 'Home')}
+                </Link>
+              </Button>
+              <Button asChild variant='outline' size='sm'>
+                <Link to='/home'>
+                  <LayoutDashboard className='h-4 w-4 mr-2' />
+                  {t('common.dashboard')}
                 </Link>
               </Button>
             </div>
@@ -103,17 +110,17 @@ const PostsPage: React.FC = () => {
               posts.filter((post) => !post.deleted),
               sort.value
             ).map((post) => (
-              <Card className='w-full' key={post.id}>
+              <Card className='w-full dark:bg-gray-800 dark:border-gray-700' key={post.id}>
                 <CardHeader>
                   <CardTitle>
                     <Link
                       to={`/${post.category}/${post.id}`}
-                      className='hover:text-teal-500 transition-colors duration-200'
+                      className='hover:text-teal-500 dark:hover:text-teal-400 transition-colors duration-200 dark:text-white'
                     >
                       {post.title}
                     </Link>
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className='dark:text-gray-400'>
                     <div className='flex items-center space-x-4'>
                       <div className='flex items-center space-x-2'>
                         <User className='h-4 w-4' />
@@ -139,7 +146,7 @@ const PostsPage: React.FC = () => {
                       >
                         <ThumbsUp className='h-4 w-4' />
                       </Button>
-                      <span className='font-bold'>{post.voteScore}</span>
+                      <span className='font-bold dark:text-white'>{post.voteScore}</span>
                       <Button
                         className='w-18'
                         variant='destructive'

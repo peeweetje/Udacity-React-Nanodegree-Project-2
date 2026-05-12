@@ -170,10 +170,10 @@ const PostDetail= () => {
     });
 
   return (
-    <div className='flex flex-col min-h-screen bg-background'>
+    <div className='flex flex-col min-h-screen bg-background dark:bg-gray-900'>
       <SideBar />
       <main className='flex-1 p-8'>
-        <h1 className='text-3xl font-bold text-center text-primary mb-8'>
+        <h1 className='text-3xl font-bold text-center text-primary dark:text-white mb-8'>
           {t('common.git-talks')}
         </h1>
         <Menu />
@@ -201,16 +201,16 @@ const PostDetail= () => {
             ))}
 
             {filteredPosts?.length > 0 ? (
-              <Card className='mt-8'>
+              <Card className='mt-8 dark:bg-gray-800 dark:border-gray-700'>
                 <CardHeader>
-                  <CardTitle>{t('postDetails.add-comment')}</CardTitle>
+                  <CardTitle className='dark:text-white'>{t('postDetails.add-comment')}</CardTitle>
                 </CardHeader>
                 <form onSubmit={handleSubmit}>
                   <CardContent className='space-y-4'>
                     <div className='space-y-2'>
                       <label
                         htmlFor='commentAuthor'
-                        className='text-sm font-medium'
+                        className='text-sm font-medium dark:text-white'
                       >
                         {t('postDetails.label-author')}
                       </label>
@@ -227,7 +227,7 @@ const PostDetail= () => {
                     <div className='space-y-2'>
                       <label
                         htmlFor='commentContent'
-                        className='text-sm font-medium'
+                        className='text-sm font-medium dark:text-white'
                       >
                         {t('postDetails.comment-content')}
                       </label>
@@ -252,9 +252,9 @@ const PostDetail= () => {
                 </form>
               </Card>
             ) : (
-              <Card className='mt-8'>
+              <Card className='mt-8 dark:bg-gray-800 dark:border-gray-700'>
                 <CardContent className='text-center py-8'>
-                  <h3 className='text-xl font-semibold mb-4'>
+                  <h3 className='text-xl font-semibold dark:text-white mb-4'>
                     Post not found.
                   </h3>
                   <Button onClick={() => navigate(-1)} size='sm'>

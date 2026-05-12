@@ -101,6 +101,7 @@ const EditPost: React.FC = () => {
   }, [post, isLoading, form]);
 
   const onSubmit = async (values: FormValues) => {
+    if (!postId) return;
     const data = {
       id: postId,
       title: values.postTitle,
@@ -117,16 +118,16 @@ const EditPost: React.FC = () => {
   }
 
   return (
-    <div className='flex min-h-screen bg-neutral-10'>
+    <div className='flex min-h-screen bg-neutral-10 dark:bg-gray-900'>
       <SideBar />
       <div className='flex-1 p-8'>
         <div className='mb-8 text-center'>
-          <h1 className=' text-teal-500 text-3xl font-bold text-primary'>
-            <Edit className=' text-teal-500 inline-block mr-2' />
+          <h1 className=' text-teal-500 dark:text-teal-400 text-3xl font-bold text-primary dark:text-white'>
+            <Edit className=' text-teal-500 dark:text-teal-400 inline-block mr-2' />
             {t('editPost.edit-post')}
           </h1>
         </div>
-        <div className='max-w-2xl mx-auto bg-card bg-neutral-100 p-8 rounded-lg shadow-inner'>
+        <div className='max-w-2xl mx-auto bg-card bg-neutral-100 dark:bg-gray-800 p-8 rounded-lg shadow-inner dark:border dark:border-gray-700'>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
               <FormField

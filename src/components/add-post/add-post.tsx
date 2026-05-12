@@ -90,16 +90,16 @@ const AddPost: React.FC = () => {
   }
 
   return (
-    <div className='flex min-h-screen bg-neutral-10'>
+    <div className='flex min-h-screen bg-neutral-10 dark:bg-gray-900'>
       <SideBar />
       <div className='flex-1 p-8'>
         <div className='mb-8 text-center'>
-          <h1 className='text-3xl font-bold text-center text-teal-500 mb-6 flex items-center justify-center'>
+          <h1 className='text-3xl font-bold text-center text-teal-500 dark:text-teal-400 mb-6 flex items-center justify-center'>
             <PlusCircle className='inline-block mr-2 h-8 w-8' />
             {t('addPost.new-post')}
           </h1>
         </div>
-        <div className='max-w-2xl mx-auto bg-card bg-neutral-100 p-8 rounded-lg shadow-inner'>
+        <div className='max-w-2xl mx-auto bg-card bg-neutral-100 dark:bg-gray-800 p-8 rounded-lg shadow-inner dark:border dark:border-gray-700'>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
               <FormField

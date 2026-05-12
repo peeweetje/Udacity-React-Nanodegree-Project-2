@@ -48,12 +48,12 @@ const SinglePost: React.FC<SinglePostProps> = ({
 
   return (
     <div className='flex flex-col mx-auto w-full  px-4'>
-      <Card className='flex flex-col w-full mx-auto overflow-hidden'>
+      <Card className='flex flex-col w-full mx-auto overflow-hidden dark:bg-gray-800 dark:border-gray-700'>
         <CardHeader className='space-y-2'>
-          <CardTitle className='text-xl sm:text-2xl break-words'>
+          <CardTitle className='text-xl sm:text-2xl break-words dark:text-white'>
             {title}
           </CardTitle>
-          <div className='flex flex-col sm:flex-row sm:items-center text-sm text-muted-foreground'>
+          <div className='flex flex-col sm:flex-row sm:items-center text-sm text-muted-foreground dark:text-gray-400'>
             <User className='w-5 h-5 mr-1' />
             <span className='mr-2 break-words'>{author}</span>
             <Timestamp
@@ -63,7 +63,7 @@ const SinglePost: React.FC<SinglePostProps> = ({
           </div>
         </CardHeader>
         <CardContent>
-          <p className='text-sm sm:text-base break-words'>{body}</p>
+          <p className='text-sm sm:text-base break-words dark:text-gray-300'>{body}</p>
         </CardContent>
         <CardFooter className='flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4'>
           <div className='flex items-center space-x-2 flex-wrap'>

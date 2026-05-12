@@ -77,21 +77,21 @@ const EditComment: React.FC = () => {
   };
 
   return (
-    <div className='flex min-h-screen bg-background'>
+    <div className='flex min-h-screen bg-background dark:bg-gray-900'>
       <main className='flex-1 p-8'>
-        <Card className='w-full max-w-md mx-auto'>
+        <Card className='w-full max-w-md mx-auto dark:bg-gray-800 dark:border-gray-700'>
           <CardHeader>
-            <CardTitle className='text-2xl font-bold text-center text-primary'>
+            <CardTitle className='text-2xl font-bold text-center text-primary dark:text-white'>
               {t('editComment.edit-comment')}
             </CardTitle>
-            <CardDescription className='text-center'>
+            <CardDescription className='text-center dark:text-gray-400'>
               {t('editComment.edit-description')}
             </CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit}>
             <CardContent className='space-y-4'>
               <div className='space-y-2'>
-                <Label htmlFor='commentAuthor'>
+                <Label  htmlFor='commentAuthor'>
                   {t('editComment.label-author')}
                 </Label>
                 <Input

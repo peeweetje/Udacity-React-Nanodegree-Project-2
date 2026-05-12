@@ -49,17 +49,17 @@ const CategoryItem: React.FC<CategoryItemProps> = ({
   const handleDownVote = () => onVote(post.id, 'downVote');
 
   return (
-    <Card className='w-4/5 mx-auto mb-4'>
+    <Card className='w-4/5 mx-auto mb-4 dark:bg-gray-800 dark:border-gray-700'>
       <CardHeader>
         <CardTitle>
           <Link
             to={`/${post.category}/${post.id}`}
-            className='hover:text-teal-500'
+            className='hover:text-teal-500 dark:hover:text-teal-400 dark:text-white'
           >
             {post.title}
           </Link>
         </CardTitle>
-        <CardDescription>
+        <CardDescription className='dark:text-gray-400'>
           <div className='flex items-center space-x-4'>
             <div className='flex items-center space-x-2'>
               <User className='h-4 w-4' />
@@ -76,13 +76,13 @@ const CategoryItem: React.FC<CategoryItemProps> = ({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <p className='text-md mb-6'>{post.body}</p>
+        <p className='text-md mb-6 dark:text-gray-300'>{post.body}</p>
         <div className='flex flex-col space-y-2'>
           <div className='flex items-center space-x-4'>
             <Button className='w-18' size='sm' onClick={handleUpVote}>
               <ThumbsUp className='h-4 w-4 mr-1' />
             </Button>
-            <span className='text-sm font-medium'>{post.voteScore}</span>
+            <span className='text-sm font-medium dark:text-white'>{post.voteScore}</span>
             <Button
               className='w-18'
               variant='destructive'
@@ -92,7 +92,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({
               <ThumbsDown className='h-4 w-4' />
             </Button>
           </div>
-          <div className='flex items-center text-md text-muted-foreground'>
+          <div className='flex items-center text-md text-muted-foreground dark:text-gray-400'>
             <MessageSquare className='h-5 w-5 mr-1' />
             <span>{post.comments ? post.comments.length : 0} comments</span>
           </div>

@@ -61,20 +61,20 @@ const Categories: React.FC = () => {
       : [];
 
   return (
-    <div className='flex min-h-screen bg-background'>
+    <div className='flex min-h-screen bg-background dark:bg-gray-900'>
       <SideBar />
       <div className='flex-1 p-8'>
         <div className='mb-8 text-center'>
-          <h1 className='text-4xl font-bold text-primary mb-4'>
+          <h1 className='text-4xl font-bold text-primary dark:text-white mb-4'>
             {t('common.git-talks')}
           </h1>
           <div className='mt-4 mb-6 flex justify-center'>
             <Menu />
           </div>
           <div className='flex justify-center'>
-            <Card className='w-auto'>
-              <CardContent className='p-4 bg-teal-100'>
-                <p className='text-lg font-semibold text-primary bg-teal-100'>
+            <Card className='w-auto dark:bg-gray-800 dark:border-gray-700'>
+              <CardContent className='p-4 bg-teal-100 dark:bg-teal-900/50'>
+                <p className='text-lg font-semibold text-primary dark:text-white'>
                   {t('common.category')} : {formattedCategoryName}
                 </p>
               </CardContent>
@@ -94,7 +94,7 @@ const Categories: React.FC = () => {
             ))
           ) : (
             <div className='flex justify-center mx-40'>
-              <h3 className='text-xl font-semibold text-muted-foreground text-center mt-4'>
+              <h3 className='text-xl font-semibold text-muted-foreground dark:text-gray-400 text-center mt-4'>
                 {t('common.no-posts')}
               </h3>
             </div>
