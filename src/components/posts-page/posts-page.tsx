@@ -171,7 +171,7 @@ const PostsPage: React.FC = () => {
                         <ThumbsDown className='h-4 w-4' />
                       </Button>
                     </div>
-                    <div className='flex items-center'>
+                    <div className='flex items-center dark:text-neutral-300'>
                       <MessageSquare className='h-4 w-4 mr-2' />
                       <span>{post.comments && post.comments.length}</span>
                     </div>

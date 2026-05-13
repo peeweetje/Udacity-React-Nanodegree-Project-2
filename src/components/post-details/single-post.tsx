@@ -74,7 +74,7 @@ const SinglePost: React.FC<SinglePostProps> = ({
             >
               <ThumbsUp className='w-4 h-4' />
             </Button>
-            <span className='font-bold text-sm sm:text-base'>{voteScore}</span>
+            <span className='font-bold text-sm sm:text-base dark:text-white'>{voteScore}</span>
             <Button
               className='w-12 sm:w-18'
               variant='destructive'
@@ -84,8 +84,8 @@ const SinglePost: React.FC<SinglePostProps> = ({
               <ThumbsDown className='w-4 h-4' />
             </Button>
             <Button variant='ghost' size='sm' className='ml-2'>
-              <MessageCircle className='w-4 h-4 mr-1' />
-              <span className='text-sm sm:text-base'>{commentsCount}</span>
+              <MessageCircle className='w-4 h-4 mr-1 dark:text-neutral-300' />
+              <span className='text-sm sm:text-base dark:text-neutral-300'>{commentsCount}</span>
             </Button>
           </div>
           <div className='flex space-x-2 w-full sm:w-auto'>

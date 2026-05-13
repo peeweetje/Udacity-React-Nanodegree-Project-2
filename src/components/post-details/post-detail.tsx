@@ -174,12 +174,11 @@ const PostDetail= () => {
     <div className='flex flex-col min-h-screen bg-background dark:bg-gray-900'>
       <SideBar />
       <main className='flex-1 p-8'>
-        <div className='flex items-center justify-between mb-8'>
-          <BackButton />
-          <h1 className='text-3xl font-bold text-center text-primary dark:text-white flex-1'>
+        <div className='flex flex-col items-center mb-8'>
+          <h1 className='text-3xl font-bold text-center text-primary dark:text-white mb-4'>
             {t('common.git-talks')}
           </h1>
-          <div className='w-[88px]' />
+          <BackButton />
         </div>
         <Menu />
         <div className='w-4/5 mx-auto'>
