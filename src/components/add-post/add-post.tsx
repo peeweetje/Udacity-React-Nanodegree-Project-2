@@ -28,6 +28,7 @@ import {
 
 import { fetchAddPost } from '../../redux/actions';
 import SideBar from '../sidebar/sideBar';
+import BackButton from '@/components/ui/back-button';
 import { options } from '../../utils/options';
 import { PlusCircle } from 'lucide-react';
 
@@ -94,6 +95,9 @@ const AddPost: React.FC = () => {
       <SideBar />
       <div className='flex-1 p-8'>
         <div className='mb-8 text-center'>
+          <div className='mb-4'>
+            <BackButton />
+          </div>
           <h1 className='text-3xl font-bold text-center text-teal-500 dark:text-teal-400 mb-6 flex items-center justify-center'>
             <PlusCircle className='inline-block mr-2 h-8 w-8' />
             {t('addPost.new-post')}

@@ -9,6 +9,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import CategoryItem from '../category-item/catergory-item';
 import Menu from '../menu/menu';
 import SideBar from '../sidebar/sideBar';
+import BackButton from '@/components/ui/back-button';
 import { sortPosts } from '../../utils/sortPosts';
 import * as actions from '../../redux/actions';
 import { useTranslation } from 'react-i18next';
@@ -68,6 +69,9 @@ const Categories: React.FC = () => {
           <h1 className='text-4xl font-bold text-primary dark:text-white mb-4'>
             {t('common.git-talks')}
           </h1>
+          <div className='mb-4'>
+            <BackButton />
+          </div>
           <div className='mt-4 mb-6 flex justify-center'>
             <Menu />
           </div>
