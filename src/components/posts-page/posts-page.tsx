@@ -29,7 +29,8 @@ import {
 } from 'lucide-react';
 
 import Menu from '../menu/menu';
-import SideBar from '../sidebar/sideBar';
+import MobileSidebar from '../dashboard-page/mobile-sidebar';
+import BackButton from '@/components/ui/back-button';
 import { useTranslation } from 'react-i18next';
 import { Post } from '../../types/post';
 
@@ -50,6 +51,7 @@ const PostsPage: React.FC = () => {
   const posts = useSelector((state: RootState) => state.posts.posts);
   const sort = useSelector((state: RootState) => state.sort.sort);
   const [loading, setLoading] = useState<boolean>(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -79,13 +81,26 @@ const PostsPage: React.FC = () => {
   }
 
   return (
-    <div className='flex min-h-screen bg-background dark:bg-gray-900'>
-      <SideBar />
-      <div className='flex-1 p-8'>
+    <div className='flex min-h-screen bg-background dark:bg-gray-900 overflow-x-hidden'>
+      {/* Mobile hamburger button */}
+      <div className='md:hidden fixed top-4 left-4 z-50'>
+        <Button
+          variant='outline'
+          size='icon'
+          onClick={() => setMobileMenuOpen(true)}
+        >
+          <svg className='h-5 w-5' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'><line x1='4' x2='20' y1='12' y2='12'/><line x1='4' x2='20' y1='6' y2='6'/><line x1='4' x2='20' y1='18' y2='18'/></svg>
+          <span className='sr-only'>{t('common.toggle-menu')}</span>
+        </Button>
+      </div>
+
+      <MobileSidebar isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} showNav={false} />
+      <div className='flex-1 p-4 md:p-8 min-w-0'>
         <div className='container mx-auto'>
           <div className='text-center mb-8'>
-            <h1 className='text-4xl font-bold text-primary dark:text-white'>Git Talks</h1>
-            <div className='mt-4 flex items-center justify-center gap-2'>
+            <h1 className='text-3xl md:text-4xl font-bold text-primary dark:text-white'>Git Talks</h1>
+            <div className='mt-4 flex flex-wrap items-center justify-center gap-2'>
+              <BackButton />
               <Button asChild variant='outline' size='sm'>
                 <Link to='/'>
                   <Home className='h-4 w-4 mr-2' />
@@ -103,7 +118,7 @@ const PostsPage: React.FC = () => {
           <Menu />
         </div>
 
-        <div className='grid gap-6 mt-8 w-4/5 mx-auto'>
+        <div className='grid gap-6 mt-8 w-full md:w-4/5 mx-auto'>
           {posts &&
             posts.length > 0 &&
             sortPosts(

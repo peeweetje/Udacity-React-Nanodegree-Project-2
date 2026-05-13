@@ -28,6 +28,7 @@ import {
 } from 'lucide-react';
 import Menu from '../menu/menu';
 import SideBar from '../sidebar/sideBar';
+import BackButton from '@/components/ui/back-button';
 import SinglePost from './single-post';
 import SingleComment from './single-comment';
 import { Post } from '../../types/post';
@@ -173,9 +174,13 @@ const PostDetail= () => {
     <div className='flex flex-col min-h-screen bg-background dark:bg-gray-900'>
       <SideBar />
       <main className='flex-1 p-8'>
-        <h1 className='text-3xl font-bold text-center text-primary dark:text-white mb-8'>
-          {t('common.git-talks')}
-        </h1>
+        <div className='flex items-center justify-between mb-8'>
+          <BackButton />
+          <h1 className='text-3xl font-bold text-center text-primary dark:text-white flex-1'>
+            {t('common.git-talks')}
+          </h1>
+          <div className='w-[88px]' />
+        </div>
         <Menu />
         <div className='w-4/5 mx-auto'>
           {filteredPosts?.map((post) => (

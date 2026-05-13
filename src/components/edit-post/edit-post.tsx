@@ -24,6 +24,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Edit } from 'lucide-react';
+import BackButton from '@/components/ui/back-button';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -122,6 +123,9 @@ const EditPost: React.FC = () => {
       <SideBar />
       <div className='flex-1 p-8'>
         <div className='mb-8 text-center'>
+          <div className='mb-4'>
+            <BackButton />
+          </div>
           <h1 className=' text-teal-500 dark:text-teal-400 text-3xl font-bold text-primary dark:text-white'>
             <Edit className=' text-teal-500 dark:text-teal-400 inline-block mr-2' />
             {t('editPost.edit-post')}

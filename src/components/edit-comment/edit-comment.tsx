@@ -16,6 +16,7 @@ import {
 import { Label } from '@/components/ui/label';
 import { Edit } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import BackButton from '@/components/ui/back-button';
 
 interface Comment {
   id: string;
@@ -79,6 +80,9 @@ const EditComment: React.FC = () => {
   return (
     <div className='flex min-h-screen bg-background dark:bg-gray-900'>
       <main className='flex-1 p-8'>
+        <div className='mb-4'>
+          <BackButton />
+        </div>
         <Card className='w-full max-w-md mx-auto dark:bg-gray-800 dark:border-gray-700'>
           <CardHeader>
             <CardTitle className='text-2xl font-bold text-center text-primary dark:text-white'>

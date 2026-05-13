@@ -36,23 +36,27 @@ const SideBar: React.FC = () => {
     <div className='md:hidden'>
       <Sheet>
         <SheetTrigger asChild>
-          <Button className='mx-4 my-4' variant='outline' size='icon'>
-            <MenuIcon className='h-4 w-4' />
+          <Button className='fixed top-4 left-4 z-50' variant='outline' size='icon'>
+            <MenuIcon className='h-5 w-5' />
             <span className='sr-only'>{t('common.toggle-menu')}</span>
           </Button>
         </SheetTrigger>
         <SheetContent
-          className='w-[175px] sm:w-[250px] bg-teal-500'
+          className='w-[250px] sm:w-[300px] bg-teal-500 overflow-y-auto [&_.lucide-x]:text-white'
           side='left'
         >
-          <SheetTitle className='py-4'>Categories</SheetTitle>
-          <nav className='flex flex-col space-y-4'>
+          <SheetTitle className='text-2xl font-bold text-white py-4 px-4'>
+            {t('common.git-talks')}
+          </SheetTitle>
+
+          {/* Categories */}
+          <nav className='flex flex-col space-y-2 px-4 mt-6'>
             {receiveCategories.length > 0 &&
               receiveCategories.map((category) => (
                 <Link
                   key={category.path}
                   to={`/${category.name}`}
-                  className='text-md font-bold text-neutral-100 hover:text-teal-700'
+                  className='text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-colors duration-200'
                 >
                   {category.name.charAt(0).toUpperCase() +
                     category.name.slice(1)}
