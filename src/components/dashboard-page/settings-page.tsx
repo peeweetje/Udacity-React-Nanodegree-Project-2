@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { fetchPosts, fetchCategories } from '../../redux/actions';
 import { useLocation } from 'react-router-dom';
 import DashboardSidebar from './dashboard-sidebar';
+import BackButton from '@/components/ui/back-button';
 
 const SettingsPage = () => {
   const { t, i18n } = useTranslation();
@@ -33,19 +34,22 @@ const SettingsPage = () => {
     <div className='flex min-h-screen bg-gray-50 dark:bg-gray-900'>
       <DashboardSidebar />
       <div className='flex-1 flex flex-col'>
-        <header className='bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-8 py-4 flex items-center justify-between'>
-          <h1 className='text-xl font-semibold text-gray-900 dark:text-white'>
-            {t('dashboard.settings')}
-          </h1>
+        <header className='bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 pl-16 md:pl-8 pr-4 py-4 flex items-center justify-between'>
+          <div className='flex items-center space-x-4'>
+            <BackButton />
+            <h1 className='text-xl font-semibold text-gray-900 dark:text-white'>
+              {t('dashboard.settings')}
+            </h1>
+          </div>
           <div className='bg-teal-100 p-2 rounded-full'>
             <Settings className='h-6 w-6 text-teal-600' />
           </div>
         </header>
 
-        <main className='flex-1 p-8 overflow-y-auto'>
-          <div className='max-w-2xl mx-auto space-y-8'>
+        <main className='flex-1 p-4 md:p-8 overflow-y-auto'>
+          <div className='max-w-2xl mx-auto space-y-6 md:space-y-8'>
             {/* Language Section */}
-            <div className='bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6'>
+            <div className='bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-4 md:p-6'>
               <div className='flex items-center space-x-3 mb-6'>
                 <Languages className='h-6 w-6 text-teal-500' />
                 <h2 className='text-lg font-semibold text-gray-900 dark:text-white'>
@@ -77,7 +81,7 @@ const SettingsPage = () => {
             </div>
 
             {/* Theme Section */}
-            <div className='bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6'>
+            <div className='bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-4 md:p-6'>
               <div className='flex items-center space-x-3 mb-6'>
                 {theme === 'light' ? (
                   <Sun className='h-6 w-6 text-teal-500' />

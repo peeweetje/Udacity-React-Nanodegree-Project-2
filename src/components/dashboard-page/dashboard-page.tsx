@@ -66,11 +66,11 @@ const DashboardPage = () => {
     }));
 
   return (
-    <div className='flex min-h-screen bg-gray-50'>
+    <div className='flex min-h-screen bg-gray-50 overflow-x-hidden'>
       <DashboardSidebar />
-      <div className='flex-1 flex flex-col'>
+      <div className='flex-1 flex flex-col min-w-0'>
         {/* Top bar */}
-        <header className='bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-8 py-4 flex items-center justify-between'>
+        <header className='bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 pl-16 md:pl-8 pr-4 py-4 flex items-center justify-between'>
           <DashboardSearch value={searchQuery} onChange={setSearchQuery} />
           <div className='flex items-center space-x-3'>
             <Link
@@ -95,7 +95,7 @@ const DashboardPage = () => {
         </header>
 
         {/* Main content */}
-        <main className='flex-1 p-8 overflow-y-auto dark:bg-gray-900'>
+        <main className='flex-1 p-4 md:p-8 overflow-y-auto dark:bg-gray-900'>
           {/* Stats cards */}
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
             <DashboardStatCard
