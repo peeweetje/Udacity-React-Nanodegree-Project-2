@@ -2,34 +2,39 @@
   "common": {
     "git-talks": "Git Talks",
     "category": "Categorie",
-    "no-posts": "geen berichten in deze categorie.",
-    "edit-post": "bewerken",
+    "no-posts": "Er zijn geen berichten in deze categorie.",
+    "edit-post": "Bewerk",
     "delete-post": "Verwijder",
-    "add-post": "Voeg bericht toe",
-    "all": "Alle",
-    "toggle-menu": "Wissel menu",
+    "add-post": "Bericht toevoegen",
+    "all": "Alles",
+    "toggle-menu": "Menu schakelen",
     "sort-by": "Sorteer op",
     "loading": "Laden...",
     "popular": "populair",
     "unpopular": "niet populair",
     "new": "nieuw",
     "old": "oud",
-    "welcome-message": "Een plek om je favoriete onderwerpen te bespreken. Blader door berichten, deel je gedachten en maak verbinding met de community.",
+    "welcome-message": "Een plek om je favoriete onderwerpen te bespreken. Blader door berichten, deel je gedachten en maak contact met de community.",
     "view-posts": "Bekijk alle berichten",
     "create-post": "Maak een bericht",
     "dashboard": "Dashboard",
     "go-to-dashboard": "Ga naar Dashboard",
     "discuss": "Discussieer",
-    "discuss-desc": "Voer gesprekken over verschillende onderwerpen die je interesseren.",
+    "discuss-desc": "Doe mee aan gesprekken over verschillende onderwerpen die je interesseren.",
     "browse": "Bladeren",
-    "browse-desc": "Verken berichten op categorie en ontdek nieuwe discussies.",
+    "browse-desc": "Verken berichten per categorie en ontdek nieuwe discussies.",
     "share": "Delen",
-    "share-desc": "Maak je eigen berichten en deel je gedachten met de community."
+    "share-desc": "Maak je eigen berichten en deel je gedachten met de community.",
+    "react": "React",
+    "redux": "Redux",
+    "udacity": "Udacity",
+    "javascript": "JavaScript",
+    "categories": "Categorieën"
   },
 
   "addPost": {
     "new-post": "Nieuw bericht",
-    "add-post": "Voeg bericht toe",
+    "add-post": "Bericht toevoegen",
     "category": "Categorie",
     "form-label": {
       "category": "Categorie",
@@ -38,23 +43,23 @@
       "content": "Inhoud"
     },
     "placeholder": {
-      "enter-title": "Voer titel in",
-      "enter-author": "Voer naam in",
-      "enter-content": "Voeg inhoud toe"
+      "enter-title": "voer berichttitel in",
+      "enter-author": "voer auteurnaam in",
+      "enter-content": "voer berichtinhoud in"
     }
   },
 
   "categoryItem": {
-    "edit": "Bewerken",
+    "edit": "Bewerk",
     "delete": "Verwijder"
   },
 
   "editComment": {
-    "edit-comment": "Bewerk commentaar",
-    "edit-description": "Wijzig hier uw opmerking",
+    "edit-comment": "Reactie bewerken",
+    "edit-description": "Wijzigingen aanbrengen in je reactie",
     "label-author": "Auteur",
-    "label-content": "Inhoud commentaar",
-    "button-edit": "Bewerk commentaar"
+    "label-content": "reactie-inhoud",
+    "button-edit": "Reactie bewerken"
   },
 
   "editPost": {
@@ -64,15 +69,15 @@
     "label-title": "Titel",
     "label-author": "Auteur",
     "label-content": "Inhoud",
-    "placeholder-text-area": "Voer hier uw inhoud in...",
-    "button-edit": "Bewerk bericht"
+    "placeholder-text-area": "voer berichtinhoud in...",
+    "button-edit": "Bericht bewerken"
   },
 
   "postDetails": {
     "label-author": "auteur",
-    "comment-content": "Inhoud commentaar",
-    "add-comment": "Commentaar toevoegen",
-    "add-comment-button": "toevoegen"
+    "comment-content": "Reactie-inhoud",
+    "add-comment": "voeg een reactie toe",
+    "add-comment-button": "Reactie toevoegen"
   },
 
   "singleComment": {
@@ -83,8 +88,8 @@
   },
 
   "singlePost": {
-    "edit-post": "bewerken",
-    "delete-post": "bericht",
+    "edit-post": "Bewerk",
+    "delete-post": "Verwijder",
     "edit": "Bewerk",
     "delete": "Verwijder"
   },

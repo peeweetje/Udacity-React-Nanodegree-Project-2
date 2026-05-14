@@ -24,7 +24,12 @@
     "browse": "Browse",
     "browse-desc": "Explore posts by category and discover new discussions.",
     "share": "Share",
-    "share-desc": "Create your own posts and share your thoughts with the community."
+    "share-desc": "Create your own posts and share your thoughts with the community.",
+    "react": "React",
+    "redux": "Redux",
+    "udacity": "Udacity",
+    "javascript": "JavaScript",
+    "categories": "Categories"
   },
 
   "addPost": {
