@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { PlusCircle } from 'lucide-react';
@@ -8,7 +8,7 @@ import { Card, CardContent } from '@/components/ui/card';
 
 import CategoryItem from '../category-item/catergory-item';
 import Menu from '../menu/menu';
-import SideBar from '../sidebar/sideBar';
+import MobileSidebar from '../dashboard-page/mobile-sidebar';
 import BackButton from '@/components/ui/back-button';
 import { sortPosts } from '../../utils/sortPosts';
 import * as actions from '../../redux/actions';
@@ -34,6 +34,7 @@ const Categories: React.FC = () => {
   const { posts } = useSelector((state: RootState) => state.posts);
   const sort = useSelector((state: RootState) => state.sort.sort);
   const { category: categoryName } = useParams<{ category: string }>();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if (categoryName) {
@@ -63,7 +64,19 @@ const Categories: React.FC = () => {
 
   return (
     <div className='flex min-h-screen bg-background dark:bg-gray-900'>
-      <SideBar />
+      {/* Mobile hamburger button */}
+      <div className='md:hidden fixed top-4 left-4 z-50'>
+        <Button
+          variant='outline'
+          size='icon'
+          onClick={() => setMobileMenuOpen(true)}
+        >
+          <svg className='h-5 w-5' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'><line x1='4' x2='20' y1='12' y2='12'/><line x1='4' x2='20' y1='6' y2='6'/><line x1='4' x2='20' y1='18' y2='18'/></svg>
+          <span className='sr-only'>{t('common.toggle-menu')}</span>
+        </Button>
+      </div>
+
+      <MobileSidebar isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
       <div className='flex-1 p-8'>
         <div className='mb-8 text-center'>
           <h1 className='text-4xl font-bold text-primary dark:text-white mb-4'>
