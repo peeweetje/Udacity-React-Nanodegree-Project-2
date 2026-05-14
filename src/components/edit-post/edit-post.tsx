@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEditPost, fetchSinglePost } from '../../redux/actions';
-import SideBar from '../sidebar/sideBar';
+import MobileSidebar from '../dashboard-page/mobile-sidebar';
 import { options } from '../../utils/options';
 import Loading from '../loading/loading';
 import { Button } from '@/components/ui/button';
@@ -64,6 +64,7 @@ const EditPost: React.FC = () => {
   const { postId } = useParams<{ postId: string }>();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const post = useSelector((state: RootState) =>
     state.posts.posts.find((p) => p.id === postId)
@@ -120,7 +121,26 @@ const EditPost: React.FC = () => {
 
   return (
     <div className='flex min-h-screen bg-neutral-10 dark:bg-gray-900'>
-      <SideBar />
+      {/* Mobile hamburger button */}
+      <div className='md:hidden fixed top-4 left-4 z-50'>
+        <Button
+          variant='outline'
+          size='icon'
+          onClick={() => setMobileMenuOpen(true)}
+        >
+          <svg className='h-5 w-5' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
+            <line x1='4' x2='20' y1='12' y2='12' />
+            <line x1='4' x2='20' y1='6' y2='6' />
+            <line x1='4' x2='20' y1='18' y2='18' />
+          </svg>
+          <span className='sr-only'>{t('common.toggle-menu')}</span>
+        </Button>
+      </div>
+
+      <MobileSidebar
+        isOpen={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+      />
       <div className='flex-1 p-8'>
         <div className='mb-8 text-center'>
           <div className='mb-4'>
