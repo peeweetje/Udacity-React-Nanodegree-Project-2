@@ -48,6 +48,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({ isOpen, onClose, showNav 
   const receiveCategories = useSelector(
     (state: RootState) => state.receiveCategories
   );
+  const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
 
   const sheetContentRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLHeadingElement>(null);
@@ -61,7 +62,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({ isOpen, onClose, showNav 
   }, [dispatch, showCategories]);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || !animationsEnabled) return;
 
     let isCancelled = false;
     let rafId: number;
@@ -138,7 +139,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({ isOpen, onClose, showNav 
       cancelAnimationFrame(rafId);
       gsap.killTweensOf('*');
     };
-  }, [isOpen]);
+  }, [isOpen, animationsEnabled]);
 
   return (
     <Sheet open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
