@@ -14,7 +14,8 @@ import {
   deleteComment,
   addComment,
   editComment,
-  changeSortAction
+  changeSortAction,
+  toggleAnimations
 } from "../reducers";
 
 // Re-export synchronous actions so components importing * as actions still get them
@@ -33,7 +34,8 @@ export {
   deleteComment,
   addComment,
   editComment,
-  changeSortAction
+  changeSortAction,
+  toggleAnimations
 };
 
 // POST ACTIONS
@@ -89,7 +91,7 @@ export const fetchEditPost = (post: any, postId: string) => (dispatch: any) =>
 export const fetchAddPost = (post: any) => (dispatch: any) =>
   api.addPost(post).then(post => dispatch(addPost(post)));
 
-export const fetchVotePost = (postId: string, option: string) => (dispatch: any) =>
+export const fetchVotePost = (postId: string, option: api.VoteOption) => (dispatch: any) =>
   api.votePost(postId, option).then(post => dispatch(votePost(post)));
 
 
@@ -116,7 +118,7 @@ export const fetchEditComment = (comment: any, commentId: string) => (dispatch: 
 export const fetchAddComment = (comment: any) => (dispatch: any) =>
   api.addComment(comment).then(comment => dispatch(addComment(comment)));
 
-export const fetchVoteComment = (commentId: string, option: string) => (dispatch: any) =>
+export const fetchVoteComment = (commentId: string, option: api.VoteOption) => (dispatch: any) =>
   api
     .voteComment(commentId, option)
     .then(comment => dispatch(voteComment(comment)));
