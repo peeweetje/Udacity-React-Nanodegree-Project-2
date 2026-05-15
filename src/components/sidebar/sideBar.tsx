@@ -21,7 +21,7 @@ interface RootState {
   receiveCategories: Category[];
 }
 
-const SideBar: React.FC = () => {
+const SideBar = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const receiveCategories = useSelector(

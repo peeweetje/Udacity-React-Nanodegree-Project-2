@@ -36,13 +36,13 @@ interface SinglePostProps {
   onDelete: (id: string) => void;
 }
 
-const SinglePost: React.FC<SinglePostProps> = ({
+const SinglePost = ({
   post,
   commentsCount,
   onUpvote,
   onDownvote,
   onDelete,
-}) => {
+}: SinglePostProps) => {
   const { id, title, author, timestamp, body, voteScore } = post;
   const { t } = useTranslation();
 

@@ -20,7 +20,7 @@ interface RootState {
 
 
 
-const SortBy: React.FC = () => {
+const SortBy = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const value = useSelector((state: RootState) => state.sort.value);

@@ -21,12 +21,7 @@ interface SingleCommentProps {
   onDelete: (id: string) => void;
 }
 
-const SingleComment: React.FC<SingleCommentProps> = ({
-  comment,
-  onUpvote,
-  onDownvote,
-  onDelete,
-}) => {
+const SingleComment = ({ comment, onUpvote, onDownvote, onDelete }: SingleCommentProps) => {
   const { id, author, body, voteScore, timestamp } = comment;
   const { t } = useTranslation();
 

@@ -46,7 +46,7 @@ interface RootState {
   };
 }
 
-const PostsPage: React.FC = () => {
+const PostsPage = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch<any>();
   const posts = useSelector((state: RootState) => state.posts.posts);

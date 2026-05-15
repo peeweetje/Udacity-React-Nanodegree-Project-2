@@ -8,7 +8,7 @@ interface HamburgerButtonProps {
   className?: string;
 }
 
-const HamburgerButton: React.FC<HamburgerButtonProps> = ({ onClick, className = '' }) => {
+const HamburgerButton = ({ onClick, className = '' }: HamburgerButtonProps) => {
   const { t } = useTranslation();
 
   return (
