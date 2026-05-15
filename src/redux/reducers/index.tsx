@@ -124,15 +124,27 @@ export const { getComments, voteComment, deleteComment, addComment, editComment 
 
 const sortSlice = createSlice({
   name: 'sort',
-  initialState: { sort: "popular" } as any,
+  initialState: { sort: { value: 'popular' } } as any,
   reducers: {
     changeSortAction: (state, action) => {
-      state.sort = action.payload;
+      state.sort.value = action.payload.value;
     }
   }
 });
 
 export const { changeSortAction } = sortSlice.actions;
+
+const animationsSlice = createSlice({
+  name: 'animations',
+  initialState: { enabled: true } as any,
+  reducers: {
+    toggleAnimations: (state, action) => {
+      state.enabled = action.payload;
+    }
+  }
+});
+
+export const { toggleAnimations } = animationsSlice.actions;
 
 export default combineReducers({
   posts: postsSlice.reducer,
@@ -140,4 +152,5 @@ export default combineReducers({
   receiveComment: commentSlice.reducer,
   getComments: commentsSlice.reducer,
   sort: sortSlice.reducer,
+  animations: animationsSlice.reducer,
 });
