@@ -119,6 +119,8 @@
     "date": "Datum",
     "status": "Status",
     "active": "Actief",
-    "resolved": "Opgelost"
+    "resolved": "Opgelost",
+    "animations": "Animaties",
+    "animations-description": "Schakel animaties aan of uit"
   }
 }

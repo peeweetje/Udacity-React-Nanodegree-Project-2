@@ -119,6 +119,8 @@
     "date": "Date",
     "status": "Status",
     "active": "Active",
-    "resolved": "Resolved"
+    "resolved": "Resolved",
+    "animations": "Animations",
+    "animations-description": "Enable or disable animations"
   }
 }
