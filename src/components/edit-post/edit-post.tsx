@@ -25,6 +25,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Edit } from 'lucide-react';
 import BackButton from '@/components/ui/back-button';
+import HamburgerButton from '@/components/ui/hamburger-button';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -122,20 +123,7 @@ const EditPost: React.FC = () => {
   return (
     <div className='flex min-h-screen bg-neutral-10 dark:bg-gray-900'>
       {/* Mobile hamburger button */}
-      <div className='md:hidden fixed top-4 left-4 z-50'>
-        <Button
-          variant='outline'
-          size='icon'
-          onClick={() => setMobileMenuOpen(true)}
-        >
-          <svg className='h-5 w-5' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
-            <line x1='4' x2='20' y1='12' y2='12' />
-            <line x1='4' x2='20' y1='6' y2='6' />
-            <line x1='4' x2='20' y1='18' y2='18' />
-          </svg>
-          <span className='sr-only'>{t('common.toggle-menu')}</span>
-        </Button>
-      </div>
+      <HamburgerButton onClick={() => setMobileMenuOpen(true)} />
 
       <MobileSidebar
         isOpen={mobileMenuOpen}

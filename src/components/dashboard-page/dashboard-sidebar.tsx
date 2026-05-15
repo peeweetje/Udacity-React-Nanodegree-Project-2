@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Home,Bell, Settings, MessageSquare, List, MenuIcon } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Home,Bell, Settings, MessageSquare, List } from 'lucide-react';
 import MobileSidebar from './mobile-sidebar';
+import HamburgerButton from '@/components/ui/hamburger-button';
 
 interface NavItem {
   to: string;
@@ -27,16 +27,7 @@ const DashboardSidebar = () => {
   return (
     <>
       {/* Mobile hamburger button */}
-      <div className='md:hidden fixed top-4 left-4 z-50'>
-        <Button
-          variant='outline'
-          size='icon'
-          onClick={() => setMobileMenuOpen(true)}
-        >
-          <MenuIcon className='h-5 w-5' />
-          <span className='sr-only'>{t('common.toggle-menu')}</span>
-        </Button>
-      </div>
+      <HamburgerButton onClick={() => setMobileMenuOpen(true)} />
 
       {/* Mobile sidebar */}
       <MobileSidebar isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} showCategories={false} />
