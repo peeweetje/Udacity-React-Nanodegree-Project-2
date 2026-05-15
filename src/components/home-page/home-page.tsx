@@ -5,6 +5,7 @@ import {
   List,
   LayoutDashboard,
 } from 'lucide-react';
+import { useSelector } from 'react-redux';
 import HomePageButton from './home-page-button';
 import HomePageCard from './home-page-card';
 import { useTranslation } from 'react-i18next';
@@ -18,6 +19,7 @@ import {
 
 const HomePage = () => {
   const { t } = useTranslation();
+  const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
   const arrowRef = useRef<SVGSVGElement>(null);
   const dashboardArrowRef = useRef<SVGSVGElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -26,13 +28,15 @@ const HomePage = () => {
   const bgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!animationsEnabled) return;
+    
     animateArrow(arrowRef);
     animateArrow(dashboardArrowRef);
     animateTitle(titleRef);
     animatePlusIcon(plusIconRef);
     animateOrbs(bgRef);
     animateCards(cardsRef);
-  }, []);
+  }, [animationsEnabled]);
 
   return (
     <div className='relative flex min-h-screen bg-background dark:bg-gray-900 items-center justify-center overflow-hidden'>

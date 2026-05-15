@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Sun, Moon, Languages, Settings } from 'lucide-react';
-import { useDispatch } from 'react-redux';
-import { fetchPosts, fetchCategories } from '../../redux/actions';
+import { Sun, Moon, Languages, Settings, Zap } from 'lucide-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPosts, fetchCategories, toggleAnimations } from '../../redux/actions';
 import { useLocation } from 'react-router-dom';
 import DashboardSidebar from './dashboard-sidebar';
 import BackButton from '@/components/ui/back-button';
@@ -11,10 +11,17 @@ const SettingsPage = () => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch<any>();
   const location = useLocation();
+  const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
 
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     return (localStorage.getItem('theme') as 'light' | 'dark') || 'light';
   });
+
+  const [animationsToggle, setAnimationsToggle] = useState<boolean>(animationsEnabled);
+
+  useEffect(() => {
+    setAnimationsToggle(animationsEnabled);
+  }, [animationsEnabled]);
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -28,6 +35,12 @@ const SettingsPage = () => {
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
+  };
+
+  const handleAnimationsToggle = () => {
+    const newValue = !animationsToggle;
+    setAnimationsToggle(newValue);
+    dispatch(toggleAnimations(newValue));
   };
 
   return (
@@ -114,6 +127,37 @@ const SettingsPage = () => {
                 >
                   <Moon className='h-4 w-4' />
                   <span>{t('dashboard.dark')}</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Animations Section */}
+            <div className='bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-4 md:p-6'>
+              <div className='flex items-center justify-between'>
+                <div className='flex items-center space-x-3'>
+                  <Zap className='h-6 w-6 text-teal-500' />
+                  <div>
+                    <h2 className='text-lg font-semibold text-gray-900 dark:text-white'>
+                      {t('dashboard.animations') || 'Animations'}
+                    </h2>
+                    <p className='text-sm text-gray-600 dark:text-gray-400'>
+                      {t('dashboard.animations-description') || 'Enable or disable interface animations'}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={handleAnimationsToggle}
+                  className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors duration-300 ${
+                    animationsToggle
+                      ? 'bg-teal-500 dark:bg-teal-600'
+                      : 'bg-gray-300 dark:bg-gray-600'
+                  }`}
+                >
+                  <span
+                    className={`inline-block h-6 w-6 transform rounded-full bg-white shadow-lg transition-transform duration-300 ${
+                      animationsToggle ? 'translate-x-7' : 'translate-x-1'
+                    }`}
+                  />
                 </button>
               </div>
             </div>
