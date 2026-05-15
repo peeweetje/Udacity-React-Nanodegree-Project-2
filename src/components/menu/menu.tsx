@@ -15,7 +15,7 @@ interface RootState {
   receiveCategories: Category[];
 }
 
-const Menu: React.FC = () => {
+const Menu = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();

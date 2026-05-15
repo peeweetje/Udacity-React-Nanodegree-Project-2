@@ -30,7 +30,7 @@ interface RootState {
   };
 }
 
-const Categories: React.FC = () => {
+const Categories = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch<any>();
   const { posts } = useSelector((state: RootState) => state.posts);

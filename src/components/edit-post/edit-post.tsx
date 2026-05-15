@@ -59,7 +59,7 @@ const formSchema = z.object({
   postContent: z.string().min(1, 'Content is required'),
 });
 
-const EditPost: React.FC = () => {
+const EditPost = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { postId } = useParams<{ postId: string }>();

@@ -41,7 +41,7 @@ interface MobileSidebarProps {
   showCategories?: boolean;
 }
 
-const MobileSidebar: React.FC<MobileSidebarProps> = ({ isOpen, onClose, showNav = true, showCategories = true }) => {
+const MobileSidebar = ({ isOpen, onClose, showNav = true, showCategories = true }: MobileSidebarProps) => {
   const { t } = useTranslation();
   const location = useLocation();
   const dispatch = useDispatch();

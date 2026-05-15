@@ -28,7 +28,7 @@ interface RootState {
   receiveComment: Comment | null;
 }
 
-const EditComment: React.FC = () => {
+const EditComment = () => {
   const { t } = useTranslation();
   const [commentAuthor, setCommentAuthor] = useState<string>('');
   const [commentContent, setCommentContent] = useState<string>('');

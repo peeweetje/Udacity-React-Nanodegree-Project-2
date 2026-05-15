@@ -38,11 +38,7 @@ interface CategoryItemProps {
   onVote: (id: string, option: 'upVote' | 'downVote') => void;
 }
 
-const CategoryItem: React.FC<CategoryItemProps> = ({
-  post,
-  onDelete,
-  onVote,
-}) => {
+const CategoryItem = ({ post, onDelete, onVote }: CategoryItemProps) => {
   const { t } = useTranslation();
   const handleDelete = () => onDelete(post.id);
   const handleUpVote = () => onVote(post.id, 'upVote');
