@@ -56,9 +56,12 @@ const DashboardPage = () => {
       )
     : activePosts;
 
-  const recentActivities = filteredPosts
+  const recentActivities = (searchQuery ? filteredPosts : activePosts)
+    .slice()
+    .sort((a, b) => b.timestamp - a.timestamp)
     .slice(0, 5)
     .map((post) => ({
+      id: post.id,
       topic: post.title,
       category: post.category,
       date: new Date(post.timestamp).toLocaleDateString(undefined, { day: '2-digit', month: '2-digit', year: 'numeric' }),
