@@ -175,11 +175,11 @@ const MobileSidebar = ({ isOpen, onClose, showNav = true, showCategories = true 
                       key={to}
                       to={to}
                       onClick={onClose}
-                      className={`group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
-                        isActive
-                          ? 'bg-teal-600/15 text-teal-400 shadow-sm'
-                          : 'text-teal-600/70 hover:text-teal-400 hover:bg-teal-600/10'
-                      }`}
+              className={`group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
+                isActive
+                  ? 'bg-teal-600/15 text-teal-400 shadow-sm'
+                  : 'text-teal-300/85 hover:text-teal-200 hover:bg-teal-600/10'
+              }`}
                     >
                       <span className={`flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-200 ${
                         isActive
@@ -217,11 +217,11 @@ const MobileSidebar = ({ isOpen, onClose, showNav = true, showCategories = true 
                         key={category.path}
                         to={categoryPath}
                         onClick={onClose}
-                        className={`group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
-                          isCategoryActive
-                            ? 'bg-teal-500/15 text-emerald-400 shadow-sm'
-                            : 'text-teal-500/70 hover:text-teal-400 hover:bg-teal-500/10'
-                        }`}
+              className={`group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
+                isCategoryActive
+                  ? 'bg-teal-500/15 text-emerald-400 shadow-sm'
+                  : 'text-teal-300/85 hover:text-teal-200 hover:bg-teal-500/10'
+              }`}
                       >
                         <span className={`flex items-center justify-center w-8 h-8 rounded-lg transition-all duration-200 ${
                           isCategoryActive

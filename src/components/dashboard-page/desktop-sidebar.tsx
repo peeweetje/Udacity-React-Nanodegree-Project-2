@@ -36,7 +36,7 @@ const DesktopSidebar = () => {
               className={`flex items-center space-x-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors duration-200 ${
                 isActive
                   ? 'bg-white/20 text-white'
-                  : 'text-white/70 hover:text-white hover:bg-white/10'
+                  : 'text-white/85 hover:text-white hover:bg-white/10'
               }`}
             >
               <Icon className='h-5 w-5' />

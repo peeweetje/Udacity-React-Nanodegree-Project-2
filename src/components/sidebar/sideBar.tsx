@@ -56,7 +56,7 @@ const SideBar = () => {
                 <Link
                   key={category.path}
                   to={`/${category.name}`}
-                  className='text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-colors duration-200'
+                  className='text-sm font-medium text-white/85 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-colors duration-200'
                 >
                   {category.name.charAt(0).toUpperCase() +
                     category.name.slice(1)}
