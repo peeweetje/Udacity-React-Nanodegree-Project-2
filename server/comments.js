@@ -23,6 +23,16 @@ const defaultData = {
     deleted: false,
     parentDeleted: false,
   },
+  '8tu4bsan805n8cv48ve89': {
+    id: '8tu4bsan805n8cv48ve89',
+    parentId: 'f7a688f0522511f1a73b17',
+    timestamp: 1813708800000,
+    body: 'We will all loose our jobs.',
+    author: 'METOO',
+    voteScore: 25,
+    deleted: false,
+    parentDeleted: false,
+  },
 };
 
 function getData(token) {
