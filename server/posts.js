@@ -53,6 +53,26 @@ const defaultData = {
     voteScore: 5,
     deleted: false,
   },
+  'f7a688f0522511f1a73b45': {
+    id: 'f7a688f0522511f1a73b45',
+    timestamp: 1779045844735,
+    title: 'Is AI going to take over the world???',
+    body: 'You just have to wait and see, right???!',
+    author: 'Christopher Nolan',
+    category: 'react',
+    voteScore: 3,
+    deleted: false,
+  },
+  'f7a688f0522511f1a73b17': {
+    id: 'f7a688f0522511f1a73b17',
+    timestamp: 1813707700222,
+    title: 'this is not what i expected while coding',
+    body: 'Because of AI',
+    author: 'Steve Jobs',
+    category: 'redux',
+    voteScore: 1,
+    deleted: false,
+  },
 };
 
 function getData(token) {
