@@ -61,7 +61,7 @@ const DashboardPage = () => {
     .map((post) => ({
       topic: post.title,
       category: post.category,
-      date: new Date(post.timestamp).toLocaleDateString(),
+      date: new Date(post.timestamp).toLocaleDateString(undefined, { day: '2-digit', month: '2-digit', year: 'numeric' }),
       status: (post.voteScore > 0 ? 'active' : 'resolved') as 'active' | 'resolved',
     }));
 
