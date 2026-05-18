@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 interface Activity {
+  id: string;
   topic: string;
   category: string;
   date: string;
@@ -44,8 +46,13 @@ const DashboardRecentActivity = ({ activities }: DashboardRecentActivityProps) =
                 key={index}
                 className='border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors'
               >
-                <td className='py-3 px-4 font-medium text-gray-900 dark:text-white'>
-                  {activity.topic}
+                <td className='py-3 px-4 font-medium'>
+                  <Link
+                    to={`/${activity.category}/${activity.id}`}
+                    className='text-gray-900 dark:text-white hover:text-teal-600 dark:hover:text-teal-400 transition-colors'
+                  >
+                    {activity.topic}
+                  </Link>
                 </td>
                 <td className='py-3 px-4 text-gray-600 dark:text-gray-400'>{activity.category}</td>
                 <td className='py-3 px-4 text-gray-600 dark:text-gray-400'>{activity.date}</td>
