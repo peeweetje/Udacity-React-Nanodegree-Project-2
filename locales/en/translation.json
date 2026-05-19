@@ -121,6 +121,12 @@
     "active": "Active",
     "resolved": "Resolved",
     "animations": "Animations",
+    "profile": "Profile",
+    "member-since": "Member since",
+    "comments-made": "comments made",
+    "posts-count": "posts",
+    "votes-received": "votes received",
+    "total-votes": "Total Votes",
     "animations-description": "Enable or disable animations"
   }
 }

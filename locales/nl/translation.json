@@ -121,6 +121,12 @@
     "active": "Actief",
     "resolved": "Opgelost",
     "animations": "Animaties",
+    "profile": "Profiel",
+    "member-since": "Lid sinds",
+    "comments-made": "reacties geplaatst",
+    "posts-count": "berichten",
+    "votes-received": "stemmen ontvangen",
+    "total-votes": "Totaal stemmen",
     "animations-description": "Schakel animaties aan of uit"
   }
 }
