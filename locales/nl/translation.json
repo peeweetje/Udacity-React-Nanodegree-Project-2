@@ -126,7 +126,15 @@
     "comments-made": "reacties geplaatst",
     "posts-count": "berichten",
     "votes-received": "stemmen ontvangen",
-    "total-votes": "Totaal stemmen",
+    "total-topics": "{{count}} totale onderwerpen",
+    "total-topics_plural": "{{count}} totale onderwerpen",
+    "total-comments": "{{count}} totale reacties",
+    "total-comments_plural": "{{count}} totale reacties",
+    "total-categories": "{{count}} categorieën",
+    "total-categories_plural": "{{count}} categorieën",
+    "total-votes": "Totale stemmen",
+    "total-votes-trend": "{{count}} totale stemmen",
+    "total-votes-trend_plural": "{{count}} totale stemmen",
     "animations-description": "Schakel animaties aan of uit"
   }
 }
