@@ -47,6 +47,10 @@ const DashboardPage = () => {
     (sum, post) => sum + (post.comments?.length || 0),
     0
   );
+  const totalVotes = activePosts.reduce(
+    (sum, post) => sum + (post.voteScore || 0),
+    0
+  );
 
   const filteredPosts = searchQuery
     ? activePosts.filter(
@@ -91,9 +95,14 @@ const DashboardPage = () => {
                 </span>
               )}
             </Link>
-            <div className='bg-teal-100 dark:bg-teal-900/50 p-2 rounded-full'>
+            <Link
+              to='/profile'
+              aria-label={t('dashboard.profile')}
+              title={t('dashboard.profile')}
+              className='bg-teal-100 dark:bg-teal-900/50 p-2 rounded-full hover:bg-teal-200 dark:hover:bg-teal-800/50 transition-colors'
+            >
               <User className='h-6 w-6 text-teal-600' />
-            </div>
+            </Link>
           </div>
         </header>
 
@@ -105,28 +114,28 @@ const DashboardPage = () => {
               icon={MessageSquare}
               label={t('dashboard.active-topics')}
               value={activePosts.length}
-              trend={`${activePosts.length > 0 ? '+12%' : '0%'} this week`}
+              trend={activePosts.length > 0 ? t('dashboard.total-topics', { count: activePosts.length }) : t('dashboard.total-topics', { count: 0 })}
               trendDirection='up'
             />
             <DashboardStatCard
               icon={Hash}
               label={t('dashboard.new-comments')}
               value={totalComments}
-              trend={`+${totalComments > 0 ? '8%' : '0%'} this week`}
+              trend={totalComments > 0 ? t('dashboard.total-comments', { count: totalComments }) : t('dashboard.total-comments', { count: 0 })}
               trendDirection='up'
             />
             <DashboardStatCard
               icon={TrendingUp}
               label={t('dashboard.trending-categories')}
               value={categories.length}
-              trend='+2 new categories'
+              trend={categories.length > 0 ? t('dashboard.total-categories', { count: categories.length }) : t('dashboard.total-categories', { count: 0 })}
               trendDirection='up'
             />
             <DashboardStatCard
               icon={Eye}
-              label={t('dashboard.page-views')}
-              value={filteredPosts.length > 0 ? '1,234' : '0'}
-              trend={filteredPosts.length > 0 ? '+5%' : '0%'}
+              label={t('dashboard.total-votes')}
+              value={totalVotes}
+              trend={totalVotes > 0 ? t('dashboard.total-votes-trend', { count: totalVotes }) : t('dashboard.total-votes-trend', { count: 0 })}
               trendDirection='up'
             />
           </div>

@@ -11,6 +11,7 @@ import PostDetail from './post-details/post-detail';
 import EditPost from './edit-post/edit-post';
 import EditComment from './edit-comment/edit-comment';
 import AddPost from './add-post/add-post';
+import ProfilePage from './dashboard-page/profile-page';
 
 import '../index.css';
 
@@ -26,6 +27,7 @@ const App = () => {
       <Route path='/addPost' element={<AddPost />} />
       <Route path='/:category/' element={<AllCategories />} />
       <Route path='/editPost/:postId' element={<EditPost />} />
+      <Route path='/profile' element={<ProfilePage />} />
       <Route path='/editComment/:commentId' element={<EditComment />} />
       <Route path='/:category/:post_id' element={<PostDetail />} />
     </Routes>

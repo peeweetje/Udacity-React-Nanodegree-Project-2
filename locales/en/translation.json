@@ -121,6 +121,20 @@
     "active": "Active",
     "resolved": "Resolved",
     "animations": "Animations",
+    "profile": "Profile",
+    "member-since": "Member since",
+    "comments-made": "comments made",
+    "posts-count": "posts",
+    "votes-received": "votes received",
+    "total-topics": "{{count}} total topic",
+    "total-topics_plural": "{{count}} total topics",
+    "total-comments": "{{count}} total comment",
+    "total-comments_plural": "{{count}} total comments",
+    "total-categories": "{{count}} category",
+    "total-categories_plural": "{{count}} categories",
+    "total-votes": "Total Votes",
+    "total-votes-trend": "{{count}} total vote",
+    "total-votes-trend_plural": "{{count}} total votes",
     "animations-description": "Enable or disable animations"
   }
 }
