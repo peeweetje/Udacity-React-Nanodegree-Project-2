@@ -11,26 +11,30 @@ import PostDetail from './post-details/post-detail';
 import EditPost from './edit-post/edit-post';
 import EditComment from './edit-comment/edit-comment';
 import AddPost from './add-post/add-post';
-import ProfilePage from './dashboard-page/profile-page';
+import ProfilePage from './dashboard-page/profile-page/profile-page';
+import AnimatedOrbs from './ui/animated-orbs';
 
 import '../index.css';
 
 const App = () => {
   return (
-    <Routes>
-      <Route path='/' element={<HomePage />} />
-      <Route path='/home' element={<DashboardPage />} />
-      <Route path='/notifications' element={<NotificationsPage />} />
-      <Route path='/messages' element={<MessagesPage />} />
-      <Route path='/settings' element={<SettingsPage />} />
-      <Route path='/posts' element={<PostsPage />} />
-      <Route path='/addPost' element={<AddPost />} />
-      <Route path='/:category/' element={<AllCategories />} />
-      <Route path='/editPost/:postId' element={<EditPost />} />
-      <Route path='/profile' element={<ProfilePage />} />
-      <Route path='/editComment/:commentId' element={<EditComment />} />
-      <Route path='/:category/:post_id' element={<PostDetail />} />
-    </Routes>
+    <>
+      <AnimatedOrbs />
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/home' element={<DashboardPage />} />
+        <Route path='/notifications' element={<NotificationsPage />} />
+        <Route path='/messages' element={<MessagesPage />} />
+        <Route path='/settings' element={<SettingsPage />} />
+        <Route path='/posts' element={<PostsPage />} />
+        <Route path='/addPost' element={<AddPost />} />
+        <Route path='/:category/' element={<AllCategories />} />
+        <Route path='/editPost/:postId' element={<EditPost />} />
+        <Route path='/profile' element={<ProfilePage />} />
+        <Route path='/editComment/:commentId' element={<EditComment />} />
+        <Route path='/:category/:post_id' element={<PostDetail />} />
+      </Routes>
+    </>
   );
 };
 
