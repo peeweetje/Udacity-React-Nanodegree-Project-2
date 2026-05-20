@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Home, Bell, Settings, MessageSquare, List, Hash, User } from 'lucide-react';
+import { Home, Bell, Settings, MessageSquare, List, Hash, User, LayoutDashboard } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategories } from '../../redux/actions';
 import {
@@ -28,6 +28,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   { to: '/', icon: Home, labelKey: 'dashboard.home' },
+  { to: '/home', icon: LayoutDashboard, labelKey: 'dashboard.dashboard' },
   { to: '/profile', icon: User, labelKey: 'dashboard.profile' },
   { to: '/posts', icon: List, labelKey: 'dashboard.categories' },
   { to: '/notifications', icon: Bell, labelKey: 'dashboard.notifications' },

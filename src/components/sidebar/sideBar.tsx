@@ -10,7 +10,7 @@ import {
   SheetTrigger,
   SheetTitle,
 } from '@/components/ui/sheet';
-import { MenuIcon } from 'lucide-react';
+import { MenuIcon, LayoutDashboard } from 'lucide-react';
 
 interface Category {
   path: string;
@@ -49,8 +49,17 @@ const SideBar = () => {
             {t('common.git-talks')}
           </SheetTitle>
 
-          {/* Categories */}
+          {/* Navigation links */}
           <nav className='flex flex-col space-y-2 px-4 mt-6'>
+            <Link
+              to='/home'
+              className='flex items-center gap-2 text-sm font-medium text-white/85 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg transition-colors duration-200'
+            >
+              <LayoutDashboard className='h-4 w-4' />
+              <span>{t('dashboard.dashboard')}</span>
+            </Link>
+
+            {/* Categories */}
             {receiveCategories.length > 0 &&
               receiveCategories.map((category) => (
                 <Link
