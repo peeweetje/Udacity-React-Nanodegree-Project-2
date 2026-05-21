@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Home, Bell, Settings, MessageSquare, List, User, LayoutDashboard } from 'lucide-react';
+import { animateSidebar } from '../animations/sidebar-animations';
 
 interface NavItem {
   to: string;
@@ -22,13 +23,26 @@ const navItems: NavItem[] = [
 const DesktopSidebar = () => {
   const { t } = useTranslation();
   const location = useLocation();
+  const sidebarRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLHeadingElement>(null);
+  const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!sidebarRef.current) return;
+
+    animateSidebar({
+      containerRef: sidebarRef.current,
+      logoRef: logoRef.current,
+      navRef: navRef.current,
+    });
+  }, []);
 
   return (
-    <aside className='hidden md:flex w-64 bg-teal-500 min-h-screen flex-col py-8 px-4'>
+    <aside ref={sidebarRef} className='hidden md:flex w-64 bg-teal-500 min-h-screen flex-col py-8 px-4'>
       <div className='mb-10 px-4'>
-        <h2 className='text-2xl font-bold text-white'>{t('common.git-talks')}</h2>
+        <h2 ref={logoRef} className='text-2xl font-bold text-white opacity-0'>{t('common.git-talks')}</h2>
       </div>
-      <nav className='flex flex-col space-y-2'>
+      <nav ref={navRef} className='flex flex-col space-y-2'>
         {navItems.map(({ to, icon: Icon, labelKey }) => {
           const isActive = location.pathname === to;
           return (
