@@ -12,7 +12,7 @@ import EditPost from './edit-post/edit-post';
 import EditComment from './edit-comment/edit-comment';
 import AddPost from './add-post/add-post';
 import ProfilePage from './dashboard-page/profile-page/profile-page';
-import AnimatedOrbs from './ui/animated-orbs';
+import AnimatedOrbs from './animations/animated-orbs';
 
 import '../index.css';
 

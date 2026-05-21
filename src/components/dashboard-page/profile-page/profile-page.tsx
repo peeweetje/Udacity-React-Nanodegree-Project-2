@@ -7,7 +7,7 @@ import { fetchPosts } from '../../../redux/actions';
 import DashboardSidebar from '../dashboard-sidebar';
 import ProfileAvatar from './profile-avatar';
 import ProfileInfo from './profile-info';
-import AnimatedOrbs from '../../ui/animated-orbs';
+import AnimatedOrbs from '../../animations/animated-orbs';
 import { Post } from '../../../types/post';
 
 interface RootState {
