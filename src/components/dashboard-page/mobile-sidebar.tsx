@@ -9,7 +9,7 @@ import {
   SheetContent,
   SheetTitle,
 } from '@/components/ui/sheet';
-import gsap from 'gsap';
+import { animateSidebar } from '../animations/sidebar-animations';
 
 interface Category {
   path: string;
@@ -66,88 +66,33 @@ const MobileSidebar = ({ isOpen, onClose, showNav = true, showCategories = true 
   useEffect(() => {
     if (!isOpen || !animationsEnabled) return;
 
-    let isCancelled = false;
-    let rafId: number;
+    // Wait one frame for the Radix Portal to render content into DOM
+    const raf = requestAnimationFrame(() => {
+      const container = sheetContentRef.current;
+      const logo = logoRef.current;
+      if (!container || !logo) return;
 
-    const animate = () => {
-      if (isCancelled) return;
-      // Wait for sheet content and logo (always rendered) to be available
-      if (!sheetContentRef.current || !logoRef.current) {
-        rafId = requestAnimationFrame(animate);
-        return;
-      }
-      // If showNav is true, wait for nav too
-      if (showNav && !navRef.current) {
-        rafId = requestAnimationFrame(animate);
-        return;
-      }
-      // If showCategories is true and categories exist, wait for categories ref
-      if (showCategories && receiveCategories.length > 0 && !categoriesRef.current) {
-        rafId = requestAnimationFrame(animate);
-        return;
-      }
+      const nav = navRef.current;
+      const catLabelEl = container.querySelector('.categories-label') as HTMLElement | null;
+      const catNavEl = container.querySelector('[data-category-nav]') as HTMLElement | null;
 
-      // Disable CSS transitions that conflict
-      sheetContentRef.current.querySelectorAll('a').forEach(link => {
-        link.style.setProperty('transition', 'none', 'important');
+      animateSidebar({
+        containerRef: container,
+        logoRef: logo,
+        navRef: nav,
+        categoryLabelRef: catLabelEl,
+        categoryNavRef: catNavEl,
       });
+    });
 
-      // Use fromTo to set AND animate in one GSAP call — no flash
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-      // Logo: immediately hidden at -60px, then slides in
-      tl.fromTo(logoRef.current,
-        { x: -60, opacity: 0 },
-        { x: 0, opacity: 1, duration: 1.0 }
-      );
-
-      // Nav items: hidden at -50px, stagger in
-      if (navRef.current) {
-        const navLinks = navRef.current.querySelectorAll('a');
-        if (navLinks.length > 0) {
-          tl.fromTo(navLinks,
-            { x: -50, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.7, stagger: 0.12 },
-            '-=0.3'
-          );
-        }
-      }
-
-      // Categories section
-      if (categoriesRef.current) {
-        const catLabel = categoriesRef.current.querySelector('.categories-label');
-        if (catLabel) {
-          tl.fromTo(catLabel,
-            { x: -30, opacity: 0 },
-            { x: 0, opacity: 1, duration: 0.5 },
-            '-=0.2'
-          );
-        }
-        const catLinks = categoriesRef.current.querySelectorAll('a');
-        if (catLinks.length > 0) {
-          tl.fromTo(catLinks,
-            { y: 15, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 },
-            '-=0.2'
-          );
-        }
-      }
-    };
-
-    rafId = requestAnimationFrame(animate);
-
-    return () => {
-      isCancelled = true;
-      cancelAnimationFrame(rafId);
-      gsap.killTweensOf('*');
-    };
+    return () => cancelAnimationFrame(raf);
   }, [isOpen, animationsEnabled]);
 
   return (
     <Sheet open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
       <SheetContent
         ref={sheetContentRef}
-        className='w-[250px] sm:w-[300px] overflow-y-auto overflow-x-hidden border-r border-teal-600/10 [&_.lucide-x]:text-teal-600/50 [&_.lucide-x]:hover:text-teal-400 [&_.lucide-x]:transition-colors'
+        className='w-[250px] sm:w-[300px] overflow-y-auto overflow-x-hidden border-r border-teal-600/10 data-[state=open]:animate-none data-[state=closed]:animate-none [&_.lucide-x]:text-teal-600/50 [&_.lucide-x]:hover:text-teal-400 [&_.lucide-x]:transition-colors'
         side='left'
       >
         {/* Dark gradient background */}
@@ -200,6 +145,7 @@ const MobileSidebar = ({ isOpen, onClose, showNav = true, showCategories = true 
             {showCategories && receiveCategories.length > 0 && (
               <div
                 ref={categoriesRef}
+                data-category-nav
                 className={`${showNav ? 'border-t border-teal-600/10 mt-2 pt-5' : ''}`}
               >
                 <p className='categories-label text-[11px] font-semibold text-teal-500/60 uppercase tracking-[0.12em] mb-3 px-3 flex items-center gap-2'>
