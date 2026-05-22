@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Timestamp from 'react-timestamp';
 import * as actions from '../../redux/actions';
 import { sortPosts } from '../../utils/sortPosts';
+import { animateVoteButton } from '../animations/vote-animations';
 import Loading from '../loading/loading';
 
 import { Button } from '@/components/ui/button';
@@ -69,12 +70,14 @@ const PostsPage = () => {
     dispatch(actions.fetchDeletePost(postId));
   };
 
-  const iconThumbsUp = (postId: string) => {
+  const iconThumbsUp = (postId: string, e: React.MouseEvent<HTMLButtonElement>) => {
     dispatch(actions.fetchVotePost(postId, 'upVote'));
+    animateVoteButton(e.currentTarget, 'up');
   };
 
-  const iconThumbsDown = (postId: string) => {
+  const iconThumbsDown = (postId: string, e: React.MouseEvent<HTMLButtonElement>) => {
     dispatch(actions.fetchVotePost(postId, 'downVote'));
+    animateVoteButton(e.currentTarget, 'down');
   };
 
   if (loading) {
@@ -149,7 +152,7 @@ const PostsPage = () => {
                       <Button
                         className='w-18'
                         size='sm'
-                        onClick={() => iconThumbsUp(post.id)}
+                        onClick={(e) => iconThumbsUp(post.id, e)}
                       >
                         <ThumbsUp className='h-4 w-4' />
                       </Button>
@@ -158,7 +161,7 @@ const PostsPage = () => {
                         className='w-18'
                         variant='destructive'
                         size='sm'
-                        onClick={() => iconThumbsDown(post.id)}
+                        onClick={(e) => iconThumbsDown(post.id, e)}
                       >
                         <ThumbsDown className='h-4 w-4' />
                       </Button>
