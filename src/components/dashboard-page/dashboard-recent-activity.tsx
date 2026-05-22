@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { animateRecentActivityRows } from '../animations/recent-activity-animations';
 
 interface Activity {
   id: string;
@@ -16,13 +17,27 @@ interface DashboardRecentActivityProps {
 
 const DashboardRecentActivity = ({ activities }: DashboardRecentActivityProps) => {
   const { t } = useTranslation();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const tl = animateRecentActivityRows(containerRef.current);
+      return () => {
+        tl.kill();
+      };
+    }
+  }, [activities]);
 
   return (
-    <div className='bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6'>
+    <div ref={containerRef}>
+      <div
+        data-recent-activity-card
+        className='bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6'
+      >
       <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
         {t('dashboard.recent-activity')}
       </h3>
-      <div className='overflow-x-auto'>
+      <div data-recent-activity-table-wrapper className='overflow-x-auto'>
         <table className='w-full text-sm'>
           <thead>
             <tr className='border-b border-gray-100 dark:border-gray-700'>
@@ -44,6 +59,7 @@ const DashboardRecentActivity = ({ activities }: DashboardRecentActivityProps) =
             {activities.map((activity, index) => (
               <tr
                 key={index}
+                data-recent-activity-row
                 className='border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors'
               >
                 <td className='py-3 px-4 font-medium'>
@@ -73,6 +89,7 @@ const DashboardRecentActivity = ({ activities }: DashboardRecentActivityProps) =
             ))}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   );
