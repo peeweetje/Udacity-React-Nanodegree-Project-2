@@ -1,5 +1,5 @@
 import React from 'react';
-import { LucideIcon } from 'lucide-react';
+import { LucideIcon, TrendingUp, TrendingDown } from 'lucide-react';
 
 interface DashboardStatCardProps {
   icon: LucideIcon;
@@ -17,7 +17,10 @@ const DashboardStatCard = ({
   trendDirection = 'up',
 }: DashboardStatCardProps) => {
   return (
-    <div className='bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 flex items-center space-x-4'>
+    <div
+      data-dashboard-stat-card
+      className='bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 flex items-center space-x-4'
+    >
       <div className='bg-teal-50 dark:bg-teal-900/50 p-4 rounded-lg'>
         <Icon className='h-8 w-8 text-teal-500' />
       </div>
@@ -30,7 +33,8 @@ const DashboardStatCard = ({
               trendDirection === 'up' ? 'text-green-600' : 'text-red-600'
             }`}
           >
-            {trendDirection === 'up' ? '↑' : '↓'} {trend}
+            {trendDirection === 'up' ? <TrendingUp className='h-3 w-3 inline-block mr-0.5' /> : <TrendingDown className='h-3 w-3 inline-block mr-0.5' />}
+            {trend}
           </p>
         )}
       </div>

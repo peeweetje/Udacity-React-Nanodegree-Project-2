@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -15,6 +15,8 @@ import DashboardSidebar from './dashboard-sidebar';
 import DashboardSearch from './dashboard-search';
 import DashboardStatCard from './dashboard-stat-card';
 import DashboardRecentActivity from './dashboard-recent-activity';
+import gsap from 'gsap';
+import { animateDashboardStats } from '../animations/dashboard-stat-animations';
 import { Post } from '../../types/post';
 
 interface RootState {
@@ -35,11 +37,28 @@ const DashboardPage = () => {
   const categories = useSelector((state: RootState) => state.receiveCategories);
   const [searchQuery, setSearchQuery] = useState('');
   const [notificationsRead, setNotificationsRead] = useState(false);
+  const [animationDone, setAnimationDone] = useState(false);
+  const statsGridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     dispatch(fetchPosts());
     dispatch(fetchCategories());
   }, [dispatch, location.pathname]);
+
+  useEffect(() => {
+    if (statsGridRef.current) {
+      const grid = statsGridRef.current;
+      const tl = animateDashboardStats(grid);
+      tl.eventCallback('onComplete', () => {
+        setAnimationDone(true);
+      });
+      return () => {
+        tl.kill();
+        setAnimationDone(true);
+        gsap.killTweensOf(grid.querySelectorAll('[data-dashboard-stat-card]'));
+      };
+    }
+  }, []);
 
   const activePosts = posts.filter((post) => !post.deleted);
   const hasNotifications = activePosts.length > 0 && !notificationsRead;
@@ -107,9 +126,9 @@ const DashboardPage = () => {
         </header>
 
         {/* Main content */}
-        <main className='flex-1 p-4 md:p-8 overflow-y-auto dark:bg-gray-900'>
+        <main className={`flex-1 p-4 md:p-8 ${animationDone ? 'overflow-y-auto' : 'overflow-hidden'} dark:bg-gray-900`}>
           {/* Stats cards */}
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
+          <div ref={statsGridRef} className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
             <DashboardStatCard
               icon={MessageSquare}
               label={t('dashboard.active-topics')}
