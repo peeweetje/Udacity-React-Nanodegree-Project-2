@@ -40,6 +40,7 @@
 - **Theme Toggle** — switch between Light and Dark mode.
 - Theme preference persists in `localStorage`.
 - Dark mode support added across all dashboard pages using Tailwind's `dark:` variant (`@custom-variant dark`).
+- **Animation Toggle** — a switch to enable or disable interface animations. Affects GSAP animations on the home page, sidebar entrance, mobile sidebar, back button, and animated orbs. Preference is stored in Redux and persists for the session.
 
 ### Recent Activity Table (Dashboard)
 - Displays real post data from the Redux store (title, category, date, status based on vote score).
