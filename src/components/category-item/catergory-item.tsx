@@ -20,6 +20,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { useTranslation } from 'react-i18next';
+import { animateVoteButton } from '../animations/vote-animations';
 
 interface Post {
   id: string;
@@ -41,11 +42,17 @@ interface CategoryItemProps {
 const CategoryItem = ({ post, onDelete, onVote }: CategoryItemProps) => {
   const { t } = useTranslation();
   const handleDelete = () => onDelete(post.id);
-  const handleUpVote = () => onVote(post.id, 'upVote');
-  const handleDownVote = () => onVote(post.id, 'downVote');
+  const handleUpVote = (e: React.MouseEvent<HTMLButtonElement>) => {
+    onVote(post.id, 'upVote');
+    animateVoteButton(e.currentTarget, 'up');
+  };
+  const handleDownVote = (e: React.MouseEvent<HTMLButtonElement>) => {
+    onVote(post.id, 'downVote');
+    animateVoteButton(e.currentTarget, 'down');
+  };
 
   return (
-    <Card className='w-4/5 mx-auto mb-4 dark:bg-gray-800 dark:border-gray-700'>
+    <Card data-category-card className='w-4/5 mx-auto mb-4 dark:bg-gray-800 dark:border-gray-700'>
       <CardHeader>
         <CardTitle>
           <Link

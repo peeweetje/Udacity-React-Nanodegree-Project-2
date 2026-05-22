@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Timestamp from 'react-timestamp';
 import { useTranslation } from 'react-i18next';
+import { animateVoteButton } from '../animations/vote-animations';
 import {
   Card,
   CardContent,
@@ -47,7 +48,7 @@ const SinglePost = ({
   const { t } = useTranslation();
 
   return (
-    <div className='flex flex-col mx-auto w-full  px-4'>
+    <div data-post-detail-card className='flex flex-col mx-auto w-full  px-4'>
       <Card className='flex flex-col w-full mx-auto overflow-hidden dark:bg-gray-800 dark:border-gray-700'>
         <CardHeader className='space-y-2'>
           <CardTitle className='text-xl sm:text-2xl break-words dark:text-white'>
@@ -70,7 +71,7 @@ const SinglePost = ({
             <Button
               className='w-12 sm:w-18'
               size='sm'
-              onClick={() => onUpvote(id)}
+               onClick={(e) => { onUpvote(id); animateVoteButton(e.currentTarget, 'up'); }}
             >
               <ThumbsUp className='w-4 h-4' />
             </Button>
@@ -79,7 +80,7 @@ const SinglePost = ({
               className='w-12 sm:w-18'
               variant='destructive'
               size='sm'
-              onClick={() => onDownvote(id)}
+               onClick={(e) => { onDownvote(id); animateVoteButton(e.currentTarget, 'down'); }}
             >
               <ThumbsDown className='w-4 h-4' />
             </Button>
