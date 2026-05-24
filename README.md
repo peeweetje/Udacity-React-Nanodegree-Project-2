@@ -1,73 +1,163 @@
-## update 2026
+# Git Talks - A Reddit Clone
 
-- Extracted home page GSAP animations into a separate `animations.ts` file.
-- Home page feature cards now use the reusable `Card` UI component (`@/components/ui/card`).
-- Added animated gradient orb background (purple, teal, fuchsia) with floating GSAP animations.
-- Home page cards have staggered entrance animations and lift/shadow effects on hover.
-- PlusCircle icon on "Create a Post" button spins 180° with scale on hover.
-- ArrowRight icon on "View All Posts" button bounces back and forth continuously.
-- "Git Talks" title drops in with a spring overshoot effect on page load.
-- Home page text fully translated to both Dutch and English.
-- Created reusable `HomePageButton` component with icon, label, variant (default/outline/secondary), optional animated arrow, and optional icon ref for GSAP animations.
-- Created reusable `HomePageCard` component with icon (teal-500 color), title, description, and callback ref for animation registration.
-- Added "Go to Dashboard" button on the landing page linking to `/home`.
+A modern Reddit-style application built with React, Redux, and TypeScript. This project is part of the Udacity React Nanodegree program.
 
-### New Dashboard Page (`/home`)
-- Built a full dashboard layout with a fixed teal sidebar and content area.
-- **DashboardSidebar** component with navigation items (Home, Categories, Notifications, Settings, Messages) — each with Lucide icons and active state highlighting.
-- **DashboardSearch** component — reusable search input with search icon, filters posts by title/category in real-time.
-- **DashboardStatCard** component — reusable stat card showing label, value, icon in teal-50 background, and trend indicator (up/down arrow).
-- Four stat cards on the dashboard: Active Topics, New Comments, Trending Categories, Page Views — all pulling data from Redux store.
-- **DashboardRecentActivity** component — table showing the 5 most recent/filtered posts with columns: Topic, Category, Date, Status (Active/Resolved) with status badges and hover row highlighting.
-- Top bar with search input on the left and notification bell + user badge on the right.
-- **Notification bell** with animated red badge count and ping animation; badge hides on hover (marks as read).
-- Posts refetch when navigating back to the dashboard so new posts appear immediately.
+## 🌟 Features
 
-### Notifications Page (`/notifications`)
-- Lists the 10 most recent posts sorted by newest first.
-- Posts with comments show as "X new comments" (blue message icon), new posts show as "New post created" (green plus icon).
-- Each notification links to the corresponding post detail page.
-- Empty state with centered bell icon when no notifications exist.
+### Core Functionality
+- **Posts Management**: Create, read, update, and delete posts
+- **Comments System**: Comment on posts and engage in discussions
+- **Voting System**: Upvote and downvote posts and comments
+- **Categories**: Browse content organized by categories
+- **Search**: Real-time search across posts and categories
 
-### Messages Page (`/messages`)
-- Unified inbox showing all comments across all posts, sorted by newest first.
-- Each message shows the comment author, the post title they commented on, the comment body (2-line clamp), date, and category.
-- Each message links to the post detail page.
-- Empty state when no comments exist.
+### Advanced Features
+- **Dashboard**: Comprehensive analytics and activity overview
+- **Notifications**: Real-time notification system with animated badges
+- **Messages**: Unified inbox for all comments across posts
+- **Settings**: Language switching (English/Dutch) and theme toggle (Light/Dark mode)
+- **Animations**: Smooth GSAP animations throughout the application
 
-### Settings Page (`/settings`)
-- **Language Switcher** — toggle between English and Dutch, using `i18n.changeLanguage()`.
-- **Theme Toggle** — switch between Light and Dark mode.
-- Theme preference persists in `localStorage`.
-- Dark mode support added across all dashboard pages using Tailwind's `dark:` variant (`@custom-variant dark`).
-- **Animation Toggle** — a switch to enable or disable interface animations. Affects GSAP animations on the home page, sidebar entrance, mobile sidebar, back button, and animated orbs. Preference is stored in Redux and persists for the session.
+## 🛠️ Tech Stack
 
-### Recent Activity Table (Dashboard)
-- Displays real post data from the Redux store (title, category, date, status based on vote score).
-- Filters in real-time when typing in the search bar.
+- **Frontend**: React 18, TypeScript, Redux Toolkit
+- **Styling**: Tailwind CSS, shadcn/ui components
+- **Animations**: GSAP (GreenSock Animation Platform)
+- **Build Tool**: Vite
+- **Internationalization**: i18n support (English & Dutch)
+- **Backend**: Node.js Express server (provided API)
 
-## update 2024
+## 📁 Project Structure
 
-- Update project using Vite instead of react-create-app.
-- Refactor styling using `shadcn/ui` and `Tailwind`
-- Adding typescript to the project.
-- Implemented `internationalization` to the project => languages are `dutch` and `english`.
+```
+├── src/
+│   ├── components/          # React components
+│   │   ├── ui/             # Reusable UI components (shadcn)
+│   │   ├── dashboard-page/ # Dashboard components
+│   │   ├── posts-page/     # Posts management
+│   │   ├── animations/     # GSAP animation utilities
+│   │   └── ...             # Other feature components
+│   ├── redux/              # Redux store and slices
+│   ├── types/              # TypeScript type definitions
+│   └── utils/              # Utility functions
+├── server/                 # Backend API server
+├── locales/                # i18n translation files
+└── public/                 # Static assets
+```
 
-## Readable: A Reddit clone
+## 🚀 Getting Started
 
-This is the second project for the Udacity React Nanodegree programm.
-This application is a Reddit clone, made using React and Redux. The users will be able to search for categories, to post content,comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.
+### Prerequisites
+- Node.js (v18 or higher)
+- pnpm (recommended) or npm
 
-Important! The assignment did not specify any use of authentication. From the API provided, each user has access to its own set of posts and comments, and can modify or delete any entry.
+### Installation
 
-## Getting Started
+1. **Clone the repository**
+   ```bash
+   git clone git@github.com:peeweetje/Udacity-React-Nanodegree-Project-2.git
+   cd Udacity-React-Nanodegree-Project-2
+   ```
 
-> - git clone git@github.com:peeweetje/Udacity-React-Nanodegree-Project-2.git
+2. **Install frontend dependencies**
+   ```bash
+   pnpm install
+   ```
 
-> - `pnpm install`
-> - `pnpm start`
+3. **Install backend dependencies**
+   ```bash
+   cd server
+   pnpm install
+   cd ..
+   ```
 
-> - `cd server`
-> - `pnpm install`
-> - To start the server:
-> - `node server.js`
+### Running the Application
+
+1. **Start the backend server** (in one terminal)
+   ```bash
+   cd server
+   node server.js
+   ```
+
+2. **Start the frontend** (in another terminal)
+   ```bash
+   pnpm start
+   ```
+
+3. **Open your browser**
+   - Frontend: `http://localhost:5173`
+   - Backend API: `http://localhost:8080`
+
+## 🎨 Key Features Breakdown
+
+### Dashboard (`/home`)
+- **Sidebar Navigation**: Fixed teal sidebar with navigation items
+- **Stat Cards**: Display Active Topics, New Comments, Trending Categories, Page Views
+- **Recent Activity Table**: Shows latest posts with filtering capabilities
+- **Search Functionality**: Real-time post filtering
+- **Notification System**: Animated bell with badge count
+
+### Posts Page
+- Full CRUD operations for posts
+- Category-based organization
+- Voting system for posts and comments
+- Edit and delete functionality
+
+### Notifications (`/notifications`)
+- Lists 10 most recent posts
+- Shows new comments and new posts
+- Direct links to post details
+- Empty state handling
+
+### Messages (`/messages`)
+- Unified inbox for all comments
+- Shows comment author, post title, and content preview
+- Sorted by newest first
+- Links to corresponding posts
+
+### Settings (`/settings`)
+- **Language Switcher**: Toggle between English and Dutch
+- **Theme Toggle**: Switch between Light and Dark modes
+- **Animation Toggle**: Enable/disable interface animations
+- Preferences persist in localStorage
+
+## 🎯 Recent Updates (2026)
+
+### Performance & Architecture
+- ✅ Migrated from Create React App to Vite for faster builds
+- ✅ Implemented TypeScript for better type safety
+- ✅ Refactored to use shadcn/ui and Tailwind CSS
+
+### User Experience
+- ✅ Added comprehensive i18n support (English/Dutch)
+- ✅ Implemented dark mode with smooth transitions
+- ✅ Enhanced animations with GSAP for better UX
+- ✅ Created reusable components for consistency
+
+### New Components
+- ✅ `HomePageButton` - Reusable button with variants
+- ✅ `HomePageCard` - Animated feature cards
+- ✅ `DashboardStatCard` - Analytics display cards
+- ✅ `DashboardRecentActivity` - Activity table
+- ✅ `NotificationBell` - Animated notification system
+
+## 📝 Important Notes
+
+- **No Authentication**: The application doesn't implement user authentication. Each user has access to all posts and comments through the provided API.
+- **API Server**: The backend server must be running for the application to function properly.
+- **Data Persistence**: Data is stored in memory on the server (restarts will clear data).
+
+## 🤝 Contributing
+
+This is an educational project for the Udacity React Nanodegree. Feel free to explore the codebase and learn from it.
+
+## 📄 License
+
+This project is part of the Udacity React Nanodegree program and is intended for educational purposes.
+
+## 🙏 Acknowledgments
+
+- Udacity for the React Nanodegree program
+- shadcn/ui for the excellent component library
+- GSAP for amazing animation capabilities
+- The React and TypeScript communities
