@@ -20,7 +20,7 @@ A modern Reddit-style application built with React, Redux, and TypeScript. This 
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React 18, TypeScript, Redux Toolkit
+- **Frontend**: React 19, TypeScript, Redux Toolkit
 - **Styling**: Tailwind CSS, shadcn/ui components
 - **Animations**: GSAP (GreenSock Animation Platform)
 - **Build Tool**: Vite
