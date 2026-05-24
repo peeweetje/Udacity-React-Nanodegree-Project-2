@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import gsap from 'gsap';
 import { animateRecentActivityRows } from '../animations/recent-activity-animations';
 
 interface Activity {
@@ -18,15 +20,24 @@ interface DashboardRecentActivityProps {
 const DashboardRecentActivity = ({ activities }: DashboardRecentActivityProps) => {
   const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
+  const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
 
   useEffect(() => {
     if (containerRef.current) {
+      if (!animationsEnabled) {
+        // Show all rows immediately without animation
+        const card = containerRef.current.querySelector('[data-recent-activity-card]') as HTMLElement | null;
+        const rows = containerRef.current.querySelectorAll('[data-recent-activity-row]');
+        if (card) gsap.set(card, { opacity: 1 });
+        if (rows.length > 0) gsap.set(rows, { scale: 1, opacity: 1 });
+        return;
+      }
       const tl = animateRecentActivityRows(containerRef.current);
       return () => {
         tl.kill();
       };
     }
-  }, [activities]);
+  }, [activities, animationsEnabled]);
 
   return (
     <div ref={containerRef}>

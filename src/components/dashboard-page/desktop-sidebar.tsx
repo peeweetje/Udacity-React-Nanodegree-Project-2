@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { Home, Bell, Settings, MessageSquare, List, User, LayoutDashboard } from 'lucide-react';
+import gsap from 'gsap';
 import { animateSidebar } from '../animations/sidebar-animations';
 
 interface NavItem {
@@ -27,15 +29,25 @@ const DesktopSidebar = () => {
   const logoRef = useRef<HTMLHeadingElement>(null);
   const navRef = useRef<HTMLElement>(null);
 
+  const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
+
   useEffect(() => {
     if (!sidebarRef.current) return;
+
+    if (!animationsEnabled) {
+      gsap.set(logoRef.current, { x: 0, opacity: 1 });
+      if (navRef.current) {
+        gsap.set(navRef.current.querySelectorAll('a'), { x: 0, opacity: 1 });
+      }
+      return;
+    }
 
     animateSidebar({
       containerRef: sidebarRef.current,
       logoRef: logoRef.current,
       navRef: navRef.current,
     });
-  }, []);
+  }, [animationsEnabled]);
 
   return (
     <aside ref={sidebarRef} className='hidden md:flex w-64 bg-teal-500 min-h-screen flex-col py-8 px-4'>
