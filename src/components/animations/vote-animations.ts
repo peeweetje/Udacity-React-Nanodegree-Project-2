@@ -5,8 +5,11 @@ import gsap from 'gsap';
  * to give visual feedback for thumbs up/down votes.
  * @param buttonElement - the button element that was clicked
  * @param direction - 'up' for thumbs up (green pulse) or 'down' for thumbs down (red pulse)
+ * @param enabled - whether animations are enabled (skips animation if false)
  */
-export function animateVoteButton(buttonElement: HTMLElement, direction: 'up' | 'down') {
+export function animateVoteButton(buttonElement: HTMLElement, direction: 'up' | 'down', enabled: boolean = true) {
+  if (!enabled) return;
+
   // Kill any existing tweens on this element to avoid conflicts
   gsap.killTweensOf(buttonElement);
 

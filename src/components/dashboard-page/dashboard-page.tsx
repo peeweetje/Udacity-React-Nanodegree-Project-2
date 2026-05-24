@@ -27,6 +27,9 @@ interface RootState {
   getComments: {
     comments: Array<any>;
   };
+  animations: {
+    enabled: boolean;
+  };
 }
 
 const DashboardPage = () => {
@@ -39,6 +42,7 @@ const DashboardPage = () => {
   const [notificationsRead, setNotificationsRead] = useState(false);
   const [animationDone, setAnimationDone] = useState(false);
   const statsGridRef = useRef<HTMLDivElement>(null);
+  const animationsEnabled = useSelector((state: RootState) => state.animations?.enabled ?? true);
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -47,6 +51,13 @@ const DashboardPage = () => {
 
   useEffect(() => {
     if (statsGridRef.current) {
+      if (!animationsEnabled) {
+        // Show stat cards immediately without animation
+        const cards = statsGridRef.current.querySelectorAll('[data-dashboard-stat-card]');
+        gsap.set(cards, { y: 0, opacity: 1 });
+        setAnimationDone(true);
+        return;
+      }
       const grid = statsGridRef.current;
       const tl = animateDashboardStats(grid);
       tl.eventCallback('onComplete', () => {
@@ -58,7 +69,7 @@ const DashboardPage = () => {
         gsap.killTweensOf(grid.querySelectorAll('[data-dashboard-stat-card]'));
       };
     }
-  }, []);
+  }, [animationsEnabled]);
 
   const activePosts = posts.filter((post) => !post.deleted);
   const hasNotifications = activePosts.length > 0 && !notificationsRead;

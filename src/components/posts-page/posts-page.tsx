@@ -52,6 +52,7 @@ const PostsPage = () => {
   const dispatch = useDispatch<any>();
   const posts = useSelector((state: RootState) => state.posts.posts);
   const sort = useSelector((state: RootState) => state.sort.sort);
+  const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
   const [loading, setLoading] = useState<boolean>(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -72,12 +73,12 @@ const PostsPage = () => {
 
   const iconThumbsUp = (postId: string, e: React.MouseEvent<HTMLButtonElement>) => {
     dispatch(actions.fetchVotePost(postId, 'upVote'));
-    animateVoteButton(e.currentTarget, 'up');
+    animateVoteButton(e.currentTarget, 'up', animationsEnabled);
   };
 
   const iconThumbsDown = (postId: string, e: React.MouseEvent<HTMLButtonElement>) => {
     dispatch(actions.fetchVotePost(postId, 'downVote'));
-    animateVoteButton(e.currentTarget, 'down');
+    animateVoteButton(e.currentTarget, 'down', animationsEnabled);
   };
 
   if (loading) {
