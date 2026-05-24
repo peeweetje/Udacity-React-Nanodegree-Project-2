@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Timestamp from 'react-timestamp';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { animateVoteButton } from '../animations/vote-animations';
 import {
   Card,
@@ -46,6 +47,7 @@ const SinglePost = ({
 }: SinglePostProps) => {
   const { id, title, author, timestamp, body, voteScore } = post;
   const { t } = useTranslation();
+  const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
 
   return (
     <div data-post-detail-card className='flex flex-col mx-auto w-full  px-4'>
@@ -71,7 +73,7 @@ const SinglePost = ({
             <Button
               className='w-12 sm:w-18'
               size='sm'
-               onClick={(e) => { onUpvote(id); animateVoteButton(e.currentTarget, 'up'); }}
+               onClick={(e) => { onUpvote(id); animateVoteButton(e.currentTarget, 'up', animationsEnabled); }}
             >
               <ThumbsUp className='w-4 h-4' />
             </Button>
@@ -80,7 +82,7 @@ const SinglePost = ({
               className='w-12 sm:w-18'
               variant='destructive'
               size='sm'
-               onClick={(e) => { onDownvote(id); animateVoteButton(e.currentTarget, 'down'); }}
+               onClick={(e) => { onDownvote(id); animateVoteButton(e.currentTarget, 'down', animationsEnabled); }}
             >
               <ThumbsDown className='w-4 h-4' />
             </Button>
