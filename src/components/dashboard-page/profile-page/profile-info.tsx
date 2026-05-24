@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Mail, Calendar, FileText, MessageSquare, ThumbsUp } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import gsap from 'gsap';
 
 interface ProfileInfoProps {
@@ -20,9 +21,14 @@ const ProfileInfo = ({
 }: ProfileInfoProps) => {
   const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
+  const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      if (!animationsEnabled) {
+        gsap.set('.profile-info-item', { x: 0, opacity: 1 });
+        return;
+      }
       gsap.fromTo(
         '.profile-info-item',
         { x: -40, opacity: 0 },
@@ -38,7 +44,7 @@ const ProfileInfo = ({
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [animationsEnabled]);
 
   return (
     <div ref={containerRef} className='space-y-4'>

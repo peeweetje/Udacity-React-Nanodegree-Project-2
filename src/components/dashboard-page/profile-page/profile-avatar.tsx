@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { User } from 'lucide-react';
+import { useSelector } from 'react-redux';
 import gsap from 'gsap';
 
 interface ProfileAvatarProps {
@@ -9,9 +10,16 @@ interface ProfileAvatarProps {
 const ProfileAvatar = ({ userName }: ProfileAvatarProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const userHandle = `@${userName.toLowerCase().replace(/\s+/g, '')}`;
+  const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      if (!animationsEnabled) {
+        gsap.set('.profile-avatar-icon', { scale: 1, opacity: 1, rotation: 0 });
+        gsap.set('.profile-avatar-name', { y: 0, opacity: 1 });
+        gsap.set('.profile-avatar-handle', { y: 0, opacity: 1 });
+        return;
+      }
       gsap.fromTo(
         '.profile-avatar-icon',
         { scale: 0, opacity: 0, rotation: -180 },
@@ -30,7 +38,7 @@ const ProfileAvatar = ({ userName }: ProfileAvatarProps) => {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [animationsEnabled]);
 
   return (
     <div ref={containerRef} className='flex flex-col items-center mb-8'>
