@@ -155,9 +155,3 @@ This is an educational project for the Udacity React Nanodegree. Feel free to ex
 
 This project is part of the Udacity React Nanodegree program and is intended for educational purposes.
 
-## 🙏 Acknowledgments
-
-- Udacity for the React Nanodegree program
-- shadcn/ui for the excellent component library
-- GSAP for amazing animation capabilities
-- The React and TypeScript communities
