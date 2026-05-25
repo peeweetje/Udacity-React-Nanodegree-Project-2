@@ -1,17 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Sun, Moon, Languages, Settings, Zap } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
+import gsap from 'gsap';
 import { fetchPosts, fetchCategories, toggleAnimations } from '../../redux/actions';
 import { useLocation } from 'react-router-dom';
 import DashboardSidebar from './dashboard-sidebar';
 import BackButton from '@/components/ui/back-button';
+import { animateSettingsCards, animateSettingsCardHover } from '../animations/settings-animations';
 
 const SettingsPage = () => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch<any>();
   const location = useLocation();
   const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
+  const cardsContainerRef = useRef<HTMLDivElement>(null);
+  const languageCardRef = useRef<HTMLDivElement>(null);
+  const themeCardRef = useRef<HTMLDivElement>(null);
+  const animationsCardRef = useRef<HTMLDivElement>(null);
 
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     return (localStorage.getItem('theme') as 'light' | 'dark') || 'light';
@@ -32,6 +38,27 @@ const SettingsPage = () => {
     document.documentElement.classList.toggle('dark', theme === 'dark');
     localStorage.setItem('theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      animateSettingsCards(animationsEnabled);
+    }, cardsContainerRef);
+
+    return () => ctx.revert();
+  }, [animationsEnabled]);
+
+  useEffect(() => {
+    if (!animationsEnabled) return;
+    const cards = [languageCardRef, themeCardRef, animationsCardRef]
+      .map(ref => ref.current)
+      .filter(Boolean) as Element[];
+
+    const hoverCleanups = cards.map(card => animateSettingsCardHover(card));
+
+    return () => {
+      hoverCleanups.forEach(cleanup => cleanup());
+    };
+  }, [animationsEnabled]);
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
@@ -60,9 +87,9 @@ const SettingsPage = () => {
         </header>
 
         <main className='flex-1 p-4 md:p-8 overflow-y-auto'>
-          <div className='max-w-2xl mx-auto space-y-6 md:space-y-8'>
+          <div ref={cardsContainerRef} className='max-w-2xl mx-auto space-y-6 md:space-y-8'>
             {/* Language Section */}
-            <div className='bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-4 md:p-6'>
+            <div ref={languageCardRef} className='settings-card bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-4 md:p-6'>
               <div className='flex items-center space-x-3 mb-6'>
                 <Languages className='h-6 w-6 text-teal-500' />
                 <h2 className='text-lg font-semibold text-gray-900 dark:text-white'>
@@ -94,7 +121,7 @@ const SettingsPage = () => {
             </div>
 
             {/* Theme Section */}
-            <div className='bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-4 md:p-6'>
+            <div ref={themeCardRef} className='settings-card bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-4 md:p-6'>
               <div className='flex items-center space-x-3 mb-6'>
                 {theme === 'light' ? (
                   <Sun className='h-6 w-6 text-teal-500' />
@@ -132,7 +159,7 @@ const SettingsPage = () => {
             </div>
 
             {/* Animations Section */}
-            <div className='bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-4 md:p-6'>
+            <div ref={animationsCardRef} className='settings-card bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-4 md:p-6'>
               <div className='flex items-center justify-between'>
                 <div className='flex items-center space-x-3'>
                   <Zap className='h-6 w-6 text-teal-500' />
