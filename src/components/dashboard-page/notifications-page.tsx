@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { MessageSquare, User, PlusCircle, Bell } from 'lucide-react';
+import gsap from 'gsap';
 import { fetchPosts } from '../../redux/actions';
 import DashboardSidebar from './dashboard-sidebar';
 import BackButton from '@/components/ui/back-button';
 import { Post } from '../../types/post';
+import { animateNotificationCards, animateEmptyState } from '../animations/notifications-animations';
 
 interface RootState {
   posts: {
@@ -18,6 +20,9 @@ const NotificationsPage = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch<any>();
   const posts = useSelector((state: RootState) => state.posts.posts);
+  const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const emptyStateRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -49,6 +54,22 @@ const NotificationsPage = () => {
       };
     });
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      animateNotificationCards(animationsEnabled);
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [posts, animationsEnabled, notifications.length]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      animateEmptyState(animationsEnabled);
+    }, emptyStateRef);
+
+    return () => ctx.revert();
+  }, [notifications.length, animationsEnabled]);
+
   return (
     <div className='flex min-h-screen bg-gray-50 overflow-x-hidden'>
       <DashboardSidebar />
@@ -67,7 +88,7 @@ const NotificationsPage = () => {
 
         <main className='flex-1 p-4 md:p-8 overflow-y-auto dark:bg-gray-900'>
           {notifications.length === 0 && (
-            <div className='text-center py-20'>
+            <div ref={emptyStateRef} className='notification-empty-state opacity-0 text-center py-20'>
               <Bell className='h-16 w-16 text-gray-300 mx-auto mb-4' />
               <p className='text-gray-500 text-lg'>
                 No notifications yet
@@ -75,14 +96,14 @@ const NotificationsPage = () => {
             </div>
           )}
 
-          <div className='space-y-4 max-w-3xl mx-auto'>
+          <div ref={containerRef} className='space-y-4 max-w-3xl mx-auto'>
             {notifications.map((notification) => {
               const Icon = notification.icon;
               return (
                 <Link
                   key={notification.id}
                   to={`/${notification.category}/${notification.id}`}
-                  className='block bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-4 md:p-5 hover:shadow-md hover:border-teal-200 dark:hover:border-teal-600 transition-all duration-200'
+                  className='notification-card opacity-0 block bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-4 md:p-5 hover:shadow-md hover:border-teal-200 dark:hover:border-teal-600 transition-all duration-200'
                 >
                   <div className='flex items-start space-x-3 md:space-x-4'>
                     <div className={`${notification.iconBg} p-2 md:p-3 rounded-full flex-shrink-0`}>
