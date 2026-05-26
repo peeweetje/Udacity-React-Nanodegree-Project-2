@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { PlusCircle } from 'lucide-react';
+import gsap from 'gsap';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -16,6 +17,7 @@ import * as actions from '../../redux/actions';
 import { useTranslation } from 'react-i18next';
 import { Post } from '../../types/post';
 import { VoteOption } from '../../utils/api';
+import { animateCards, animateCardHover } from '../animations/card-animations';
 
 interface SortState {
   value: string;
@@ -37,6 +39,8 @@ const Categories = () => {
   const sort = useSelector((state: RootState) => state.sort.sort);
   const { category: categoryName } = useParams<{ category: string }>();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
+  const listContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (categoryName) {
@@ -51,6 +55,23 @@ const Categories = () => {
   const handleVotePost = (postId: string, option: VoteOption) => {
     dispatch(actions.fetchVotePost(postId, option));
   };
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      animateCards('.category-post-card', animationsEnabled, 0.2, 0.3);
+    }, listContainerRef);
+
+    return () => ctx.revert();
+  }, [animationsEnabled, posts]);
+
+  useEffect(() => {
+    if (!animationsEnabled) return;
+    const cards = listContainerRef.current?.querySelectorAll('.category-post-card');
+    if (!cards) return;
+    const hoverCleanups = Array.from(cards).map(card => animateCardHover(card));
+    return () => {
+      hoverCleanups.forEach(cleanup => cleanup());
+    };
+  }, [animationsEnabled, posts]);
 
   const formattedCategoryName = categoryName
     ? categoryName.charAt(0).toUpperCase() + categoryName.slice(1)
@@ -92,7 +113,7 @@ const Categories = () => {
           </div>
         </div>
 
-        <div className='mt-4 space-y-4'>
+        <div ref={listContainerRef} className='mt-4 space-y-4'>
           {filteredAndSortedPosts.length > 0 ? (
             filteredAndSortedPosts.map((post) => (
               <CategoryItem
