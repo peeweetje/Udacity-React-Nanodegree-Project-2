@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Timestamp from 'react-timestamp';
+import gsap from 'gsap';
 import * as actions from '../../redux/actions';
 import { sortPosts } from '../../utils/sortPosts';
 import { animateVoteButton } from '../animations/vote-animations';
+import { animateCards, animateCardHover } from '../animations/card-animations';
 import Loading from '../loading/loading';
 
 import { Button } from '@/components/ui/button';
@@ -81,6 +83,27 @@ const PostsPage = () => {
     animateVoteButton(e.currentTarget, 'down', animationsEnabled);
   };
 
+  const postsContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (loading) return;
+    const ctx = gsap.context(() => {
+      animateCards('.post-card', animationsEnabled, 0.2, 0.4);
+    }, postsContainerRef);
+
+    return () => ctx.revert();
+  }, [animationsEnabled, posts, loading]);
+
+  useEffect(() => {
+    if (loading || !animationsEnabled) return;
+    const cards = postsContainerRef.current?.querySelectorAll('.post-card');
+    if (!cards) return;
+    const hoverCleanups = Array.from(cards).map(card => animateCardHover(card));
+    return () => {
+      hoverCleanups.forEach(cleanup => cleanup());
+    };
+  }, [animationsEnabled, posts, loading]);
+
   if (loading) {
     return <Loading />;
   }
@@ -114,14 +137,14 @@ const PostsPage = () => {
           <Menu />
         </div>
 
-        <div className='grid gap-6 mt-8 w-full md:w-4/5 mx-auto'>
+        <div ref={postsContainerRef} className='grid gap-6 mt-8 w-full md:w-4/5 mx-auto'>
           {posts &&
             posts.length > 0 &&
             sortPosts(
               posts.filter((post) => !post.deleted),
               sort.value
             ).map((post) => (
-              <Card className='w-full dark:bg-gray-800 dark:border-gray-700' key={post.id}>
+              <Card className='post-card w-full dark:bg-gray-800 dark:border-gray-700' key={post.id}>
                 <CardHeader>
                   <CardTitle>
                     <Link

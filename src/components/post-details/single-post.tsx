@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Timestamp from 'react-timestamp';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { animateVoteButton } from '../animations/vote-animations';
+import { animateCardHover } from '../animations/card-animations';
 import {
   Card,
   CardContent,
@@ -48,10 +49,17 @@ const SinglePost = ({
   const { id, title, author, timestamp, body, voteScore } = post;
   const { t } = useTranslation();
   const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!animationsEnabled || !cardRef.current) return;
+    const cleanup = animateCardHover(cardRef.current);
+    return () => cleanup();
+  }, [animationsEnabled]);
 
   return (
     <div data-post-detail-card className='flex flex-col mx-auto w-full  px-4'>
-      <Card className='flex flex-col w-full mx-auto overflow-hidden dark:bg-gray-800 dark:border-gray-700'>
+      <Card ref={cardRef} className='post-detail-card flex flex-col w-full mx-auto overflow-hidden dark:bg-gray-800 dark:border-gray-700'>
         <CardHeader className='space-y-2'>
           <CardTitle className='text-xl sm:text-2xl break-words dark:text-white'>
             {title}

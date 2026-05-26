@@ -30,7 +30,7 @@ const SingleComment = ({ comment, onUpvote, onDownvote, onDelete }: SingleCommen
 
   return (
     <div data-post-detail-card className=' flex flex-col w-full md:w-3/4 mx-auto mt-8 px-4'>
-      <Card className='mb-4 flex flex-col dark:bg-gray-800 dark:border-gray-700'>
+      <Card className='comment-card mb-4 flex flex-col dark:bg-gray-800 dark:border-gray-700'>
         <CardContent className='p-4 flex flex-col h-full'>
           <div className='flex flex-col md:flex-row md:items-center md:justify-between mb-2'>
             <div className='flex items-center space-x-2 mb-2 sm:mb-0'>
