@@ -52,7 +52,7 @@ const CategoryItem = ({ post, onDelete, onVote }: CategoryItemProps) => {
   };
 
   return (
-    <Card data-category-card className='w-4/5 mx-auto mb-4 dark:bg-gray-800 dark:border-gray-700'>
+    <Card data-category-card className='category-post-card w-4/5 mx-auto mb-4 dark:bg-gray-800 dark:border-gray-700'>
       <CardHeader>
         <CardTitle>
           <Link

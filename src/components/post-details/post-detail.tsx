@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import gsap from 'gsap';
 import {
   fetchSinglePost,
   fetchComments,
@@ -33,6 +34,7 @@ import BackButton from '@/components/ui/back-button';
 import SinglePost from './single-post';
 import SingleComment from './single-comment';
 import { Post } from '../../types/post';
+import { animateCards, animateCardHover } from '../animations/card-animations';
 
 interface Comment {
   id: string;
@@ -74,6 +76,8 @@ const PostDetail= () => {
     (state: RootState) => state.getComments.comments
   );
   const sort = useSelector((state: RootState) => state.sort.sort);
+  const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
+  const contentContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (post_id) {
@@ -157,6 +161,25 @@ const PostDetail= () => {
     (post) => !post.deleted && Object.keys(post).length > 0 && !post.error
   );
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      animateCards('.comment-card', animationsEnabled, 0.15, 0.4);
+      animateCards('.add-comment-card', animationsEnabled, 0.15, 0.5);
+    }, contentContainerRef);
+
+    return () => ctx.revert();
+  }, [animationsEnabled, comments]);
+
+  useEffect(() => {
+    if (!animationsEnabled) return;
+    const cards = contentContainerRef.current?.querySelectorAll('.comment-card, .add-comment-card');
+    if (!cards) return;
+    const hoverCleanups = Array.from(cards).map(card => animateCardHover(card));
+    return () => {
+      hoverCleanups.forEach(cleanup => cleanup());
+    };
+  }, [animationsEnabled, comments]);
+
   const sortedComments = comments
     ?.filter((comment) => !comment.deleted && !comment.parentDeleted)
     .sort((a, b) => {
@@ -186,7 +209,7 @@ const PostDetail= () => {
           <BackButton />
         </div>
         <Menu />
-        <div className='w-4/5 mx-auto'>
+        <div ref={contentContainerRef} className='w-4/5 mx-auto'>
           {filteredPosts?.map((post) => (
             <SinglePost
               key={post.id}
@@ -210,7 +233,7 @@ const PostDetail= () => {
             ))}
 
             {filteredPosts?.length > 0 ? (
-              <Card className='mt-8 dark:bg-gray-800 dark:border-gray-700'>
+              <Card className='add-comment-card mt-8 dark:bg-gray-800 dark:border-gray-700'>
                 <CardHeader>
                   <CardTitle className='dark:text-white'>{t('postDetails.add-comment')}</CardTitle>
                 </CardHeader>
