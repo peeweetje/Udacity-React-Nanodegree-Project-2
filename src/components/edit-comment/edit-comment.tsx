@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEditComment, fetchComment } from '../../redux/actions';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -17,6 +17,8 @@ import { Label } from '@/components/ui/label';
 import { Edit } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import BackButton from '@/components/ui/back-button';
+import gsap from 'gsap';
+import { animateEditCommentCard } from '../animations/edit-form-animations';
 
 interface Comment {
   id: string;
@@ -38,6 +40,8 @@ const EditComment = () => {
   const receiveComment = useSelector(
     (state: RootState) => state.receiveComment
   );
+  const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const commentId = params?.commentId;
@@ -52,6 +56,14 @@ const EditComment = () => {
       setCommentContent(receiveComment.body || '');
     }
   }, [receiveComment]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      animateEditCommentCard(animationsEnabled);
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [animationsEnabled]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -83,55 +95,57 @@ const EditComment = () => {
         <div className='mb-4'>
           <BackButton />
         </div>
-        <Card className='w-full max-w-md mx-auto dark:bg-gray-800 dark:border-gray-700'>
-          <CardHeader>
-            <CardTitle className='text-2xl font-bold text-center text-primary dark:text-white'>
-              {t('editComment.edit-comment')}
-            </CardTitle>
-            <CardDescription className='text-center dark:text-gray-400'>
-              {t('editComment.edit-description')}
-            </CardDescription>
-          </CardHeader>
-          <form onSubmit={handleSubmit}>
-            <CardContent className='space-y-4'>
-              <div className='space-y-2'>
-                <Label  htmlFor='commentAuthor'>
-                  {t('editComment.label-author')}
-                </Label>
-                <Input
-                  className='border-teal-200'
-                  id='commentAuthor'
-                  name='commentAuthor'
-                  value={commentAuthor}
-                  onChange={handleInputChange}
-                  required
-                  aria-required='true'
-                />
-              </div>
-              <div className='space-y-2'>
-                <Label htmlFor='commentContent'>
-                  {t('editComment.label-content')}
-                </Label>
-                <Textarea
-                  className='border-teal-200'
-                  id='commentContent'
-                  name='commentContent'
-                  value={commentContent}
-                  onChange={handleInputChange}
-                  rows={6}
-                  required
-                  aria-required='true'
-                />
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Button type='submit' className='w-full'>
-                <Edit className='w-4 h-4 mr-2' aria-hidden='true' />
-                <span> {t('editComment.button-edit')}</span>
-              </Button>
-            </CardFooter>
-          </form>
-        </Card>
+        <div ref={containerRef}>
+          <Card className='edit-comment-card w-full max-w-md mx-auto dark:bg-gray-800 dark:border-gray-700'>
+            <CardHeader>
+              <CardTitle className='text-2xl font-bold text-center text-primary dark:text-white'>
+                {t('editComment.edit-comment')}
+              </CardTitle>
+              <CardDescription className='text-center dark:text-gray-400'>
+                {t('editComment.edit-description')}
+              </CardDescription>
+            </CardHeader>
+            <form onSubmit={handleSubmit}>
+              <CardContent className='space-y-4'>
+                <div className='space-y-2'>
+                  <Label  htmlFor='commentAuthor'>
+                    {t('editComment.label-author')}
+                  </Label>
+                  <Input
+                    className='border-teal-200'
+                    id='commentAuthor'
+                    name='commentAuthor'
+                    value={commentAuthor}
+                    onChange={handleInputChange}
+                    required
+                    aria-required='true'
+                  />
+                </div>
+                <div className='space-y-2'>
+                  <Label htmlFor='commentContent'>
+                    {t('editComment.label-content')}
+                  </Label>
+                  <Textarea
+                    className='border-teal-200'
+                    id='commentContent'
+                    name='commentContent'
+                    value={commentContent}
+                    onChange={handleInputChange}
+                    rows={6}
+                    required
+                    aria-required='true'
+                  />
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button type='submit' className='w-full'>
+                  <Edit className='w-4 h-4 mr-2' aria-hidden='true' />
+                  <span> {t('editComment.button-edit')}</span>
+                </Button>
+              </CardFooter>
+            </form>
+          </Card>
+        </div>
       </main>
     </div>
   );

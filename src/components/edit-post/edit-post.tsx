@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEditPost, fetchSinglePost } from '../../redux/actions';
@@ -26,6 +26,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Edit } from 'lucide-react';
 import BackButton from '@/components/ui/back-button';
 import HamburgerButton from '@/components/ui/hamburger-button';
+import gsap from 'gsap';
+import { animateEditPostCard } from '../animations/edit-form-animations';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -66,6 +68,8 @@ const EditPost = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const post = useSelector((state: RootState) =>
     state.posts.posts.find((p) => p.id === postId)
@@ -103,6 +107,15 @@ const EditPost = () => {
     }
   }, [post, isLoading, form]);
 
+  useEffect(() => {
+    if (isLoading) return;
+    const ctx = gsap.context(() => {
+      animateEditPostCard(animationsEnabled);
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [animationsEnabled, isLoading]);
+
   const onSubmit = async (values: FormValues) => {
     if (!postId) return;
     const data = {
@@ -139,91 +152,93 @@ const EditPost = () => {
             {t('editPost.edit-post')}
           </h1>
         </div>
-        <div className='max-w-2xl mx-auto bg-card bg-neutral-100 dark:bg-gray-800 p-8 rounded-lg shadow-inner dark:border dark:border-gray-700'>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-              <FormField
-                control={form.control}
-                name='postCategory'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('editPost.category')}</FormLabel>
-                    <Select onValueChange={field.onChange} value={field.value}>
+        <div ref={containerRef}>
+          <div className='edit-post-card max-w-2xl mx-auto bg-card bg-neutral-100 dark:bg-gray-800 p-8 rounded-lg shadow-inner dark:border dark:border-gray-700'>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+                <FormField
+                  control={form.control}
+                  name='postCategory'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('editPost.category')}</FormLabel>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue
+                              placeholder={t('editPost.placeholder-category')}
+                            />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {options.map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                              {option.text}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name='postTitle'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('editPost.label-title')}</FormLabel>
                       <FormControl>
-                        <SelectTrigger>
-                          <SelectValue
-                            placeholder={t('editPost.placeholder-category')}
-                          />
-                        </SelectTrigger>
+                        <Input
+                          className='border-teal-200'
+                          placeholder={t('editPost.label-title')}
+                          {...field}
+                        />
                       </FormControl>
-                      <SelectContent>
-                        {options.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.text}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='postTitle'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('editPost.label-title')}</FormLabel>
-                    <FormControl>
-                      <Input
-                        className='border-teal-200'
-                        placeholder={t('editPost.label-title')}
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='postAuthor'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('editPost.label-author')}</FormLabel>
-                    <FormControl>
-                      <Input
-                        className='border-teal-200'
-                        placeholder={t('editPost.label-author')}
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='postContent'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('editPost.label-content')}</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder={t('editPost.placeholder-text-area')}
-                        className='resize-none border-teal-200'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type='submit' className='w-32'>
-                <Edit className='mr-2 h-4 w-4' /> {t('editPost.button-edit')}
-              </Button>
-            </form>
-          </Form>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name='postAuthor'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('editPost.label-author')}</FormLabel>
+                      <FormControl>
+                        <Input
+                          className='border-teal-200'
+                          placeholder={t('editPost.label-author')}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name='postContent'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('editPost.label-content')}</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder={t('editPost.placeholder-text-area')}
+                          className='resize-none border-teal-200'
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type='submit' className='w-32'>
+                  <Edit className='mr-2 h-4 w-4' /> {t('editPost.button-edit')}
+                </Button>
+              </form>
+            </Form>
+          </div>
         </div>
       </div>
     </div>
