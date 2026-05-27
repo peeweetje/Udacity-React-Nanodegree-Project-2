@@ -41,6 +41,8 @@ const Categories = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
   const listContainerRef = useRef<HTMLDivElement>(null);
+  const categoryCardContainerRef = useRef<HTMLDivElement>(null);
+  const addPostBtnContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (categoryName) {
@@ -61,7 +63,9 @@ const Categories = () => {
     }, listContainerRef);
 
     return () => ctx.revert();
-  }, [animationsEnabled, posts]);
+  }, [animationsEnabled, posts.length]);
+  // Note: Only depends on posts.length (triggers when posts are added/removed), not the full posts array.
+  // This prevents re-animation on vote because voteScore changes don't affect array length.
 
   useEffect(() => {
     if (!animationsEnabled) return;
@@ -71,7 +75,26 @@ const Categories = () => {
     return () => {
       hoverCleanups.forEach(cleanup => cleanup());
     };
-  }, [animationsEnabled, posts]);
+  }, [animationsEnabled]);
+  // Note: Only depends on animationsEnabled, not posts, so voting doesn't re-attach hover listeners.
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      animateCards('.formatted-category-card', animationsEnabled, 0.2, 0.3);
+    }, categoryCardContainerRef);
+
+    return () => ctx.revert();
+  }, [animationsEnabled]);
+  // Note: Only depends on animationsEnabled, not posts, so voting doesn't re-trigger the animation.
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      animateCards('.add-post-btn', animationsEnabled, 0.2, 0.5);
+    }, addPostBtnContainerRef);
+
+    return () => ctx.revert();
+  }, [animationsEnabled]);
+  // Animates the add post button on mount.
 
   const formattedCategoryName = categoryName
     ? categoryName.charAt(0).toUpperCase() + categoryName.slice(1)
@@ -102,8 +125,8 @@ const Categories = () => {
           <div className='mt-4 mb-6 flex justify-center'>
             <Menu />
           </div>
-          <div className='flex justify-center'>
-            <Card className='w-auto dark:bg-gray-800 dark:border-gray-700'>
+          <div ref={categoryCardContainerRef} className='flex justify-center'>
+            <Card className='formatted-category-card w-auto dark:bg-gray-800 dark:border-gray-700'>
               <CardContent className='p-4 bg-teal-100 dark:bg-teal-900/50'>
                 <p className='text-lg font-semibold text-primary dark:text-white'>
                   {t('common.category')} : {formattedCategoryName}
@@ -131,13 +154,15 @@ const Categories = () => {
             </div>
           )}
         </div>
-        <div className='mt-8 text-center'>
-          <Button asChild className='w-34 text-sm'>
-            <Link to='/addpost'>
-              <PlusCircle className='h-5 w-5 mr-2' />
-              <span className='font-semibold'>{t('common.add-post')}</span>
-            </Link>
-          </Button>
+        <div ref={addPostBtnContainerRef}>
+          <div className='mt-8 text-center'>
+            <Button asChild className='add-post-btn w-34 text-sm'>
+              <Link to='/addpost'>
+                <PlusCircle className='h-5 w-5 mr-2' />
+                <span className='font-semibold'>{t('common.add-post')}</span>
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </div>
