@@ -92,7 +92,9 @@ const PostsPage = () => {
     }, postsContainerRef);
 
     return () => ctx.revert();
-  }, [animationsEnabled, posts, loading]);
+  }, [animationsEnabled, posts.length, loading]);
+  // Note: Only depends on posts.length (triggers when posts are added/removed), not the full posts array.
+  // This prevents re-animation on vote because voteScore changes don't affect array length.
 
   useEffect(() => {
     if (loading || !animationsEnabled) return;
@@ -102,7 +104,8 @@ const PostsPage = () => {
     return () => {
       hoverCleanups.forEach(cleanup => cleanup());
     };
-  }, [animationsEnabled, posts, loading]);
+  }, [animationsEnabled, loading]);
+  // Note: Only depends on animationsEnabled and loading, not posts, so voting doesn't re-attach hover listeners.
 
   if (loading) {
     return <Loading />;
