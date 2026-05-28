@@ -18,7 +18,7 @@ import { Edit } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import BackButton from '@/components/ui/back-button';
 import gsap from 'gsap';
-import { animateEditCommentCard } from '../animations/edit-form-animations';
+import { animateCards } from '../animations/card-animations';
 
 interface Comment {
   id: string;
@@ -59,7 +59,7 @@ const EditComment = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      animateEditCommentCard(animationsEnabled);
+      animateCards('.edit-comment-card', animationsEnabled, 0.2, 0.3);
     }, containerRef);
 
     return () => ctx.revert();

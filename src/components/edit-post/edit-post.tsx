@@ -27,7 +27,7 @@ import { Edit } from 'lucide-react';
 import BackButton from '@/components/ui/back-button';
 import HamburgerButton from '@/components/ui/hamburger-button';
 import gsap from 'gsap';
-import { animateEditPostCard } from '../animations/edit-form-animations';
+import { animateCards } from '../animations/card-animations';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -110,7 +110,7 @@ const EditPost = () => {
   useEffect(() => {
     if (isLoading) return;
     const ctx = gsap.context(() => {
-      animateEditPostCard(animationsEnabled);
+      animateCards('.edit-post-card', animationsEnabled, 0.2, 0.3);
     }, containerRef);
 
     return () => ctx.revert();
