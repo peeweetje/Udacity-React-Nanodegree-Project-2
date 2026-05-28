@@ -8,7 +8,7 @@ import { fetchPosts } from '../../redux/actions';
 import DashboardSidebar from './dashboard-sidebar';
 import BackButton from '@/components/ui/back-button';
 import { Post } from '../../types/post';
-import { animateNotificationCards, animateEmptyState } from '../animations/notifications-animations';
+import { animateListItems, animateEmptyState } from '../animations/list-entry-animations';
 
 interface RootState {
   posts: {
@@ -56,7 +56,10 @@ const NotificationsPage = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      animateNotificationCards(animationsEnabled);
+      animateListItems({
+        itemSelector: '.notification-card',
+        enabled: animationsEnabled,
+      });
     }, containerRef);
 
     return () => ctx.revert();
@@ -64,7 +67,7 @@ const NotificationsPage = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      animateEmptyState(animationsEnabled);
+      animateEmptyState('.notification-empty-state', animationsEnabled);
     }, emptyStateRef);
 
     return () => ctx.revert();

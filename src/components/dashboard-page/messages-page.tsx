@@ -9,7 +9,7 @@ import DashboardSidebar from './dashboard-sidebar';
 import BackButton from '@/components/ui/back-button';
 import { Post } from '../../types/post';
 import { Comment } from '../../utils/api';
-import { animateMessageCards, animateMessagesEmptyState } from '../animations/messages-animations';
+import { animateListItems, animateEmptyState } from '../animations/list-entry-animations';
 
 interface RootState {
   posts: {
@@ -57,7 +57,10 @@ const MessagesPage = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      animateMessageCards(animationsEnabled);
+      animateListItems({
+        itemSelector: '.message-card',
+        enabled: animationsEnabled,
+      });
     }, containerRef);
 
     return () => ctx.revert();
@@ -65,7 +68,7 @@ const MessagesPage = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      animateMessagesEmptyState(animationsEnabled);
+      animateEmptyState('.messages-empty-state', animationsEnabled);
     }, emptyStateRef);
 
     return () => ctx.revert();

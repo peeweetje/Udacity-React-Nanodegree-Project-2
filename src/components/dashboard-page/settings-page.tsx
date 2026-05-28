@@ -7,7 +7,7 @@ import { fetchPosts, fetchCategories, toggleAnimations } from '../../redux/actio
 import { useLocation } from 'react-router-dom';
 import DashboardSidebar from './dashboard-sidebar';
 import BackButton from '@/components/ui/back-button';
-import { animateSettingsCards, animateSettingsCardHover } from '../animations/settings-animations';
+import { animateCards, animateCardHover } from '../animations/card-animations';
 
 const SettingsPage = () => {
   const { t, i18n } = useTranslation();
@@ -41,7 +41,7 @@ const SettingsPage = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      animateSettingsCards(animationsEnabled);
+      animateCards('.settings-card', animationsEnabled);
     }, cardsContainerRef);
 
     return () => ctx.revert();
@@ -53,7 +53,7 @@ const SettingsPage = () => {
       .map(ref => ref.current)
       .filter(Boolean) as Element[];
 
-    const hoverCleanups = cards.map(card => animateSettingsCardHover(card));
+    const hoverCleanups = cards.map(card => animateCardHover(card));
 
     return () => {
       hoverCleanups.forEach(cleanup => cleanup());
