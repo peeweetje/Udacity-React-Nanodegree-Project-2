@@ -62,3 +62,35 @@ export function animateCardHover(card: Element) {
     card.removeEventListener('mouseleave', handleMouseLeave);
   };
 }
+
+/**
+ * Subtle hover effect for form cards – lifts up without scaling (avoids text blur),
+ * with a softer shadow. Returns a cleanup function to remove event listeners.
+ */
+export function animateFormCardHover(card: Element) {
+  const handleMouseEnter = () => {
+    gsap.to(card, {
+      y: -4,
+      boxShadow: '0 12px 28px rgba(0,0,0,0.12)',
+      duration: 0.3,
+      ease: 'power2.out',
+    });
+  };
+
+  const handleMouseLeave = () => {
+    gsap.to(card, {
+      y: 0,
+      boxShadow: 'none',
+      duration: 0.3,
+      ease: 'power2.out',
+    });
+  };
+
+  card.addEventListener('mouseenter', handleMouseEnter);
+  card.addEventListener('mouseleave', handleMouseLeave);
+
+  return () => {
+    card.removeEventListener('mouseenter', handleMouseEnter);
+    card.removeEventListener('mouseleave', handleMouseLeave);
+  };
+}
