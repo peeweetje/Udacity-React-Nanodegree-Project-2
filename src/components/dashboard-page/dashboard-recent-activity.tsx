@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import gsap from 'gsap';
-import { animateRecentActivityRows } from '../animations/recent-activity-animations';
+import { animateRecentActivityRows } from '../animations/dashboard-animations';
 
 interface Activity {
   id: string;

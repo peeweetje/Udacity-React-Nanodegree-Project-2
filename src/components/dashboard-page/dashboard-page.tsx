@@ -16,7 +16,7 @@ import DashboardSearch from './dashboard-search';
 import DashboardStatCard from './dashboard-stat-card';
 import DashboardRecentActivity from './dashboard-recent-activity';
 import gsap from 'gsap';
-import { animateDashboardStats } from '../animations/dashboard-stat-animations';
+import { animateDashboardStats } from '../animations/dashboard-animations';
 import { Post } from '../../types/post';
 
 interface RootState {
