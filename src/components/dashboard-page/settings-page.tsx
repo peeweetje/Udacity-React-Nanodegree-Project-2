@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Sun, Moon, Languages, Settings, Zap } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
-import gsap from 'gsap';
 import { fetchPosts, fetchCategories, toggleAnimations } from '../../redux/actions';
 import { useLocation } from 'react-router-dom';
 import DashboardSidebar from './dashboard-sidebar';
 import BackButton from '@/components/ui/back-button';
-import { animateCards, animateCardHover } from '../animations/card-animations';
+import { animateCards } from '../animations/card-animations';
+import { useGsapContext, useGsapCardHover } from '../animations/use-gsap-animation';
 
 const SettingsPage = () => {
   const { t, i18n } = useTranslation();
@@ -39,26 +39,15 @@ const SettingsPage = () => {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      animateCards('.settings-card', animationsEnabled);
-    }, cardsContainerRef);
-
-    return () => ctx.revert();
+  useGsapContext(cardsContainerRef as React.RefObject<HTMLDivElement | null>, () => {
+    animateCards('.settings-card', animationsEnabled);
   }, [animationsEnabled]);
 
-  useEffect(() => {
-    if (!animationsEnabled) return;
-    const cards = [languageCardRef, themeCardRef, animationsCardRef]
-      .map(ref => ref.current)
-      .filter(Boolean) as Element[];
-
-    const hoverCleanups = cards.map(card => animateCardHover(card));
-
-    return () => {
-      hoverCleanups.forEach(cleanup => cleanup());
-    };
-  }, [animationsEnabled]);
+  useGsapCardHover(
+    cardsContainerRef as React.RefObject<HTMLDivElement | null>,
+    '.settings-card',
+    animationsEnabled
+  );
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);

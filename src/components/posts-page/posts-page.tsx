@@ -2,11 +2,11 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Timestamp from 'react-timestamp';
-import gsap from 'gsap';
 import * as actions from '../../redux/actions';
 import { sortPosts } from '../../utils/sortPosts';
 import { animateVoteButton } from '../animations/vote-animations';
-import { animateCards, animateCardHover } from '../animations/card-animations';
+import { animateCards } from '../animations/card-animations';
+import { useGsapContext, useGsapCardHover } from '../animations/use-gsap-animation';
 import Loading from '../loading/loading';
 
 import { Button } from '@/components/ui/button';
@@ -85,26 +85,18 @@ const PostsPage = () => {
 
   const postsContainerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (loading) return;
-    const ctx = gsap.context(() => {
-      animateCards('.post-card', animationsEnabled, 0.2, 0.4);
-    }, postsContainerRef);
-
-    return () => ctx.revert();
+  useGsapContext(postsContainerRef as React.RefObject<HTMLDivElement | null>, () => {
+    animateCards('.post-card', animationsEnabled, 0.2, 0.4);
   }, [animationsEnabled, posts.length, loading]);
   // Note: Only depends on posts.length (triggers when posts are added/removed), not the full posts array.
   // This prevents re-animation on vote because voteScore changes don't affect array length.
 
-  useEffect(() => {
-    if (loading || !animationsEnabled) return;
-    const cards = postsContainerRef.current?.querySelectorAll('.post-card');
-    if (!cards) return;
-    const hoverCleanups = Array.from(cards).map(card => animateCardHover(card));
-    return () => {
-      hoverCleanups.forEach(cleanup => cleanup());
-    };
-  }, [animationsEnabled, loading]);
+  useGsapCardHover(
+    postsContainerRef as React.RefObject<HTMLDivElement | null>,
+    '.post-card',
+    animationsEnabled,
+    [loading]
+  );
   // Note: Only depends on animationsEnabled and loading, not posts, so voting doesn't re-attach hover listeners.
 
   if (loading) {
