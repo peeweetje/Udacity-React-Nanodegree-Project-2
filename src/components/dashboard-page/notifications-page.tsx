@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { MessageSquare, User, PlusCircle, Bell } from 'lucide-react';
-import gsap from 'gsap';
 import { fetchPosts } from '../../redux/actions';
 import DashboardSidebar from './dashboard-sidebar';
 import BackButton from '@/components/ui/back-button';
 import { Post } from '../../types/post';
 import { animateListItems, animateEmptyState } from '../animations/list-entry-animations';
+import { useGsapContext } from '../animations/use-gsap-animation';
 
 interface RootState {
   posts: {
@@ -54,23 +54,15 @@ const NotificationsPage = () => {
       };
     });
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      animateListItems({
-        itemSelector: '.notification-card',
-        enabled: animationsEnabled,
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
+  useGsapContext(containerRef, () => {
+    animateListItems({
+      itemSelector: '.notification-card',
+      enabled: animationsEnabled,
+    });
   }, [posts, animationsEnabled, notifications.length]);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      animateEmptyState('.notification-empty-state', animationsEnabled);
-    }, emptyStateRef);
-
-    return () => ctx.revert();
+  useGsapContext(emptyStateRef, () => {
+    animateEmptyState('.notification-empty-state', animationsEnabled);
   }, [notifications.length, animationsEnabled]);
 
   return (

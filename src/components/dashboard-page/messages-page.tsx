@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { MessageSquare, Clock } from 'lucide-react';
-import gsap from 'gsap';
 import { fetchPosts } from '../../redux/actions';
 import DashboardSidebar from './dashboard-sidebar';
 import BackButton from '@/components/ui/back-button';
 import { Post } from '../../types/post';
 import { Comment } from '../../utils/api';
 import { animateListItems, animateEmptyState } from '../animations/list-entry-animations';
+import { useGsapContext } from '../animations/use-gsap-animation';
 
 interface RootState {
   posts: {
@@ -55,23 +55,15 @@ const MessagesPage = () => {
 
   allComments.sort((a, b) => b.comment.timestamp - a.comment.timestamp);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      animateListItems({
-        itemSelector: '.message-card',
-        enabled: animationsEnabled,
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
+  useGsapContext(containerRef, () => {
+    animateListItems({
+      itemSelector: '.message-card',
+      enabled: animationsEnabled,
+    });
   }, [posts, animationsEnabled, allComments.length]);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      animateEmptyState('.messages-empty-state', animationsEnabled);
-    }, emptyStateRef);
-
-    return () => ctx.revert();
+  useGsapContext(emptyStateRef, () => {
+    animateEmptyState('.messages-empty-state', animationsEnabled);
   }, [allComments.length, animationsEnabled]);
 
   return (
