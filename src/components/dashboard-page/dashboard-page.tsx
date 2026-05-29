@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -17,6 +17,7 @@ import DashboardStatCard from './dashboard-stat-card';
 import DashboardRecentActivity from './dashboard-recent-activity';
 import gsap from 'gsap';
 import { animateDashboardStats } from '../animations/dashboard-animations';
+import { useGsapTimeline } from '../animations/use-gsap-animation';
 import { Post } from '../../types/post';
 
 interface RootState {
@@ -49,29 +50,19 @@ const DashboardPage = () => {
     dispatch(fetchCategories());
   }, [dispatch, location.pathname]);
 
-  useEffect(() => {
-    if (statsGridRef.current) {
-      if (!animationsEnabled) {
-        // Show stat cards immediately without animation
-        const cards = statsGridRef.current.querySelectorAll('[data-dashboard-stat-card]');
-        gsap.set(cards, { y: 0, opacity: 1 });
-        setAnimationDone(true);
-        return;
-      }
-      const grid = statsGridRef.current;
-      const tl = animateDashboardStats(grid);
-      tl.eventCallback('onComplete', () => {
-        setAnimationDone(true);
-      });
-      return () => {
-        tl.kill();
-        setAnimationDone(true);
-        gsap.killTweensOf(grid.querySelectorAll('[data-dashboard-stat-card]'));
-      };
-    }
-  }, [animationsEnabled]);
+  useGsapTimeline({
+    containerRef: statsGridRef,
+    enabled: animationsEnabled,
+    animate: () => animateDashboardStats(statsGridRef.current!),
+    onComplete: () => setAnimationDone(true),
+    onDisabled: (container) => {
+      const cards = container?.querySelectorAll('[data-dashboard-stat-card]');
+      if (cards) gsap.set(cards, { y: 0, opacity: 1 });
+      setAnimationDone(true);
+    },
+  });
 
-  const activePosts = posts.filter((post) => !post.deleted);
+  const activePosts = useMemo(() => posts.filter((post) => !post.deleted), [posts]);
   const hasNotifications = activePosts.length > 0 && !notificationsRead;
   const totalComments = activePosts.reduce(
     (sum, post) => sum + (post.comments?.length || 0),
@@ -82,25 +73,33 @@ const DashboardPage = () => {
     0
   );
 
-  const filteredPosts = searchQuery
-    ? activePosts.filter(
-        (post) =>
-          post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          post.category.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    : activePosts;
+  const filteredPosts = useMemo(
+    () =>
+      searchQuery
+        ? posts
+            .filter((post) => !post.deleted)
+            .filter(
+              (post) =>
+                post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                post.category.toLowerCase().includes(searchQuery.toLowerCase())
+            )
+        : activePosts,
+    [posts, searchQuery, activePosts]
+  );
 
-  const recentActivities = (searchQuery ? filteredPosts : activePosts)
-    .slice()
-    .sort((a, b) => b.timestamp - a.timestamp)
-    .slice(0, 5)
-    .map((post) => ({
-      id: post.id,
-      topic: post.title,
-      category: post.category,
-      date: new Date(post.timestamp).toLocaleDateString(undefined, { day: '2-digit', month: '2-digit', year: 'numeric' }),
-      status: (post.voteScore > 0 ? 'active' : 'resolved') as 'active' | 'resolved',
-    }));
+  const recentActivities = useMemo(() => {
+    return filteredPosts
+      .slice()
+      .sort((a, b) => b.timestamp - a.timestamp)
+      .slice(0, 5)
+      .map((post) => ({
+        id: post.id,
+        topic: post.title,
+        category: post.category,
+        date: new Date(post.timestamp).toLocaleDateString(undefined, { day: '2-digit', month: '2-digit', year: 'numeric' }),
+        status: (post.voteScore > 0 ? 'active' : 'resolved') as 'active' | 'resolved',
+      }));
+  }, [filteredPosts]);
 
   return (
     <div className='flex min-h-screen bg-gray-50 overflow-x-hidden'>

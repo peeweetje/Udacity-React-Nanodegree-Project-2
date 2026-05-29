@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { PlusCircle } from 'lucide-react';
-import gsap from 'gsap';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -17,7 +16,8 @@ import * as actions from '../../redux/actions';
 import { useTranslation } from 'react-i18next';
 import { Post } from '../../types/post';
 import { VoteOption } from '../../utils/api';
-import { animateCards, animateCardHover } from '../animations/card-animations';
+import { animateCards } from '../animations/card-animations';
+import { useGsapContext, useGsapCardHover } from '../animations/use-gsap-animation';
 
 interface SortState {
   value: string;
@@ -57,42 +57,27 @@ const Categories = () => {
   const handleVotePost = (postId: string, option: VoteOption) => {
     dispatch(actions.fetchVotePost(postId, option));
   };
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      animateCards('.category-post-card', animationsEnabled, 0.2, 0.3);
-    }, listContainerRef);
 
-    return () => ctx.revert();
+  useGsapContext(listContainerRef as React.RefObject<HTMLDivElement | null>, () => {
+    animateCards('.category-post-card', animationsEnabled, 0.2, 0.3);
   }, [animationsEnabled, posts.length]);
   // Note: Only depends on posts.length (triggers when posts are added/removed), not the full posts array.
   // This prevents re-animation on vote because voteScore changes don't affect array length.
 
-  useEffect(() => {
-    if (!animationsEnabled) return;
-    const cards = listContainerRef.current?.querySelectorAll('.category-post-card');
-    if (!cards) return;
-    const hoverCleanups = Array.from(cards).map(card => animateCardHover(card));
-    return () => {
-      hoverCleanups.forEach(cleanup => cleanup());
-    };
-  }, [animationsEnabled]);
+  useGsapCardHover(
+    listContainerRef as React.RefObject<HTMLDivElement | null>,
+    '.category-post-card',
+    animationsEnabled
+  );
   // Note: Only depends on animationsEnabled, not posts, so voting doesn't re-attach hover listeners.
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      animateCards('.formatted-category-card', animationsEnabled, 0.2, 0.3);
-    }, categoryCardContainerRef);
-
-    return () => ctx.revert();
+  useGsapContext(categoryCardContainerRef as React.RefObject<HTMLDivElement | null>, () => {
+    animateCards('.formatted-category-card', animationsEnabled, 0.2, 0.3);
   }, [animationsEnabled]);
   // Note: Only depends on animationsEnabled, not posts, so voting doesn't re-trigger the animation.
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      animateCards('.add-post-btn', animationsEnabled, 0.2, 0.5);
-    }, addPostBtnContainerRef);
-
-    return () => ctx.revert();
+  useGsapContext(addPostBtnContainerRef as React.RefObject<HTMLDivElement | null>, () => {
+    animateCards('.add-post-btn', animationsEnabled, 0.2, 0.5);
   }, [animationsEnabled]);
   // Animates the add post button on mount.
 
