@@ -26,8 +26,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Edit } from 'lucide-react';
 import BackButton from '@/components/ui/back-button';
 import HamburgerButton from '@/components/ui/hamburger-button';
-import gsap from 'gsap';
 import { animateCards } from '../animations/card-animations';
+import { useGsapContext } from '../animations/use-gsap-animation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -107,13 +107,8 @@ const EditPost = () => {
     }
   }, [post, isLoading, form]);
 
-  useEffect(() => {
-    if (isLoading) return;
-    const ctx = gsap.context(() => {
-      animateCards('.edit-post-card', animationsEnabled, 0.2, 0.3);
-    }, containerRef);
-
-    return () => ctx.revert();
+  useGsapContext(containerRef as React.RefObject<HTMLDivElement | null>, () => {
+    animateCards('.edit-post-card', animationsEnabled, 0.2, 0.3);
   }, [animationsEnabled, isLoading]);
 
   const onSubmit = async (values: FormValues) => {

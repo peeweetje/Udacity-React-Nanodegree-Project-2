@@ -17,8 +17,8 @@ import { Label } from '@/components/ui/label';
 import { Edit } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import BackButton from '@/components/ui/back-button';
-import gsap from 'gsap';
 import { animateCards } from '../animations/card-animations';
+import { useGsapContext } from '../animations/use-gsap-animation';
 
 interface Comment {
   id: string;
@@ -57,12 +57,8 @@ const EditComment = () => {
     }
   }, [receiveComment]);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      animateCards('.edit-comment-card', animationsEnabled, 0.2, 0.3);
-    }, containerRef);
-
-    return () => ctx.revert();
+  useGsapContext(containerRef as React.RefObject<HTMLDivElement | null>, () => {
+    animateCards('.edit-comment-card', animationsEnabled, 0.2, 0.3);
   }, [animationsEnabled]);
 
   const handleInputChange = (
