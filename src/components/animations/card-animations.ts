@@ -11,6 +11,10 @@ export function animateCards(
   stagger: number = 0.15,
   delay: number = 0.2
 ) {
+  // Guard: skip if no elements match the selector to avoid GSAP "target not found" warnings
+  const elements = document.querySelectorAll(selector);
+  if (elements.length === 0) return;
+
   if (!animationsEnabled) {
     gsap.set(selector, { y: 0, opacity: 1, rotateX: 0 });
     return;
