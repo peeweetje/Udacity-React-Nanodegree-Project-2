@@ -88,7 +88,7 @@ const EditComment = () => {
   return (
     <div className='flex min-h-screen bg-background dark:bg-gray-900'>
       <main className='flex-1 p-8'>
-        <div className='mb-4'>
+        <div className='mb-4 text-center'>
           <BackButton />
         </div>
         <div ref={containerRef}>
