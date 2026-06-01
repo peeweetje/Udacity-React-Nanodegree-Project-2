@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { useSelector } from 'react-redux';
 import Timestamp from 'react-timestamp';
 import { Link } from 'react-router-dom';
 import {
@@ -21,6 +22,8 @@ import {
 } from '@/components/ui/card';
 import { useTranslation } from 'react-i18next';
 import { animateVoteButton } from '../animations/vote-animations';
+import { animateCards } from '../animations/card-animations';
+import { useGsapContext, useGsapCardHover } from '../animations/use-gsap-animation';
 
 interface Post {
   id: string;
@@ -41,6 +44,23 @@ interface CategoryItemProps {
 
 const CategoryItem = ({ post, onDelete, onVote }: CategoryItemProps) => {
   const { t } = useTranslation();
+  const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useGsapContext(
+    cardRef as React.RefObject<HTMLDivElement | null>,
+    () => {
+      animateCards('[data-category-card]', animationsEnabled, 0.15, 0.1);
+    },
+    [animationsEnabled]
+  );
+
+  useGsapCardHover(
+    cardRef as React.RefObject<HTMLDivElement | null>,
+    '[data-category-card]',
+    animationsEnabled
+  );
+
   const handleDelete = () => onDelete(post.id);
   const handleUpVote = (e: React.MouseEvent<HTMLButtonElement>) => {
     onVote(post.id, 'upVote');
@@ -52,6 +72,7 @@ const CategoryItem = ({ post, onDelete, onVote }: CategoryItemProps) => {
   };
 
   return (
+    <div ref={cardRef}>
     <Card data-category-card className='category-post-card w-4/5 mx-auto mb-4 dark:bg-gray-800 dark:border-gray-700'>
       <CardHeader>
         <CardTitle>
@@ -114,6 +135,7 @@ const CategoryItem = ({ post, onDelete, onVote }: CategoryItemProps) => {
         </Button>
       </CardFooter>
     </Card>
+    </div>
   );
 };
 
