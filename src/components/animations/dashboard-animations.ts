@@ -30,6 +30,10 @@ export function animateRecentActivityRows(container: HTMLElement) {
   const tableWrapper = container.querySelector('[data-recent-activity-table-wrapper]') as HTMLElement | null;
   const rows = container.querySelectorAll('[data-recent-activity-row]');
 
+  // Set initial hidden state synchronously to prevent flicker before animation starts
+  if (card) gsap.set(card, { opacity: 0 });
+  if (rows.length > 0) gsap.set(rows, { scale: 0.85, opacity: 0 });
+
   const tl = gsap.timeline({
     defaults: { ease: 'back.out(1.2)' },
     onStart: () => {
