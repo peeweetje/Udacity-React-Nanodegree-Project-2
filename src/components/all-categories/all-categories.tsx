@@ -17,7 +17,7 @@ import { useTranslation } from 'react-i18next';
 import { Post } from '../../types/post';
 import { VoteOption } from '../../utils/api';
 import { animateCards } from '../animations/card-animations';
-import { useGsapContext, useGsapCardHover } from '../animations/use-gsap-animation';
+import { useGsapContext } from '../animations/use-gsap-animation';
 
 interface SortState {
   value: string;
@@ -58,18 +58,8 @@ const Categories = () => {
     dispatch(actions.fetchVotePost(postId, option));
   };
 
-  useGsapContext(listContainerRef as React.RefObject<HTMLDivElement | null>, () => {
-    animateCards('.category-post-card', animationsEnabled, 0.2, 0.3);
-  }, [animationsEnabled, posts.length]);
-  // Note: Only depends on posts.length (triggers when posts are added/removed), not the full posts array.
-  // This prevents re-animation on vote because voteScore changes don't affect array length.
-
-  useGsapCardHover(
-    listContainerRef as React.RefObject<HTMLDivElement | null>,
-    '.category-post-card',
-    animationsEnabled
-  );
-  // Note: Only depends on animationsEnabled, not posts, so voting doesn't re-attach hover listeners.
+  // CategoryItem now handles its own card entrance and hover animations internally.
+  // No need to animate .category-post-card from here to avoid double-animation.
 
   useGsapContext(categoryCardContainerRef as React.RefObject<HTMLDivElement | null>, () => {
     animateCards('.formatted-category-card', animationsEnabled, 0.2, 0.3);
