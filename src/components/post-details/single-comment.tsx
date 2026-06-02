@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Timestamp from 'react-timestamp';
 import { useTranslation } from 'react-i18next';
@@ -7,6 +7,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ThumbsUp, ThumbsDown, Trash2, Edit, Clock, User } from 'lucide-react';
 import { animateVoteButton } from '../animations/vote-animations';
+import { animateCards } from '../animations/card-animations';
+import { useGsapContext, useGsapCardHover } from '../animations/use-gsap-animation';
 
 interface Comment {
   id: string;
@@ -27,10 +29,25 @@ const SingleComment = ({ comment, onUpvote, onDownvote, onDelete }: SingleCommen
   const { id, author, body, voteScore, timestamp } = comment;
   const { t } = useTranslation();
   const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useGsapContext(
+    cardRef as React.RefObject<HTMLDivElement | null>,
+    () => {
+      animateCards('[data-comment-card]', animationsEnabled, 0.15, 0.1);
+    },
+    [animationsEnabled]
+  );
+
+  useGsapCardHover(
+    cardRef as React.RefObject<HTMLDivElement | null>,
+    '[data-comment-card]',
+    animationsEnabled
+  );
 
   return (
-    <div data-post-detail-card className=' flex flex-col w-full md:w-3/4 mx-auto mt-8 px-4'>
-      <Card className='comment-card mb-4 flex flex-col dark:bg-gray-800 dark:border-gray-700'>
+    <div ref={cardRef} data-post-detail-card className=' flex flex-col w-full md:w-3/4 mx-auto mt-8 px-4'>
+      <Card data-comment-card className='comment-card mb-4 flex flex-col dark:bg-gray-800 dark:border-gray-700'>
         <CardContent className='p-4 flex flex-col h-full'>
           <div className='flex flex-col md:flex-row md:items-center md:justify-between mb-2'>
             <div className='flex items-center space-x-2 mb-2 sm:mb-0'>
@@ -49,7 +66,7 @@ const SingleComment = ({ comment, onUpvote, onDownvote, onDelete }: SingleCommen
           <div className='flex flex-col sm:flex-row md:items-center md:justify-between space-y-2 md:space-y-0'>
             <div className='flex items-center space-x-2'>
               <Button className='w-18' size='sm' onClick={(e) => { onUpvote(id); animateVoteButton(e.currentTarget, 'up', animationsEnabled); }}>
-                <ThumbsUp className='w-4 h-4 mr-1 text-primary dark:text-white' />
+                <ThumbsUp className='w-4 h-4 mr-1 dark:text-white' />
               </Button>
               <span className='font-medium dark:text-white'>{voteScore}</span>
               <Button
@@ -58,7 +75,7 @@ const SingleComment = ({ comment, onUpvote, onDownvote, onDelete }: SingleCommen
                 size='sm'
                 onClick={(e) => { onDownvote(id); animateVoteButton(e.currentTarget, 'down', animationsEnabled); }}
               >
-                <ThumbsDown className='w-4 h-4 mr-1 text-destructive dark:text-white' />
+                <ThumbsDown className='w-4 h-4 mr-1 dark:text-white' />
               </Button>
             </div>
             <div className='flex flex-row space-x-2 sm:m-1'>
