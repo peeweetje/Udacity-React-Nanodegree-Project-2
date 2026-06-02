@@ -61,16 +61,6 @@ const Categories = () => {
   // CategoryItem now handles its own card entrance and hover animations internally.
   // No need to animate .category-post-card from here to avoid double-animation.
 
-  useGsapContext(categoryCardContainerRef as React.RefObject<HTMLDivElement | null>, () => {
-    animateCards('.formatted-category-card', animationsEnabled, 0.2, 0.3);
-  }, [animationsEnabled]);
-  // Note: Only depends on animationsEnabled, not posts, so voting doesn't re-trigger the animation.
-
-  useGsapContext(addPostBtnContainerRef as React.RefObject<HTMLDivElement | null>, () => {
-    animateCards('.add-post-btn', animationsEnabled, 0.2, 0.5);
-  }, [animationsEnabled]);
-  // Animates the add post button on mount.
-
   const formattedCategoryName = categoryName
     ? categoryName.charAt(0).toUpperCase() + categoryName.slice(1)
     : '';
@@ -82,6 +72,22 @@ const Categories = () => {
           sort.value
         )
       : [];
+
+  useGsapContext(listContainerRef as React.RefObject<HTMLDivElement | null>, () => {
+    animateCards('.no-posts-message', animationsEnabled, 0.2, 0.3);
+  }, [animationsEnabled, filteredAndSortedPosts.length]);
+  // Animates the "no posts in this category" empty state message when there are no posts.
+  // Re-triggers when filteredAndSortedPosts.length changes (i.e. when posts appear/disappear).
+
+  useGsapContext(categoryCardContainerRef as React.RefObject<HTMLDivElement | null>, () => {
+    animateCards('.formatted-category-card', animationsEnabled, 0.2, 0.3);
+  }, [animationsEnabled]);
+  // Note: Only depends on animationsEnabled, not posts, so voting doesn't re-trigger the animation.
+
+  useGsapContext(addPostBtnContainerRef as React.RefObject<HTMLDivElement | null>, () => {
+    animateCards('.add-post-btn', animationsEnabled, 0.2, 0.5);
+  }, [animationsEnabled]);
+  // Animates the add post button on mount.
 
   return (
     <div className='flex min-h-screen bg-background dark:bg-gray-900'>
@@ -122,7 +128,7 @@ const Categories = () => {
               />
             ))
           ) : (
-            <div className='flex justify-center mx-40'>
+            <div className='no-posts-message flex justify-center mx-40'>
               <h3 className='text-xl font-semibold text-muted-foreground dark:text-gray-400 text-center mt-4'>
                 {t('common.no-posts')}
               </h3>
