@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { v1 as uuidv1 } from 'uuid';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -32,6 +32,8 @@ import HamburgerButton from '@/components/ui/hamburger-button';
 import BackButton from '@/components/ui/back-button';
 import { options } from '../../utils/options';
 import { PlusCircle } from 'lucide-react';
+import { animateCards } from '../animations/card-animations';
+import { useGsapContext } from '../animations/use-gsap-animation';
 
 const formSchema = z.object({
   category: z.string().min(1, {
@@ -66,6 +68,12 @@ const AddPost: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGsapContext(containerRef as React.RefObject<HTMLDivElement | null>, () => {
+    animateCards('.add-post-form-card', animationsEnabled, 0.2, 0.3);
+  }, [animationsEnabled]);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -111,7 +119,8 @@ const AddPost: React.FC = () => {
             {t('addPost.new-post')}
           </h1>
         </div>
-        <div className='max-w-2xl mx-auto bg-card bg-neutral-100 dark:bg-gray-800 p-8 rounded-lg shadow-inner dark:border dark:border-gray-700'>
+        <div ref={containerRef}>
+          <div className='add-post-form-card max-w-2xl mx-auto bg-card bg-neutral-100 dark:bg-gray-800 p-8 rounded-lg shadow-inner dark:border dark:border-gray-700'>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
               <FormField
@@ -198,6 +207,7 @@ const AddPost: React.FC = () => {
               </Button>
             </form>
           </Form>
+          </div>
         </div>
       </div>
     </div>
