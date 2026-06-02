@@ -1,9 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import gsap from 'gsap';
-import { animateRecentActivityRows } from '../animations/dashboard-animations';
 
 interface Activity {
   id: string;
@@ -21,23 +20,58 @@ const DashboardRecentActivity = ({ activities }: DashboardRecentActivityProps) =
   const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
+  // Stable content key based on activitie IDs — prevents re-animation on voting or other
+  // shallow array reference changes that don't actually add/remove/reorder rows.
+  const contentKey = useMemo(() => activities.map(a => a.id).join(','), [activities]);
 
   useEffect(() => {
-    if (containerRef.current) {
-      if (!animationsEnabled) {
-        // Show all rows immediately without animation
-        const card = containerRef.current.querySelector('[data-recent-activity-card]') as HTMLElement | null;
-        const rows = containerRef.current.querySelectorAll('[data-recent-activity-row]');
-        if (card) gsap.set(card, { opacity: 1 });
-        if (rows.length > 0) gsap.set(rows, { scale: 1, opacity: 1 });
-        return;
-      }
-      const tl = animateRecentActivityRows(containerRef.current);
-      return () => {
-        tl.kill();
-      };
+    const container = containerRef.current;
+    if (!container) return;
+
+    const card = container.querySelector('[data-recent-activity-card]') as HTMLElement | null;
+    const rows = container.querySelectorAll('[data-recent-activity-row]');
+    const tableWrapper = container.querySelector('[data-recent-activity-table-wrapper]') as HTMLElement | null;
+
+    if (!animationsEnabled) {
+      // Show all rows immediately without animation
+      if (card) gsap.set(card, { opacity: 1 });
+      if (rows.length > 0) gsap.set(rows, { scale: 1, opacity: 1 });
+      return;
     }
-  }, [activities, animationsEnabled]);
+
+    // Synchronously set initial hidden state before paint to prevent flicker
+    if (card) gsap.set(card, { opacity: 0 });
+    if (rows.length > 0) gsap.set(rows, { scale: 0.85, opacity: 0 });
+
+    const tl = gsap.timeline({
+      defaults: { ease: 'back.out(1.2)' },
+      onStart: () => {
+        if (tableWrapper) tableWrapper.style.overflow = 'hidden';
+      },
+      onComplete: () => {
+        if (tableWrapper) tableWrapper.style.overflow = '';
+      },
+    });
+
+    // Card container: subtle fade in
+    if (card) {
+      tl.fromTo(card, { opacity: 0 }, { opacity: 1, duration: 0.5 });
+    }
+
+    // Table rows: pop-in with scale + fade
+    if (rows.length > 0) {
+      tl.fromTo(
+        rows,
+        { scale: 0.85, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.4, stagger: 0.06 },
+        '-=0.2'
+      );
+    }
+
+    return () => {
+      tl.kill();
+    };
+  }, [contentKey, animationsEnabled]);
 
   return (
     <div ref={containerRef}>
