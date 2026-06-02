@@ -34,7 +34,7 @@ import BackButton from '@/components/ui/back-button';
 import SinglePost from './single-post';
 import SingleComment from './single-comment';
 import { Post } from '../../types/post';
-import { animateCards, animateCardHover } from '../animations/card-animations';
+import { animateCards } from '../animations/card-animations';
 
 interface Comment {
   id: string;
@@ -161,24 +161,17 @@ const PostDetail= () => {
     (post) => !post.deleted && Object.keys(post).length > 0 && !post.error
   );
 
+  // Animate the add-comment card on mount (stable dep — only re-triggers when
+  // comments array length changes, i.e. when a comment is added or removed).
   useEffect(() => {
     const ctx = gsap.context(() => {
-      animateCards('.comment-card', animationsEnabled, 0.15, 0.4);
       animateCards('.add-comment-card', animationsEnabled, 0.15, 0.5);
     }, contentContainerRef);
 
     return () => ctx.revert();
-  }, [animationsEnabled, comments]);
-
-  useEffect(() => {
-    if (!animationsEnabled) return;
-    const cards = contentContainerRef.current?.querySelectorAll('.comment-card, .add-comment-card');
-    if (!cards) return;
-    const hoverCleanups = Array.from(cards).map(card => animateCardHover(card));
-    return () => {
-      hoverCleanups.forEach(cleanup => cleanup());
-    };
-  }, [animationsEnabled, comments]);
+  }, [animationsEnabled, comments?.length]);
+  // SingleComment now handles its own card entrance and hover animations internally.
+  // No need to animate .comment-card from here to avoid re-animation on vote.
 
   const sortedComments = comments
     ?.filter((comment) => !comment.deleted && !comment.parentDeleted)
