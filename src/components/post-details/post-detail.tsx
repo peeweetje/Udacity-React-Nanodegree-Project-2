@@ -140,7 +140,7 @@ const PostDetail= () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data: Comment = {
       id: uuidv1(),
