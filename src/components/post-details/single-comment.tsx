@@ -55,7 +55,7 @@ const SingleComment = ({ comment, onUpvote, onDownvote, onDelete }: SingleCommen
               <span className='font-medium dark:text-white'>{author}</span>
             </div>
             <div className='flex items-center text-sm text-gray-500 dark:text-gray-400'>
-              <Clock className='w-4 h-4 mr-1 text-primary' />
+              <Clock className='w-4 h-4 mr-1 text-primary dark:text-gray-400' />
               <Timestamp
                 date={timestamp / 1000}
                 options={{ twentyFourHour: true }}
