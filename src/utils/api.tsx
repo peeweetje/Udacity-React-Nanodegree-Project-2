@@ -7,7 +7,7 @@ let token: string = localStorage.token;
 if (!token)
   token = localStorage.token = Math.random()
     .toString(36)
-    .substr(-8);
+    .slice(-8);
 
 const headers: Record<string, string> = {
   Accept: "application/json",
