@@ -112,19 +112,19 @@ const PostsPage = () => {
       <div className='flex-1 p-4 md:p-8 min-w-0'>
         <div className='container mx-auto'>
           <div className='text-center mb-8'>
-            <h1 className='text-3xl md:text-4xl font-bold text-primary dark:text-white'>Git Talks</h1>
+            <h1 className='text-3xl md:text-4xl font-bold text-primary dark:text-white'>{t('common.git-talks')}</h1>
             <div className='mt-4 flex flex-wrap items-center justify-center gap-2'>
               <BackButton />
               <Button asChild variant='outline' size='sm'>
                 <Link to='/'>
-                  <Home className='h-4 w-4 mr-2' />
-                  {t('common.home', 'Home')}
+                  <Home className='h-4 w-4 sm:mr-2' />
+                   <span className='hidden sm:inline'> {t('common.home')}</span>
                 </Link>
               </Button>
               <Button asChild variant='outline' size='sm'>
                 <Link to='/home'>
-                  <LayoutDashboard className='h-4 w-4 mr-2' />
-                  {t('common.dashboard')}
+                  <LayoutDashboard className='h-4 w-4 sm:mr-2' />
+                    <span className='hidden sm:inline'> {t('common.dashboard')}</span>
                 </Link>
               </Button>
             </div>
