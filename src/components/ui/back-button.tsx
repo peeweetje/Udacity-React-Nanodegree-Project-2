@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -11,6 +12,7 @@ interface BackButtonProps {
 }
 
 const BackButton = ({ className, children }: BackButtonProps) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const arrowRef = useRef<SVGSVGElement>(null);
   const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
@@ -38,8 +40,8 @@ const BackButton = ({ className, children }: BackButtonProps) => {
       onClick={() => navigate(-1)}
       className={`${className}`}
     >
-      <ArrowLeft ref={arrowRef} className='h-4 w-4 md:mr-4' />
-      <span className='hidden md:inline'>{children || 'Back'}</span>
+      <ArrowLeft ref={arrowRef} className='h-4 w-4 sm:mr-4' />
+      <span className='hidden sm:inline'>{children || t('common.back')}</span>
     </Button>
   );
 };

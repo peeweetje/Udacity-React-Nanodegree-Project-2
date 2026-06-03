@@ -1,5 +1,7 @@
 {
   "common": {
+    "home": "Home",
+    "back": "Back",
     "git-talks": "Git Talks",
     "category": "Category",
     "no-posts": "There are no posts in this category.",

@@ -1,5 +1,7 @@
 {
   "common": {
+    "home": "Home",
+    "back": "Terug",
     "git-talks": "Git Talks",
     "category": "Categorie",
     "no-posts": "Er zijn geen berichten in deze categorie.",
