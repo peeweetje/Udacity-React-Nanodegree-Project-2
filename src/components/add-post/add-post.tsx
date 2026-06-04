@@ -31,7 +31,7 @@ import MobileSidebar from '../dashboard-page/mobile-sidebar';
 import HamburgerButton from '@/components/ui/hamburger-button';
 import BackButton from '@/components/ui/back-button';
 import { options } from '../../utils/options';
-import { PlusCircle } from 'lucide-react';
+import { FilePlus, PlusCircle } from 'lucide-react';
 import { animateCards } from '../animations/card-animations';
 import { useGsapContext } from '../animations/use-gsap-animation';
 
@@ -115,7 +115,7 @@ const AddPost: React.FC = () => {
             <BackButton />
           </div>
           <h1 className='text-3xl font-bold text-center text-teal-500 dark:text-teal-400 mb-6 flex items-center justify-center'>
-            <PlusCircle className='inline-block mr-2 h-8 w-8' />
+            <FilePlus className='inline-block mr-2 h-8 w-8' />
             {t('addPost.new-post')}
           </h1>
         </div>
