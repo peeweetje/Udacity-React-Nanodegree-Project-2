@@ -1,16 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
-import { PlusCircle } from 'lucide-react';
-
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-
+import {  useParams } from 'react-router-dom';
+import CategoryCard from './category-card';
+import AddPostButton from './add-post-button';
 import CategoryItem from '../category-item/catergory-item';
-import Menu from '../menu/menu';
+import CategoryMenu from '../category-menu/category-menu';
 import MobileSidebar from '../dashboard-page/mobile-sidebar';
 import HamburgerButton from '@/components/ui/hamburger-button';
-import BackButton from '@/components/ui/back-button';
+import Header from '@/components/header/header';
 import { sortPosts } from '../../utils/sortPosts';
 import * as actions from '../../redux/actions';
 import { useTranslation } from 'react-i18next';
@@ -61,10 +58,6 @@ const Categories = () => {
   // CategoryItem now handles its own card entrance and hover animations internally.
   // No need to animate .category-post-card from here to avoid double-animation.
 
-  const formattedCategoryName = categoryName
-    ? categoryName.charAt(0).toUpperCase() + categoryName.slice(1)
-    : '';
-
   const filteredAndSortedPosts: Post[] =
     posts && posts.length > 0
       ? sortPosts(
@@ -101,20 +94,12 @@ const Categories = () => {
             {t('common.git-talks')}
           </h1>
           <div className='mb-4'>
-            <BackButton />
+            <Header />
           </div>
           <div className='mt-4 mb-6 flex justify-center'>
-            <Menu />
+            <CategoryMenu />
           </div>
-          <div ref={categoryCardContainerRef} className='flex justify-center'>
-            <Card className='formatted-category-card w-auto dark:bg-gray-800 dark:border-gray-700'>
-              <CardContent className='p-4 bg-teal-100 dark:bg-teal-900/50'>
-                <p className='text-lg font-semibold text-primary dark:text-white'>
-                  {t('common.category')} : {formattedCategoryName}
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+          <CategoryCard ref={categoryCardContainerRef} categoryName={categoryName || ''} />
         </div>
 
         <div ref={listContainerRef} className='mt-4 space-y-4'>
@@ -135,16 +120,7 @@ const Categories = () => {
             </div>
           )}
         </div>
-        <div ref={addPostBtnContainerRef}>
-          <div className='mt-8 text-center'>
-            <Button asChild className='add-post-btn w-34 text-sm'>
-              <Link to='/addpost'>
-                <PlusCircle className='h-5 w-5 mr-2' />
-                <span className='font-semibold'>{t('common.add-post')}</span>
-              </Link>
-            </Button>
-          </div>
-        </div>
+        <AddPostButton ref={addPostBtnContainerRef} />
       </div>
     </div>
   );
