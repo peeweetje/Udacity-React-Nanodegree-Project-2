@@ -15,7 +15,7 @@ interface RootState {
   receiveCategories: Category[];
 }
 
-const Menu = () => {
+const CategoryMenu = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -65,4 +65,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default CategoryMenu;
