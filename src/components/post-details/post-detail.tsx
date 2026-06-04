@@ -27,7 +27,7 @@ import {
   ArrowLeft,
   PlusCircle,
 } from 'lucide-react';
-import Menu from '../menu/menu';
+import CategoryMenu from '../category-menu/category-menu';
 import MobileSidebar from '../dashboard-page/mobile-sidebar';
 import HamburgerButton from '@/components/ui/hamburger-button';
 import BackButton from '@/components/ui/back-button';
@@ -201,7 +201,7 @@ const PostDetail= () => {
           </h1>
           <BackButton />
         </div>
-        <Menu />
+        <CategoryMenu />
         <div ref={contentContainerRef} className='w-4/5 mx-auto'>
           {filteredPosts?.map((post) => (
             <SinglePost

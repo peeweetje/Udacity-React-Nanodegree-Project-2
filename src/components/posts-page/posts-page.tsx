@@ -27,14 +27,12 @@ import {
   PlusCircle,
   User,
   Clock,
-  Home,
-  LayoutDashboard,
 } from 'lucide-react';
 
-import Menu from '../menu/menu';
+import CategoryMenu from '../category-menu/category-menu';
 import MobileSidebar from '../dashboard-page/mobile-sidebar';
 import HamburgerButton from '@/components/ui/hamburger-button';
-import BackButton from '@/components/ui/back-button';
+import Header from '@/components/header/header';
 import { useTranslation } from 'react-i18next';
 import { Post } from '../../types/post';
 
@@ -113,23 +111,9 @@ const PostsPage = () => {
         <div className='container mx-auto'>
           <div className='text-center mb-8'>
             <h1 className='text-3xl md:text-4xl font-bold text-primary dark:text-white'>{t('common.git-talks')}</h1>
-            <div className='mt-4 flex flex-wrap items-center justify-center gap-2'>
-              <BackButton />
-              <Button asChild variant='outline' size='sm'>
-                <Link to='/'>
-                  <Home className='h-4 w-4 sm:mr-2' />
-                   <span className='hidden sm:inline'> {t('common.home')}</span>
-                </Link>
-              </Button>
-              <Button asChild variant='outline' size='sm'>
-                <Link to='/home'>
-                  <LayoutDashboard className='h-4 w-4 sm:mr-2' />
-                    <span className='hidden sm:inline'> {t('common.dashboard')}</span>
-                </Link>
-              </Button>
-            </div>
+            <Header />
           </div>
-          <Menu />
+          <CategoryMenu />
         </div>
 
         <div ref={postsContainerRef} className='grid gap-6 mt-8 w-full md:w-4/5 mx-auto'>
