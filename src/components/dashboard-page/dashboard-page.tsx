@@ -3,17 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
-  MessageSquare,
-  Hash,
-  TrendingUp,
-  Eye,
   User,
   Bell,
 } from 'lucide-react';
 import { fetchPosts, fetchCategories } from '../../redux/actions';
 import DashboardSidebar from './dashboard-sidebar';
 import DashboardSearch from './dashboard-search';
-import DashboardStatCard from './dashboard-stat-card';
+import DashboardStatsGrid from './dashboard-stats-grid';
 import DashboardRecentActivity from './dashboard-recent-activity';
 import gsap from 'gsap';
 import { animateDashboardStats } from '../animations/dashboard-animations';
@@ -138,34 +134,12 @@ const DashboardPage = () => {
         {/* Main content */}
         <main className={`flex-1 p-4 md:p-8 ${animationDone ? 'overflow-y-auto' : 'overflow-hidden'} dark:bg-gray-900`}>
           {/* Stats cards */}
-          <div ref={statsGridRef} className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
-            <DashboardStatCard
-              icon={MessageSquare}
-              label={t('dashboard.active-topics')}
-              value={activePosts.length}
-              trend={activePosts.length > 0 ? t('dashboard.total-topics', { count: activePosts.length }) : t('dashboard.total-topics', { count: 0 })}
-              trendDirection='up'
-            />
-            <DashboardStatCard
-              icon={Hash}
-              label={t('dashboard.new-comments')}
-              value={totalComments}
-              trend={totalComments > 0 ? t('dashboard.total-comments', { count: totalComments }) : t('dashboard.total-comments', { count: 0 })}
-              trendDirection='up'
-            />
-            <DashboardStatCard
-              icon={TrendingUp}
-              label={t('dashboard.trending-categories')}
-              value={categories.length}
-              trend={categories.length > 0 ? t('dashboard.total-categories', { count: categories.length }) : t('dashboard.total-categories', { count: 0 })}
-              trendDirection='up'
-            />
-            <DashboardStatCard
-              icon={Eye}
-              label={t('dashboard.total-votes')}
-              value={totalVotes}
-              trend={totalVotes > 0 ? t('dashboard.total-votes-trend', { count: totalVotes }) : t('dashboard.total-votes-trend', { count: 0 })}
-              trendDirection='up'
+          <div ref={statsGridRef}>
+            <DashboardStatsGrid
+              activePostsCount={activePosts.length}
+              totalComments={totalComments}
+              categoriesCount={categories.length}
+              totalVotes={totalVotes}
             />
           </div>
 
