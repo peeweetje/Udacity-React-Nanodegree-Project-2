@@ -10,6 +10,7 @@ import { Post } from '../../types/post';
 import { Comment } from '../../utils/api';
 import { animateListItems, animateEmptyState } from '../animations/list-entry-animations';
 import { useGsapContext } from '../animations/use-gsap-animation';
+import FormattedDate from '../forms/formatted-date';
 
 interface RootState {
   posts: {
@@ -118,7 +119,7 @@ const MessagesPage = () => {
                       <div className='flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 text-xs text-gray-400 dark:text-gray-500'>
                       <span className='flex items-center space-x-1'>
                         <Clock className='h-3 w-3' />
-                        <span>{new Date(comment.timestamp).toLocaleDateString()}</span>
+                        <FormattedDate timestamp={comment.timestamp} />
                       </span>
                       <span>{postCategory}</span>
                     </div>

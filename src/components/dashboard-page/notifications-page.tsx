@@ -2,13 +2,14 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { MessageSquare, User, PlusCircle, Bell } from 'lucide-react';
+import { MessageSquare, User, PlusCircle, Bell, Clock } from 'lucide-react';
 import { fetchPosts } from '../../redux/actions';
 import DashboardSidebar from './dashboard-sidebar';
 import BackButton from '@/components/ui/back-button';
 import { Post } from '../../types/post';
 import { animateListItems, animateEmptyState } from '../animations/list-entry-animations';
 import { useGsapContext } from '../animations/use-gsap-animation';
+import FormattedDate from '../forms/formatted-date';
 
 interface RootState {
   posts: {
@@ -111,13 +112,16 @@ const NotificationsPage = () => {
                       <p className='text-sm text-gray-600 dark:text-gray-300 mt-1 truncate'>
                         {notification.postTitle}
                       </p>
-                      <div className='flex flex-wrap items-center gap-x-3 gap-y-1 mt-2 text-xs text-gray-400 dark:text-gray-500'>
+                      <div className='flex flex-wrap items-center gap-x-4 gap-y-1 mt-2 text-xs text-gray-400 dark:text-gray-500'>
                         <span className='flex items-center space-x-1'>
                           <User className='h-3 w-3' />
                           <span>{notification.author}</span>
                         </span>
+                        <span className='flex items-center space-x-1'>
+                          <Clock className='h-3 w-3' />
+                          <FormattedDate timestamp={notification.timestamp} />
+                        </span>
                         <span>{notification.category}</span>
-                        <span>{new Date(notification.timestamp).toLocaleDateString()}</span>
                       </div>
                     </div>
                   </div>
