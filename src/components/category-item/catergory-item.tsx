@@ -23,6 +23,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { animateVoteButton } from '../animations/vote-animations';
 import { animateCards } from '../animations/card-animations';
+import { animateCategoryText } from '../animations/text-animations';
 import { useGsapContext, useGsapCardHover } from '../animations/use-gsap-animation';
 
 interface Post {
@@ -51,6 +52,9 @@ const CategoryItem = ({ post, onDelete, onVote }: CategoryItemProps) => {
     cardRef as React.RefObject<HTMLDivElement | null>,
     () => {
       animateCards('[data-category-card]', animationsEnabled, 0.15, 0.1);
+      if (cardRef.current) {
+        animateCategoryText(cardRef.current, '[data-category-name]', animationsEnabled, 0.6);
+      }
     },
     [animationsEnabled]
   );
@@ -97,6 +101,12 @@ const CategoryItem = ({ post, onDelete, onVote }: CategoryItemProps) => {
               />
             </div>
           </div>
+          <p
+            data-category-name
+            className='text-xs font-medium text-teal-600 dark:text-teal-400 mt-2'
+          >
+            {post.category.charAt(0).toUpperCase() + post.category.slice(1)}
+          </p>
         </CardDescription>
       </CardHeader>
       <CardContent>
