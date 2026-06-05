@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchEditComment, fetchComment } from '../../redux/actions';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 import {
   Card,
   CardHeader,
@@ -13,10 +11,11 @@ import {
   CardContent,
   CardFooter,
 } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
 import { Edit } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import BackButton from '@/components/ui/back-button';
+import FormInput from '../forms/form-input';
+import FormTextarea from '../forms/form-textarea';
 import { animateCards } from '../animations/card-animations';
 import { useGsapContext } from '../animations/use-gsap-animation';
 
@@ -103,35 +102,20 @@ const EditComment = () => {
             </CardHeader>
             <form onSubmit={handleSubmit}>
               <CardContent className='space-y-4'>
-                <div className='space-y-2'>
-                  <Label  htmlFor='commentAuthor'>
-                    {t('editComment.label-author')}
-                  </Label>
-                  <Input
-                    className='border-teal-200'
-                    id='commentAuthor'
-                    name='commentAuthor'
-                    value={commentAuthor}
-                    onChange={handleInputChange}
-                    required
-                    aria-required='true'
-                  />
-                </div>
-                <div className='space-y-2'>
-                  <Label htmlFor='commentContent'>
-                    {t('editComment.label-content')}
-                  </Label>
-                  <Textarea
-                    className='border-teal-200'
-                    id='commentContent'
-                    name='commentContent'
-                    value={commentContent}
-                    onChange={handleInputChange}
-                    rows={6}
-                    required
-                    aria-required='true'
-                  />
-                </div>
+                <FormInput
+                  id='commentAuthor'
+                  name='commentAuthor'
+                  labelKey='editComment.label-author'
+                  value={commentAuthor}
+                  onChange={handleInputChange}
+                />
+                <FormTextarea
+                  id='commentContent'
+                  name='commentContent'
+                  labelKey='editComment.label-content'
+                  value={commentContent}
+                  onChange={handleInputChange}
+                />
               </CardContent>
               <CardFooter>
                 <Button type='submit' className='w-full'>
