@@ -8,29 +8,16 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { Form } from '@/components/ui/form';
 
 import { fetchAddPost } from '../../redux/actions';
 import MobileSidebar from '../dashboard-page/mobile-sidebar';
 import HamburgerButton from '@/components/ui/hamburger-button';
 import BackButton from '@/components/ui/back-button';
-import { options } from '../../utils/options';
+import FormCategorySelect from '../forms/form-category-select';
+import FormTitleInput from '../forms/form-title-input';
+import FormAuthorInput from '../forms/form-author-input';
+import FormContentTextarea from '../forms/form-content-textarea';
 import { FilePlus, PlusCircle } from 'lucide-react';
 import { animateCards } from '../animations/card-animations';
 import { useGsapContext } from '../animations/use-gsap-animation';
@@ -63,7 +50,7 @@ interface PostData {
   voteScore: number;
 }
 
-const AddPost: React.FC = () => {
+const AddPost = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -97,7 +84,7 @@ const AddPost: React.FC = () => {
       voteScore: 1,
     };
     (fetchAddPost(data))(dispatch);
-    navigate('/');
+    navigate('/posts');
   }
 
   return (
@@ -123,83 +110,29 @@ const AddPost: React.FC = () => {
           <div className='add-post-form-card max-w-2xl mx-auto bg-card bg-neutral-100 dark:bg-gray-800 p-8 rounded-lg shadow-inner dark:border dark:border-gray-700'>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-              <FormField
+              <FormCategorySelect
                 control={form.control}
                 name='category'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('addPost.form-label.category')}</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder={t('addPost.category')} />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {options.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.text}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                labelKey='addPost.form-label.category'
+                placeholderKey='addPost.category'
               />
-              <FormField
+              <FormTitleInput
                 control={form.control}
                 name='title'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('addPost.form-label.title')}</FormLabel>
-                    <FormControl>
-                      <Input
-                        className='border-teal-200'
-                        placeholder={t('addPost.placeholder.enter-title')}
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                labelKey='addPost.form-label.title'
+                placeholderKey='addPost.placeholder.enter-title'
               />
-              <FormField
+              <FormAuthorInput
                 control={form.control}
                 name='author'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('addPost.form-label.author')}</FormLabel>
-                    <FormControl>
-                      <Input
-                        className='border-teal-200'
-                        placeholder={t('addPost.placeholder.enter-author')}
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                labelKey='addPost.form-label.author'
+                placeholderKey='addPost.placeholder.enter-author'
               />
-              <FormField
+              <FormContentTextarea
                 control={form.control}
                 name='content'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('addPost.form-label.content')}</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder={t('addPost.placeholder.enter-content')}
-                        className='resize-none border-teal-200'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                labelKey='addPost.form-label.content'
+                placeholderKey='addPost.placeholder.enter-content'
               />
               <Button type='submit' className='w-32'>
                 <PlusCircle className='mr-2 h-4 w-4' />
