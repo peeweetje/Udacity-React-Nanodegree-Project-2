@@ -15,7 +15,7 @@ import {
   animatePlusIcon,
   animateOrbs,
   animateCards,
-} from './animations';
+} from '../animations/home-animations';
 
 const HomePage = () => {
   const { t } = useTranslation();
