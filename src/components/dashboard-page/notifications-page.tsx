@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { MessageSquare, User, PlusCircle, Bell, Clock } from 'lucide-react';
 import { fetchPosts } from '../../redux/actions';
 import DashboardSidebar from './dashboard-sidebar';
+import NoNotificationsMessage from './NoNotificationsMessage';
 import BackButton from '@/components/ui/back-button';
 import { Post } from '../../types/post';
 import { animateListItems, animateEmptyState } from '../animations/list-entry-animations';
@@ -31,11 +32,30 @@ const NotificationsPage = () => {
 
   const activePosts = posts.filter((post) => !post.deleted);
 
-  const notifications = activePosts
-    .sort((a, b) => b.timestamp - a.timestamp)
+  // For each post, determine the latest activity timestamp (post timestamp or latest comment timestamp)
+  const postsWithActivity = activePosts.map((post) => {
+    const commentCount = post.comments?.length || 0;
+    let latestActivityTimestamp = post.timestamp;
+    
+    if (commentCount > 0 && post.comments) {
+      const latestComment = post.comments.reduce((latest, comment) => 
+        comment.timestamp > latest.timestamp ? comment : latest
+      );
+      latestActivityTimestamp = latestComment.timestamp;
+    }
+    
+    return {
+      ...post,
+      _latestActivityTimestamp: latestActivityTimestamp,
+      _commentCount: commentCount
+    };
+  });
+
+  const notifications = postsWithActivity
+    .sort((a, b) => b._latestActivityTimestamp - a._latestActivityTimestamp)
     .slice(0, 10)
     .map((post) => {
-      const commentCount = post.comments?.length || 0;
+      const commentCount = post._commentCount;
       const type = commentCount > 0 ? 'comment' : 'post';
       const label = type === 'comment'
         ? `${commentCount} new comment${commentCount > 1 ? 's' : ''}`
@@ -48,7 +68,7 @@ const NotificationsPage = () => {
         author: post.author,
         postTitle: post.title,
         category: post.category,
-        timestamp: post.timestamp,
+        timestamp: post._latestActivityTimestamp,
         icon: type === 'comment' ? MessageSquare : PlusCircle,
         iconBg: type === 'comment' ? 'bg-blue-100' : 'bg-green-100',
         iconColor: type === 'comment' ? 'text-blue-600' : 'text-green-600',
@@ -84,12 +104,7 @@ const NotificationsPage = () => {
 
         <main className='flex-1 p-4 md:p-8 overflow-y-auto dark:bg-gray-900'>
           {notifications.length === 0 && (
-            <div ref={emptyStateRef} className='notification-empty-state opacity-0 text-center py-20'>
-              <Bell className='h-16 w-16 text-gray-300 mx-auto mb-4' />
-              <p className='text-gray-500 text-lg'>
-                No notifications yet
-              </p>
-            </div>
+            <NoNotificationsMessage ref={emptyStateRef} />
           )}
 
           <div ref={containerRef} className='space-y-4 max-w-3xl mx-auto'>
