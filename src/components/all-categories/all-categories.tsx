@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {  useParams } from 'react-router-dom';
 import CategoryCard from './category-card';
 import AddPostButton from './add-post-button';
+import NoPostsMessage from './no-posts-message';
 import CategoryItem from '../category-item/catergory-item';
 import CategoryMenu from '../category-menu/category-menu';
 import MobileSidebar from '../dashboard-page/mobile-sidebar';
@@ -86,7 +87,6 @@ const Categories = () => {
     <div className='flex min-h-screen bg-background dark:bg-gray-900'>
       {/* Mobile hamburger button */}
       <HamburgerButton onClick={() => setMobileMenuOpen(true)} />
-
       <MobileSidebar isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
       <div className='flex-1 p-8'>
         <div className='mb-8 text-center'>
@@ -101,7 +101,6 @@ const Categories = () => {
           </div>
           <CategoryCard ref={categoryCardContainerRef} categoryName={categoryName || ''} />
         </div>
-
         <div ref={listContainerRef} className='mt-4 space-y-4'>
           {filteredAndSortedPosts.length > 0 ? (
             filteredAndSortedPosts.map((post) => (
@@ -113,11 +112,7 @@ const Categories = () => {
               />
             ))
           ) : (
-            <div className='no-posts-message flex justify-center mx-40'>
-              <h3 className='text-xl font-semibold text-muted-foreground dark:text-gray-400 text-center mt-4'>
-                {t('common.no-posts')}
-              </h3>
-            </div>
+            <NoPostsMessage />
           )}
         </div>
         <AddPostButton ref={addPostBtnContainerRef} />

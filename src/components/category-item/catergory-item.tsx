@@ -25,17 +25,7 @@ import { animateVoteButton } from '../animations/vote-animations';
 import { animateCards } from '../animations/card-animations';
 import { animateCategoryText } from '../animations/text-animations';
 import { useGsapContext, useGsapCardHover } from '../animations/use-gsap-animation';
-
-interface Post {
-  id: string;
-  title: string;
-  author: string;
-  timestamp: number;
-  body: string;
-  voteScore: number;
-  category: string;
-  comments?: Array<any>; //need to be more specific type for comments
-}
+import { Post } from '../../types/post';
 
 interface CategoryItemProps {
   post: Post;
