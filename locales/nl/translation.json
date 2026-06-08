@@ -138,6 +138,7 @@
     "total-votes": "Totale stemmen",
     "total-votes-trend": "{{count}} totale stemmen",
     "total-votes-trend_plural": "{{count}} totale stemmen",
-    "animations-description": "Schakel animaties aan of uit"
+    "animations-description": "Schakel animaties aan of uit",
+    "no-notifications": "Nog geen meldingen"
   }
 }

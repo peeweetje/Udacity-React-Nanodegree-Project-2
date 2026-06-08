@@ -138,6 +138,7 @@
     "total-votes": "Total Votes",
     "total-votes-trend": "{{count}} total votes",
     "total-votes-trend_plural": "{{count}} total votes",
-    "animations-description": "Enable or disable animations"
+    "animations-description": "Enable or disable animations",
+    "no-notifications": "No notifications available"
   }
 }
