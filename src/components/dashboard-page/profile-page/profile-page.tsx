@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import BackButton from '@/components/ui/back-button';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts } from '../../../redux/actions';
-import DashboardSidebar from '../dashboard-sidebar';
+import DashboardSidebar from '../sidebar/dashboard-sidebar';
 import ProfileAvatar from './profile-avatar';
 import ProfileInfo from './profile-info';
 import AnimatedOrbs from '../../animations/animated-orbs';

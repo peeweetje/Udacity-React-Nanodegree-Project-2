@@ -7,7 +7,7 @@ import {
   Bell,
 } from 'lucide-react';
 import { fetchPosts, fetchCategories } from '../../redux/actions';
-import DashboardSidebar from './dashboard-sidebar';
+import DashboardSidebar from './sidebar/dashboard-sidebar';
 import DashboardSearch from './dashboard-search';
 import DashboardStatsGrid from './dashboard-stats-grid';
 import DashboardRecentActivity from './dashboard-recent-activity';

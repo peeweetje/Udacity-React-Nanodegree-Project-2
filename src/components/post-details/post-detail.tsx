@@ -28,7 +28,7 @@ import {
   PlusCircle,
 } from 'lucide-react';
 import CategoryMenu from '../category-menu/category-menu';
-import MobileSidebar from '../dashboard-page/mobile-sidebar';
+import MobileSidebar from '../dashboard-page/sidebar/mobile-sidebar/mobile-sidebar';
 import HamburgerButton from '@/components/ui/hamburger-button';
 import BackButton from '@/components/ui/back-button';
 import SinglePost from './single-post';
