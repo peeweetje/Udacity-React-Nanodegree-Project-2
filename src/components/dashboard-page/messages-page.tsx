@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { MessageSquare, Clock } from 'lucide-react';
 import { fetchPosts } from '../../redux/actions';
-import DashboardSidebar from './dashboard-sidebar';
+import DashboardSidebar from './sidebar/dashboard-sidebar';
 import BackButton from '@/components/ui/back-button';
 import { Post } from '../../types/post';
 import { Comment } from '../../utils/api';

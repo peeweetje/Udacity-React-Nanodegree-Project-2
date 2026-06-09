@@ -4,7 +4,7 @@ import { Sun, Moon, Languages, Settings, Zap } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts, fetchCategories, toggleAnimations } from '../../redux/actions';
 import { useLocation } from 'react-router-dom';
-import DashboardSidebar from './dashboard-sidebar';
+import DashboardSidebar from './sidebar/dashboard-sidebar';
 import BackButton from '@/components/ui/back-button';
 import { animateCards } from '../animations/card-animations';
 import { useGsapContext, useGsapCardHover } from '../animations/use-gsap-animation';
