@@ -2,25 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { Home, Bell, Settings, MessageSquare, List, User, LayoutDashboard } from 'lucide-react';
 import gsap from 'gsap';
-import { animateSidebar } from '../animations/sidebar-animations';
-
-interface NavItem {
-  to: string;
-  icon: React.ElementType;
-  labelKey: string;
-}
-
-const navItems: NavItem[] = [
-  { to: '/', icon: Home, labelKey: 'dashboard.home' },
-  { to: '/home', icon: LayoutDashboard, labelKey: 'dashboard.dashboard' },
-  { to: '/profile', icon: User, labelKey: 'dashboard.profile' },
-  { to: '/posts', icon: List, labelKey: 'dashboard.categories' },
-  { to: '/notifications', icon: Bell, labelKey: 'dashboard.notifications' },
-  { to: '/settings', icon: Settings, labelKey: 'dashboard.settings' },
-  { to: '/messages', icon: MessageSquare, labelKey: 'dashboard.messages' },
-];
+import { animateSidebar } from '../../../animations/sidebar-animations';
+import { navItems } from '../sidebar-nav-items';
 
 const DesktopSidebar = () => {
   const { t } = useTranslation();
