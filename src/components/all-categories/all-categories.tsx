@@ -6,7 +6,7 @@ import AddPostButton from './add-post-button';
 import NoPostsMessage from './no-posts-message';
 import CategoryItem from '../category-item/catergory-item';
 import CategoryMenu from '../category-menu/category-menu';
-import MobileSidebar from '../dashboard-page/mobile-sidebar';
+import MobileSidebar from '../dashboard-page/sidebar/mobile-sidebar/mobile-sidebar';
 import HamburgerButton from '@/components/ui/hamburger-button';
 import Header from '@/components/header/header';
 import { sortPosts } from '../../utils/sortPosts';

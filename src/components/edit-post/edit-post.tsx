@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEditPost, fetchSinglePost } from '../../redux/actions';
-import MobileSidebar from '../dashboard-page/mobile-sidebar';
+import MobileSidebar from '../dashboard-page/sidebar/mobile-sidebar/mobile-sidebar';
 import Loading from '../loading/loading';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';

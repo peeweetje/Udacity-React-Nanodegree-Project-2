@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 
 import { fetchAddPost } from '../../redux/actions';
-import MobileSidebar from '../dashboard-page/mobile-sidebar';
+import MobileSidebar from '../dashboard-page/sidebar/mobile-sidebar/mobile-sidebar';
 import HamburgerButton from '@/components/ui/hamburger-button';
 import BackButton from '@/components/ui/back-button';
 import FormCategorySelect from '../forms/form-category-select';
