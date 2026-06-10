@@ -1,14 +1,12 @@
 import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
-import Timestamp from 'react-timestamp';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { ThumbsUp, ThumbsDown, Trash2, Edit, Clock, User } from 'lucide-react';
-import { animateVoteButton } from '../animations/vote-animations';
 import { animateCards } from '../animations/card-animations';
 import { useGsapContext, useGsapCardHover } from '../animations/use-gsap-animation';
+import VoteActions from '../shared/vote-actions';
+import AuthorTimestamp from '../shared/author-timestamp';
+import EditDeleteActions from '../shared/edit-delete-actions';
 
 interface Comment {
   id: string;
@@ -46,61 +44,30 @@ const SingleComment = ({ comment, onUpvote, onDownvote, onDelete }: SingleCommen
   );
 
   return (
-    <div ref={cardRef} data-post-detail-card className=' flex flex-col w-full md:w-3/4 mx-auto mt-8 px-4'>
+    <div ref={cardRef} data-post-detail-card className='flex flex-col w-full md:w-3/4 mx-auto mt-8 px-4'>
       <Card data-comment-card className='comment-card mb-4 flex flex-col dark:bg-gray-800 dark:border-gray-700'>
         <CardContent className='p-4 flex flex-col h-full'>
           <div className='flex flex-col md:flex-row md:items-center md:justify-between mb-2'>
-            <div className='flex items-center space-x-2 mb-2 sm:mb-0'>
-              <User className='w-5 h-5 text-primary dark:text-teal-400' />
-              <span className='font-medium dark:text-white'>{author}</span>
-            </div>
-            <div className='flex items-center text-sm text-gray-500 dark:text-gray-400'>
-              <Clock className='w-4 h-4 mr-1 text-primary dark:text-gray-400' />
-              <Timestamp
-                date={timestamp / 1000}
-                options={{ twentyFourHour: true }}
-              />
-            </div>
+            <AuthorTimestamp author={author} timestamp={timestamp} />
           </div>
           <p className='my-4 grow line-clamp-3 dark:text-gray-300'>{body}</p>
           <div className='flex flex-col sm:flex-row md:items-center md:justify-between space-y-2 md:space-y-0'>
-            <div className='flex items-center space-x-2'>
-              <Button className='w-18' size='sm' onClick={(e) => { onUpvote(id); animateVoteButton(e.currentTarget, 'up', animationsEnabled); }}>
-                <ThumbsUp className='w-4 h-4 mr-1 dark:text-white' />
-              </Button>
-              <span className='font-medium dark:text-white'>{voteScore}</span>
-              <Button
-                className='w-18'
-                variant='destructive'
-                size='sm'
-                onClick={(e) => { onDownvote(id); animateVoteButton(e.currentTarget, 'down', animationsEnabled); }}
-              >
-                <ThumbsDown className='w-4 h-4 mr-1 dark:text-white' />
-              </Button>
-            </div>
-            <div className='flex flex-row space-x-2 sm:m-1'>
-              <Link to={`/editcomment/${id}`}>
-                <Button className='w-34' size='sm'>
-                  <Edit className='w-4 h-4 mr-2' />
-                  <span className='hidden lg:inline p-1'>
-                    {t('singleComment.edit-comment')}
-                  </span>
-                  <span className='lg:hidden'> {t('singleComment.edit')}</span>
-                </Button>
-              </Link>
-              <Button
-                className='w-34'
-                variant='destructive'
-                size='sm'
-                onClick={() => onDelete(id)}
-              >
-                <Trash2 className='w-4 h-4 mr-2' />
-                <span className='hidden lg:inline '>
-                  {t('singleComment.delete-comment')}
-                </span>
-                <span className='lg:hidden'> {t('singleComment.delete')}</span>
-              </Button>
-            </div>
+            <VoteActions
+              id={id}
+              voteScore={voteScore}
+              onUpvote={onUpvote}
+              onDownvote={onDownvote}
+              animationsEnabled={animationsEnabled}
+            />
+            <EditDeleteActions
+              editLink={`/editcomment/${id}`}
+              onDelete={() => onDelete(id)}
+              editLabelFull={t('singleComment.edit-comment')}
+              editLabelShort={t('singleComment.edit')}
+              deleteLabelFull={t('singleComment.delete-comment')}
+              deleteLabelShort={t('singleComment.delete')}
+              containerClassName='flex flex-row space-x-2 sm:m-1'
+            />
           </div>
         </CardContent>
       </Card>

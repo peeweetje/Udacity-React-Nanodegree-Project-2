@@ -1,9 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Timestamp from 'react-timestamp';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { animateVoteButton } from '../animations/vote-animations';
 import { animateCardHover } from '../animations/card-animations';
 import {
   Card,
@@ -12,15 +9,13 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import {
-  ThumbsUp,
-  ThumbsDown,
   MessageCircle,
-  Trash2,
-  Edit,
-  User,
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import VoteActions from '../shared/vote-actions';
+import AuthorTimestamp from '../shared/author-timestamp';
+import EditDeleteActions from '../shared/edit-delete-actions';
 
 interface Post {
   id: string;
@@ -58,19 +53,14 @@ const SinglePost = ({
   }, [animationsEnabled]);
 
   return (
-    <div data-post-detail-card className='flex flex-col mx-auto w-full  px-4'>
+    <div data-post-detail-card className='flex flex-col mx-auto w-full px-4'>
       <Card ref={cardRef} className='post-detail-card flex flex-col w-full mx-auto overflow-hidden dark:bg-gray-800 dark:border-gray-700'>
         <CardHeader className='space-y-2'>
           <CardTitle className='text-xl sm:text-2xl break-words dark:text-white'>
             {title}
           </CardTitle>
           <div className='flex flex-col sm:flex-row sm:items-center text-sm text-muted-foreground dark:text-gray-400'>
-            <User className='w-5 h-5 mr-1' />
-            <span className='mr-2 break-words'>{author}</span>
-            <Timestamp
-              date={timestamp / 1000}
-              options={{ twentyFourHour: true }}
-            />
+            <AuthorTimestamp author={author} timestamp={timestamp} showClock={false} />
           </div>
         </CardHeader>
         <CardContent>
@@ -78,54 +68,27 @@ const SinglePost = ({
         </CardContent>
         <CardFooter className='flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4'>
           <div className='flex items-center space-x-2 flex-wrap'>
-            <Button
-              className='w-12 sm:w-18'
-              size='sm'
-               onClick={(e) => { onUpvote(id); animateVoteButton(e.currentTarget, 'up', animationsEnabled); }}
-            >
-              <ThumbsUp className='w-4 h-4' />
-            </Button>
-            <span className='font-bold text-sm sm:text-base dark:text-white'>{voteScore}</span>
-            <Button
-              className='w-12 sm:w-18'
-              variant='destructive'
-              size='sm'
-               onClick={(e) => { onDownvote(id); animateVoteButton(e.currentTarget, 'down', animationsEnabled); }}
-            >
-              <ThumbsDown className='w-4 h-4' />
-            </Button>
+            <VoteActions
+              id={id}
+              voteScore={voteScore}
+              onUpvote={onUpvote}
+              onDownvote={onDownvote}
+              animationsEnabled={animationsEnabled}
+            />
             <Button variant='ghost' size='sm' className='ml-2'>
               <MessageCircle className='w-4 h-4 mr-1 dark:text-neutral-300' />
               <span className='text-sm sm:text-base dark:text-neutral-300'>{commentsCount}</span>
             </Button>
           </div>
-          <div className='flex space-x-2 w-full sm:w-auto'>
-            <Button className='w-34' size='sm' asChild>
-              <Link
-                to={`/editpost/${id}`}
-                className='flex items-center justify-center'
-              >
-                <Edit className='w-4 h-4 mr-1' />
-                <span className='hidden sm:inline'>
-                  {t('singlePost.edit-post')}
-                </span>
-                <span className='sm:hidden'>{t('singlePost.edit')}</span>
-              </Link>
-            </Button>
-            <Button
-              className='w-34'
-              variant='destructive'
-              size='sm'
-              onClick={() => onDelete(id)}
-            >
-              <Trash2 className='w-4 h-4 mr-1' />
-              <span className='hidden sm:inline'>
-                {' '}
-                {t('singlePost.delete-post')}
-              </span>
-              <span className='sm:hidden'> {t('singlePost.delete')}</span>
-            </Button>
-          </div>
+          <EditDeleteActions
+            editLink={`/editpost/${id}`}
+            onDelete={() => onDelete(id)}
+            editLabelFull={t('singlePost.edit-post')}
+            editLabelShort={t('singlePost.edit')}
+            deleteLabelFull={t('singlePost.delete-post')}
+            deleteLabelShort={t('singlePost.delete')}
+            containerClassName='flex space-x-2 w-full sm:w-auto'
+          />
         </CardFooter>
       </Card>
     </div>
