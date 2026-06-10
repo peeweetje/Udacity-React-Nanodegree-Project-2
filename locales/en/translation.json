@@ -79,7 +79,8 @@
     "label-author": "author",
     "comment-content": "Comment content",
     "add-comment": "add a comment",
-    "add-comment-button": "Add comment"
+    "add-comment-button": "Add comment",
+    "not-found": "Post not found."
   },
 
   "singleComment": {

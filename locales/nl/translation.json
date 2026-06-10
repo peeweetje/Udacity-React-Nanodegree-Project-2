@@ -79,7 +79,8 @@
     "label-author": "auteur",
     "comment-content": "Reactie-inhoud",
     "add-comment": "voeg een reactie toe",
-    "add-comment-button": "Reactie toevoegen"
+    "add-comment-button": "Reactie toevoegen",
+    "not-found": "Bericht niet gevonden."
   },
 
   "singleComment": {
