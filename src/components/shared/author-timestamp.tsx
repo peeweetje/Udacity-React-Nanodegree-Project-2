@@ -17,6 +17,7 @@ const AuthorTimestamp = ({ author, timestamp, showClock = true }: AuthorTimestam
         <div className='flex items-center space-x-1'>
           <Clock className='w-4 h-4 text-primary dark:text-gray-400' />
           <Timestamp
+            className="dark: text-gray-400"
             date={timestamp / 1000}
             options={{ twentyFourHour: true }}
           />
