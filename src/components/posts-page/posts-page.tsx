@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Timestamp from 'react-timestamp';
 import * as actions from '../../redux/actions';
 import { sortPosts } from '../../utils/sortPosts';
-import { animateVoteButton } from '../animations/vote-animations';
 import { animateCards } from '../animations/card-animations';
 import { animateCategoryText } from '../animations/text-animations';
 import { useGsapContext, useGsapCardHover } from '../animations/use-gsap-animation';
@@ -20,8 +19,6 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import {
-  ThumbsUp,
-  ThumbsDown,
   MessageSquare,
   Trash2,
   Edit,
@@ -36,6 +33,7 @@ import HamburgerButton from '@/components/ui/hamburger-button';
 import Header from '@/components/header/header';
 import { useTranslation } from 'react-i18next';
 import { Post } from '../../types/post';
+import VoteActions from '../shared/vote-actions';
 
 interface RootState {
   posts: {
@@ -72,14 +70,8 @@ const PostsPage = () => {
     dispatch(actions.fetchDeletePost(postId));
   };
 
-  const iconThumbsUp = (postId: string, e: React.MouseEvent<HTMLButtonElement>) => {
-    dispatch(actions.fetchVotePost(postId, 'upVote'));
-    animateVoteButton(e.currentTarget, 'up', animationsEnabled);
-  };
-
-  const iconThumbsDown = (postId: string, e: React.MouseEvent<HTMLButtonElement>) => {
-    dispatch(actions.fetchVotePost(postId, 'downVote'));
-    animateVoteButton(e.currentTarget, 'down', animationsEnabled);
+  const handleVotePost = (postId: string, option: 'upVote' | 'downVote') => {
+    dispatch(actions.fetchVotePost(postId, option));
   };
 
   const postsContainerRef = useRef<HTMLDivElement>(null);
@@ -161,24 +153,13 @@ const PostsPage = () => {
                 </CardHeader>
                 <CardContent>
                   <div className='flex flex-col space-y-4'>
-                    <div className='flex items-center space-x-4'>
-                      <Button
-                        className='w-18'
-                        size='sm'
-                        onClick={(e) => iconThumbsUp(post.id, e)}
-                      >
-                        <ThumbsUp className='h-4 w-4' />
-                      </Button>
-                      <span className='font-bold dark:text-white'>{post.voteScore}</span>
-                      <Button
-                        className='w-18'
-                        variant='destructive'
-                        size='sm'
-                        onClick={(e) => iconThumbsDown(post.id, e)}
-                      >
-                        <ThumbsDown className='h-4 w-4' />
-                      </Button>
-                    </div>
+                    <VoteActions
+                      id={post.id}
+                      voteScore={post.voteScore}
+                      onUpvote={(id) => handleVotePost(id, 'upVote')}
+                      onDownvote={(id) => handleVotePost(id, 'downVote')}
+                      animationsEnabled={animationsEnabled}
+                    />
                     <div className='flex items-center dark:text-neutral-300'>
                       <MessageSquare className='h-4 w-4 mr-2' />
                       <span>{post.comments && post.comments.length}</span>
