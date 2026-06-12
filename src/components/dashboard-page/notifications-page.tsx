@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { MessageSquare, User, PlusCircle, Bell, Clock } from 'lucide-react';
+import { MessageSquare, User, Edit, Bell, Clock } from 'lucide-react';
 import { fetchPosts } from '../../redux/actions';
 import DashboardSidebar from './sidebar/dashboard-sidebar';
 import NoNotificationsMessage from './NoNotificationsMessage';
@@ -69,7 +69,7 @@ const NotificationsPage = () => {
         postTitle: post.title,
         category: post.category,
         timestamp: post._latestActivityTimestamp,
-        icon: type === 'comment' ? MessageSquare : PlusCircle,
+        icon: type === 'comment' ? MessageSquare : Edit,
         iconBg: type === 'comment' ? 'bg-blue-100' : 'bg-green-100',
         iconColor: type === 'comment' ? 'text-blue-600' : 'text-green-600',
       };
