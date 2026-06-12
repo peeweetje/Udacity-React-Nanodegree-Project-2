@@ -6,6 +6,7 @@ import * as actions from '../../redux/actions';
 import { sortPosts } from '../../utils/sortPosts';
 import { animateVoteButton } from '../animations/vote-animations';
 import { animateCards } from '../animations/card-animations';
+import { animateCategoryText } from '../animations/text-animations';
 import { useGsapContext, useGsapCardHover } from '../animations/use-gsap-animation';
 import Loading from '../loading/loading';
 
@@ -85,6 +86,10 @@ const PostsPage = () => {
 
   useGsapContext(postsContainerRef as React.RefObject<HTMLDivElement | null>, () => {
     animateCards('.post-card', animationsEnabled, 0.2, 0.4);
+    const container = postsContainerRef.current;
+    if (container) {
+      animateCategoryText(container, '[data-category-text]', animationsEnabled, 0.6);
+    }
   }, [animationsEnabled, posts.length, loading]);
   // Note: Only depends on posts.length (triggers when posts are added/removed), not the full posts array.
   // This prevents re-animation on vote because voteScore changes don't affect array length.
@@ -134,18 +139,23 @@ const PostsPage = () => {
                     </Link>
                   </CardTitle>
                   <CardDescription className='dark:text-gray-400'>
-                    <div className='flex items-center space-x-4'>
-                      <div className='flex items-center space-x-2'>
-                        <User className='h-4 w-4' />
-                        <span>{post.author}</span>
+                    <div className='flex flex-col space-y-1'>
+                      <div className='flex items-center space-x-4'>
+                        <div className='flex items-center space-x-2'>
+                          <User className='h-4 w-4' />
+                          <span>{post.author}</span>
+                        </div>
+                        <div className='flex items-center space-x-2 mt-1'>
+                          <Clock className='h-4 w-4' />
+                          <Timestamp
+                            date={post.timestamp / 1000}
+                            options={{ twentyFourHour: true }}
+                          />
+                        </div>
                       </div>
-                      <div className='flex items-center space-x-2 mt-1'>
-                        <Clock className='h-4 w-4' />
-                        <Timestamp
-                          date={post.timestamp / 1000}
-                          options={{ twentyFourHour: true }}
-                        />
-                      </div>
+                      <p data-category-text className='text-xs font-medium text-teal-600 dark:text-teal-400'>
+                        {post.category.charAt(0).toUpperCase() + post.category.slice(1)}
+                      </p>
                     </div>
                   </CardDescription>
                 </CardHeader>
