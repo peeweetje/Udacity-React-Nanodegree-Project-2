@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './home-page/home-page';
 import DashboardPage from './dashboard-page/dashboard-page';
-import NotificationsPage from './dashboard-page/notifications-page';
+import NotificationsPage from './dashboard-page/notification-page/notifications-page';
 import MessagesPage from './dashboard-page/messages-page';
 import SettingsPage from './dashboard-page/settings-page';
 import PostsPage from './posts-page/posts-page';
