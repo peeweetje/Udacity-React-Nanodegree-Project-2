@@ -2,22 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEditComment, fetchComment } from '../../redux/actions';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from '@/components/ui/card';
-import { Edit } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import BackButton from '@/components/ui/back-button';
-import FormInput from '../forms/form-input';
-import FormTextarea from '../forms/form-textarea';
 import { animateCards } from '../animations/card-animations';
 import { useGsapContext } from '../animations/use-gsap-animation';
+import EditCommentCard from './edit-comment-card';
 
 interface Comment {
   id: string;
@@ -30,7 +18,6 @@ interface RootState {
 }
 
 const EditComment = () => {
-  const { t } = useTranslation();
   const [commentAuthor, setCommentAuthor] = useState<string>('');
   const [commentContent, setCommentContent] = useState<string>('');
   const dispatch = useDispatch();
@@ -90,42 +77,13 @@ const EditComment = () => {
         <div className='mb-4 text-center'>
           <BackButton />
         </div>
-        <div ref={containerRef}>
-          <Card className='edit-comment-card w-full max-w-md mx-auto dark:bg-gray-800 dark:border-gray-700'>
-            <CardHeader>
-              <CardTitle className='text-2xl font-bold text-center text-primary dark:text-white'>
-                {t('editComment.edit-comment')}
-              </CardTitle>
-              <CardDescription className='text-center dark:text-gray-400'>
-                {t('editComment.edit-description')}
-              </CardDescription>
-            </CardHeader>
-            <form onSubmit={handleSubmit}>
-              <CardContent className='space-y-4'>
-                <FormInput
-                  id='commentAuthor'
-                  name='commentAuthor'
-                  labelKey='editComment.label-author'
-                  value={commentAuthor}
-                  onChange={handleInputChange}
-                />
-                <FormTextarea
-                  id='commentContent'
-                  name='commentContent'
-                  labelKey='editComment.label-content'
-                  value={commentContent}
-                  onChange={handleInputChange}
-                />
-              </CardContent>
-              <CardFooter>
-                <Button type='submit' className='w-full'>
-                  <Edit className='w-4 h-4 mr-2' aria-hidden='true' />
-                  <span> {t('editComment.button-edit')}</span>
-                </Button>
-              </CardFooter>
-            </form>
-          </Card>
-        </div>
+        <EditCommentCard
+          commentAuthor={commentAuthor}
+          commentContent={commentContent}
+          containerRef={containerRef as React.RefObject<HTMLDivElement | null>}
+          onInputChange={handleInputChange}
+          onSubmit={handleSubmit}
+        />
       </main>
     </div>
   );
