@@ -140,6 +140,9 @@
     "total-votes-trend": "{{count}} total votes",
     "total-votes-trend_plural": "{{count}} total votes",
     "animations-description": "Enable or disable animations",
-    "no-notifications": "No notifications available"
+    "no-notifications": "No notifications available",
+    "noMessages": "No messages yet",
+    "noMessagesHint": "Comments on posts will appear here",
+    "commentedOn": "commented on"
   }
 }
