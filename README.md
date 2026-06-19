@@ -25,6 +25,7 @@ A modern Reddit-style application built with React, Redux, and TypeScript. This 
 - **Animations**: GSAP (GreenSock Animation Platform)
 - **Build Tool**: Vite
 - **Internationalization**: i18n support (English & Dutch)
+- **Testing**: Jest, React Testing Library
 - **Backend**: Node.js Express server (provided API)
 
 ## 📁 Project Structure
@@ -36,7 +37,7 @@ A modern Reddit-style application built with React, Redux, and TypeScript. This 
 │   │   ├── dashboard-page/ # Dashboard components
 │   │   ├── posts-page/     # Posts management
 │   │   ├── animations/     # GSAP animation utilities
-│   │   └── ...             # Other feature components
+│   │   └── __tests__/      # Component tests
 │   ├── redux/              # Redux store and slices
 │   ├── types/              # TypeScript type definitions
 │   └── utils/              # Utility functions
@@ -87,6 +88,13 @@ A modern Reddit-style application built with React, Redux, and TypeScript. This 
 3. **Open your browser**
    - Frontend: `http://localhost:5173`
    - Backend API: `http://localhost:8080`
+
+### Running Tests
+
+Run the test suite with:
+```bash
+pnpm test
+```
 
 ## 🎨 Key Features Breakdown
 
