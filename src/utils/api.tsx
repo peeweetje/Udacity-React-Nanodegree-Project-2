@@ -1,4 +1,5 @@
 import type { Post } from "@/types/post";
+export { Post };
 
 const api = "http://localhost:5001";
 
