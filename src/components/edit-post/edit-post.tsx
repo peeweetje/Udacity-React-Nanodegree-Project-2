@@ -104,7 +104,7 @@ const EditPost = () => {
           </h1>
         </div>
         <div ref={containerRef}>
-          <div className='edit-post-card max-w-2xl mx-auto bg-card bg-neutral-100 dark:bg-gray-800 p-8 rounded-lg shadow-inner dark:border dark:border-gray-700'>
+          <div className='edit-post-card max-w-2xl mx-auto bg-card dark:bg-gray-800 p-8 rounded-lg shadow-inner border-t-4 border-teal-500 dark:border-gray-700'>
             <EditPostForm
               key={post.id}
               initialCategory={post.category}
