@@ -4,26 +4,26 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-background: oklch(1 0 0);
-  --color-foreground: oklch(0.145 0 0);
-  --color-card: oklch(1 0 0);
-  --color-card-foreground: oklch(0.145 0 0);
-  --color-popover: oklch(1 0 0);
-  --color-popover-foreground: oklch(0.145 0 0);
-  --color-primary: oklch(0.205 0.042 265.755);
-  --color-primary-foreground: oklch(0.985 0 0);
-  --color-secondary: oklch(0.965 0.001 286.375);
-  --color-secondary-foreground: oklch(0.205 0.042 265.755);
-  --color-muted: oklch(0.965 0.001 286.375);
-  --color-muted-foreground: oklch(0.556 0 0);
-  --color-accent: oklch(0.965 0.001 286.375);
-  --color-accent-foreground: oklch(0.205 0.042 265.755);
-  --color-destructive: oklch(0.577 0.245 27.325);
-  --color-destructive-foreground: oklch(0.985 0 0);
-  --color-border: oklch(0.922 0 0);
-  --color-input: oklch(0.922 0 0);
-  --color-ring: oklch(0.708 0 0);
-  --radius: 0.5rem;
+  --color-background: hsl(214 24% 96%);
+  --color-foreground: hsl(215 18% 18%);
+  --color-card: hsl(214 18% 94%);
+  --color-card-foreground: hsl(215 18% 18%);
+  --color-popover: hsl(214 18% 96%);
+  --color-popover-foreground: hsl(215 18% 18%);
+  --color-primary: hsl(214 18% 16%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(218 64% 52%);
+  --color-secondary-foreground: hsl(0 0% 100%);
+  --color-muted: hsl(210 16% 87%);
+  --color-muted-foreground: hsl(215 18% 36%);
+  --color-accent: hsl(171 43% 46%);
+  --color-accent-foreground: hsl(0 0% 100%);
+  --color-destructive: hsl(354 73% 55%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+  --color-border: hsl(210 16% 82%);
+  --color-input: hsl(210 18% 94%);
+  --color-ring: hsl(187 73% 62%);
+  --radius: 0.75rem;
 }
 
 @keyframes select-slide-up {
@@ -56,5 +56,41 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     overflow-x: hidden;
+  }
+
+  :root:not(.dark) {
+    --surface-100: hsl(214 18% 96%);
+    --surface-200: hsl(214 16% 94%);
+    --surface-300: hsl(214 16% 91%);
+    --border-soft: hsl(210 16% 82%);
+    --text-strong: hsl(215 18% 18%);
+  }
+
+  :root:not(.dark) .bg-white {
+    background-color: var(--surface-100) !important;
+  }
+
+  :root:not(.dark) .bg-gray-50,
+  :root:not(.dark) .bg-neutral-100,
+  :root:not(.dark) .bg-slate-50 {
+    background-color: var(--surface-200) !important;
+  }
+
+  :root:not(.dark) .bg-gray-100,
+  :root:not(.dark) .bg-neutral-200,
+  :root:not(.dark) .bg-slate-100 {
+    background-color: var(--surface-300) !important;
+  }
+
+  :root:not(.dark) .border-gray-100,
+  :root:not(.dark) .border-neutral-200,
+  :root:not(.dark) .border-slate-200 {
+    border-color: var(--border-soft) !important;
+  }
+
+  :root:not(.dark) .text-gray-900,
+  :root:not(.dark) .text-slate-900,
+  :root:not(.dark) .text-neutral-950 {
+    color: var(--text-strong) !important;
   }
 }
