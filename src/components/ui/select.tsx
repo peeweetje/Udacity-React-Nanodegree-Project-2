@@ -22,7 +22,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      'flex h-9 w-full items-center justify-between rounded-md border border-teal-200 dark:border-teal-700 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-neutral-900 dark:text-white ring-offset-white dark:ring-offset-gray-900 placeholder:text-neutral-300 dark:placeholder:text-neutral-500 focus:outline-hidden focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
+      'flex h-9 w-full items-center justify-between rounded-md border border-slate-300 dark:border-teal-700 bg-card dark:bg-gray-800 px-3 py-2 text-sm text-neutral-900 dark:text-white ring-offset-white dark:ring-offset-gray-900 placeholder:text-neutral-300 dark:placeholder:text-neutral-500 focus:outline-hidden focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
       className
     )}
     {...props}
@@ -93,7 +93,7 @@ const SelectContent = React.forwardRef<
     <SelectPrimitive.Content
       ref={ref}
       className={cn(
-        'relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-gray-800 text-neutral-950 dark:text-neutral-50 shadow-md',
+        'relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border border-neutral-200 dark:border-neutral-700 bg-card dark:bg-gray-800 text-neutral-950 dark:text-neutral-50 shadow-md',
         'data-[state=open]:animate-[select-slide-up_200ms_ease-out]',
         'data-[state=closed]:animate-[select-slide-down_150ms_ease-in]',
         position === 'popper' &&
