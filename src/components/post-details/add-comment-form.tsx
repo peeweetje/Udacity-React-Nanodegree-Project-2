@@ -38,21 +38,21 @@ const AddCommentForm = ({
 
   return (
     <div ref={cardRef}>
-      <Card className='add-comment-card mt-8 dark:bg-gray-800 dark:border-gray-700'>
+      <Card className='add-comment-card mt-8 bg-card dark:bg-gray-800 border-t-4 border-teal-500 dark:border-t-4 dark:border-teal-500'>
         <CardHeader>
-          <CardTitle className='dark:text-white'>{t('postDetails.add-comment')}</CardTitle>
+          <CardTitle className='text-gray-900 dark:text-white'>{t('postDetails.add-comment')}</CardTitle>
         </CardHeader>
         <form onSubmit={onSubmit}>
           <CardContent className='space-y-4'>
             <div className='space-y-2'>
               <label
                 htmlFor='commentAuthor'
-                className='text-sm font-medium dark:text-white'
+                className='text-sm font-medium text-gray-900 dark:text-white'
               >
                 {t('postDetails.label-author')}
               </label>
               <Input
-                className='border-teal-200'
+                className='border-slate-300'
                 id='commentAuthor'
                 name='commentAuthor'
                 value={commentAuthor}
@@ -69,7 +69,7 @@ const AddCommentForm = ({
                 {t('postDetails.comment-content')}
               </label>
               <Textarea
-                className='border-teal-200'
+                className='border-slate-300'
                 id='commentContent'
                 name='commentContent'
                 value={commentContent}

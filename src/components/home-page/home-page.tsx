@@ -51,7 +51,7 @@ const HomePage = () => {
       </div>
       <div className='relative container mx-auto px-4 text-center'>
         <div className='mb-8'>
-          <h1 ref={titleRef} className='text-5xl font-bold text-primary dark:text-white mb-4'>{t('common.git-talks')}</h1>
+          <h1 ref={titleRef} className='text-5xl font-bold text-teal-500 dark:text-white mb-4'>{t('common.git-talks')}</h1>
           <p className='text-xl text-muted-foreground dark:text-gray-300 max-w-2xl mx-auto'>
             {t('common.welcome-message')}
           </p>
