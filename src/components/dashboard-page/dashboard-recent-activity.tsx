@@ -77,7 +77,7 @@ const DashboardRecentActivity = ({ activities }: DashboardRecentActivityProps) =
     <div ref={containerRef}>
       <div
         data-recent-activity-card
-        className='bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6'
+        className='bg-card dark:bg-gray-800 rounded-xl shadow-sm border border-teal-500 dark:border-gray-700 p-6'
       >
       <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
         {t('dashboard.recent-activity')}
@@ -85,7 +85,7 @@ const DashboardRecentActivity = ({ activities }: DashboardRecentActivityProps) =
       <div data-recent-activity-table-wrapper className='overflow-x-auto'>
         <table className='w-full text-sm'>
           <thead>
-            <tr className='border-b border-gray-100 dark:border-gray-700'>
+              <tr className='border-b border-slate-300 dark:border-gray-700'>
               <th className='text-left py-3 px-4 font-medium text-gray-500 dark:text-gray-400'>
                 {t('dashboard.topic')}
               </th>
@@ -105,7 +105,7 @@ const DashboardRecentActivity = ({ activities }: DashboardRecentActivityProps) =
               <tr
                 key={index}
                 data-recent-activity-row
-                className='border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors'
+                className='border-b border-slate-300 dark:border-gray-700/50 hover:bg-slate-100 dark:hover:bg-gray-700/50 transition-colors'
               >
                 <td className='py-3 px-4 font-medium'>
                   <Link
