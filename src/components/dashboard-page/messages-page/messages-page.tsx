@@ -68,10 +68,10 @@ const MessagesPage = () => {
   }, [allComments.length, animationsEnabled]);
 
   return (
-    <div className='flex min-h-screen bg-gray-50 overflow-x-hidden'>
+    <div className='flex min-h-screen bg-white overflow-x-hidden'>
       <DashboardSidebar />
       <div className='flex-1 flex flex-col min-w-0'>
-        <header className='bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 pl-16 md:pl-8 pr-4 py-4 flex items-center justify-between'>
+        <header className='bg-card dark:bg-gray-800 border-b border-teal-500 dark:border-gray-700 pl-16 md:pl-8 pr-4 py-4 flex items-center justify-between'>
           <div className='flex items-center space-x-4'>
             <BackButton />
             <h1 className='text-xl font-semibold text-gray-900 dark:text-white'>
