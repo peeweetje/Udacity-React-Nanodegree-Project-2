@@ -26,7 +26,7 @@ const NotificationCard: React.FC<NotificationCardProps> = ({ notification }) => 
   return (
     <Link
       to={`/${notification.category}/${notification.id}`}
-      className='notification-card opacity-0 block bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-4 md:p-5 hover:shadow-md hover:border-teal-200 dark:hover:border-teal-600 transition-all duration-200'
+      className='notification-card opacity-0 block bg-card dark:bg-gray-800 rounded-xl shadow-sm border border-teal-500 dark:border-gray-700 p-4 md:p-5 hover:shadow-md hover:border-teal-400 dark:hover:border-teal-600 transition-all duration-200'
     >
       <div className='flex items-start space-x-3 md:space-x-4'>
         <div className={`${notification.iconBg} p-2 md:p-3 rounded-full flex-shrink-0`}>
