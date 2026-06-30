@@ -19,7 +19,7 @@ const DashboardStatCard = ({
   return (
     <div
       data-dashboard-stat-card
-      className='bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 flex items-center space-x-4'
+      className='bg-card dark:bg-gray-800 rounded-xl shadow-sm border border-teal-500 dark:border-gray-700 p-6 flex items-center space-x-4'
     >
       <div className='bg-teal-50 dark:bg-teal-900/50 p-4 rounded-lg'>
         <Icon className='h-8 w-8 text-teal-500' />
