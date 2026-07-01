@@ -20,7 +20,7 @@ const AnimationSettings = ({ animationsCardRef }: AnimationSettingsProps) => {
   return (
     <div
       ref={animationsCardRef as React.RefObject<HTMLDivElement>}
-      className='settings-card bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-4 md:p-6'
+      className='settings-card bg-card dark:bg-gray-800 rounded-xl shadow-sm border border-teal-500 dark:border-gray-700 p-4 md:p-6'
     >
       <div className='flex items-center justify-between'>
         <div className='flex items-center space-x-3'>
