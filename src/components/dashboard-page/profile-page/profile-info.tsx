@@ -48,31 +48,31 @@ const ProfileInfo = ({
 
   return (
     <div ref={containerRef} className='space-y-4'>
-      <div className='profile-info-item flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700/50'>
+      <div className='profile-info-item flex items-center gap-3 px-4 py-3 rounded-lg bg-card border border-teal-500 dark:bg-gray-700/50 dark:border-teal-600'>
         <Mail className='h-5 w-5 text-teal-500' />
         <span className='text-sm text-gray-600 dark:text-gray-300'>
           {userName.toLowerCase().replace(/\s+/g, '')}@example.com
         </span>
       </div>
-      <div className='profile-info-item flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700/50'>
+      <div className='profile-info-item flex items-center gap-3 px-4 py-3 rounded-lg bg-card border border-teal-500 dark:bg-gray-700/50 dark:border-teal-600'>
         <Calendar className='h-5 w-5 text-teal-500' />
         <span className='text-sm text-gray-600 dark:text-gray-300'>
           {t('dashboard.member-since')}{memberSinceDate ? ` ${memberSinceDate}` : ''}
         </span>
       </div>
-      <div className='profile-info-item flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700/50'>
+      <div className='profile-info-item flex items-center gap-3 px-4 py-3 rounded-lg bg-card border border-teal-500 dark:bg-gray-700/50 dark:border-teal-600'>
         <FileText className='h-5 w-5 text-teal-500' />
         <span className='text-sm text-gray-600 dark:text-gray-300'>
           {postsCount} {t('dashboard.posts-count')}
         </span>
       </div>
-      <div className='profile-info-item flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700/50'>
+      <div className='profile-info-item flex items-center gap-3 px-4 py-3 rounded-lg bg-card border border-teal-500 dark:bg-gray-700/50 dark:border-teal-600'>
         <MessageSquare className='h-5 w-5 text-teal-500' />
         <span className='text-sm text-gray-600 dark:text-gray-300'>
           {commentCount} {t('dashboard.comments-made')}
         </span>
       </div>
-      <div className='profile-info-item flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-700/50'>
+      <div className='profile-info-item flex items-center gap-3 px-4 py-3 rounded-lg bg-card border border-teal-500 dark:bg-gray-700/50 dark:border-teal-600'>
         <ThumbsUp className='h-5 w-5 text-teal-500' />
         <span className='text-sm text-gray-600 dark:text-gray-300'>
           {totalVotes} {t('dashboard.votes-received')}
