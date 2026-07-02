@@ -30,7 +30,7 @@ const LanguageSettings = ({ languageCardRef }: LanguageSettingsProps) => {
           className={`flex-1 py-3 px-4 rounded-lg border-2 font-medium text-sm transition-all ${
             i18n.language === 'en'
               ? 'border-teal-500 bg-teal-50 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300'
-              : 'border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-teal-300'
+              : 'border-teal-600 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-teal-500'
           }`}
         >
           🇬🇧 {t('dashboard.english')}
@@ -40,7 +40,7 @@ const LanguageSettings = ({ languageCardRef }: LanguageSettingsProps) => {
           className={`flex-1 py-3 px-4 rounded-lg border-2 font-medium text-sm transition-all ${
             i18n.language === 'nl'
               ? 'border-teal-500 bg-teal-50 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300'
-              : 'border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-teal-300'
+              : 'border-teal-600 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-teal-500'
           }`}
         >
           🇳🇱 {t('dashboard.dutch')}
