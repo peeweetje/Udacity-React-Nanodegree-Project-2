@@ -10,7 +10,7 @@ const ThemeSettings = ({ themeCardRef }: ThemeSettingsProps) => {
   const { t } = useTranslation();
 
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    return (localStorage.getItem('theme') as 'light' | 'dark') || 'light';
+    return (localStorage.getItem('theme') as 'light' | 'dark') || 'dark';
   });
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const ThemeSettings = ({ themeCardRef }: ThemeSettingsProps) => {
           className={`flex-1 py-3 px-4 rounded-lg border-2 font-medium text-sm transition-all flex items-center justify-center space-x-2 ${
             theme === 'light'
               ? 'border-teal-500 bg-teal-50 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300'
-              : 'border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-teal-300'
+              : 'border-teal-600 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-teal-500'
           }`}
         >
           <Sun className='h-4 w-4' />
@@ -50,7 +50,7 @@ const ThemeSettings = ({ themeCardRef }: ThemeSettingsProps) => {
           className={`flex-1 py-3 px-4 rounded-lg border-2 font-medium text-sm transition-all flex items-center justify-center space-x-2 ${
             theme === 'dark'
               ? 'border-teal-500 bg-teal-50 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300'
-              : 'border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-teal-300'
+              : 'border-teal-600 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-teal-500'
           }`}
         >
           <Moon className='h-4 w-4' />
