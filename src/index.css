@@ -6,8 +6,8 @@
 @theme {
   --color-background: hsl(140 25% 96%);
   --color-foreground: hsl(215 18% 18%);
-  --color-card: hsl(140 30% 92%);
-  --color-card-foreground: hsl(215 18% 18%);
+  --color-card: hsl(142 35% 90%);
+  --color-card-foreground: hsl(140 20% 18%);
   --color-popover: hsl(140 28% 94%);
   --color-popover-foreground: hsl(215 18% 18%);
   --color-primary: hsl(214 18% 16%);
@@ -20,10 +20,11 @@
   --color-accent-foreground: hsl(0 0% 100%);
   --color-destructive: hsl(354 73% 55%);
   --color-destructive-foreground: hsl(0 0% 100%);
-  --color-border: hsl(210 16% 82%);
+  --color-border: hsl(142 35% 60%);
   --color-input: hsl(210 18% 94%);
   --color-ring: hsl(187 73% 62%);
   --radius: 0.75rem;
+  --gradient-pastel-green: linear-gradient(180deg, hsl(142 40% 95%), hsl(142 35% 82%));
 }
 
 @keyframes select-slide-up {
@@ -68,6 +69,10 @@
 
   :root:not(.dark) .bg-white {
     background-color: var(--surface-100) !important;
+  }
+
+  :root:not(.dark) .bg-card {
+    background: var(--gradient-pastel-green) !important;
   }
 
   :root:not(.dark) .bg-gray-50,
