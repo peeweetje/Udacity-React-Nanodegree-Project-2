@@ -1,6 +1,9 @@
 import React, { RefObject } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Languages } from 'lucide-react';
+import SettingsCard from '@/components/dashboard-page/settings-page/settings-components/settings-card';
+import SettingsCardHeader from '@/components/dashboard-page/settings-page/settings-components/settings-card-header';
+import SettingsOptionButton from '@/components/dashboard-page/settings-page/settings-components/settings-option-button';
 
 interface LanguageSettingsProps {
   languageCardRef?: RefObject<HTMLDivElement | null>;
@@ -14,39 +17,23 @@ const LanguageSettings = ({ languageCardRef }: LanguageSettingsProps) => {
   };
 
   return (
-    <div
-      ref={languageCardRef as React.RefObject<HTMLDivElement>}
-      className='settings-card bg-card dark:bg-gray-800 rounded-xl shadow-sm border border-teal-500 dark:border-gray-700 p-4 md:p-6'
-    >
-      <div className='flex items-center space-x-3 mb-6'>
-        <Languages className='h-6 w-6 text-teal-500' />
-        <h2 className='text-lg font-semibold text-gray-900 dark:text-white'>
-          {t('dashboard.language')}
-        </h2>
-      </div>
+    <SettingsCard ref={languageCardRef as React.RefObject<HTMLDivElement>}>
+      <SettingsCardHeader icon={<Languages className="h-6 w-6" />} title={t('dashboard.language')} />
       <div className='flex space-x-4'>
-        <button
+        <SettingsOptionButton
+          selected={i18n.language === 'en'}
           onClick={() => changeLanguage('en')}
-          className={`flex-1 py-3 px-4 rounded-lg border-2 font-medium text-sm transition-all ${
-            i18n.language === 'en'
-              ? 'border-teal-500 bg-teal-50 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300'
-              : 'border-teal-600 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-teal-500'
-          }`}
         >
           🇬🇧 {t('dashboard.english')}
-        </button>
-        <button
+        </SettingsOptionButton>
+        <SettingsOptionButton
+          selected={i18n.language === 'nl'}
           onClick={() => changeLanguage('nl')}
-          className={`flex-1 py-3 px-4 rounded-lg border-2 font-medium text-sm transition-all ${
-            i18n.language === 'nl'
-              ? 'border-teal-500 bg-teal-50 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300'
-              : 'border-teal-600 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-teal-500'
-          }`}
         >
           🇳🇱 {t('dashboard.dutch')}
-        </button>
+        </SettingsOptionButton>
       </div>
-    </div>
+    </SettingsCard>
   );
 };
 
