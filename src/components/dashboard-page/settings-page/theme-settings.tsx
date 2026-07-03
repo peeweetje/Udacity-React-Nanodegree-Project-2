@@ -1,6 +1,9 @@
 import React, { RefObject, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Sun, Moon } from 'lucide-react';
+import SettingsCard from '@/components/dashboard-page/settings-page/settings-components/settings-card';
+import SettingsCardHeader from '@/components/dashboard-page/settings-page/settings-components/settings-card-header';
+import SettingsOptionButton from '@/components/dashboard-page/settings-page/settings-components/settings-option-button';
 
 interface ThemeSettingsProps {
   themeCardRef?: RefObject<HTMLDivElement | null>;
@@ -18,46 +21,28 @@ const ThemeSettings = ({ themeCardRef }: ThemeSettingsProps) => {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
+  const themeIcon = theme === 'light' ? <Sun className="h-6 w-6" /> : <Moon className="h-6 w-6" />;
+
   return (
-    <div
-      ref={themeCardRef as React.RefObject<HTMLDivElement>}
-      className='settings-card bg-card dark:bg-gray-800 rounded-xl shadow-sm border border-teal-500 dark:border-gray-700 p-4 md:p-6'
-    >
-      <div className='flex items-center space-x-3 mb-6'>
-        {theme === 'light' ? (
-          <Sun className='h-6 w-6 text-teal-500' />
-        ) : (
-          <Moon className='h-6 w-6 text-teal-500' />
-        )}
-        <h2 className='text-lg font-semibold text-gray-900 dark:text-white'>
-          {t('dashboard.theme')}
-        </h2>
-      </div>
+    <SettingsCard ref={themeCardRef as React.RefObject<HTMLDivElement>}>
+      <SettingsCardHeader icon={themeIcon} title={t('dashboard.theme')} />
       <div className='flex space-x-4'>
-        <button
+        <SettingsOptionButton
+          selected={theme === 'light'}
           onClick={() => setTheme('light')}
-          className={`flex-1 py-3 px-4 rounded-lg border-2 font-medium text-sm transition-all flex items-center justify-center space-x-2 ${
-            theme === 'light'
-              ? 'border-teal-500 bg-teal-50 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300'
-              : 'border-teal-600 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-teal-500'
-          }`}
+          icon={<Sun className='h-4 w-4' />}
         >
-          <Sun className='h-4 w-4' />
-          <span>{t('dashboard.light')}</span>
-        </button>
-        <button
+          {t('dashboard.light')}
+        </SettingsOptionButton>
+        <SettingsOptionButton
+          selected={theme === 'dark'}
           onClick={() => setTheme('dark')}
-          className={`flex-1 py-3 px-4 rounded-lg border-2 font-medium text-sm transition-all flex items-center justify-center space-x-2 ${
-            theme === 'dark'
-              ? 'border-teal-500 bg-teal-50 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300'
-              : 'border-teal-600 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-teal-500'
-          }`}
+          icon={<Moon className='h-4 w-4' />}
         >
-          <Moon className='h-4 w-4' />
-          <span>{t('dashboard.dark')}</span>
-        </button>
+          {t('dashboard.dark')}
+        </SettingsOptionButton>
       </div>
-    </div>
+    </SettingsCard>
   );
 };
 
