@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleAnimations } from '../../../redux/actions';
 import { Zap } from 'lucide-react';
+import SettingsCard from '@/components/dashboard-page/settings-page/settings-components/settings-card';
+import SettingsCardHeader from '@/components/dashboard-page/settings-page/settings-components/settings-card-header';
 
 interface AnimationSettingsProps {
   animationsCardRef?: RefObject<HTMLDivElement | null>;
@@ -18,22 +20,13 @@ const AnimationSettings = ({ animationsCardRef }: AnimationSettingsProps) => {
   };
 
   return (
-    <div
-      ref={animationsCardRef as React.RefObject<HTMLDivElement>}
-      className='settings-card bg-card dark:bg-gray-800 rounded-xl shadow-sm border border-teal-500 dark:border-gray-700 p-4 md:p-6'
-    >
+    <SettingsCard ref={animationsCardRef as React.RefObject<HTMLDivElement>}>
       <div className='flex items-center justify-between'>
-        <div className='flex items-center space-x-3'>
-          <Zap className='h-6 w-6 text-teal-500' />
-          <div>
-            <h2 className='text-lg font-semibold text-gray-900 dark:text-white'>
-              {t('dashboard.animations') || 'Animations'}
-            </h2>
-            <p className='text-sm text-gray-600 dark:text-gray-400'>
-              {t('dashboard.animations-description') || 'Enable or disable interface animations'}
-            </p>
-          </div>
-        </div>
+        <SettingsCardHeader
+          icon={<Zap className="h-6 w-6" />}
+          title={t('dashboard.animations') || 'Animations'}
+          description={t('dashboard.animations-description')}
+        />
         <button
           onClick={handleAnimationsToggle}
           className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors duration-300 ${
@@ -49,7 +42,7 @@ const AnimationSettings = ({ animationsCardRef }: AnimationSettingsProps) => {
           />
         </button>
       </div>
-    </div>
+    </SettingsCard>
   );
 };
 
