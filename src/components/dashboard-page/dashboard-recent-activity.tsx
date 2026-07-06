@@ -20,7 +20,7 @@ const DashboardRecentActivity = ({ activities }: DashboardRecentActivityProps) =
   const { t } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const animationsEnabled = useSelector((state: any) => state.animations?.enabled ?? true);
-  // Stable content key based on activitie IDs — prevents re-animation on voting or other
+  // Stable content key based on activity IDs — prevents re-animation on voting or other
   // shallow array reference changes that don't actually add/remove/reorder rows.
   const contentKey = useMemo(() => activities.map(a => a.id).join(','), [activities]);
 
@@ -77,63 +77,63 @@ const DashboardRecentActivity = ({ activities }: DashboardRecentActivityProps) =
     <div ref={containerRef}>
       <div
         data-recent-activity-card
-        className='bg-card dark:bg-gray-800 rounded-xl shadow-sm border border-teal-500 dark:border-gray-700 p-6'
+        className='bg-card dark:bg-gray-800 rounded-xl shadow-sm border border-purple-500 dark:border-gray-700 p-6'
       >
-      <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
-        {t('dashboard.recent-activity')}
-      </h3>
-      <div data-recent-activity-table-wrapper className='overflow-x-auto'>
-        <table className='w-full text-sm'>
-          <thead>
+        <h3 className='text-lg font-semibold text-gray-900 dark:text-white mb-4'>
+          {t('dashboard.recent-activity')}
+        </h3>
+        <div data-recent-activity-table-wrapper className='overflow-x-auto'>
+          <table className='w-full text-sm'>
+            <thead>
               <tr className='border-b border-slate-300 dark:border-gray-700'>
-              <th className='text-left py-3 px-4 font-medium text-gray-500 dark:text-gray-400'>
-                {t('dashboard.topic')}
-              </th>
-              <th className='text-left py-3 px-4 font-medium text-gray-500 dark:text-gray-400'>
-                {t('common.category')}
-              </th>
-              <th className='text-left py-3 px-4 font-medium text-gray-500 dark:text-gray-400'>
-                {t('dashboard.date')}
-              </th>
-              <th className='text-left py-3 px-4 font-medium text-gray-500'>
-                {t('dashboard.status')}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {activities.map((activity, index) => (
-              <tr
-                key={index}
-                data-recent-activity-row
-                className='border-b border-slate-300 dark:border-gray-700/50 hover:bg-slate-100 dark:hover:bg-gray-700/50 transition-colors'
-              >
-                <td className='py-3 px-4 font-medium'>
-                  <Link
-                    to={`/${activity.category}/${activity.id}`}
-                    className='text-gray-900 dark:text-white hover:text-teal-600 dark:hover:text-teal-400 transition-colors'
-                  >
-                    {activity.topic}
-                  </Link>
-                </td>
-                <td className='py-3 px-4 text-gray-600 dark:text-gray-400'>{activity.category}</td>
-                <td className='py-3 px-4 text-gray-600 dark:text-gray-400'>{activity.date}</td>
-                <td className='py-3 px-4'>
-                  <span
-                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                      activity.status === 'active'
-                        ? 'bg-green-100 text-green-800 dark:bg-teal-900/80 dark:text-teal-200'
-                        : 'bg-gray-100 text-gray-600 dark:bg-gray-600 dark:text-gray-200'
-                    }`}
-                  >
-                    {activity.status === 'active'
-                      ? t('dashboard.active')
-                      : t('dashboard.resolved')}
-                  </span>
-                </td>
+                <th className='text-left py-3 px-4 font-medium text-gray-500 dark:text-gray-400'>
+                  {t('dashboard.topic')}
+                </th>
+                <th className='text-left py-3 px-4 font-medium text-gray-500 dark:text-gray-400'>
+                  {t('common.category')}
+                </th>
+                <th className='text-left py-3 px-4 font-medium text-gray-500 dark:text-gray-400'>
+                  {t('dashboard.date')}
+                </th>
+                <th className='text-left py-3 px-4 font-medium text-gray-500'>
+                  {t('dashboard.status')}
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {activities.map((activity, index) => (
+                <tr
+                  key={index}
+                  data-recent-activity-row
+                  className='border-b border-slate-300 dark:border-gray-700/50 hover:bg-slate-100 dark:hover:bg-gray-700/50 transition-colors'
+                >
+                  <td className='py-3 px-4 font-medium'>
+                    <Link
+                      to={`/${activity.category}/${activity.id}`}
+                      className='text-purple-600 dark:text-purple-400 hover:text-gray-900 dark:hover:text-white transition-colors'
+                    >
+                      {activity.topic}
+                    </Link>
+                  </td>
+                  <td className='py-3 px-4 text-gray-600 dark:text-gray-400'>{activity.category}</td>
+                  <td className='py-3 px-4 text-gray-600 dark:text-gray-400'>{activity.date}</td>
+                  <td className='py-3 px-4'>
+                    <span
+                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                        activity.status === 'active'
+                          ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/80 dark:text-purple-200'
+                          : 'bg-gray-100 text-gray-600 dark:bg-gray-600 dark:text-gray-200'
+                      }`}
+                    >
+                      {activity.status === 'active'
+                        ? t('dashboard.active')
+                        : t('dashboard.resolved')}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

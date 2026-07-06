@@ -19,10 +19,10 @@ const DashboardStatCard = ({
   return (
     <div
       data-dashboard-stat-card
-      className='bg-card dark:bg-gray-800 rounded-xl shadow-sm border border-teal-500 dark:border-gray-700 p-6 flex items-center space-x-4'
+      className='bg-card dark:bg-gray-800 rounded-xl shadow-sm border border-purple-500 dark:border-gray-700 p-6 flex items-center space-x-4'
     >
-      <div className='bg-teal-50 dark:bg-teal-900/50 p-4 rounded-lg'>
-        <Icon className='h-8 w-8 text-teal-500' />
+      <div className='bg-purple-50 dark:bg-purple-900/50 p-4 rounded-lg'>
+        <Icon className='h-8 w-8 text-purple-500' />
       </div>
       <div className='flex-1'>
         <p className='text-sm text-gray-500 dark:text-gray-400 font-medium'>{label}</p>
@@ -30,7 +30,7 @@ const DashboardStatCard = ({
         {trend && (
           <p
             className={`text-xs mt-1 flex items-center ${
-              trendDirection === 'up' ? 'text-green-600' : 'text-red-600'
+              trendDirection === 'up' ? 'text-purple-600' : 'text-red-600'
             }`}
           >
             {trendDirection === 'up' ? <TrendingUp className='h-3 w-3 inline-block mr-0.5' /> : <TrendingDown className='h-3 w-3 inline-block mr-0.5' />}

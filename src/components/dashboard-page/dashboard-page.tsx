@@ -102,15 +102,15 @@ const DashboardPage = () => {
       <DashboardSidebar />
       <div className='flex-1 flex flex-col min-w-0'>
         {/* Top bar */}
-        <header className='bg-card dark:bg-gray-800 border-b border-teal-500 dark:border-gray-700 pl-16 md:pl-8 pr-4 py-4 flex items-center justify-between'>
+        <header className='bg-card dark:bg-gray-800 border-b border-purple-500 dark:border-gray-700 pl-16 md:pl-8 pr-4 py-4 flex items-center justify-between'>
           <DashboardSearch value={searchQuery} onChange={setSearchQuery} />
           <div className='flex items-center space-x-3'>
             <Link
               to='/notifications'
-              className='relative bg-teal-100 dark:bg-teal-900/50 p-2 rounded-full hover:bg-teal-200 dark:hover:bg-teal-800/50 transition-colors'
+              className='relative bg-purple-100 dark:bg-purple-900/50 p-2 rounded-full hover:bg-purple-200 dark:hover:bg-purple-800/50 transition-colors'
               onMouseEnter={() => setNotificationsRead(true)}
             >
-              <Bell className='h-6 w-6 text-teal-600' />
+              <Bell className='h-6 w-6 text-purple-600' />
               {hasNotifications && (
                 <span className='absolute -top-0.5 -right-0.5 flex h-4 w-4'>
                   <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75' />
@@ -124,9 +124,9 @@ const DashboardPage = () => {
               to='/profile'
               aria-label={t('dashboard.profile')}
               title={t('dashboard.profile')}
-              className='bg-teal-100 dark:bg-teal-900/50 p-2 rounded-full hover:bg-teal-200 dark:hover:bg-teal-800/50 transition-colors'
+              className='bg-purple-100 dark:bg-purple-900/50 p-2 rounded-full hover:bg-purple-200 dark:hover:bg-purple-800/50 transition-colors'
             >
-              <User className='h-6 w-6 text-teal-600' />
+              <User className='h-6 w-6 text-purple-600' />
             </Link>
           </div>
         </header>

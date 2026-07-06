@@ -39,7 +39,7 @@ const CategoryItemCard: React.FC<CategoryItemCardProps> = ({ post, onDelete, onV
         <CardTitle>
           <Link
             to={`/${post.category}/${post.id}`}
-            className='hover:text-teal-500 dark:hover:text-teal-400 dark:text-white'
+            className='hover:text-purple-500 dark:hover:text-purple-400 dark:text-white'
           >
             {post.title}
           </Link>
@@ -48,7 +48,7 @@ const CategoryItemCard: React.FC<CategoryItemCardProps> = ({ post, onDelete, onV
           <AuthorTimestamp author={post.author} timestamp={post.timestamp} />
           <p
             data-category-name
-            className='text-xs font-medium text-teal-600 dark:text-teal-400 mt-2'
+            className='text-xs font-medium text-purple-600 dark:text-purple-400 mt-2'
           >
             {post.category.charAt(0).toUpperCase() + post.category.slice(1)}
           </p>
