@@ -42,8 +42,8 @@ const ProfileAvatar = ({ userName }: ProfileAvatarProps) => {
 
   return (
     <div ref={containerRef} className='flex flex-col items-center mb-8'>
-      <div className='profile-avatar-icon w-24 h-24 rounded-full bg-teal-100 dark:bg-teal-900/50 flex items-center justify-center mb-4'>
-        <User className='h-12 w-12 text-teal-600' />
+      <div className='profile-avatar-icon w-24 h-24 rounded-full bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center mb-4'>
+        <User className='h-12 w-12 text-purple-600' />
       </div>
       <h2 className='profile-avatar-name text-2xl font-bold text-gray-900 dark:text-white'>
         {userName}
