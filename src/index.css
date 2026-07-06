@@ -4,11 +4,11 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-background: hsl(140 25% 96%);
+  --color-background: hsl(270 25% 96%);
   --color-foreground: hsl(215 18% 18%);
-  --color-card: hsl(142 35% 90%);
-  --color-card-foreground: hsl(140 20% 18%);
-  --color-popover: hsl(140 28% 94%);
+  --color-card: hsl(270 35% 90%);
+  --color-card-foreground: hsl(270 20% 18%);
+  --color-popover: hsl(270 28% 94%);
   --color-popover-foreground: hsl(215 18% 18%);
   --color-primary: hsl(214 18% 16%);
   --color-primary-foreground: hsl(0 0% 100%);
@@ -16,15 +16,15 @@
   --color-secondary-foreground: hsl(0 0% 100%);
   --color-muted: hsl(210 16% 87%);
   --color-muted-foreground: hsl(215 18% 36%);
-  --color-accent: hsl(171 43% 46%);
+  --color-accent: hsl(270 43% 46%);
   --color-accent-foreground: hsl(0 0% 100%);
   --color-destructive: hsl(354 73% 55%);
   --color-destructive-foreground: hsl(0 0% 100%);
-  --color-border: hsl(142 35% 60%);
+  --color-border: hsl(270 30% 70%);
   --color-input: hsl(210 18% 94%);
-  --color-ring: hsl(187 73% 62%);
+  --color-ring: hsl(270 73% 62%);
   --radius: 0.75rem;
-  --gradient-pastel-green: linear-gradient(180deg, hsl(142 40% 95%), hsl(142 35% 82%));
+  --gradient-pastel-purple: linear-gradient(180deg, hsl(270 40% 96%), hsl(270 35% 88%));
 }
 
 @keyframes select-slide-up {
@@ -60,10 +60,10 @@
   }
 
   :root:not(.dark) {
-    --surface-100: hsl(140 28% 94%);
-    --surface-200: hsl(140 30% 92%);
-    --surface-300: hsl(140 32% 89%);
-    --border-soft: hsl(140 20% 82%);
+    --surface-100: hsl(270 28% 94%);
+    --surface-200: hsl(270 30% 92%);
+    --surface-300: hsl(270 32% 89%);
+    --border-soft: hsl(270 20% 82%);
     --text-strong: hsl(215 18% 18%);
   }
 
@@ -72,7 +72,7 @@
   }
 
   :root:not(.dark) .bg-card {
-    background: var(--gradient-pastel-green) !important;
+    background: #ffffff !important;
   }
 
   :root:not(.dark) .bg-gray-50,
