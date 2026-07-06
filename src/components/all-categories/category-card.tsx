@@ -33,7 +33,7 @@ const CategoryCard = forwardRef<HTMLDivElement, CategoryCardProps>(
     return (
       <div ref={ref} className='flex justify-center'>
         <Card key={formattedCategoryName} ref={cardRef} className='formatted-category-card w-auto dark:bg-gray-800 dark:border-gray-700'>
-          <CardContent className='p-4 bg-teal-100 dark:bg-teal-900/50'>
+          <CardContent className='p-4 bg-purple-100 dark:bg-purple-900/50'>
             <p data-category-text className='text-lg font-semibold text-primary dark:text-white'>
               {t('common.category')} : {formattedCategoryName}
             </p>

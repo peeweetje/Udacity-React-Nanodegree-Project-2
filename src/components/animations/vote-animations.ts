@@ -13,7 +13,7 @@ export function animateVoteButton(buttonElement: HTMLElement, direction: 'up' | 
   // Kill any existing tweens on this element to avoid conflicts
   gsap.killTweensOf(buttonElement);
 
-  const color = direction === 'up' ? '#10b981' : '#ef4444'; // green / red
+  const color = direction === 'up' ? '#9e44c2' : '#ef4444'; // green / red
 
   gsap.to(buttonElement, {
     scale: 1.25,

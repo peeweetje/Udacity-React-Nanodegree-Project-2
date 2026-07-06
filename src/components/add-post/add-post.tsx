@@ -101,13 +101,13 @@ const AddPost = () => {
           <div className='mb-4'>
             <BackButton />
           </div>
-          <h1 className='text-3xl font-bold text-center text-teal-500 dark:text-teal-400 mb-6 flex items-center justify-center'>
+          <h1 className='text-3xl font-bold text-center text-purple-500 dark:text-purple-400 mb-6 flex items-center justify-center'>
             <FilePlus className='inline-block mr-2 h-8 w-8' />
             {t('addPost.new-post')}
           </h1>
         </div>
         <div ref={containerRef}>
-          <div className='add-post-form-card max-w-2xl mx-auto bg-card dark:bg-gray-800 p-8 rounded-lg shadow-inner border-t-4 border-teal-500 dark:border-gray-700'>
+          <div className='add-post-form-card max-w-2xl mx-auto bg-card dark:bg-gray-800 p-8 rounded-lg shadow-inner border-t-4 border-purple-500 dark:border-gray-700'>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
               <FormCategorySelect
