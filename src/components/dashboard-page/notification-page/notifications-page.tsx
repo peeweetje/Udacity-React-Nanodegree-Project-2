@@ -69,8 +69,8 @@ const NotificationsPage = () => {
         category: post.category,
         timestamp: post._latestActivityTimestamp,
         icon: type === 'comment' ? MessageSquare : Edit,
-        iconBg: type === 'comment' ? 'bg-blue-100' : 'bg-green-100',
-        iconColor: type === 'comment' ? 'text-blue-600' : 'text-green-600',
+        iconBg: type === 'comment' ? 'bg-blue-100' : 'bg-purple-100',
+        iconColor: type === 'comment' ? 'text-blue-600' : 'text-purple-600',
       };
     });
 
@@ -89,15 +89,15 @@ const NotificationsPage = () => {
     <div className='flex min-h-screen bg-white overflow-x-hidden'>
       <DashboardSidebar />
       <div className='flex-1 flex flex-col min-w-0'>
-        <header className='bg-card dark:bg-gray-800 border-b border-teal-500 dark:border-gray-700 pl-16 md:pl-8 pr-4 py-4 flex items-center justify-between'>
+        <header className='bg-card dark:bg-gray-800 border-b border-purple-500 dark:border-gray-700 pl-16 md:pl-8 pr-4 py-4 flex items-center justify-between'>
           <div className='flex items-center space-x-4'>
             <BackButton />
             <h1 className='text-xl font-semibold text-gray-900 dark:text-white'>
               {t('dashboard.notifications')}
             </h1>
           </div>
-          <div className='bg-teal-100 p-2 rounded-full'>
-            <Bell className='h-6 w-6 text-teal-600' />
+          <div className='bg-purple-100 p-2 rounded-full'>
+            <Bell className='h-6 w-6 text-purple-600' />
           </div>
         </header>
 
