@@ -34,7 +34,7 @@ const DesktopSidebar = () => {
   }, [animationsEnabled]);
 
   return (
-    <aside ref={sidebarRef} className='hidden md:flex w-64 bg-teal-500 min-h-screen flex-col py-8 px-4'>
+    <aside ref={sidebarRef} className='hidden md:flex w-64 bg-purple-500 min-h-screen flex-col py-8 px-4'>
       <div className='mb-10 px-4'>
         <h2 ref={logoRef} className='text-2xl font-bold text-white opacity-0'>{t('common.git-talks')}</h2>
       </div>
