@@ -33,15 +33,15 @@ const SettingsPage = () => {
     <div className='flex min-h-screen bg-white dark:bg-gray-900'>
       <DashboardSidebar />
       <div className='flex-1 flex flex-col'>
-        <header className='bg-card dark:bg-gray-800 border-b border-teal-500 dark:border-gray-700 pl-16 md:pl-8 pr-4 py-4 flex items-center justify-between'>
+        <header className='bg-card dark:bg-gray-800 border-b border-purple-500 dark:border-gray-700 pl-16 md:pl-8 pr-4 py-4 flex items-center justify-between'>
           <div className='flex items-center space-x-4'>
             <BackButton />
             <h1 className='text-xl font-semibold text-gray-900 dark:text-white'>
               {t('dashboard.settings')}
             </h1>
           </div>
-          <div className='bg-teal-100 p-2 rounded-full'>
-            <Settings className='h-6 w-6 text-teal-600' />
+          <div className='bg-purple-100 p-2 rounded-full'>
+            <Settings className='h-6 w-6 text-purple-600' />
           </div>
         </header>
 

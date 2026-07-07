@@ -14,7 +14,7 @@ const SettingsCardHeader = React.forwardRef<HTMLDivElement, SettingsCardHeaderPr
       className={cn('flex items-center space-x-3 mb-6', className)}
       {...props}
     >
-      {icon && <div className="text-teal-500">{icon}</div>}
+      {icon && <div className="text-purple-500">{icon}</div>}
       {description ? (
         <div>
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{title}</h2>

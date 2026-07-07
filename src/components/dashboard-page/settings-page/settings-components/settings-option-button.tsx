@@ -14,8 +14,8 @@ const SettingsOptionButton = React.forwardRef<HTMLButtonElement, SettingsOptionB
       className={cn(
         'flex-1 py-3 px-4 rounded-lg border-2 font-medium text-sm transition-all flex items-center justify-center space-x-2',
         selected
-          ? 'border-teal-500 bg-teal-50 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300'
-          : 'border-teal-600 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-teal-500',
+          ? 'border-purple-500 bg-purple-50 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300'
+          : 'border-purple-600 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:border-purple-500',
         className
       )}
       {...props}
