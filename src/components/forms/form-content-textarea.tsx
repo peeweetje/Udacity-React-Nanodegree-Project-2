@@ -30,7 +30,7 @@ const FormContentTextarea = <T extends FieldValues>({ control, name, labelKey, p
           <FormControl>
             <Textarea
               placeholder={t(placeholderKey)}
-              className='resize-none border-teal-200'
+              className='resize-none border-purple-200'
               {...field}
             />
           </FormControl>

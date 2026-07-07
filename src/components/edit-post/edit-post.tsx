@@ -98,13 +98,13 @@ const EditPost = () => {
           <div className='mb-4'>
             <BackButton />
           </div>
-          <h1 className=' text-teal-500 dark:text-teal-400 text-3xl font-bold text-primary dark:text-white'>
-            <Edit className=' text-teal-500 dark:text-teal-400 inline-block mr-2' />
+          <h1 className=' text-purple-500 dark:text-purple-400 text-3xl font-bold text-primary dark:text-white'>
+            <Edit className=' text-purple-500 dark:text-purple-400 inline-block mr-2' />
             {t('editPost.edit-post')}
           </h1>
         </div>
         <div ref={containerRef}>
-          <div className='edit-post-card max-w-2xl mx-auto bg-card dark:bg-gray-800 p-8 rounded-lg shadow-inner border-t-4 border-teal-500 dark:border-gray-700'>
+          <div className='edit-post-card max-w-2xl mx-auto bg-card dark:bg-gray-800 p-8 rounded-lg shadow-inner border-t-4 border-purple-500 dark:border-gray-700'>
             <EditPostForm
               key={post.id}
               initialCategory={post.category}

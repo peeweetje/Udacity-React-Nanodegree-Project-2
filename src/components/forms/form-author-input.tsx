@@ -29,7 +29,7 @@ const FormAuthorInput = <T extends FieldValues>({ control, name, labelKey, place
           <FormLabel>{t(labelKey)}</FormLabel>
           <FormControl>
             <Input
-              className='border-teal-200'
+              className='border-purple-200'
               placeholder={t(placeholderKey)}
               {...field}
             />
