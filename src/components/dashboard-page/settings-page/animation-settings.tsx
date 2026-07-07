@@ -31,7 +31,7 @@ const AnimationSettings = ({ animationsCardRef }: AnimationSettingsProps) => {
           onClick={handleAnimationsToggle}
           className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors duration-300 ${
             animationsEnabled
-              ? 'bg-teal-500 dark:bg-teal-600'
+              ? 'bg-purple-500 dark:bg-purple-600'
               : 'bg-gray-300 dark:bg-gray-600'
           }`}
         >
