@@ -19,7 +19,7 @@ const FormTextarea = ({ id, name, labelKey, value, onChange, rows = 6 }: FormTex
     <div className='space-y-2'>
       <Label htmlFor={id}>{t(labelKey)}</Label>
       <Textarea
-        className='border-teal-200'
+        className='border-purple-200'
         id={id}
         name={name}
         value={value}

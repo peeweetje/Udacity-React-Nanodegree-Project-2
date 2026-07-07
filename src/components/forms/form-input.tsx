@@ -18,7 +18,7 @@ const FormInput = ({ id, name, labelKey, value, onChange }: FormInputProps) => {
     <div className='space-y-2'>
       <Label htmlFor={id}>{t(labelKey)}</Label>
       <Input
-        className='border-teal-200'
+        className='border-purple-200'
         id={id}
         name={name}
         value={value}
