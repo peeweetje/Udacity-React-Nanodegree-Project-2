@@ -13,7 +13,7 @@ const HomePageCard = ({ icon: Icon, title, description, cardRef }: HomePageCardP
   return (
     <Card ref={cardRef} className='text-center dark:bg-gray-800 dark:border-gray-700'>
       <CardHeader>
-        <Icon className='h-10 w-10 text-teal-500 mx-auto' />
+        <Icon className='h-10 w-10 text-purple-500 mx-auto' />
         <CardTitle className='dark:text-white'>{title}</CardTitle>
       </CardHeader>
       <CardContent>

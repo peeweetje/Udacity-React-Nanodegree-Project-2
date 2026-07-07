@@ -46,12 +46,12 @@ const HomePage = () => {
         aria-hidden='true'
       >
         <div className='absolute w-[500px] h-[500px] rounded-full bg-purple-600/40 blur-[120px]' style={{ left: '-100px', top: '-100px' }} />
-        <div className='absolute w-[400px] h-[400px] rounded-full bg-teal-500/40 blur-[120px]' style={{ left: 'calc(100vw - 400px)', bottom: '-80px' }} />
+        <div className='absolute w-[400px] h-[400px] rounded-full bg-purple-500/40 blur-[120px]' style={{ left: 'calc(100vw - 400px)', bottom: '-80px' }} />
         <div className='absolute w-[300px] h-[300px] rounded-full bg-fuchsia-500/20 blur-[120px]' style={{ left: 'calc(50% - 150px)', top: 'calc(50% - 150px)' }} />
       </div>
       <div className='relative container mx-auto px-4 text-center'>
         <div className='mb-8'>
-          <h1 ref={titleRef} className='text-5xl font-bold text-teal-500 dark:text-white mb-4'>{t('common.git-talks')}</h1>
+          <h1 ref={titleRef} className='text-5xl font-bold text-purple-500 dark:text-white mb-4'>{t('common.git-talks')}</h1>
           <p className='text-xl text-muted-foreground dark:text-gray-300 max-w-2xl mx-auto'>
             {t('common.welcome-message')}
           </p>
