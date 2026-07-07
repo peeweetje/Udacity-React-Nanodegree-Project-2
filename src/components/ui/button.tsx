@@ -9,14 +9,14 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-teal-500 text-neutral-50 hover:bg-teal-600 hover:text-neutral-50',
+          'bg-purple-500 text-neutral-50 hover:bg-purple-600 hover:text-neutral-50',
         destructive:
           'bg-red-500 text-neutral-50 hover:bg-red-600 hover:text-neutral-50',
         outline:
-          'border border-teal-500 bg-card dark:bg-gray-800 text-neutral-900 dark:text-white hover:bg-teal-100 dark:hover:bg-teal-900/50 hover:text-neutral-900 dark:hover:text-white',
-        secondary: 'bg-teal-100 dark:bg-teal-900/50 text-neutral-800 dark:text-neutral-200 hover:bg-teal-200/80 dark:hover:bg-teal-800/50',
-        ghost: 'hover:bg-teal-100 dark:hover:bg-teal-900/50 hover:text-neutral-900 dark:hover:text-white',
-        link: 'text-teal-500 underline-offset-4 hover:underline',
+          'border border-purple-500 bg-card dark:bg-gray-800 text-neutral-900 dark:text-white hover:bg-purple-100 dark:hover:bg-purple-900/50 hover:text-neutral-900 dark:hover:text-white',
+        secondary: 'bg-purple-100 dark:bg-purple-900/50 text-neutral-800 dark:text-neutral-200 hover:bg-purple-200/80 dark:hover:bg-purple-800/50',
+        ghost: 'hover:bg-purple-100 dark:hover:bg-purple-900/50 hover:text-neutral-900 dark:hover:text-white',
+        link: 'text-purple-500 underline-offset-4 hover:underline',
       },
       size: {
         default: 'h-10 px-4 py-2',

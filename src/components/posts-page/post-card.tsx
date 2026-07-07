@@ -37,7 +37,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, onDelete, onVote, animationsE
         <CardTitle>
           <Link
             to={`/${post.category}/${post.id}`}
-            className='hover:text-teal-500 dark:hover:text-teal-400 transition-colors duration-200 dark:text-white'
+            className='hover:text-purple-500 dark:hover:text-purple-400 transition-colors duration-200 dark:text-white'
           >
             {post.title}
           </Link>
@@ -57,7 +57,7 @@ const PostCard: React.FC<PostCardProps> = ({ post, onDelete, onVote, animationsE
                 />
               </div>
             </div>
-            <p data-category-text className='text-xs font-medium text-teal-600 dark:text-teal-400'>
+            <p data-category-text className='text-xs font-medium text-purple-600 dark:text-purple-400'>
               {post.category.charAt(0).toUpperCase() + post.category.slice(1)}
             </p>
           </div>

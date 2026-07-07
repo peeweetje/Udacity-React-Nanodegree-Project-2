@@ -11,7 +11,7 @@ interface AuthorTimestampProps {
 const AuthorTimestamp = ({ author, timestamp, showClock = true }: AuthorTimestampProps) => {
   return (
     <div className='flex items-center space-x-2'>
-      <User className='w-5 h-5 text-primary dark:text-teal-400' />
+      <User className='w-5 h-5 text-primary dark:text-purple-400' />
       <span className='font-medium dark:text-white'>{author}</span>
       {showClock && (
         <div className='flex items-center space-x-1'>
