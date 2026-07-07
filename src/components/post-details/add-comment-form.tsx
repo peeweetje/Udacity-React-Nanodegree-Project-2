@@ -38,7 +38,7 @@ const AddCommentForm = ({
 
   return (
     <div ref={cardRef}>
-      <Card className='add-comment-card mt-8 bg-card dark:bg-gray-800 border-t-4 border-teal-500 dark:border-t-4 dark:border-teal-500'>
+      <Card className='add-comment-card mt-8 bg-card dark:bg-gray-800 border-t-4 border-purple-500 dark:border-t-4 dark:border-purple-500'>
         <CardHeader>
           <CardTitle className='text-gray-900 dark:text-white'>{t('postDetails.add-comment')}</CardTitle>
         </CardHeader>

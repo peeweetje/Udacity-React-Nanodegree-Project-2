@@ -9,7 +9,7 @@ const Loading = () => {
       role='status'
       className='flex flex-col items-center justify-center h-screen font-sans dark:bg-gray-950'
     >
-      <Loader2 className='w-14 h-14 text-teal-700 animate-spin dark:text-teal-400' />
+      <Loader2 className='w-14 h-14 text-purple-700 animate-spin dark:text-purple-400' />
       <span className='sr-only'>{t('common.loading')}</span>
     </div>
   );
