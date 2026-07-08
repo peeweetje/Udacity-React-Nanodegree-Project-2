@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { MessageSquare, Clock } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { Comment } from '../../../utils/api';
+import type { Comment } from '@/types';
 import FormattedDate from '../../forms/formatted-date';
 
 interface MessageCardProps {

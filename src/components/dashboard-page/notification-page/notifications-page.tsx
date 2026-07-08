@@ -6,7 +6,7 @@ import { fetchPosts } from '../../../redux/actions';
 import DashboardSidebar from '../sidebar/dashboard-sidebar';
 import NoNotificationsMessage from './NoNotificationsMessage';
 import BackButton from '@/components/ui/back-button';
-import { Post } from '../../../types/post';
+import type { Post } from '@/types';
 import { animateListItems, animateEmptyState } from '../../animations/list-entry-animations';
 import { useGsapContext } from '../../animations/use-gsap-animation';
 import NotificationCard from './notification-card';

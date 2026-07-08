@@ -6,12 +6,7 @@ import BackButton from '@/components/ui/back-button';
 import { animateCards } from '../animations/card-animations';
 import { useGsapContext } from '../animations/use-gsap-animation';
 import EditCommentCard from './edit-comment-card';
-
-interface Comment {
-  id: string;
-  author: string;
-  body: string;
-}
+import type { Comment } from '@/types';
 
 interface RootState {
   receiveComment: Comment | null;
@@ -61,12 +56,12 @@ const EditComment = () => {
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (receiveComment) {
-      const data: Comment = {
+      const data: Partial<Comment> = {
         id: receiveComment.id,
         body: commentContent,
         author: commentAuthor,
       };
-      (fetchEditComment(data, data.id))(dispatch);
+      (fetchEditComment(data, data.id as string))(dispatch);
       navigate(-1);
     }
   };

@@ -8,7 +8,7 @@ import DashboardSidebar from '../sidebar/dashboard-sidebar';
 import ProfileAvatar from './profile-avatar';
 import ProfileInfo from './profile-info';
 import AnimatedOrbs from '../../animations/animated-orbs';
-import { Post } from '../../../types/post';
+import type { Post } from '@/types';
 
 interface RootState {
   posts: {
