@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { animateCards } from '../animations/card-animations';
 import { animateCategoryText } from '../animations/text-animations';
 import { useGsapContext, useGsapCardHover } from '../animations/use-gsap-animation';
-import { Post } from '../../types/post';
+import type { Post } from '@/types';
 import CategoryItemCard from './category-item-card';
 
 interface CategoryItemProps {

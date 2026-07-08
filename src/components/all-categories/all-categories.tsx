@@ -12,8 +12,7 @@ import Header from '@/components/header/header';
 import { sortPosts } from '../../utils/sortPosts';
 import * as actions from '../../redux/actions';
 import { useTranslation } from 'react-i18next';
-import { Post } from '../../types/post';
-import { VoteOption } from '../../utils/api';
+import type { Post, VoteOption } from '@/types';
 import { animateCards } from '../animations/card-animations';
 import { useGsapContext } from '../animations/use-gsap-animation';
 

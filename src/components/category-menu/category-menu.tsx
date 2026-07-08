@@ -5,11 +5,7 @@ import { fetchCategories, fetchPostsCategory, fetchPosts } from '../../redux/act
 import SortBy from '../sort-by/sortBy';
 import { Button } from '@/components/ui/button';
 import { useTranslation } from 'react-i18next';
-
-interface Category {
-  path: string;
-  name: string;
-}
+import type { Category } from '@/types';
 
 interface RootState {
   receiveCategories: Category[];

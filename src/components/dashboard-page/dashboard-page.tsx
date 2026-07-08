@@ -14,7 +14,7 @@ import DashboardRecentActivity from './dashboard-recent-activity';
 import gsap from 'gsap';
 import { animateDashboardStats } from '../animations/dashboard-animations';
 import { useGsapTimeline } from '../animations/use-gsap-animation';
-import { Post } from '../../types/post';
+import type { Post } from '@/types';
 
 interface RootState {
   posts: {

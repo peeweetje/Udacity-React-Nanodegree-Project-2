@@ -15,7 +15,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { useTranslation } from 'react-i18next';
-import { Post } from '../../types/post';
+import type { Post } from '@/types';
 import VoteActions from '../shared/vote-actions';
 import AuthorTimestamp from '../shared/author-timestamp';
 
