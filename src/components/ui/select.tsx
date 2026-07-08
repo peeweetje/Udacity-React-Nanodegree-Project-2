@@ -16,13 +16,13 @@ interface SelectTriggerProps
 }
 
 const SelectTrigger = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Trigger>,
+  React.ComponentRef<typeof SelectPrimitive.Trigger>,
   SelectTriggerProps
 >(({ className, children, ...props }, ref) => (
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      'flex h-9 w-full items-center justify-between rounded-md border border-slate-300 dark:border-purple-700 bg-card dark:bg-gray-800 px-3 py-2 text-sm text-neutral-900 dark:text-white ring-offset-white dark:ring-offset-gray-900 placeholder:text-neutral-300 dark:placeholder:text-neutral-500 focus:outline-hidden focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
+      'flex h-9 w-full cursor-pointer items-center justify-between rounded-md border border-purple-300 dark:border-purple-700 bg-card dark:bg-gray-800 px-3 py-2 text-sm text-neutral-900 dark:text-white ring-offset-white dark:ring-offset-gray-900 placeholder:text-neutral-300 dark:placeholder:text-neutral-500 hover:bg-purple-100 dark:hover:bg-purple-900/50 focus:outline-hidden focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
       className
     )}
     {...props}
@@ -41,7 +41,7 @@ interface SelectScrollUpButtonProps
   > {}
 
 const SelectScrollUpButton = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.ScrollUpButton>,
+  React.ComponentRef<typeof SelectPrimitive.ScrollUpButton>,
   SelectScrollUpButtonProps
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.ScrollUpButton
@@ -63,7 +63,7 @@ interface SelectScrollDownButtonProps
   > {}
 
 const SelectScrollDownButton = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.ScrollDownButton>,
+  React.ComponentRef<typeof SelectPrimitive.ScrollDownButton>,
   SelectScrollDownButtonProps
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.ScrollDownButton
@@ -86,7 +86,7 @@ interface SelectContentProps
 }
 
 const SelectContent = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Content>,
+  React.ComponentRef<typeof SelectPrimitive.Content>,
   SelectContentProps
 >(({ className, children, position = 'popper', ...props }, ref) => (
   <SelectPrimitive.Portal>
@@ -123,7 +123,7 @@ interface SelectLabelProps
   extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label> {}
 
 const SelectLabel = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Label>,
+  React.ComponentRef<typeof SelectPrimitive.Label>,
   SelectLabelProps
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.Label
@@ -140,13 +140,13 @@ interface SelectItemProps
 }
 
 const SelectItem = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Item>,
+  React.ComponentRef<typeof SelectPrimitive.Item>,
   SelectItemProps
 >(({ className, children, ...props }, ref) => (
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-hidden focus:bg-neutral-100 dark:focus:bg-neutral-700 focus:text-neutral-900 dark:focus:text-neutral-50 data-disabled:pointer-events-none data-disabled:opacity-50',
+      'relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-hidden hover:bg-purple-100 dark:hover:bg-purple-900/50 focus:bg-purple-100 dark:focus:bg-purple-900/50 focus:text-neutral-900 dark:focus:text-neutral-50 data-disabled:pointer-events-none data-disabled:opacity-50',
       className
     )}
     {...props}
@@ -166,7 +166,7 @@ interface SelectSeparatorProps
   extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator> {}
 
 const SelectSeparator = React.forwardRef<
-  React.ElementRef<typeof SelectPrimitive.Separator>,
+  React.ComponentRef<typeof SelectPrimitive.Separator>,
   SelectSeparatorProps
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.Separator
