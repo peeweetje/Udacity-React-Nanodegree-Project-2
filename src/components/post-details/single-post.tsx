@@ -16,15 +16,7 @@ import { Button } from '@/components/ui/button';
 import VoteActions from '../shared/vote-actions';
 import AuthorTimestamp from '../shared/author-timestamp';
 import EditDeleteActions from '../shared/edit-delete-actions';
-
-interface Post {
-  id: string;
-  title: string;
-  author: string;
-  timestamp: number;
-  body: string;
-  voteScore: number;
-}
+import type { Post } from '@/types';
 
 interface SinglePostProps {
   post: Post;

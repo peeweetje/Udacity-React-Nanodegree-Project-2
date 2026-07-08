@@ -7,14 +7,7 @@ import { useGsapContext, useGsapCardHover } from '../animations/use-gsap-animati
 import VoteActions from '../shared/vote-actions';
 import AuthorTimestamp from '../shared/author-timestamp';
 import EditDeleteActions from '../shared/edit-delete-actions';
-
-interface Comment {
-  id: string;
-  author: string;
-  body: string;
-  voteScore: number;
-  timestamp: number;
-}
+import type { Comment } from '@/types';
 
 interface SingleCommentProps {
   comment: Comment;

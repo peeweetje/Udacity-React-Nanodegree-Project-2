@@ -18,7 +18,7 @@ import MobileSidebar from '../dashboard-page/sidebar/mobile-sidebar/mobile-sideb
 import HamburgerButton from '@/components/ui/hamburger-button';
 import Header from '@/components/header/header';
 import { useTranslation } from 'react-i18next';
-import { Post } from '../../types/post';
+import type { Post } from '@/types';
 import PostCard from './post-card';
 
 interface RootState {

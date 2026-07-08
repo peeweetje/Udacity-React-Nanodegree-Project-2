@@ -18,7 +18,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Post } from '../../types/post';
+import type { Post } from '@/types';
 import VoteActions from '../shared/vote-actions';
 
 interface PostCardProps {

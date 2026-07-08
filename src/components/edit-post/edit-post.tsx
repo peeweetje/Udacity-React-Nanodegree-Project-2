@@ -10,6 +10,9 @@ import HamburgerButton from '@/components/ui/hamburger-button';
 import { animateCards } from '../animations/card-animations';
 import { useGsapContext } from '../animations/use-gsap-animation';
 import { useTranslation } from 'react-i18next';
+import EditPostForm from './edit-post-form';
+import type { FormValues } from './edit-post-form';
+import type { Post } from '@/types';
 
 interface RootState {
   posts: {
@@ -17,16 +20,7 @@ interface RootState {
   };
 }
 
-interface Post {
-  id: string;
-  category: string;
-  title: string;
-  author: string;
-  body: string;
-}
 
-import EditPostForm from './edit-post-form';
-import type { FormValues } from './edit-post-form';
 
 const EditPost = () => {
   const { t } = useTranslation();
@@ -88,7 +82,6 @@ const EditPost = () => {
     <div className='flex min-h-screen bg-neutral-10 dark:bg-gray-900'>
       {/* Mobile hamburger button */}
       <HamburgerButton onClick={() => setMobileMenuOpen(true)} />
-
       <MobileSidebar
         isOpen={mobileMenuOpen}
         onClose={() => setMobileMenuOpen(false)}

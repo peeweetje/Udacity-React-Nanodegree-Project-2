@@ -1,6 +1,5 @@
-import type { Post } from "@/types/post";
-export { Post };
-
+import type { Post, NewPost, Comment, NewComment, Category, VoteOption } from "@/types";
+export type { Post, NewPost, Comment, NewComment, Category, VoteOption };
 const api = "http://localhost:5001";
 
 // Generate a unique token for storing data on the backend server.
@@ -16,38 +15,8 @@ const headers: Record<string, string> = {
   "Content-Type": "application/json",
 };
 
-export interface Category {
-  path: string;
-  name: string;
-}
 
-export interface Comment {
-  id: string;
-  parentId: string;
-  timestamp: number;
-  body: string;
-  author: string;
-  voteScore: number;
-  deleted: boolean;
-  parentDeleted: boolean;
-}
 
-export interface NewPost {
-  title: string;
-  author: string;
-  body: string;
-  category: string;
-}
-
-export interface NewComment {
-  id: string;
-  parentId: string;
-  timestamp: number;
-  body: string;
-  author: string;
-}
-
-export type VoteOption = "upVote" | "downVote";
 
 export const getAllCategories = (): Promise<Category[]> =>
   fetch(`${api}/categories`, { headers })
