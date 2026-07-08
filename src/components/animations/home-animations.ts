@@ -1,5 +1,6 @@
 import React from 'react';
 import { gsap } from 'gsap';
+import { animateCardMount, animateCardHover } from './card-animations';
 
 export function animateArrow(arrowRef: React.RefObject<SVGSVGElement | null>) {
   if (!arrowRef.current) return;
@@ -76,42 +77,16 @@ export function animateOrbs(bgRef: React.RefObject<HTMLDivElement | null>) {
   });
 }
 
+/**
+ * Animates home page cards on mount with mount animation + hover effects.
+ * Delegates to the shared functions from card-animations.ts to avoid duplication.
+ */
 export function animateCards(cardsRef: React.MutableRefObject<HTMLDivElement[]>) {
   const cards = cardsRef.current.filter(Boolean);
   if (!cards.length) return;
 
   cards.forEach((card, i) => {
-    gsap.fromTo(
-      card,
-      { y: 60, opacity: 0, rotateX: 15, transformPerspective: 600 },
-      {
-        y: 0,
-        opacity: 1,
-        rotateX: 0,
-        duration: 0.8,
-        ease: 'back.out(1.7)',
-        delay: 0.8 + i * 0.2,
-      }
-    );
-
-    card.addEventListener('mouseenter', () => {
-      gsap.to(card, {
-        y: -8,
-        scale: 1.03,
-        boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
-        duration: 0.3,
-        ease: 'power2.out',
-      });
-    });
-
-    card.addEventListener('mouseleave', () => {
-      gsap.to(card, {
-        y: 0,
-        scale: 1,
-        boxShadow: 'none',
-        duration: 0.3,
-        ease: 'power2.out',
-      });
-    });
+    animateCardMount(card, 0.8 + i * 0.2);
+    animateCardHover(card);
   });
 }
