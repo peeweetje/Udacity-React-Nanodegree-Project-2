@@ -2,15 +2,11 @@ import React, { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { v1 as uuidv1 } from 'uuid';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
-
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
-
-import { fetchAddPost } from '../../redux/actions';
+import { formSchema, type FormValues, createPostData, submitPost } from './add-post-utils';
 import MobileSidebar from '../dashboard-page/sidebar/mobile-sidebar/mobile-sidebar';
 import HamburgerButton from '@/components/ui/hamburger-button';
 import BackButton from '@/components/ui/back-button';
@@ -22,33 +18,6 @@ import { FilePlus, PlusCircle } from 'lucide-react';
 import { animateCards } from '../animations/card-animations';
 import { useGsapContext } from '../animations/use-gsap-animation';
 
-const formSchema = z.object({
-  category: z.string().min(1, {
-    message: 'Please select a category.',
-  }),
-  title: z.string().min(2, {
-    message: 'Title must be at least 2 characters.',
-  }),
-  author: z.string().min(2, {
-    message: 'Author name must be at least 2 characters.',
-  }),
-  content: z.string().min(10, {
-    message: 'Content must be at least 10 characters.',
-  }),
-});
-
-type FormValues = z.infer<typeof formSchema>;
-
-interface PostData {
-  id: string;
-  timestamp: number;
-  title: string;
-  body: string;
-  author: string;
-  category: string;
-  deleted: boolean;
-  voteScore: number;
-}
 
 const AddPost = () => {
   const { t } = useTranslation();
@@ -73,25 +42,14 @@ const AddPost = () => {
   });
 
   function onSubmit(values: FormValues) {
-    const data: PostData = {
-      id: uuidv1(),
-      timestamp: Date.now(),
-      title: values.title,
-      body: values.content,
-      author: values.author,
-      category: values.category,
-      deleted: false,
-      voteScore: 1,
-    };
-    (fetchAddPost(data))(dispatch);
-    navigate('/posts');
+    const data = createPostData(values);
+    submitPost(data, dispatch, navigate);
   }
 
   return (
     <div className='flex min-h-screen bg-neutral-10 dark:bg-gray-900'>
       {/* Mobile hamburger button */}
       <HamburgerButton onClick={() => setMobileMenuOpen(true)} />
-
       <MobileSidebar
         isOpen={mobileMenuOpen}
         onClose={() => setMobileMenuOpen(false)}
