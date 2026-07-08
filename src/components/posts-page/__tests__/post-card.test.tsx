@@ -10,7 +10,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import PostCard from '../post-card';
 import rootReducer from '../../../redux/reducers';
-import { Post } from '../../../types/post';
+import type { Post } from '@/types';
 
 const mockT = (key: string) => key;
 

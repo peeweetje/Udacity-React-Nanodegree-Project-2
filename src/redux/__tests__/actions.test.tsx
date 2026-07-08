@@ -1,5 +1,5 @@
 import { vi, describe, it, expect, beforeEach, type Mocked } from 'vitest';
-import type { Comment, Post, Category, NewPost, NewComment } from '../../utils/api';
+import type { Comment, Post, Category, NewPost, NewComment } from '@/types';
 import {
   fetchPosts,
   fetchCategories,
